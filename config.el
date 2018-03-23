@@ -39,6 +39,9 @@
       :i "C-å" #'evil-escape)
 
 ;; Hooks
+;; Turn off hihglight line in org-mode
+ (add-hook 'org-mode-hook (lambda () (hl-line-mode -1)))
+
 ;; Automatically switch back to English in normal mode
 (cond (IS-LINUX
   (setq prev_lang (substring (shell-command-to-string
