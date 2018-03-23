@@ -1,7 +1,3 @@
-;;; config.el -*- lexical-binding: t; -*-
-
-;; This file keeps my custom settings
-
 ;; Zen experienced writing
 (def-package! writeroom-mode)
 
@@ -37,3 +33,28 @@
       ;; Swedish escape
       :i "C-å" #'evil-escape)
 
+;; Hooks
+;; Automatically switch back to English in normal mode
+(cond (IS-LINUX
+  (setq prev_lang (substring (shell-command-to-string
+                              "gsettings get org.gnome.desktop.input-sources current")
+                             7 -1))
+  (add-hook 'evil-insert-state-entry-hook
+            (lambda ()
+              (shell-command (concat
+                              "/usr/bin/gsettings set org.gnome.desktop.input-sources current " prev_lang)
+                             )
+              )
+            )
+
+  (add-hook 'evil-insert-state-exit-hook
+            (lambda ()
+              (setq prev_lang (substring (shell-command-to-string
+                                          "gsettings get org.gnome.desktop.input-sources current")
+                                         7 -1))
+              (shell-command (concat
+                              "/usr/bin/gsettings set org.gnome.desktop.input-sources current 1")
+                             )
+              )
+            )
+))
