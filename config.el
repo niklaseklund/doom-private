@@ -22,7 +22,12 @@
           :desc "Find string in project"    :n "s" #'counsel-rg)
       ;; Toggle
       (:prefix "t"
-        :desc "Zen writing" :n "z" #'writeroom-mode))
+        :desc "Zen writing" :n "z" #'writeroom-mode
+        :desc "Wrap lines to fit screen" :n "v" #'visual-line-mode)
+      ;; Window
+      (:prefix "w"
+        :desc "Close all other windows" :n "o" #'delete-other-windows
+        :desc "Doom/window/enlargen" :n "O" #'doom/window-enlargen))
       ;; Vimesque keys
       (:prefix "["
       :n "SPC" #'evil-unimpaired/insert-space-above)
