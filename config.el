@@ -19,9 +19,21 @@
       ;; Git
       (:prefix "g"
       :n "s" #'magit-status
-      :n "S" #'git-gutter:stage-hunk))
+      :n "S" #'git-gutter:stage-hunk)
+      ;; Find
+      (:prefix "f"
+          :desc "Find file in project"      :n "f" #'projectile-find-file
+          :desc "Find string in project"    :n "s" #'counsel-rg)
+      ;; Toggle
+      (:prefix "t"
+        :desc "Zen writing" :n "z" #'writeroom-mode))
       ;; Vimesque keys
       (:prefix "["
       :n "SPC" #'evil-unimpaired/insert-space-above)
       (:prefix "]"
-      :n "SPC" #'evil-unimpaired/insert-space-below))
+      :n "SPC" #'evil-unimpaired/insert-space-below)
+      ;; Company
+      :i "C-k"  #'+company/complete
+      ;; Swedish escape
+      :i "C-å" #'evil-escape)
+
