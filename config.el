@@ -26,8 +26,8 @@
         :desc "Wrap lines to fit screen" :n "v" #'visual-line-mode)
       ;; Window
       (:prefix "w"
-        :desc "Close all other windows" :n "o" #'delete-other-windows
-        :desc "Doom/window/enlargen" :n "O" #'doom/window-enlargen))
+        :desc "Close all other windows" :n "O" #'delete-other-windows
+        :desc "Doom/window/enlargen" :n "o" #'doom/window-enlargen))
       ;; Vimesque keys
       (:prefix "["
       :n "SPC" #'evil-unimpaired/insert-space-above)
