@@ -20,6 +20,8 @@
       (:prefix "f"
           :desc "Find file in project"      :n "f" #'projectile-find-file
           :desc "Find string in project"    :n "s" #'counsel-rg)
+      (:prefix "/"
+          :desc "Swiper in buffer"          :n "/" #'swiper)
       ;; Toggle
       (:prefix "t"
         :desc "Zen writing" :n "z" #'writeroom-mode
