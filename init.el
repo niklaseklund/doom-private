@@ -5,4 +5,4 @@
       doom-localleader-key ", m")
 
 ;; Change the font
-(setq doom-font (font-spec :family "Roboto Mono" :size 13))
+(setq doom-font (font-spec :family "Roboto Mono" :size 15))
