@@ -40,6 +40,12 @@
       ;; Swedish escape
       :i "C-å" #'evil-escape)
 
+;; Set settings
+(after! org
+  (setq outline-blank-line nil)
+  (setq org-cycle-separator-lines 2)
+  (setq org-log-done 'time))
+
 ;; Hooks
 ;; Turn off hihglight line in org-mode
  (add-hook 'org-mode-hook (lambda () (hl-line-mode -1)))
