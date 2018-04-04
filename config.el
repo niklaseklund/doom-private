@@ -68,3 +68,6 @@
               )
             )
 ))
+
+;; Append the git-commit hook
+(add-hook 'git-commit-setup-hook 'git-commit-turn-on-flyspell)
