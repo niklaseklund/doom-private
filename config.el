@@ -10,6 +10,9 @@
   (interactive "p")
   (dotimes (_ count) (save-excursion (evil-insert-newline-below))))
 
+;; Define flycheck
+(setq company-irony-c-headers--compiler-executable "clang++-4.0")
+
 ;; Override other keys
 (map! (:leader
       ;; Git
