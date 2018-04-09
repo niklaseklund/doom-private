@@ -37,7 +37,13 @@
       ;; Window
       (:prefix "w"
         :desc "Close all other windows" :n "O" #'delete-other-windows
-        :desc "Doom/window/enlargen" :n "o" #'doom/window-enlargen))
+        :desc "Doom/window/enlargen" :n "o" #'doom/window-enlargen)
+      ;; Navigation
+      (:prefix "["
+       :n "t" #'multi-term-prev)
+      (:prefix "]"
+       :n "t" #'multi-term-next)
+      )
       ;; Vimesque keys
       (:prefix "["
       :n "SPC" #'evil-unimpaired/insert-space-above)
