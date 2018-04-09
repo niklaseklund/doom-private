@@ -1,4 +1,5 @@
 ;;; init.example.el -*- lexical-binding: t; -*-
+(disable-packages! cmake-mode company-irony company-irony-c-headers flycheck-irony irony irony-eldoc ivy-rtags rtags)
 
 (doom! :feature
        (popup            ; tame sudden yet inevitable temporary windows
@@ -14,7 +15,7 @@
        services          ; TODO managing external services & code builders
        snippets          ; my elves. They type so I don't have to
        spellcheck        ; tasing you for misspelling mispelling
-       syntax-checker    ; tasing you for every semicolon you forget
+      ;syntax-checker    ; tasing you for every semicolon you forget
        version-control   ; remember, remember that commit in November
        workspaces        ; tab emulation, persistence & separate workspaces
 
@@ -31,7 +32,7 @@
       ;doom-quit         ; DOOM quit-message prompts when you quit Emacs
        evil-goggles      ; display visual hints when editing in evil
        hl-todo           ; highlight TODO/FIXME/NOTE tags
-       nav-flash         ; blink the current line after jumping
+      ;nav-flash         ; blink the current line after jumping
       ;posframe          ; use child frames where possible (Emacs 26+ only)
       ;tabbar            ; FIXME an (incomplete) tab bar for Emacs
       ;unicode           ; extended unicode support for various languages
@@ -119,7 +120,7 @@
        ;; and additional ex commands for evil-mode. Use it as a reference for
        ;; your own modules.
        (default +bindings +snippets +evil-commands)
-       
+
        :private
        (niklascarlsson))
 
