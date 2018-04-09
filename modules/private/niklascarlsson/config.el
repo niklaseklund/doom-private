@@ -14,6 +14,8 @@
 (setq company-irony-c-headers--compiler-executable "clang++-4.0")
 ;; Don't ask when killing emacs
 (setq confirm-kill-emacs nil)
+;; Remove trailing whitespaces
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
 ;; Override other keys
