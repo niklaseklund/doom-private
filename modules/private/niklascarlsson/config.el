@@ -12,6 +12,8 @@
 
 ;; Define flycheck
 (setq company-irony-c-headers--compiler-executable "clang++-4.0")
+;; Customize flyspell
+(setq flyspell-issue-message-flag nil)
 ;; Don't ask when killing emacs
 (setq confirm-kill-emacs nil)
 ;; Remove trailing whitespaces
