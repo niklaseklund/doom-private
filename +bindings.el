@@ -8,10 +8,6 @@
       (:prefix "g"
       :n "s" #'magit-status
       :n "S" #'git-gutter:stage-hunk)
-      ;; Find
-      (:prefix "f"
-          :desc "Find file in project"      :n "f" #'projectile-find-file
-          :desc "Find string in project"    :n "s" #'counsel-rg)
       (:prefix "/"
           :desc "Swiper in buffer"          :n "/" #'swiper)
       ;; Toggle
