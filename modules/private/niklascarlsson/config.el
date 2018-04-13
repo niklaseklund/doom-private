@@ -17,43 +17,6 @@
 ;; Remove trailing whitespaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-
-;; Override other keys
-(map! (:leader
-      ;; Git
-      (:prefix "g"
-      :n "s" #'magit-status
-      :n "S" #'git-gutter:stage-hunk)
-      ;; Find
-      (:prefix "f"
-          :desc "Find file in project"      :n "f" #'projectile-find-file
-          :desc "Find string in project"    :n "s" #'counsel-rg)
-      (:prefix "/"
-          :desc "Swiper in buffer"          :n "/" #'swiper)
-      ;; Toggle
-      (:prefix "t"
-        :desc "Zen writing" :n "z" #'writeroom-mode
-        :desc "Wrap lines to fit screen" :n "v" #'visual-line-mode)
-      ;; Window
-      (:prefix "w"
-        :desc "Close all other windows" :n "O" #'delete-other-windows
-        :desc "Doom/window/enlargen" :n "o" #'doom/window-enlargen)
-      ;; Navigation
-      (:prefix "["
-       :n "t" #'multi-term-prev)
-      (:prefix "]"
-       :n "t" #'multi-term-next)
-      )
-      ;; Vimesque keys
-      (:prefix "["
-      :n "SPC" #'evil-unimpaired/insert-space-above)
-      (:prefix "]"
-      :n "SPC" #'evil-unimpaired/insert-space-below)
-      ;; Company
-      :i "C-k"  #'+company/complete
-      ;; Swedish escape
-      :i "C-å" #'evil-escape)
-
 ;; Set settings
 (after! org
   (setq outline-blank-line nil)
