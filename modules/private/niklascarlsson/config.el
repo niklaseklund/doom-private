@@ -18,6 +18,8 @@
 (setq confirm-kill-emacs nil)
 ;; Remove trailing whitespaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; Add spell checking for comments in programming mode
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 ;; Set settings
 (after! org
