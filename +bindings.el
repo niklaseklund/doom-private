@@ -35,8 +35,7 @@
       ;; Company
       :i "C-k"  #'+company/complete
       ;; Swedish escape
-      :i "C-å" #'evil-escape
-
+      :i "C-å" #'evil-normal-state
       ;; counsel
       (:after ivy
         (:map ivy-minibuffer-map

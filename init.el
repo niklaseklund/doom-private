@@ -1,5 +1,5 @@
 ;;; init.example.el -*- lexical-binding: t; -*-
-(disable-packages! cmake-mode company-irony company-irony-c-headers flycheck-irony irony irony-eldoc ivy-rtags rtags)
+(disable-packages! cmake-mode company-irony company-irony-c-headers evil-escape flycheck-irony irony irony-eldoc ivy-rtags rtags)
 
 (doom! :feature
        (popup            ; tame sudden yet inevitable temporary windows
