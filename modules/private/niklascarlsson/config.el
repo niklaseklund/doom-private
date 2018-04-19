@@ -68,3 +68,10 @@
                      (setq-local git-commit-summary-max-length 50)
                      (setq-local fill-column 72)))
   )
+
+;; Solve missing variables in terminal
+(when IS-MAC
+    (setenv "LC_CTYPE" "UTF-8")
+    (setenv "LC_ALL" "en_US.UTF-8")
+    (setenv "LANG" "en_US.UTF-8")
+  )
