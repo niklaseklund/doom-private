@@ -6,3 +6,6 @@
 
 ;; Change the font
 (setq doom-font (font-spec :family "Roboto Mono" :size 15))
+;; Set theme
+(setq doom-theme 'doom-nord-light)
+;; (setq doom-theme 'doom-one)
