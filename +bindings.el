@@ -10,6 +10,9 @@
       :n "S" #'git-gutter:stage-hunk)
       (:prefix "/"
           :desc "Swiper in buffer"          :n "/" #'swiper)
+      ;; File
+      (:prefix "f"
+      :n "f" #'counsel-fzf)
       ;; Toggle
       (:prefix "t"
         :desc "Zen writing" :n "z" #'writeroom-mode
