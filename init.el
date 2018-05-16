@@ -1,10 +1,5 @@
-;;; init.example.el -*- lexical-binding: t; -*-
-(disable-packages! cmake-mode company-irony company-irony-c-headers evil-escape flycheck-irony irony irony-eldoc ivy-rtags rtags)
-
+;;; init.el -*- lexical-binding: t; -*-
 (doom! :feature
-       (popup            ; tame sudden yet inevitable temporary windows
-        +all             ; catch all popups that start with an asterix
-        +defaults)       ; default popup rules
       ;debugger          ; FIXME stepping through code, to help you add bugs
        eval              ; run code, run (also, repls)
        (evil +everywhere); come to the dark side, we have cookies
@@ -15,17 +10,24 @@
        services          ; TODO managing external services & code builders
        snippets          ; my elves. They type so I don't have to
        spellcheck        ; tasing you for misspelling mispelling
-       syntax-checker    ; tasing you for every semicolon you forget
+       (syntax-checker   ; tasing you for every semicolon you forget
+        +childframe)     ; use childframes for error popups (Emacs 26+ only)
        version-control   ; remember, remember that commit in November
        workspaces        ; tab emulation, persistence & separate workspaces
 
        :completion
-       company           ; the ultimate code completion backend
+       (company          ; the ultimate code completion backend
+        +auto            ; as-you-type code completion
+        +childframe)     ; a nicer company UI (Emacs 26+ only)
       ;helm              ; the *other* search engine for love and life
       ;ido               ; the other *other* search engine...
-       ivy               ; a search engine for love and life
+       (ivy              ; a search engine for love and life
+        +childframe)     ; uses childframes for popups (Emacs 26+ only)
 
        :ui
+       (popup            ; tame sudden yet inevitable temporary windows
+        +all             ; catch all popups that start with an asterix
+        +defaults)       ; default popup rules
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-modeline     ; a snazzy Atom-inspired mode-line
@@ -33,7 +35,7 @@
        evil-goggles      ; display visual hints when editing in evil
        hl-todo           ; highlight TODO/FIXME/NOTE tags
       ;nav-flash         ; blink the current line after jumping
-      ;posframe          ; use child frames where possible (Emacs 26+ only)
+       neotree           ; a project drawer, like NERDTree for vim
       ;tabbar            ; FIXME an (incomplete) tab bar for Emacs
       ;unicode           ; extended unicode support for various languages
       ;vi-tilde-fringe   ; fringe tildes to mark beyond EOB
@@ -41,21 +43,21 @@
 
        :tools
        dired             ; making dired pretty [functional]
+       editorconfig      ; let someone else argue about tabs vs spaces
+      ;ein               ; tame Jupyter notebooks with emacs
        electric-indent   ; smarter, keyword-based electric-indent
        eshell            ; a consistent, cross-platform shell (WIP)
       ;gist              ; interacting with github gists
-      ;imenu             ; an imenu sidebar and searchable code index
-      ;impatient-mode    ; show off code over HTTP
+       imenu             ; an imenu sidebar and searchable code index
       ;macos             ; MacOS-specific commands
        make              ; run make tasks from Emacs
        magit             ;
-       neotree           ; a project drawer, like NERDTree for vim
        password-store    ; password manager for nerds
        pdf               ; pdf enhancements
       ;rgb               ; creating color strings
        rotate-text       ; cycle region at point between text candidates
        term              ; terminals in Emacs
-      ;tmux              ; an API for interacting with tmux
+       tmux              ; an API for interacting with tmux
        upload            ; map local to remote projects via ssh/ftp
 
        :lang
@@ -65,6 +67,7 @@
        clojure           ; java with a lisp
        csharp            ; unity, .NET, and mono shenanigans
        data              ; config/data formats
+      ;erlang            ; an elegant language for a more civilized age
       ;elixir            ; erlang done right
       ;elm               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
@@ -79,7 +82,8 @@
        ledger            ; an accounting system in Emacs
       ;lua               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
-       nix               ; I hereby declare "nix geht mehr!"
+      ;nim               ; python + lisp at the speed of c
+      ;nix               ; I hereby declare "nix geht mehr!"
       ;ocaml             ; an objective camel
        (org              ; organize your plain life in plain text
         +attach          ; custom attachment system
@@ -114,13 +118,15 @@
       ; +wordnut         ; wordnet (wn) search
       ; +langtool)       ; a proofreader (grammar/style check) for Emacs
 
+       :collab
+      ;impatient-mode    ; show off code over HTTP
+
        :config
        ;; The default module set reasonable defaults for Emacs. It also provides
        ;; a Spacemacs-inspired keybinding scheme, a custom yasnippet library,
        ;; and additional ex commands for evil-mode. Use it as a reference for
        ;; your own modules.
        (default +bindings +snippets +evil-commands)
-
        :private
        (niklascarlsson))
 
