@@ -61,13 +61,6 @@
 
 ;; Append the git-commit hook
 (add-hook 'git-commit-setup-hook 'git-commit-turn-on-flyspell)
- ;; Limit commit message summary to 50 columns, and wrap content after 72 columns.
-(def-package! git-commit
-  :init (add-hook 'git-commit-mode-hook
-                  '(lambda ()
-                     (setq-local git-commit-summary-max-length 50)
-                     (setq-local fill-column 72)))
-  )
 
 ;; Solve missing variables in terminal
 (when IS-MAC
