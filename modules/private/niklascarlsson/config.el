@@ -107,3 +107,6 @@
 
 ;; org-images
 (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+
+;; gdb debugging
+(setq gdb-many-windows t)
