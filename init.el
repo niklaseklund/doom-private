@@ -1,7 +1,7 @@
 ;;; init.el -*- lexical-binding: t; -*-
 (add-to-list 'load-path doom-modules-dir)
 (doom! :feature
-      ;debugger          ; FIXME stepping through code, to help you add bugs
+       debugger          ; FIXME stepping through code, to help you add bugs
        eval              ; run code, run (also, repls)
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
@@ -16,8 +16,8 @@
        workspaces        ; tab emulation, persistence & separate workspaces
 
        :completion
-       (company          ; the ultimate code completion backend
-        +auto)           ; as-you-type code completion
+        company          ; the ultimate code completion backend
+      ; +auto)           ; as-you-type code completion
       ; +childframe)     ; a nicer company UI (Emacs 26+ only)
       ;helm              ; the *other* search engine for love and life
       ;ido               ; the other *other* search engine...
@@ -94,6 +94,7 @@
         +babel           ; running code in org
         +capture         ; org-capture in and outside of Emacs
         +export          ; Exporting org to whatever you want
+        +ipython         ; Using ob-ipython
         +present)        ; Emacs for presentations
       ;perl              ; write code no one else can comprehend
       ;php               ; perl's insecure younger brother
