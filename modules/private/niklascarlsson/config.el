@@ -104,3 +104,6 @@
 (set! :company-lsp-enable-snippet t)
 (set! :company-lsp-cache-candidates nil)
 (set! :company-lsp-async t))
+
+;; org-images
+(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
