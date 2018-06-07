@@ -66,3 +66,41 @@
     (setenv "LC_ALL" "en_US.UTF-8")
     (setenv "LANG" "en_US.UTF-8")
   )
+
+;; lsp
+(def-package! lsp-mode
+  :commands (lsp-mode))
+
+;; ccls
+(def-package! ccls
+  :commands (lsp-ccls-enable)
+  :init
+  :config
+  (setq ccls-executable "/usr/local/bin/ccls"
+        ccls-cache-dir (concat doom-cache-dir ".ccls_cached_index")
+        ccls-sem-highlight-method 'font-lock)
+  (setq ccls-extra-args '("--log-file=/tmp/cq.log"))
+  (setq ccls-extra-init-params
+        '(:completion (:detailedLabel t) :xref (:container t)
+                      :diagnostics (:frequencyMs 5000)))
+  (set! :company-backend '(c-mode c++-mode) '(company-lsp))
+  )
+
+;; run ccls by default in C++ files
+(defun ccls//enable ()
+  (condition-case nil
+      (lsp-ccls-enable)
+    (user-error nil)))
+
+  (use-package ccls
+    :commands lsp-ccls-enable
+    :init (add-hook 'c-mode-common-hook #'ccls//enable))
+
+
+;; lsp-company
+(def-package! company-lsp
+  :after lsp-mode)
+(set! :company-backend '(c-mode c++-mode) '(company-lsp company-yasnippet)
+(set! :company-lsp-enable-snippet t)
+(set! :company-lsp-cache-candidates nil)
+(set! :company-lsp-async t))
