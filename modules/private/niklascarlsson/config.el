@@ -14,8 +14,6 @@
   (interactive "p")
   (dotimes (_ count) (save-excursion (evil-insert-newline-below))))
 
-;; Define flycheck
-(setq company-irony-c-headers--compiler-executable "clang++-4.0")
 ;; Customize flyspell
 (setq flyspell-issue-message-flag nil)
 ;; Don't ask when killing emacs
