@@ -105,6 +105,12 @@
 (set! :company-lsp-cache-candidates nil)
 (set! :company-lsp-async t))
 
+;; lsp-flycheck
+(require 'lsp-ui-flycheck)
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-after-open-hook (lambda () (lsp-ui-flycheck-enable 1))))
+(add-hook 'c-mode-common-hook 'flycheck-mode) ;; Turn on flycheck for C++ buffers
+
 ;; org-images
 (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 
