@@ -116,3 +116,7 @@
 
 ;; gdb debugging
 (setq gdb-many-windows t)
+
+;; fill-column
+;; turn it off by default
+(remove-hook! (text-mode prog-mode conf-mode) #'turn-on-fci-mode)

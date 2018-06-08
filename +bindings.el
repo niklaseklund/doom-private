@@ -16,7 +16,8 @@
       ;; Toggle
       (:prefix "t"
         :desc "Zen writing" :n "z" #'writeroom-mode
-        :desc "Wrap lines to fit screen" :n "v" #'visual-line-mode)
+        :desc "Wrap lines to fit screen" :n "v" #'visual-line-mode
+        :desc "Column-indicator" :n "c" #'fci-mode)
       ;; Window
       (:prefix "w"
         :desc "Close all other windows" :n "O" #'delete-other-windows

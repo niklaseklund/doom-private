@@ -40,6 +40,7 @@
       ;unicode           ; extended unicode support for various languages
       ;vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        window-select     ; visually switch windows
+       fci               ; fill-column-indicator
 
        :emacs
        dired             ; making dired pretty [functional]
