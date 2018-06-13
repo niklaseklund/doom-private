@@ -4,10 +4,6 @@
 
 ;; Override other keys
 (map! (:leader
-      ;; Git
-      (:prefix "g"
-      :n "s" #'magit-status
-      :n "S" #'git-gutter:stage-hunk)
       (:prefix "/"
           :desc "Swiper in buffer"          :n "/" #'swiper)
       ;; File
