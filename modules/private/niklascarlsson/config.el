@@ -83,7 +83,7 @@
   (setq ccls-extra-init-params
         '(:completion (:detailedLabel t) :xref (:container t)
                       :diagnostics (:frequencyMs 5000)))
-  (set! :company-backend '(c-mode c++-mode) '(company-lsp))
+  (set-company-backend! '(c-mode c++-mode) '(company-lsp))
   )
 
 ;; run ccls by default in C++ files
@@ -100,10 +100,11 @@
 ;; lsp-company
 (def-package! company-lsp
   :after lsp-mode)
-(set! :company-backend '(c-mode c++-mode) '(company-lsp company-yasnippet)
-(set! :company-lsp-enable-snippet t)
-(set! :company-lsp-cache-candidates nil)
-(set! :company-lsp-async t))
+(set-company-backend! '(c-mode c++-mode) '(company-lsp company-files company-yasnippet))
+(after! lsp-mode
+(setq company-lsp-enable-snippet t)
+(setq company-lsp-cache-candidates nil)
+(setq company-lsp-async t))
 
 ;; lsp-flycheck
 (require 'lsp-ui-flycheck)
