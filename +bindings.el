@@ -41,3 +41,10 @@
         (:map ivy-minibuffer-map
           "C-l"      #'ivy-call-and-recenter))
       )
+
+;; Bring back the leader in pdf-tools by unbinding comma
+(map!
+ :after pdf-view
+ :map pdf-view-mode-map
+ :nvmei "," nil
+ )
