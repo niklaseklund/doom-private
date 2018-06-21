@@ -83,7 +83,8 @@
       ;(java +meghanada) ; the poster child for carpal tunnel syndrome
       ;javascript        ; all(hope(abandon(ye(who(enter(here))))))
       ;julia             ; a better, faster MATLAB
-      ;latex             ; writing papers in Emacs has never been so fun
+      (latex             ; writing papers in Emacs has never been so fun
+        +pdf-tools)
       ;ledger            ; an accounting system in Emacs
       ;lua               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
