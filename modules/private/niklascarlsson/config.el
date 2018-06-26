@@ -131,3 +131,6 @@
 ;; add fish-like autocompletion
 (def-package! esh-autosuggest)
 (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
+;; Dired settings
+;; Make it possible to move files between two open Direds easily
+(setq dired-dwim-target t)
