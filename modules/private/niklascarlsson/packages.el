@@ -7,3 +7,4 @@
 (package! lsp-ui)
 (package! emacs-ccls :recipe (:fetcher github :repo "MaskRay/emacs-ccls" :files ("*")))
 (package! esh-autosuggest)
+(package! fish-completion)

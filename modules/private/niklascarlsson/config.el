@@ -143,6 +143,10 @@
    "gs"  "magit-status"
    "gc"  "magit-commit"
    "rg"  "rg --color=always $*"))
+;; fish completion
+(when (and (executable-find "fish")
+           (require 'fish-completion nil t))
+  (global-fish-completion-mode))
 
 ;; Dired settings
 ;; Make it possible to move files between two open Direds easily
