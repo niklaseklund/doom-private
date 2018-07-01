@@ -151,3 +151,30 @@
 ;; Dired settings
 ;; Make it possible to move files between two open Direds easily
 (setq dired-dwim-target t)
+;;mu4e
+;; app/email
+(after! mu4e
+  ;; (setq mu4e-get-mail-command (format "mbsync -c '%s/mbsync/config' -a" xdg-config))
+
+  (setq mu4e-bookmarks
+        `(("\\\\Inbox" "Inbox" ?i)
+          ("\\\\Draft" "Drafts" ?d)
+          ("flag:unread AND \\\\Inbox" "Unread messages" ?u)
+          ("flag:flagged" "Starred messages" ?s)
+          ("date:today..now" "Today's messages" ?t)
+          ("date:7d..now" "Last 7 days" ?w)
+          ("mime:image/*" "Messages with images" ?p)))
+
+  (setq smtpmail-stream-type 'starttls
+        smtpmail-default-smtp-server "smtp.gmail.com"
+        smtpmail-smtp-server "smtp.gmail.com"
+        smtpmail-smtp-service 587)
+
+(set-email-account! "gmail.com"
+    '((mu4e-sent-folder       . "/gmail.com/Sent Mail")
+      (mu4e-drafts-folder     . "/gmail.com/Drafts")
+      (mu4e-trash-folder      . "/gmail.com/Trash")
+      (mu4e-refile-folder     . "/gmail.com/All Mail")
+      (smtpmail-smtp-user     . "carlsson.niklas")
+      (user-mail-address      . "carlsson.niklas@gmail.com")
+      (mu4e-compose-signature . "---\nNiklas")))
