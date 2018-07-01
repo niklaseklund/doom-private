@@ -131,26 +131,25 @@
 ;; add fish-like autocompletion
 (def-package! esh-autosuggest)
 (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
+;; utilize completion from fish
+(when (and (executable-find "fish")
+           (require 'fish-completion nil t))
+  (global-fish-completion-mode))
 ;; aliases
 (after! eshell
   (set-eshell-alias!
-   "q"   "quit-and-close"
    "l"   "ls -l"
    "la"  "ls -la"
-   "f"   "find-file $1"
    "d"   "dired $1"
    "gl"  "(call-interactively 'magit-log-current)"
    "gs"  "magit-status"
    "gc"  "magit-commit"
    "rg"  "rg --color=always $*"))
-;; fish completion
-(when (and (executable-find "fish")
-           (require 'fish-completion nil t))
-  (global-fish-completion-mode))
 
 ;; Dired settings
 ;; Make it possible to move files between two open Direds easily
 (setq dired-dwim-target t)
+
 ;;mu4e
 ;; app/email
 (after! mu4e
