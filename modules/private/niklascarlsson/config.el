@@ -1,3 +1,13 @@
+;; Setup
+(setq user-full-name    "Niklas Carlsson"
+      user-mail-address "carlsson.niklas@gmail.com"
+
+      +doom-modeline-buffer-file-name-style 'relative-from-project
+      show-trailing-whitespace t
+      ;; mu4e
+      mu4e-maildir (expand-file-name "~/.mail")
+)
+
 ;; Basics
 ;; Tabs
 (setq-default indent-tabs-mode nil)
@@ -150,15 +160,15 @@
 ;; Make it possible to move files between two open Direds easily
 (setq dired-dwim-target t)
 
-;;mu4e
+;; mu4e
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 ;; app/email
 (after! mu4e
-  ;; (setq mu4e-get-mail-command (format "mbsync -c '%s/mbsync/config' -a" xdg-config))
-
+  (setq mu4e-get-mail-command "offlineimap")
   (setq mu4e-bookmarks
-        `(("\\\\Inbox" "Inbox" ?i)
-          ("\\\\Draft" "Drafts" ?d)
-          ("flag:unread AND \\\\Inbox" "Unread messages" ?u)
+        `(("maildir:/gmail.com/Inbox" "Inbox" ?i)
+          ("maildir:/gmail.com/Drafts" "Drafts" ?d)
+          ("flag:unread" "Unread messages" ?u)
           ("flag:flagged" "Starred messages" ?s)
           ("date:today..now" "Today's messages" ?t)
           ("date:7d..now" "Last 7 days" ?w)
@@ -173,7 +183,6 @@
     '((mu4e-sent-folder       . "/gmail.com/Sent Mail")
       (mu4e-drafts-folder     . "/gmail.com/Drafts")
       (mu4e-trash-folder      . "/gmail.com/Trash")
-      (mu4e-refile-folder     . "/gmail.com/All Mail")
       (smtpmail-smtp-user     . "carlsson.niklas")
       (user-mail-address      . "carlsson.niklas@gmail.com")
-      (mu4e-compose-signature . "---\nNiklas")))
+      (mu4e-compose-signature . "---\nNiklas"))))
