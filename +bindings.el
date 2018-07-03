@@ -9,6 +9,9 @@
       ;; File
       (:prefix "f"
       :n "f" #'counsel-fzf)
+      ;; Open
+      (:prefix "o"
+        :desc "Open mail" :n "m" #'mu4e)
       ;; Toggle
       (:prefix "t"
         :desc "Zen writing" :n "z" #'writeroom-mode
