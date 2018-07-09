@@ -1,3 +1,12 @@
+;; Prettyify my mac
+(when IS-MAC
+  (setq ns-use-thin-smoothing t)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark))
+  ;; maximize first frame
+  (set-frame-parameter nil 'fullscreen 'maximized))
+
+
 ;; Setup
 (setq user-full-name    "Niklas Carlsson"
       user-mail-address "carlsson.niklas@gmail.com"
