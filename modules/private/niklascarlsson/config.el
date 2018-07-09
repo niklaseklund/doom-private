@@ -12,8 +12,9 @@
 ;; Tabs
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
-;; Zen experienced writing
-(def-package! writeroom-mode)
+
+;; ;; Zen experienced writing
+;; (def-package! writeroom-mode)
 
 ;; Custom functions
 (defun evil-unimpaired/insert-space-above (count)
