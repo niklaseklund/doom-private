@@ -6,5 +6,6 @@
 (package! company-lsp)
 (package! lsp-ui)
 (package! emacs-ccls :recipe (:fetcher github :repo "MaskRay/emacs-ccls" :files ("*")))
+(package! org-noter)
 (package! esh-autosuggest)
 (package! fish-completion)

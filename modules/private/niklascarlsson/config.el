@@ -188,3 +188,11 @@
       (smtpmail-smtp-user     . "carlsson.niklas")
       (user-mail-address      . "carlsson.niklas@gmail.com")
       (mu4e-compose-signature . "---\nNiklas"))))
+
+;; Org-Noter
+(def-package! org-noter
+  :config
+  (map!
+   (:leader
+     (:prefix "n"
+       :desc "Org-noter-insert" :n "i" #'org-noter-insert-note))))
