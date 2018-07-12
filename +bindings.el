@@ -4,8 +4,6 @@
 
 ;; Override other keys
 (map! (:leader
-      (:prefix "/"
-          :desc "Swiper in buffer"          :n "/" #'swiper)
       ;; File
       (:prefix "f"
       :n "f" #'counsel-fzf)
