@@ -18,8 +18,9 @@
       confirm-kill-emacs nil
       )
 ;; tabs
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
+;; Python try to guess tab-width but it assumes wrong width sometimes, turn it
+;; off to make it more consistent. I always want 4 spaces for my tabs.
+(setq python-indent-guess-indent-offset nil)
 ;; maximize first frame
 (set-frame-parameter nil 'fullscreen 'maximized)
 ;; remove trailing whitespaces (globaly)
