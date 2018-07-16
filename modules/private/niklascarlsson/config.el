@@ -174,6 +174,24 @@
                         (user-mail-address      . "carlsson.niklas@gmail.com")
                         (mu4e-compose-signature . "---\nNiklas"))))
 
+
+;; snipe/easy-motion
+(map! :after evil-easymotion
+      :map evilem-map
+      "s" (evilem-create #'evil-snipe-repeat
+                         :name 'evil-easymotion-snipe-forward
+                         :pre-hook (save-excursion (call-interactively #'evil-snipe-s))
+                         :bind ((evil-snipe-scope 'buffer)
+                                (evil-snipe-enable-highlight)
+                                (evil-snipe-enable-incremental-highlight)))
+      "S" (evilem-create #'evil-snipe-repeat
+                         :name 'evil-easymotion-snipe-backward
+                         :pre-hook (save-excursion (call-interactively #'evil-snipe-S))
+                         :bind ((evil-snipe-scope 'buffer)
+                                (evil-snipe-enable-highlight)
+                                (evil-snipe-enable-incremental-highlight))))
+
+
 ;; Cquery
 (def-package! cquery
   :hook ((c-mode c++-mode objc-mode) . +setup-cquery)
