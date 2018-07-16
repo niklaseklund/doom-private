@@ -73,6 +73,7 @@
 (setq org-noter-always-create-frame nil
       org-noter-auto-save-last-location t)
 
+
 ;; Magit
 ;; automatic spellchecking in commit messages
 (add-hook 'git-commit-setup-hook 'git-commit-turn-on-flyspell)
