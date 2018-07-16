@@ -6,7 +6,8 @@
 (map! (:leader
       ;; File
       (:prefix "f"
-      :n "f" #'counsel-fzf)
+      :desc "Find with fzf" :n "zf" #'counsel-fzf
+      :desc "Find with projectile" :n "f" #'counsel-projectile-find-file)
       ;; Open
       (:prefix "o"
         :desc "Open mail" :n "m" #'mu4e)
@@ -43,8 +44,6 @@
       :n "SPC" #'evil-unimpaired/insert-space-above)
       (:prefix "]"
       :n "SPC" #'evil-unimpaired/insert-space-below)
-      ;; Company
-      ;; :i "C-k"  #'+company/complete
       ;; Swedish escape
       :i "C-å" #'evil-normal-state
       ;; counsel
