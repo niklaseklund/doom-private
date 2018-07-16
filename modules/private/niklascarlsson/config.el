@@ -150,7 +150,7 @@
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 ;; app/email
 (after! mu4e
-  ;; (setq mu4e-get-mail-command "offlineimap"
+  ;; (setq mu4e-get-mail-command "~/mu/sync-mail")
   ;;       mu4e-update-interval 300) ;; update every 5 minutes
   (setq mu4e-bookmarks
         `(("maildir:/gmail.com/Inbox" "Inbox" ?i)
