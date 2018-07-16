@@ -44,7 +44,7 @@
       (:prefix "]"
       :n "SPC" #'evil-unimpaired/insert-space-below)
       ;; Company
-      :i "C-k"  #'+company/complete
+      ;; :i "C-k"  #'+company/complete
       ;; Swedish escape
       :i "C-å" #'evil-normal-state
       ;; counsel
