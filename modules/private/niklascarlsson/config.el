@@ -69,7 +69,9 @@
    (:leader
      (:prefix "n"
        :desc "Org-noter-insert" :n "i" #'org-noter-insert-note))))
-
+;; Setup
+(setq org-noter-always-create-frame nil
+      org-noter-auto-save-last-location t)
 
 ;; Magit
 ;; automatic spellchecking in commit messages
