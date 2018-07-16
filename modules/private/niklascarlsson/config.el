@@ -130,7 +130,8 @@
 ;; aliases
 (after! eshell
   (set-eshell-alias!
-   "ff"   "counsel-projectile-find-file"
+   "ff"  "counsel-projectile-find-file"
+   "fd"  "counsel-projectile-find-dir"
    "l"   "ls -l"
    "la"  "ls -la"
    "d"   "dired $1"
