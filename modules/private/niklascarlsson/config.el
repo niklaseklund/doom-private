@@ -175,50 +175,48 @@
                         (mu4e-compose-signature . "---\nNiklas"))))
 
 
-;; Cquery
-(def-package! cquery
-  :hook ((c-mode c++-mode objc-mode) . +setup-cquery)
+;; ccls
+(def-package! ccls
+  :commands (lsp-ccls-enable)
   :init
-  (setq cquery-extra-init-params '(:index (:comments 2)
-                                          :cacheFormat "msgpack"
-                                          :completion (:detailedLabel t))
-        cquery-sem-highlight-method 'overlay) ;; set to 'font-lock if highlighting slowly
   :config
-  (setq cquery-executable "/home/niklascarlsson/src/opensource/cquery/build/release/bin/cquery"
-        cquery-cache-dir (concat doom-cache-dir ".cquery_cached_index"))
-  (setq cquery-extra-args '("--log-file=/tmp/cquery.log"))
-  (defun +setup-cquery ()
-    (setq-local company-transformers nil)
-    (setq-local company-lsp-cache-candidates nil)
-    (condition-case nil
-        (lsp-cquery-enable)
-      (user-error nil))))
+  (setq ccls-executable "/home/niklascarlsson/src/opensource/ccls/Release/ccls"
+        ccls-cache-dir (concat doom-cache-dir ".ccls_cached_index")
+        ccls-sem-highlight-method 'font-lock)
+  (setq ccls-extra-args '("--log-file=/tmp/cc.log"))
+  (setq ccls-extra-init-params
+        '(:completion (:detailedLabel t) :xref (:container t)
+                      :diagnostics (:frequencyMs 5000)))
+  (set-company-backend! '(c-mode c++-mode) '(company-lsp))
+  )
+;; run ccls by default in C++ files
+(defun ccls//enable ()
+  (condition-case nil
+      (lsp-ccls-enable)
+    (user-error nil)))
+  (use-package ccls
+    :commands lsp-ccls-enable
+    :init (add-hook 'c-mode-common-hook #'ccls//enable))
 
 
-;; About to delete this stuff!!!
-
-;; ;; ccls old
-;; (def-package! ccls
-;;   :commands (lsp-ccls-enable)
+;; ;; Cquery
+;; (def-package! cquery
+;;   :hook ((c-mode c++-mode objc-mode) . +setup-cquery)
 ;;   :init
+;;   (setq cquery-extra-init-params '(:index (:comments 2)
+;;                                           :cacheFormat "msgpack"
+;;                                           :completion (:detailedLabel t))
+;;         cquery-sem-highlight-method 'overlay) ;; set to 'font-lock if highlighting slowly
 ;;   :config
-;;   (setq ccls-executable "~/src/opensource/old_ccls/build/ccls"
-;;         ccls-cache-dir (concat doom-cache-dir ".ccls_cached_index")
-;;         ccls-sem-highlight-method 'font-lock)
-;;   (setq ccls-extra-args '("--log-file=/tmp/cc.log"))
-;;   (setq ccls-extra-init-params
-;;         '(:completion (:detailedLabel t) :xref (:container t)
-;;                       :diagnostics (:frequencyMs 5000)))
-;;   (set-company-backend! '(c-mode c++-mode) '(company-lsp))
-;;   )
-;; ;; run ccls by default in C++ files
-;; (defun ccls//enable ()
-;;   (condition-case nil
-;;       (lsp-ccls-enable)
-;;     (user-error nil)))
-;;   (use-package ccls
-;;     :commands lsp-ccls-enable
-;;     :init (add-hook 'c-mode-common-hook #'ccls//enable))
+;;   (setq cquery-executable "/home/niklascarlsson/src/opensource/cquery/build/release/bin/cquery"
+;;         cquery-cache-dir (concat doom-cache-dir ".cquery_cached_index"))
+;;   (setq cquery-extra-args '("--log-file=/tmp/cquery.log"))
+;;   (defun +setup-cquery ()
+;;     (setq-local company-transformers nil)
+;;     (setq-local company-lsp-cache-candidates nil)
+;;     (condition-case nil
+;;         (lsp-cquery-enable)
+;;       (user-error nil))))
 
 
 ;; ;; ccls new
@@ -226,7 +224,7 @@
 ;;               :commands (lsp-ccls-enable)
 ;;               :init (add-hook! (c-mode c++-mode objc-mode) #'ccls//enable)
 ;;               :config
-;;               (setq ccls-executable "/home/niklascarlsson/src/opensource/ccls/release/ccls"
+;;               (setq ccls-executable "/home/niklascarlsson/src/opensource/ccls/Release/ccls"
 ;;                     ccls-cache-dir (concat doom-cache-dir ".ccls_cached_index")
 ;;                     ccls-sem-highlight-method 'font-lock)
 ;;               ;; (ccls-use-default-rainbow-sem-highlight)
