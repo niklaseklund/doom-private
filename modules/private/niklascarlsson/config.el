@@ -40,8 +40,6 @@
 ;; this should be set to nil for performance
 ;; https://www.emacswiki.org/emacs/FlySpell
 (setq flyspell-issue-message-flag nil)
-;; add spell checking for comments in programming mode
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 ;; Org-mode
 ;; customize org-settings
