@@ -179,7 +179,7 @@
   :commands (lsp-ccls-enable)
   :init
   :config
-  (setq ccls-executable "/home/niklascarlsson/src/opensource/ccls/Release/ccls"
+  (setq ccls-executable (expand-file-name "~/src/opensource/ccls/Release/ccls")
         ccls-cache-dir (concat doom-cache-dir ".ccls_cached_index")
         ccls-sem-highlight-method 'font-lock)
   (setq ccls-extra-args '("--log-file=/tmp/cc.log"))
