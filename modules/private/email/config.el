@@ -36,9 +36,7 @@
         notmuch-tag-formats '(("unread" (propertize tag 'face 'notmuch-tag-unread)))
         notmuch-hello-sections '(notmuch-hello-insert-saved-searches
                                  notmuch-hello-insert-alltags)
-        notmuch-saved-searches '((:name "kevin" :query "(from:kevin or (from:fuxialexander and to:kevin)) " :key "k")
-                                 (:name "hscr" :query "tag:hscr" :key "h")
-                                 (:name "inbox" :query "tag:inbox not tag:trash" :key "i")
+        notmuch-saved-searches '((:name "inbox" :query "tag:inbox not tag:trash" :key "i")
                                  (:name "flagged" :query "tag:flagged" :key "f")
                                  (:name "sent" :query "tag:sent" :key "s")
                                  (:name "drafts" :query "tag:draft" :key "d"))
