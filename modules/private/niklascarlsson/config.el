@@ -46,6 +46,7 @@
 ;; https://www.emacswiki.org/emacs/FlySpell
 (setq flyspell-issue-message-flag nil)
 
+
 ;; Org-mode
 ;; customize org-settings
 (after! org
@@ -167,6 +168,9 @@
    "gs"  "magit-status"
    "gc"  "magit-commit"
    "rg"  "rg --color=always $*"))
+;; Improvements from howard abrahams
+;; programs that want to pause the output uses cat instead
+(setenv "PAGER" "cat")
 
 
 ;; Dired
