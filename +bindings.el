@@ -10,7 +10,7 @@
       :desc "Find with projectile" :n "f" #'counsel-projectile-find-file)
       ;; Open
       (:prefix "o"
-        :desc "Open mail" :n "m" #'mu4e)
+        :desc "Open mail" :n "m" #'=mail)
       ;; Toggle
       (:prefix "t"
         :desc "Zen writing" :n "z" #'writeroom-mode

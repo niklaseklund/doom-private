@@ -126,7 +126,7 @@
        ;; toward a specific purpose. They may have additional dependencies and
        ;; should be loaded late.
        :app
-       (email +gmail)    ; emacs as an email client
+      ;(email +gmail)    ; emacs as an email client
       ;irc               ; how neckbeards socialize
       ;(rss +org)        ; emacs as an RSS reader
       ;twitter           ; twitter client https://twitter.com/vnought
@@ -145,4 +145,6 @@
        ;; your own modules.
        (default +bindings +snippets +evil-commands)
        :private
-       (niklascarlsson))
+       niklascarlsson  ; personal tweaks
+       email           ; a notmuch based email setup
+       )
