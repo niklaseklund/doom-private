@@ -36,6 +36,11 @@
   (dotimes (_ count) (save-excursion (evil-insert-newline-below))))
 
 
+;; TRAMP
+;; make tramp assume ssh to avoid typing it when connecting to remote host
+(setq tramp-default-method "ssh")
+
+
 ;; Flyspell
 ;; this should be set to nil for performance
 ;; https://www.emacswiki.org/emacs/FlySpell
