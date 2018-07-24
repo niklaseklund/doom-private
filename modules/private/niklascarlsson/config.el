@@ -200,40 +200,53 @@
     :init (add-hook 'c-mode-common-hook #'ccls//enable))
 
 
-;; org-capture-snipet
-;; http://ul.io/nb/2018/04/30/better-code-snippets-with-org-capture/
+;; org-caputre snippets
+;; http://www.howardism.org/Technical/Emacs/capturing-content.html
 (require 'which-func)
-(defun my/org-capture-get-src-block-string (major-mode)
-  "Given a major mode symbol, return the associated org-src block
-string that will enable syntax highlighting for that language
 
-E.g. tuareg-mode will return 'ocaml', python-mode 'python', etc..."
-
-  (let ((mm (intern (replace-regexp-in-string "-mode" "" (format "%s" major-mode)))))
-    (or (car (rassoc mm org-src-lang-modes)) (format "%s" mm))))
+(defun my/org-capture-clip-snippet (f)
+  "Given a file, F, this captures the currently selected text
+within an Org EXAMPLE block and a backlink to the file."
+  (with-current-buffer (find-buffer-visiting f)
+    (my/org-capture-fileref-snippet f "EXAMPLE" "" nil)))
 
 (defun my/org-capture-code-snippet (f)
+  "Given a file, F, this captures the currently selected text
+within an Org SRC block with a language based on the current mode
+and a backlink to the function and the file."
   (with-current-buffer (find-buffer-visiting f)
-    (let ((code-snippet (buffer-substring-no-properties (mark) (- (point) 1)))
-          (func-name (which-function))
-          (file-name (buffer-file-name))
-          (line-number (line-number-at-pos (region-beginning)))
-          (org-src-mode (my/org-capture-get-src-block-string major-mode)))
-      (format
-       "file:%s::%s
-In ~%s~:
-#+BEGIN_SRC %s
+    (let ((org-src-mode (replace-regexp-in-string "-mode" "" (format "%s" major-mode)))
+          (func-name (which-function)))
+      (my/org-capture-fileref-snippet f "SRC" org-src-mode func-name))))
+
+(defun my/org-capture-fileref-snippet (f type headers func-name)
+  (let* ((code-snippet
+          (buffer-substring-no-properties (mark) (- (point) 1)))
+         (file-name   (buffer-file-name))
+         (file-base   (file-name-nondirectory file-name))
+         (line-number (line-number-at-pos (region-beginning)))
+         (initial-txt (if (null func-name)
+                          (format "From [[file:%s::%s][%s]]:"
+                                  file-name line-number file-base)
+                        (format "From ~%s~ (in [[file:%s::%s][%s]]):"
+                                func-name file-name line-number
+                                file-base))))
+    (format "
+   %s
+
+   #+BEGIN_%s %s
 %s
-#+END_SRC"
-       file-name
-       line-number
-       func-name
-       org-src-mode
-       code-snippet))))
+   #+END_%s" initial-txt type headers code-snippet type)))
+
 
 (add-to-list 'org-capture-templates
              '("s" "code snippet"  entry
                (file "~/snippets.org")
                "* %?\n%(my/org-capture-code-snippet \"%F\")"))
+
+(add-to-list 'org-capture-templates
+             '("e" "example snippet"  entry
+               (file "~/snippets.org")
+               "* %?\n%(my/org-capture-clip-snippet \"%F\")"))
 
 ;;   :config
