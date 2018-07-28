@@ -45,6 +45,11 @@
 (setq flyspell-issue-message-flag nil)
 
 
+;; ivy
+;; specify counsel-projectile-find-file to use ivy--regex-plus for matching
+(push '(counsel-projectile-find-file . ivy--regex-plus) ivy-re-builders-alist)
+
+
 ;; Org-mode
 ;; customize org-settings
 (after! org
