@@ -69,6 +69,10 @@
 ;; Agenda
 (setq org-agenda-files '("~/Dropbox/org"
                          "~/org"))
+;; synchronize gcal
+(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
+
 ;; Org-super-agenda
 (def-package! org-super-agenda
   :commands (org-super-agenda-mode)
@@ -324,5 +328,9 @@ and a backlink to the function and the file."
              '("e" "example snippet"  entry
                (file "~/snippets.org")
                "* %?\n%(my/org-capture-clip-snippet \"%F\")"))
+
+(add-to-list 'org-capture-templates
+             '("a" "Appointment" entry (file  "~/Dropbox/org/gcal.org" )
+               "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n"))
 
 ;;   :config
