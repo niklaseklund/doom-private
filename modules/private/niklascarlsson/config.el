@@ -49,6 +49,9 @@
 (push '(counsel-projectile-find-file . ivy--regex-plus) ivy-re-builders-alist)
 
 
+;; Docker-Tramp
+(require 'docker-tramp)
+
 ;; Org-mode
 ;; customize org-settings
 (after! org
