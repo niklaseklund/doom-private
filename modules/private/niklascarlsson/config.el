@@ -45,10 +45,6 @@
 (setq flyspell-issue-message-flag nil)
 
 
-;; Ivy
-(push '(counsel-projectile-find-file . ivy--regex-plus) ivy-re-builders-alist)
-
-
 ;; Docker-Tramp
 (require 'docker-tramp)
 
