@@ -147,4 +147,5 @@
        :private
        niklascarlsson  ; personal tweaks
        email           ; a notmuch based email setup
+       calendar        ; what's up
        )

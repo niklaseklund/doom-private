@@ -11,3 +11,4 @@
 (package! esh-autosuggest)
 (package! fish-completion)
 (package! docker-tramp)
+(package! org-super-agenda)

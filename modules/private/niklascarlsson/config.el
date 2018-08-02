@@ -70,6 +70,79 @@
 (setq org-latex-caption-above nil)
 
 
+;; Agenda
+(setq org-agenda-files '("~/Dropbox/org"
+                         "~/org"))
+;; Org-super-agenda
+(def-package! org-super-agenda
+  :commands (org-super-agenda-mode)
+  :init (advice-add #'org-super-agenda-mode :around #'doom*shut-up)
+  :config
+  (setq org-super-agenda-groups
+        '((:log t)  ; Automatically named "Log"
+         (:name "Schedule"
+                :time-grid t)
+         (:name "Today"
+                :scheduled today)
+         (:habit t)
+         (:name "Due today"
+                :deadline today)
+         (:name "Overdue"
+                :deadline past)
+         (:name "Due soon"
+                :deadline future)
+         (:name "Unimportant"
+                :todo ("SOMEDAY" "MAYBE" "CHECK" "TO-READ" "TO-WATCH")
+                :order 100)
+         (:name "Waiting..."
+                :todo "WAITING"
+                :order 98)
+         (:name "Scheduled earlier"
+                :scheduled past))))
+  (after! org-agenda
+    (org-super-agenda-mode))
+  ;; enable more org-modules
+  (setq org-modules (quote (org-habit org-notmuch)))
+;; autoload
+;;;###autoload
+(defun org-agenda-show-daily (&optional arg)
+  (interactive "P")
+  (org-agenda arg "a")
+  (org-agenda-goto-today))
+;; customize settings
+(add-hook 'org-load-hook #'+org-private|setup-agenda t)
+(defun +org-private|setup-agenda ()
+  (setq
+        org-agenda-block-separator ""
+        org-agenda-compact-blocks t
+        org-agenda-dim-blocked-tasks nil
+        ;; org-agenda-files (ignore-errors (directory-files org-directory t "^\\(_.*\\|ref\\)\\.org$" t))
+        org-agenda-follow-indirect t
+        org-agenda-ignore-properties '(effort appt category)
+        org-agenda-inhibit-startup t
+        org-agenda-log-mode-items '(closed clock)
+        ;; org-agenda-overriding-header ""
+        org-agenda-restore-windows-after-quit t
+        org-agenda-skip-deadline-if-done t
+        org-agenda-skip-deadline-prewarning-if-scheduled t
+        org-agenda-skip-scheduled-if-done t
+        org-agenda-skip-unavailable-files t
+        org-agenda-sorting-strategy '((agenda time-up priority-down category-keep)
+                                      (todo   priority-down category-keep)
+                                      (tags   priority-down category-keep)
+                                      (search category-keep))
+        org-agenda-span 'day
+        org-agenda-start-with-log-mode t
+        org-agenda-sticky t
+        org-agenda-tags-column 'auto
+        org-agenda-use-tag-inheritance nil
+        org-habit-following-days 0
+        org-habit-graph-column 1
+        org-habit-preceding-days 8
+        org-habit-show-habits t
+        ))
+
+
 ;; Org-Noter
 (def-package! org-noter
   :config
