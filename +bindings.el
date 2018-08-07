@@ -6,8 +6,7 @@
 (map! (:leader
       ;; File
       (:prefix "f"
-      :desc "Find with fzf" :n "zf" #'counsel-fzf
-      :desc "Find with projectile" :n "f" #'counsel-projectile-find-file)
+      :desc "Find with projectile" :n "f" #'+helm/projectile-find-file)
       ;; Open
       (:prefix "o"
         :desc "Open mail" :n "m" #'=mail
@@ -49,9 +48,9 @@
       ;; Swedish escape
       :i "C-å" #'evil-normal-state
       ;; counsel
-      (:after ivy
-        (:map ivy-minibuffer-map
-          "C-l"      #'ivy-call-and-recenter))
+      ;; (:after ivy
+      ;;   (:map ivy-minibuffer-map
+      ;;     "C-l"      #'ivy-call-and-recenter))
       )
 
 ;; Bring back the leader in pdf-tools by unbinding comma
