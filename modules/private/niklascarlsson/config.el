@@ -258,8 +258,8 @@
 ;; aliases
 (after! eshell
   (set-eshell-alias!
-   "ff"  "counsel-projectile-find-file"
-   "fd"  "counsel-projectile-find-dir"
+   "ff"  "+helm/projectile-find-file"
+   "fd"  "helm-projectile-find-dir"
    "l"   "ls -l"
    "la"  "ls -la"
    "d"   "dired $1"
