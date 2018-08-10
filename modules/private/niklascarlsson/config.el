@@ -349,12 +349,12 @@ and a backlink to the function and the file."
 ;; Personal snippets
 ;; Code snippet
 (add-to-list 'org-capture-templates
-             '("cs" "Code snippet"  entry
+             '("s" "Code snippet"  entry
                (file "~/org/code/snippets.org")
                "* %?\n%(my/org-capture-code-snippet \"%F\")"))
 ;; Example block snippet
 (add-to-list 'org-capture-templates
-             '("es" "Example snippet"  entry
+             '("e" "Example snippet"  entry
                (file "~/org/snippets.org")
                "* %?\n%(my/org-capture-clip-snippet \"%F\")"))
 ;; Google calendar appointment
@@ -363,26 +363,25 @@ and a backlink to the function and the file."
                "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n"))
 ;; Journal
 (add-to-list 'org-capture-templates
-             '("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
+             '("j" "Journal" entry (file+olp+datetree "~/Dropbox/org/journal.org")
                "* %?" :append t))
 ;; Emacs ideas
 (add-to-list 'org-capture-templates
-             '("ei" "Emacs ideas" entry (file+headline "~/org/todo.org" "Emacs Ideas:")
-               "* TODO %?\n%i :emacs:" :prepend t :kill-buffer t))
-
+             '("t" "Todo" entry (file+headline "~/org/todo.org" "Inbox")
+               "* TODO %?\n%i" :prepend t :kill-buffer t))
 ;; Work snippets
 (add-to-list 'org-capture-templates
-             '("wcs" "Work code snippet"  entry
+             '("S" "Work code snippet"  entry
                (file "~/org/work/snippets.org")
                "* %?\n%(my/org-capture-code-snippet \"%F\")"))
 (add-to-list 'org-capture-templates
-             '("wes" "Work example snippet"  entry
+             '("E" "Work example snippet"  entry
                (file "~/org/work/snippets.org")
                "* %?\n%(my/org-capture-clip-snippet \"%F\")"))
 (add-to-list 'org-capture-templates
-  '("wt" "Work todo" entry (file+headline "~/org/work/todo.org" "Inbox")
+  '("T" "Work todo" entry (file+headline "~/org/work/todo.org" "Inbox")
      "* [ ] %?\n%i" :prepend t :kill-buffer t))
 (add-to-list 'org-capture-templates
-             '("wj" "Work journal" entry (file+datetree "~/org/work/journal.org")
+             '("J" "Work journal" entry (file+olp+datetree "~/org/work/journal.org")
                "* %?\nEntered on %U\n %i\n %a"))
 ;;   :config
