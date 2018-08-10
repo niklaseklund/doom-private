@@ -176,6 +176,12 @@
   (setq org-brain-title-max-length 12))
 
 
+;; Pop-rule
+(after! org
+  (set-popup-rule! "^\\*Org Agenda.*\\*$" :size 0.5 :side 'right :vslot 1  :select t :quit t   :ttl nil :modeline nil :autosave t)
+  (set-popup-rule! "^CAPTURE.*\\.org$"    :size 0.4 :side 'bottom          :select t                                  :autosave t))
+
+
 ;; Magit
 ;; automatic spellchecking in commit messages
 (add-hook 'git-commit-setup-hook 'git-commit-turn-on-flyspell)
