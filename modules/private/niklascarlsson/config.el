@@ -39,6 +39,10 @@
 (setq tramp-default-method "ssh")
 
 
+;; Ediff
+(add-hook 'ediff-prepare-buffer-hook #'outline-show-all)
+
+
 ;; Flyspell
 ;; this should be set to nil for performance
 ;; https://www.emacswiki.org/emacs/FlySpell
