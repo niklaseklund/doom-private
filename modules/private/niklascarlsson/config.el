@@ -78,74 +78,207 @@
 (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
 (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
 
-;; Org-super-agenda
+
+;; Org-(super)-agenda
 (def-package! org-super-agenda
-  :commands (org-super-agenda-mode)
+  :after org-agenda
   :init (advice-add #'org-super-agenda-mode :around #'doom*shut-up)
-  :config
-  (setq org-super-agenda-groups
-        '((:log t)  ; Automatically named "Log"
-         (:name "Schedule"
-                :time-grid t)
-         (:name "Today"
-                :scheduled today)
-         (:habit t)
-         (:name "Due today"
-                :deadline today)
-         (:name "Overdue"
-                :deadline past)
-         (:name "Due soon"
-                :deadline future)
-         (:name "Unimportant"
-                :todo ("SOMEDAY" "MAYBE" "CHECK" "TO-READ" "TO-WATCH")
-                :order 100)
-         (:name "Waiting..."
-                :todo "WAITING"
-                :order 98)
-         (:name "Scheduled earlier"
-                :scheduled past))))
-  (after! org-agenda
-    (org-super-agenda-mode))
-  ;; enable more org-modules
-  (setq org-modules (quote (org-habit org-notmuch)))
-;; autoload
-;;;###autoload
-(defun org-agenda-show-daily (&optional arg)
-  (interactive "P")
-  (org-agenda arg "a")
-  (org-agenda-goto-today))
-;; customize settings
-(add-hook 'org-load-hook #'+org-private|setup-agenda t)
-(defun +org-private|setup-agenda ()
+  :config (org-super-agenda-mode)
+  )
+(after! org-agenda
+  ;; New stuff
+  (load! "+cool-agenda.el")
+
+  (advice-add #'org-agenda-todo :after #'(lambda (&optional arg)
+                                           (save-some-buffers t (lambda () (string= buffer-file-name (car org-agenda-contributing-files))))
+                                           (org-agenda-redo)
+                                           ))
+  (advice-add #'org-agenda-redo :around #'doom*shut-up)
+  ;; (advice-add #'org-agenda-refile :after #'aj/take-care-of-org-buffers)
+  ;; (advice-add #'org-agenda-exit :after #'aj/take-care-of-org-buffers)
+  ;; (advice-add #'aj/org-agenda-refile-to-file :after #'aj/take-care-of-org-buffers)
+  ;; (advice-add #'aj/org-agenda-refile-to-datetree :after #'aj/take-care-of-org-buffers)
+  ;; (advice-add #'aj/org-agenda-refile-to-project-readme :after #'aj/take-care-of-org-buffers)
+  (advice-add 'org-agenda-change-all-lines :before '+agenda*change-all-lines-fixface)
+  (advice-add 'org-agenda-archive :after #'org-save-all-org-buffers)
+  (advice-add 'org-agenda-archive-default :after #'org-save-all-org-buffers)
+  (advice-add 'org-agenda-exit :before 'org-save-all-org-buffers)
+  (advice-add 'org-agenda-switch-to :after 'turn-off-solaire-mode)
+  ;; (advice-add #'org-copy :after #'aj/take-care-of-org-buffers)
+  (add-hook 'org-agenda-mode-hook #'hide-mode-line-mode)
+  ;; (add-hook 'org-agenda-mode-hook #'aj/complete-all-tags-for-org)
+  (add-hook 'org-agenda-after-show-hook 'org-narrow-to-subtree)
+  (add-hook 'org-agenda-finalize-hook '(lambda ()
+                                         (setq-local org-global-tags-completion-table
+                                                     (org-global-tags-completion-table org-agenda-contributing-files))))
+  ;; (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+  (remove-hook 'org-agenda-finalize-hook '+org|cleanup-agenda-files)
+
   (setq
-        org-agenda-block-separator ""
-        org-agenda-compact-blocks t
-        org-agenda-dim-blocked-tasks nil
-        ;; org-agenda-files (ignore-errors (directory-files org-directory t "^\\(_.*\\|ref\\)\\.org$" t))
-        org-agenda-follow-indirect t
-        org-agenda-ignore-properties '(effort appt category)
-        org-agenda-inhibit-startup t
-        org-agenda-log-mode-items '(closed clock)
-        ;; org-agenda-overriding-header ""
-        org-agenda-restore-windows-after-quit t
-        org-agenda-skip-deadline-if-done t
-        org-agenda-skip-deadline-prewarning-if-scheduled t
-        org-agenda-skip-scheduled-if-done t
-        org-agenda-skip-unavailable-files t
-        org-agenda-sorting-strategy '((agenda time-up priority-down category-keep)
-                                      (todo   priority-down category-keep)
-                                      (tags   priority-down category-keep)
-                                      (search category-keep))
-        org-agenda-span 'day
-        org-agenda-start-with-log-mode t
-        org-agenda-sticky t
-        org-agenda-tags-column 'auto
-        org-agenda-use-tag-inheritance nil
-        org-habit-following-days 0
-        org-habit-graph-column 1
-        org-habit-preceding-days 8
-        org-habit-show-habits t
+
+   ;; org-agenda-files '("~/org/GTD.org")
+   org-agenda-prefix-format '((agenda  . "  %-5t %6e ")
+                              (timeline  . "%s ")
+                              (todo  . " ")
+                              (tags  . " ")
+                              (search . "%l"))
+
+   org-agenda-tags-column 68
+   org-agenda-category-icon-alist
+   `(("GTD" ,(list (all-the-icons-faicon "cogs")) nil nil :ascent center))
+   org-agenda-todo-list-sublevels t
+   org-agenda-log-mode-items '(closed clock state)
+   org-agenda-span 7
+   org-agenda-start-on-weekday 1
+   org-agenda-start-with-log-mode nil
+   org-agenda-start-day "1d"
+   org-agenda-compact-blocks t
+   org-agenda-dim-blocked-tasks t
+   org-agenda-use-time-grid nil
+   org-agenda-time-grid '((daily today require-timed) nil " " " ")
+
+   org-agenda-custom-commands
+   ' (
+
+      ("R" "Current scheduled"
+       (
+
+        (agenda ""
+                ((org-agenda-overriding-header "")
+                 (org-agenda-show-current-time-in-grid t)
+                 (org-agenda-use-time-grid t)
+                 (org-agenda-skip-scheduled-if-done t)
+                 (org-agenda-span 'day)
+                 ))
+        )
+       (
+
+        (org-agenda-prefix-format '((agenda  . "  %-5t %6e ")
+                                    (timeline  . "%s ")
+                                    (todo  . " ")
+                                    (tags  . " ")
+                                    (search . "%l")))
+        )
+       )
+
+
+
+      ("c" "Clever"
+       (
+
+        (agenda ""
+                ((org-agenda-overriding-header "")
+                 (org-agenda-show-current-time-in-grid t)
+                 (org-agenda-use-time-grid t)
+                 (org-agenda-skip-scheduled-if-done nil)
+                 (org-agenda-span 'day)
+                 ))
+        (+agenda-tasks)
+        )
+       (
+        (org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
+        (org-agenda-tags-todo-honor-ignore-options t)
+        (org-agenda-todo-ignore-scheduled 'all)
+        (org-agenda-todo-ignore-deadlines 'far)
+        (org-agenda-skip-scheduled-if-done t)
+        (org-agenda-start-with-log-mode t)
+        (org-agenda-skip-deadline-if-done t)
+        (org-agenda-skip-scheduled-if-deadline-is-shown t)
+        (org-agenda-clockreport-parameter-plist `(:link t :maxlevel 6 :fileskip0 t :compact t :narrow 100))
+        (org-agenda-columns-add-appointments-to-effort-sum t)
+        (org-agenda-dim-blocked-tasks nil)
+        (org-agenda-todo-list-sublevels nil)
+        (org-agenda-block-separator "")
+        (org-agenda-time-grid '((daily today require-timed) nil " " " "))
+        )
+       )
+
+      ("i" "Inbox" ((tags "CALENDAR|INBOX"
+                          ((org-super-agenda-groups
+                            '((:discard (:tag "exclude"))
+                              (:name none
+                                     :and (:tag "CALENDAR" :scheduled today)
+                                     :tag "INBOX")
+                              (:discard (:anything t)))))))
+       ((org-agenda-overriding-header " Inbox")
+        (org-agenda-hide-tags-regexp  "INBOX\\|CALENDAR\\|tags3")
+        (org-tags-match-list-sublevels t)))
+
+      ("T" "Tasks" ((tags-todo "*"))((org-agenda-overriding-header "Tasks (no children, no schedule, by file)")
+                                     (org-agenda-prefix-format '((agenda  . "  %-5t %6e ")
+                                                                 (timeline  . "%s ")
+                                                                 (todo  . " ")
+                                                                 (tags  . " ")
+                                                                 (search . "%l")))
+                                     (org-tags-match-list-sublevels t)
+                                     (org-super-agenda-groups
+                                      '((:discard (:children t))
+                                        (:discard (:scheduled t))
+                                        (:name "Projects"
+                                               :auto-category t
+                                               )))))
+      ("3" "Someday" ((tags "+LEVEL=1"))
+       ((org-agenda-overriding-header "Someday...")
+        (org-agenda-files `(,+SOMEDAY))
+        (org-agenda-prefix-format '((agenda  . "  %-5t %6e ")
+                                    (timeline  . "%s ")
+                                    (todo  . " ")
+                                    (tags  . " ")
+                                    (search . "%l")))
         ))
+
+      ("9" "Calendar" ((agenda "*"))
+       ((org-agenda-files `(,+GTD))
+        (org-tags-match-list-sublevels t)
+        (org-agenda-skip-entry-if 'todo)
+        (org-agenda-hide-tags-regexp "CALENDAR")
+        (org-agenda-skip-scheduled-if-done t)
+        ))
+
+      ("8" "Maybe" ((tags "*"))
+       ((org-agenda-overriding-header "Maybe...")
+        (org-agenda-files `(,+MAYBE))
+        (org-agenda-prefix-format '((agenda  . "  %-5t %6e ")
+                                    (timeline  . "%s ")
+                                    (todo  . " ")
+                                    (tags  . " ")
+                                    (search . "%l")))
+        (org-tags-match-list-sublevels t)
+        ))
+
+      ("P" "Projects" ((tags-todo "*"
+                                  ((org-agenda-overriding-header "Projects")
+                                   (org-super-agenda-groups
+                                    '(
+                                      (:name "Action"
+                                             :children "NEXT")
+
+                                      (:name "Stucked:"
+                                             :and (:children t :todo "STARTED")
+                                             :and (:children nil :todo "STARTED"))
+                                      (:name "By children"
+                                             :children t)
+                                      (:discard (:anything t))
+                                      )))
+                                  ))
+       ((org-agenda-prefix-format '((agenda  . "  %-5t %6e ")
+                                    (timeline  . "%s ")
+                                    (todo  . " ")
+                                    (tags  . " ")
+                                    (search . "%l")))
+        (org-tags-match-list-sublevels t)
+        ))
+
+      ("p" "Projectile Projects" ((todo ""))
+       ((org-agenda-files `,(get-all-projectile-README-org-files))
+        (org-agenda-overriding-header "All Projectile projects")
+        (org-super-agenda-groups
+         '((:name "Projects"
+                  :auto-group t)))))
+
+      )
+   )
+  )
 
 
 ;; Org-Noter
