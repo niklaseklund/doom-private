@@ -2,7 +2,9 @@
 (when IS-MAC
   (setq ns-use-thin-smoothing t)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . dark))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark)
+               mac-option-modifier 'alt
+               mac-command-modifier 'meta)
   )
 
 
@@ -51,6 +53,7 @@
 
 ;; Docker-Tramp
 (require 'docker-tramp)
+
 
 ;; Org-mode
 ;; customize org-settings
