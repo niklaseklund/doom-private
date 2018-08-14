@@ -68,7 +68,8 @@
 (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 ;; place latex-captions below figures and tables
 (setq org-latex-caption-above nil)
-
+;; Enable eshell in babel blocks
+(load! "+eshell")
 
 ;; Agenda
 ;; specify the main org-directory
