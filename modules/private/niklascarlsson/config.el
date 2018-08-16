@@ -8,6 +8,16 @@
 	)
 
 
+;; Arch setup
+(if (string-match "ARCH"
+         (with-temp-buffer (shell-command "uname -r" t)
+                           (goto-char (point-max))
+                           (delete-char -1)
+                           (buffer-string)))
+    (setq x-super-keysym 'alt
+      x-alt-keysym 'meta))
+
+
 ;; General setup
 (setq user-full-name    "Niklas Carlsson"
       user-mail-address "carlsson.niklas@gmail.com"
