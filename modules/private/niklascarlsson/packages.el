@@ -13,3 +13,5 @@
 (package! docker-tramp)
 (package! org-super-agenda)
 (package! org-brain)
+(package! lispy)
+(package! lispyville)

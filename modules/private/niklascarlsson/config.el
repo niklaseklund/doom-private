@@ -69,6 +69,18 @@
                            (flycheck-mode -1)))
 
 
+;; Lispy(ville)
+;; enable lispy in emacs-lisp mode
+(add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+;; enable lispy in eval expression as well M-;
+(defun conditionally-enable-lispy ()
+  (when (eq this-command 'eval-expression)
+    (lispy-mode 1)))
+(add-hook 'minibuffer-setup-hook 'conditionally-enable-lispy)
+;; enable lispyville wherever lispy is enabled
+(add-hook 'lispy-mode-hook #'lispyville-mode)
+
+
 ;; Docker-Tramp
 (require 'docker-tramp)
 
