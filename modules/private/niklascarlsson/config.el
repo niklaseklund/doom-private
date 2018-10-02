@@ -92,10 +92,10 @@
      (escape insert)
      text-objects
      (additional-insert insert)
-     additional
      (additional-movement normal visual motion)
+     additional
      (atom-motions normal)
-     (slurp/barf-lispy))))
+     (slurp/barf-cp))))
 ;; Questions: Difference barf-lispy vs barf-cp
 
 ;; Docker-Tramp
