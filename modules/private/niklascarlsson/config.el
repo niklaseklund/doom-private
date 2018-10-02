@@ -14,8 +14,8 @@
                            (goto-char (point-max))
                            (delete-char -1)
                            (buffer-string)))
-    (setq x-super-keysym 'alt
-      x-alt-keysym 'meta))
+    (setq x-super-keysym 'meta
+      x-alt-keysym 'alt))
 
 
 ;; General setup
@@ -92,6 +92,7 @@
      (escape insert)
      text-objects
      (additional-insert insert)
+     additional
      (additional-movement normal visual motion)
      (atom-motions normal)
      (slurp/barf-lispy))))
