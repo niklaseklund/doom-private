@@ -83,7 +83,19 @@
 (add-hook 'minibuffer-setup-hook 'conditionally-enable-lispy)
 ;; enable lispyville wherever lispy is enabled
 (add-hook 'lispy-mode-hook #'lispyville-mode)
-
+;; key themes
+(with-eval-after-load 'lispyville
+  (lispyville-set-key-theme
+   '(operators
+     c-w
+     prettify
+     (escape insert)
+     text-objects
+     (additional-insert insert)
+     (additional-movement normal visual motion)
+     (atom-motions normal)
+     (slurp/barf-lispy))))
+;; Questions: Difference barf-lispy vs barf-cp
 
 ;; Docker-Tramp
 (require 'docker-tramp)
