@@ -54,9 +54,7 @@
 (add-hook 'writeroom-mode-hook (lambda ()
                                  (progn
                                    (visual-line-mode 1)
-                                   (hl-line-mode -1)
-                                   (setq writeroom-width 100))))
-
+                                   (hl-line-mode -1))))
 
 ;; TRAMP
 ;; make tramp assume ssh to avoid typing it when connecting to remote host
