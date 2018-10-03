@@ -47,10 +47,6 @@
       :n "SPC" #'evil-unimpaired/insert-space-below)
       ;; Swedish escape
       :i "C-å" #'evil-normal-state
-      ;; counsel
-      ;; (:after ivy
-      ;;   (:map ivy-minibuffer-map
-      ;;     "C-l"      #'ivy-call-and-recenter))
       )
 
 ;; Bring back the leader in pdf-tools by unbinding comma

@@ -50,6 +50,13 @@
   (dotimes (_ count) (save-excursion (evil-insert-newline-below))))
 
 
+;; Writeroom
+(add-hook 'writeroom-mode-hook (lambda ()
+                                 (progn
+                                   (visual-line-mode 1)
+                                   (hl-line-mode -1))))
+
+
 ;; TRAMP
 ;; make tramp assume ssh to avoid typing it when connecting to remote host
 (setq tramp-default-method "ssh")

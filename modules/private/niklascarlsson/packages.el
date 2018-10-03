@@ -1,7 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; config/niklascarlsson/packages.el
 
-;; (package! writeroom-mode)
 (package! lsp-mode)
 (package! company-lsp)
 (package! lsp-ui)
@@ -15,3 +14,4 @@
 (package! org-brain)
 (package! lispy)
 (package! lispyville)
+(package! writeroom-mode)
