@@ -54,7 +54,8 @@
 (add-hook 'writeroom-mode-hook (lambda ()
                                  (progn
                                    (visual-line-mode 1)
-                                   (hl-line-mode -1))))
+                                   (hl-line-mode -1)
+                                   (setq writeroom-width 100))))
 
 
 ;; TRAMP
