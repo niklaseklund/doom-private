@@ -80,7 +80,8 @@
 
 
 ;; Elisp
-(add-hook 'emacs-lisp-mode-hook (lambda () (prettify-symbols-mode)))
+;; prettify lambdas in elisp
+(add-hook 'emacs-lisp-mode-hook #'prettify-symbols-mode)
 
 
 ;; Lispy(ville)
