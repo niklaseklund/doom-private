@@ -79,6 +79,10 @@
                            (flycheck-mode -1)))
 
 
+;; Elisp
+(add-hook 'emacs-lisp-mode-hook (lambda () (prettify-symbols-mode)))
+
+
 ;; Lispy(ville)
 ;; enable lispy in emacs-lisp mode
 (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
