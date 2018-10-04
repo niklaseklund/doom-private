@@ -399,10 +399,7 @@
   (add-hook 'evil-insert-state-entry-hook
             (lambda ()
               (shell-command (concat
-                              "/usr/bin/gsettings set org.gnome.desktop.input-sources current " prev_lang)
-                             )
-              )
-            )
+                              "/usr/bin/gsettings set org.gnome.desktop.input-sources current " prev_lang))))
 
   (add-hook 'evil-insert-state-exit-hook
             (lambda ()
@@ -410,11 +407,7 @@
                                           "gsettings get org.gnome.desktop.input-sources current")
                                          7 -1))
               (shell-command (concat
-                              "/usr/bin/gsettings set org.gnome.desktop.input-sources current 1")
-                             )
-              )
-            )
-))
+                              "/usr/bin/gsettings set org.gnome.desktop.input-sources current 1"))))))
 
 
 ;; LSP-Mode
