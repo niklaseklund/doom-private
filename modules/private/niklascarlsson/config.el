@@ -102,13 +102,13 @@
   (lispyville-set-key-theme
    '(operators
      c-w
-     prettify
+     ;; prettify
      (escape insert)
      text-objects
      (additional-insert insert)
      (additional-movement normal visual motion)
      additional
-     (atom-motions normal)
+     atom-motions
      (slurp/barf-cp))))
 ;; Questions: Difference barf-lispy vs barf-cp
 
