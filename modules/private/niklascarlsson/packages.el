@@ -15,3 +15,4 @@
 (package! lispy)
 (package! lispyville)
 (package! writeroom-mode)
+(package! helm-org-rifle)

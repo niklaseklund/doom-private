@@ -131,6 +131,8 @@
 (setq org-latex-caption-above nil)
 ;; Enable eshell in babel blocks
 (load! "+eshell")
+;; Helm-rifle
+(require 'helm-org-rifle)
 
 ;; Agenda
 ;; specify the main org-directory
@@ -373,7 +375,11 @@
         org-capture-templates)
   (setq org-brain-visualize-default-choices 'all)
   (setq org-brain-title-max-length 12))
-
+;; Rifle the org-brain directory
+(defun helm-org-rifle-brain ()
+  "Rifle files in `org-brain-path'."
+  (interactive)
+  (helm-org-rifle-directories (list org-brain-path)))
 
 ;; Pop-rule
 (after! org
