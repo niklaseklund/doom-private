@@ -381,6 +381,18 @@
   (interactive)
   (helm-org-rifle-directories (list org-brain-path)))
 
+
+;; Projectile
+(setq projectile-enable-caching nil)
+
+
+;; Hugo
+(use-package ox-hugo
+  :ensure t                      ;Auto-install the package from Melpa (optional)
+  :after ox)
+(use-package ox-hugo-auto-export) ;If you want the auto-exporting on file saves
+
+
 ;; Pop-rule
 (after! org
   (set-popup-rule! "^\\*Org Agenda.*\\*$" :size 0.5 :side 'right :vslot 1  :select t :quit t   :ttl nil :modeline nil :autosave t)
