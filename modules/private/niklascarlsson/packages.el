@@ -12,6 +12,7 @@
 (package! docker-tramp)
 (package! org-super-agenda)
 (package! org-brain)
+(package! ox-hugo)
 (package! lispy)
 (package! lispyville)
 (package! writeroom-mode)
