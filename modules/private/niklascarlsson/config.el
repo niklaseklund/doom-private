@@ -455,6 +455,8 @@
 
 
 ;; GDB
+;; Disable realgud safe prompt after command
+(setq realgud-safe-mode nil)
 ;; Open debugging window style
 (setq gdb-many-windows t)
 
