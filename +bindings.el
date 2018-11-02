@@ -37,9 +37,6 @@
        :n "t" #'multi-term-prev)
       (:prefix "]"
        :n "t" #'multi-term-next)
-      ;; Open
-      (:prefix "r"
-       :n "i" #'ivy-resume)
       )
       ;; Vimesque keys
       (:prefix "["
