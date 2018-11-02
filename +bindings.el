@@ -27,6 +27,8 @@
         :desc "Sync current note" :n "." #'org-noter-sync-current-note
         :desc "Sync next note" :n "]" #'org-noter-sync-next-note
         :desc "Sync previous note" :n "[" #'org-noter-sync-prev-note
+        (:prefix "/"
+          :desc "Helm rifle the org files" :n "o" #'helm-org-rifle)
         )
       ;; Window
       (:prefix "w"
