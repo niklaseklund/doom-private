@@ -87,31 +87,6 @@
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
 
 
-;; Lispy(ville)
-;; enable lispy in emacs-lisp mode
-(add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-;; enable lispy in eval expression as well M-;
-(defun conditionally-enable-lispy ()
-  (when (eq this-command 'eval-expression)
-    (lispy-mode 1)))
-(add-hook 'minibuffer-setup-hook 'conditionally-enable-lispy)
-;; enable lispyville wherever lispy is enabled
-(add-hook 'lispy-mode-hook #'lispyville-mode)
-;; key themes
-(with-eval-after-load 'lispyville
-  (lispyville-set-key-theme
-   '(operators
-     c-w
-     ;; prettify
-     (escape insert)
-     text-objects
-     (additional-insert insert)
-     (additional-movement normal visual motion)
-     additional
-     atom-motions
-     (slurp/barf-cp))))
-;; Questions: Difference barf-lispy vs barf-cp
-
 ;; Docker-Tramp
 (require 'docker-tramp)
 

@@ -46,6 +46,7 @@
        window-select     ; visually switch windows
 
        :editor
+       lispy
        ;;(format +onsave)  ; automated prettiness
        multiple-cursors  ; editing in many places at once
        ;;parinfer          ; turn lisp into python, sort of
