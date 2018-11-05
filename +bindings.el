@@ -30,8 +30,6 @@
       ;; Search
       (:prefix "/"
         :desc "Helm rifle the org files" :n "o" #'helm-org-rifle)
-        :desc "Sync previous note" :n "[" #'org-noter-sync-prev-note
-        )
       ;; Code
       (:prefix "c"
         :desc "Member functions" :n "f" (lambda! (ccls/member 2))
@@ -49,7 +47,6 @@
       (:prefix "w"
         :desc "Close all other windows" :n "O" #'delete-other-windows
         :desc "Doom/window/enlargen" :n "o" #'doom/window-enlargen)
-      )
       ;; Vimesque keys
       (:prefix "["
       :n "SPC" #'evil-unimpaired/insert-space-above)
@@ -58,6 +55,7 @@
       ;; Swedish escape
       :i "C-å" #'evil-normal-state
       )
+    )
 
 ;; Bring back the leader in pdf-tools by unbinding comma
 (map!
