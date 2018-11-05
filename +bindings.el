@@ -30,6 +30,21 @@
       ;; Search
       (:prefix "/"
         :desc "Helm rifle the org files" :n "o" #'helm-org-rifle)
+        :desc "Sync previous note" :n "[" #'org-noter-sync-prev-note
+        )
+      ;; Code
+      (:prefix "c"
+        :desc "Member functions" :n "f" (lambda! (ccls/member 2))
+        :desc "Member types"     :n       "t" (lambda! (ccls/member 2))
+        :desc "Member functions"  :n      "f" (lambda! (ccls/member 3))
+        :desc "Member vars (/other)" :n   "m" (lambda! (ccls/member 0))
+        :desc "Member hierarchy" :n       "M" #'ccls-member-hierarchy
+        ;; $ccls/vars
+        ;; https://github.com/maskray/ccls/blob/master/src/messages/ccls_vars.cc
+        :desc "Vars (field or local)" :n  "v" (lambda! (ccls/vars 3))
+        :desc "Vars (field)" :n           "V" (lambda! (ccls/vars 1))
+        :desc "Vars (any)" :n "C-v" (lambda! (ccls/vars 7))
+        )
       ;; Window
       (:prefix "w"
         :desc "Close all other windows" :n "O" #'delete-other-windows
