@@ -41,21 +41,14 @@
         ;; https://github.com/maskray/ccls/blob/master/src/messages/ccls_vars.cc
         :desc "Vars (field or local)" :n  "v" (lambda! (ccls/vars 3))
         :desc "Vars (field)" :n           "V" (lambda! (ccls/vars 1))
-        :desc "Vars (any)" :n "C-v" (lambda! (ccls/vars 7))
-        )
-      ;; Window
-      (:prefix "w"
-        :desc "Close all other windows" :n "O" #'delete-other-windows
-        :desc "Doom/window/enlargen" :n "o" #'doom/window-enlargen))
+        :desc "Vars (any)" :n "C-v" (lambda! (ccls/vars 7))))
       ;; Vimesque keys
       (:prefix "["
         :n "SPC" #'evil-unimpaired/insert-space-above)
       (:prefix "]"
         :n "SPC" #'evil-unimpaired/insert-space-below)
       ;; Swedish escape
-      :i "C-å" #'evil-normal-state
-
-    )
+      :i "C-å" #'evil-normal-state)
 
 ;; Bring back the leader in pdf-tools by unbinding comma
 (map!
