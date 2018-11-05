@@ -46,15 +46,15 @@
       ;; Window
       (:prefix "w"
         :desc "Close all other windows" :n "O" #'delete-other-windows
-        :desc "Doom/window/enlargen" :n "o" #'doom/window-enlargen)
+        :desc "Doom/window/enlargen" :n "o" #'doom/window-enlargen))
       ;; Vimesque keys
       (:prefix "["
-      :n "SPC" #'evil-unimpaired/insert-space-above)
+        :n "SPC" #'evil-unimpaired/insert-space-above)
       (:prefix "]"
-      :n "SPC" #'evil-unimpaired/insert-space-below)
+        :n "SPC" #'evil-unimpaired/insert-space-below)
       ;; Swedish escape
       :i "C-å" #'evil-normal-state
-      )
+
     )
 
 ;; Bring back the leader in pdf-tools by unbinding comma
