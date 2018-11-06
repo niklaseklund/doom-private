@@ -414,12 +414,13 @@
 
 ;; LSP-Company
 (def-package! company-lsp
-  :after lsp-mode)
+  :after lsp-mode
+  :init
+  (setq company-transformers nil
+        company-lsp-async t
+        company-lsp-cache-candidates nil
+        company-lsp-enable-snippet t))
 (set-company-backend! '(c-mode c++-mode) '(company-lsp company-files company-yasnippet))
-(after! lsp-mode
-  (setq company-lsp-enable-snippet t)
-  (setq company-lsp-cache-candidates nil)
-  (setq company-lsp-async t))
 
 
 ;; LSP-Flycheck
