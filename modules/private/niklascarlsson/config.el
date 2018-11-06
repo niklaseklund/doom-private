@@ -384,8 +384,7 @@
 (when IS-MAC
   (setenv "LC_CTYPE" "UTF-8")
   (setenv "LC_ALL" "en_US.UTF-8")
-  (setenv "LANG" "en_US.UTF-8")
-  )
+  (setenv "LANG" "en_US.UTF-8"))
 
 
 ;; Automatically switch back to English in normal mode
