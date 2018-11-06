@@ -32,7 +32,7 @@
        fci               ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE tags
        ;;modeline          ; snazzy, Atom-inspired modeline, plus API
-       ;;nav-flash         ; blink the current line after jumping
+       nav-flash         ; blink the current line after jumping
        ;;neotree           ; a project drawer, like NERDTree for vim
        treemacs          ; a project drawer, like neotree but cooler
        (popup            ; tame sudden yet inevitable temporary windows
