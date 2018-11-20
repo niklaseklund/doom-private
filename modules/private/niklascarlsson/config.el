@@ -377,6 +377,8 @@
 ;; Magit
 ;; automatic spellchecking in commit messages
 (add-hook 'git-commit-setup-hook 'git-commit-turn-on-flyspell)
+;; mitigate terminal is dumb
+(setenv "EDITOR" "emacsclient")
 
 
 ;; Multi-Term
