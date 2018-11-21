@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Last session block
+# key: <ss
+# --
+
+#+BEGIN_SRC `(my/fake-session)`
+  $0
+#+END_SRC
