@@ -54,3 +54,22 @@
   (if extended-path
       (format "/docker:%s:/%s" (my/docker-match name-regexp) extended-path)
     (format "/docker:%s:/" (my/docker-match name-regexp))))
+
+
+(defun my/org-babel-previous-session ()
+  "Find the previous src code block which contains the session argument and
+return it together with the language"
+  (interactive)
+  (save-excursion
+    (let ((session nil)
+          (language nil))
+      (while (and (re-search-backward org-babel-src-block-regexp nil t) (not session))
+        (goto-char (match-beginning 0))
+        (let* ((block-info (org-babel-get-src-block-info))
+               (block-lang (nth 0 block-info))
+               (block-params (nth 2 block-info))
+               (block-session (cdr (assoc :session block-params))))
+          (when (not (string= "none" block-session))
+            (setq session block-session)
+            (setq language block-lang))))
+      (format "%s :session %s" language session))))

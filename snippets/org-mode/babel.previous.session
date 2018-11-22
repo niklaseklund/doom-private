@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: previous-session-block
+# key: <ss
+# --
+
+#+BEGIN_SRC `(my/org-babel-previous-session)`
+$0
+#+END_SRC
