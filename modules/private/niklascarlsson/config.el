@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 ;; Mac specific setup
 (when IS-MAC
   (setq ns-use-thin-smoothing t)
@@ -390,23 +391,20 @@
 
 
 ;; Automatically switch back to English in normal mode
-(cond (IS-LINUX
-  (setq prev_lang (substring (shell-command-to-string
-                              "gsettings get org.gnome.desktop.input-sources current")
-                             7 -1))
+;; Set default normal/insert-mode language to English
+(let* ((normal-mode-keyboard-layout "us")
+       (insert-mode-keyboard-layout normal-mode-keyboard-layout))
+
+  ;; Add entry hook
   (add-hook 'evil-insert-state-entry-hook
-            (lambda ()
-              (shell-command (concat
-                              "/usr/bin/gsettings set org.gnome.desktop.input-sources current " prev_lang))))
+            ;; switch language when entering insert mode to insert mode layout
+            (lambda () (shell-command (concat "xkb-switch -s " insert-mode-keyboard-layout))))
 
+  ;; Add exit hook
   (add-hook 'evil-insert-state-exit-hook
-            (lambda ()
-              (setq prev_lang (substring (shell-command-to-string
-                                          "gsettings get org.gnome.desktop.input-sources current")
-                                         7 -1))
-              (shell-command (concat
-                              "/usr/bin/gsettings set org.gnome.desktop.input-sources current 1"))))))
-
+            ;; save current insert mode layout and reset layouot to english
+            (lambda () (setq insert-mode-keyboard-layout (shell-command-to-string "xkb-switch -p"))
+              (shell-command (concat "xkb-switch -s " normal-mode-keyboard-layout)))))
 
 ;; LSP-Mode
 (def-package! lsp-mode
