@@ -677,9 +677,14 @@ session as the current block. ARG has same meaning as in
     (while (re-search-forward org-babel-src-block-regexp nil t)
       (org-babel-remove-result))))
 
+
 ;; Matlab files (use octave mode)
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 (add-hook 'octave-mode-hook (lambda ()
                             (flycheck-mode -1)))
 
+
+;; Autoformat in C++ files using clang-format
+(add-hook 'c++-mode-hook #'+format|enable-on-save)
+;;
 ;;   :config
