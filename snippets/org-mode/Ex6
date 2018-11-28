@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Ex6
+# key: ex6
+# --
+
+Why not mix languages as well, ~python~ and ~elisp~ working together
+#+NAME: elisp-max-numbers
+#+BEGIN_SRC elisp
+(/ (* 10 (+ 30 5 2)) 5)
+#+END_SRC
+
+#+BEGIN_SRC python :results output :noweb yes
+<<python-calc>>
+numbers = [x for x in range(<<elisp-max-numbers()>>)]
+print("The sum of the numbers is: " + str(calculate_sum(numbers)))
+#+END_SRC
+$0

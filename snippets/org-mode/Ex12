@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Ex12
+# key: ex12
+# --
+
+Create a session which runs from inside the docker. Here we utilize the function
+we just added to set the :dir. This utilizes TRAMP to execute the block inside
+the Docker image.
+#+BEGIN_SRC sh :session session-docker-agent :dir (my/docker-path "minimal_python")
+ls
+#+END_SRC

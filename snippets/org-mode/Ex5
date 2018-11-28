@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Ex5
+# key: ex5
+# --
+
+This is where we create our function
+#+NAME: python-calc
+#+BEGIN_SRC python
+def calculate_sum(numbers):
+    sum = 0
+    for number in numbers:
+       sum += number
+
+    return sum
+#+END_SRC
+
+And here we create the data dn call the function
+#+BEGIN_SRC python :results output :noweb yes
+<<python-calc>>
+numbers = [x for x in range(20)]
+print("The sum of the numbers is: " + str(calculate_sum(numbers)))
+#+END_SRC
+$0

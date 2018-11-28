@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Ex13
+# key: ex13
+# --
+
+We can now tangle the file directly into the running image
+#+BEGIN_SRC python :tangle (my/docker-path "minimal_python" "app/app.py")
+for i in range(20):
+    print("i has the value " + str(i))
+#+END_SRC

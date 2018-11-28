@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Ex10
+# key: ex10
+# --
+
+Start our docker image:
+#+BEGIN_SRC sh :session session-docker-background
+docker run -it minimal_python /bin/sh
+#+END_SRC
+
+Verify that it runs:
+#+BEGIN_SRC sh :results output
+docker ps
+#+END_SRC

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Ex15
+# key: ex15
+# --
+Snippets in Emacs are very powerful:
+#+BEGIN_EXAMPLE
+# -*- mode: snippet -*-
+# name: previous-session-block
+# key: <ss
+# --
+
+#+BEGIN_SRC
+$0
+#+END_SRC
+#+END_EXAMPLE

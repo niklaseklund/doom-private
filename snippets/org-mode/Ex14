@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: Ex14
+# key: ex14
+# --
+
+Now we want to run a block in the previous session ~session-docker-agent~. When
+I held this presentation there was a question on how to create a block which can
+automatically use the same session as the previous session in the file.
+
+Now that was a really good question. The solution that I came up with later is
+worth showing here I think cause it also highlights the strengths of Emacs and
+lisp. I decided to create a function that can find the previous header argument
+
+#+BEGIN_SRC elisp
+(defun org-babel-previous-session ()
+  "Find the previous src code block which contains the session argument and
+return it together with the language"
+  (interactive)
+  (save-excursion
+    (let ((session nil)
+          (language nil))
+      (while (and (re-search-backward org-babel-src-block-regexp nil t) (not session))
+        (goto-char (match-beginning 0))
+        (let* ((block-info (org-babel-get-src-block-info))
+               (block-lang (nth 0 block-info))
+               (block-params (nth 2 block-info))
+               (block-session (cdr (assoc :session block-params))))
+          (unless (string= "none" block-session)
+            (setq session block-session)
+            (setq language block-lang))))
+      (format "%s :session %s" language session))))
+
+(org-babel-previous-session)
+#+END_SRC

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Ex22
+# key: ex22
+# --
+
+I would like to describe the flow better. It would be great if we could
+visualize it, perhaps in a flow chart.
+#+BEGIN_SRC plantuml :file .images/flow.png :exports results
+@startuml
+(*) --> "Synthesize data with Elisp"
+
+if "Improve results with post" then
+  -->[Visualize the data] "Python and matplotlib"
+else
+  ->[Process the data] "Table formulas"
+  -->[Elisp, calc and code blocks] "Visualize the flow"
+  -->[plantUML] (*)
+endif
+@enduml
+#+END_SRC

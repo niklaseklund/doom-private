@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Ex19
+# key: ex19
+# --
+
+It's of course possible to use other languages for plotting like ~Octave~
+#+BEGIN_SRC octave :results file :var data=est-truth-data[1:-1, 0:1] :exports results
+truth = data(:, 1)
+estimate = data(:, 2)
+samples = linspace(1, 20, length(data))'
+
+figure( 1, "visible", "off" );
+hold on
+plot(samples, truth, 'g-')
+plot(samples, estimate, 'r-x')
+print -dpng .images/performance.png -S400;
+ans = ".images/performance.png";
+#+END_SRC

@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: Ex18
+# key: ex18
+# --
+
+Here is some python code which can plot data using the matplotlib. So as a
+variable to this code block we will pass the numbers from the ~est-truth-data~ block.
+
+#+BEGIN_SRC python :session my-plot-session :var data=est-truth-data :results file :exports both
+import numpy as np
+import matplotlib
+matplotlib.use('Agg')
+from matplotlib import pyplot as plt
+
+# Convert list to numpy array
+# The need for using 1 index here is because I added the box around truth and
+# estimate in the table so it interprests the first value to be truth and estimate
+truth = np.asarray(data)[1:, 0]
+est = np.asarray(data)[1:, 1]
+# Plot
+fig=plt.figure()
+plt.plot(truth, color="g", label="Truth")
+plt.plot(est, marker="x", label="Estimate")
+plt.legend(loc='upper left')
+plt.xlabel("Sample")
+plt.ylabel("Value")
+plt.title("Tracking")
+plt.savefig('.images/est_vs_truth.png')
+'.images/est_vs_truth.png' # return this to org-mode
+#+END_SRC
+
+Cool, the performance of the fake algorithm is not that bad. I think we can be
+pretty happy with it. let's see if we can gather some more information about
+it's performance.

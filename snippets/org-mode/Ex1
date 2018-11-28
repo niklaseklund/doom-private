@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Ex1
+# key: ex1
+# --
+
+We are of course not only limited to perform simple operations like
+~hello-world~. Here is an example using the ~Eigen~ library and the ~c++17~ compiler.
+
+#+BEGIN_SRC C++ :flags '("-I ~/Dropbox/Code/Eigen" "-std=c++17") :results output
+#include <iostream>
+#include <Eigen/Dense>
+using namespace Eigen;
+using namespace std;
+int main()
+{
+  Matrix3d m = Matrix3d::Random();
+  m = (m + Matrix3d::Constant(1.2)) * 50;
+  cout << "m =" << endl << m << endl;
+  Vector3d v(1,2,3);
+
+  cout << "m * v =" << endl << m * v << endl;
+}
+#+END_SRC

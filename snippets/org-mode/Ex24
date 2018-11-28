@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Ex24
+# key: ex24
+# --
+
+Another great feature in Emacs is that if you are not happy with something,
+change it. So I want a function that actually fix it at runtime.
+#+BEGIN_SRC elisp
+(defun org-latex-export-to-pdf-and-open ()
+"Export current buffer to LaTeX then process through to PDF and open the
+resulting file"
+  (interactive)
+  (let* ((file-name (file-name-nondirectory buffer-file-name))
+        (name (file-name-sans-extension file-name)))
+  (org-latex-export-to-pdf)
+  (find-file (concat name ".pdf"))))
+#+END_SRC

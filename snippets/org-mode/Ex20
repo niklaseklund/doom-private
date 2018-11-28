@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Ex20
+# key: ex20
+# --
+
+To calculate the mean value we can define a code block like this
+#+NAME: mean
+#+BEGIN_SRC elisp :var error=0 :exports none
+(let ((num-values (length error)))
+  (/ (seq-reduce '+ error 0.0) num-values))
+#+END_SRC
+
+And reference it in the table formula

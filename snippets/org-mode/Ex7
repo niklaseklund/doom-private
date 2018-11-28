@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Ex7
+# key: ex7
+# --
+
+Org-mode is an excellent tool for when studying, especially programming. Taking
+notes and experimenting with examples becomes very natural. Here is an example:
+[[file:~/org/hacking_notebook.org::*The%20if%20Special%20Form][An introduction to Elisp: The if Special Form]]
+$0

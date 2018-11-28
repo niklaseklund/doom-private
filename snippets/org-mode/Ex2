@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Ex2
+# key: ex2
+# --
+
+Let's create a variable
+#+BEGIN_SRC sh :results silent
+MY_NAME="Niklas"
+#+END_SRC
+
+And let's print it's value
+#+BEGIN_SRC sh :results ouput
+echo $MY_NAME
+#+END_SRC

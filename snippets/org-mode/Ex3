@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Ex3
+# key: ex3
+# --
+
+Let's create a variable
+#+BEGIN_SRC sh :session session-shell-chain :results silent
+MY_NAME="Niklas"
+#+END_SRC
+
+And let's print it's value
+#+BEGIN_SRC sh :session session-shell-chain :results ouput
+echo $MY_NAME
+#+END_SRC

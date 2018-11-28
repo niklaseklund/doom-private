@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Ex4
+# key: ex4
+# --
+
+This works with other languages that supports [[https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop][interactive
+repls]](read-eval-print-loop), like Python.
+
+#+BEGIN_SRC python :results output
+def calculate_sum(numbers):
+    sum = 0
+    for number in numbers:
+       sum += number
+
+    return sum
+#+END_SRC
+
+#+BEGIN_SRC python :results output
+numbers = [x for x in range(20)]
+print("The sum of the numbers is: " + str(calculate_sum(numbers)))
+#+END_SRC

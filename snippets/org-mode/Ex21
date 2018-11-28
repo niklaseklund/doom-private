@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Ex21
+# key: ex21
+# --
+
+Any code block can of course be used, not only the ones of ~elisp~. This is
+~python~ block which calculates the ~rmse~ value:
+#+NAME: rmse
+#+BEGIN_SRC python :var estimate=0 :var truth=0 :exports none
+import numpy as np
+error = np.asarray(estimate) - np.asarray(truth)
+result = np.sqrt(np.mean(np.square(error)))
+return result
+#+END_SRC

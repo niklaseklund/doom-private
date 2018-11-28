@@ -1,0 +1,44 @@
+# -*- mode: snippet -*-
+# name: Ex9
+# key: ex9
+# --
+
+$0
+~From~ create a layer from the ~python:3.6-alpine~ image:
+#+NAME: dockerfile-from
+#+BEGIN_SRC text
+FROM python:3.6-alpine
+#+END_SRC
+
+~Copy~ adds files from your Docker client's current directory
+#+NAME: dockerfile-copy
+#+BEGIN_SRC text
+COPY requirements.txt /
+#+END_SRC
+
+~Run~ builds your application with ~make~
+#+NAME: dockerfile-run
+#+BEGIN_SRC text
+RUN pip install -r /requirements.txt
+#+END_SRC
+
+~Cmd~ specifies what command to run within the container
+#+NAME: dockerfile-cmd
+#+BEGIN_SRC text
+CMD ["python", "app.py"]
+#+END_SRC
+
+
+The Dockerfile then becomes:
+#+BEGIN_SRC text :tangle docker_image/Dockerfile :noweb yes
+<<dockerfile-from>>
+
+<<dockerfile-copy>>
+
+<<dockerfile-run>>
+
+COPY src/ /app
+WORKDIR /app
+
+<<dockerfile-cmd>>
+#+END_SRC

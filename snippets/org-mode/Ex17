@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Ex17
+# key: ex17
+# --
+
+In order to get the table of data more comprehensive we utilize another block to
+post process the result. This block adds a header to the table.
+
+#+name: add-header
+#+begin_src emacs-lisp :var tbl=""
+(cons 'hline (cons '("Truth" "Estimate") (cons 'hline tbl)))
+#+end_src

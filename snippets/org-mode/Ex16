@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Ex16
+# key: ex16
+# --
+
+There is not room here for creating our own algorithm, so instead we will fake
+the truth and estimates. To generate the true signal and the estimate we will
+use a block of elisp code.
+#+BEGIN_SRC emacs-lisp :results value table :exports both
+  (mapcar (lambda (i)
+            (list i (+ (random 4) (- i 2))))
+          (number-sequence 1 20))
+#+END_SRC

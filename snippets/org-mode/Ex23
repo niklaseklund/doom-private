@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Ex23
+# key: ex23
+# --
+
+Calc is available in tables as well
+| Expression | Derivative |
+|------------+------------|
+| sqrt(x)    |            |
+| cos(x)     |            |
+| x^2        |            |
+| 1/x^2      |            |

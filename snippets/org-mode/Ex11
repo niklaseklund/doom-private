@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Ex11
+# key: ex11
+# --
+
+I want to have a function which can return to me a TRAMP compliant path to a
+running docker image. Implementing that in Emacs lisp can look like this:
+#+BEGIN_SRC elisp
+(defun docker-match (name-regexp)
+  ;; return the name of the last docker image which matches the input
+  ;; NAME-REGEXP
+  (with-temp-buffer (shell-command "docker ps" t)
+                    (goto-char (point-min))
+                    (let ((name-match '()))
+                      (while (not (eobp))
+                        (let ((current-name (string-trim (thing-at-point 'line))))
+                          (if (string-match name-regexp current-name)
+                              (progn
+                                (end-of-line)
+                                (setq name-match (format "%s" (thing-at-point 'symbol))))))
+                        (forward-line 1))
+                      name-match)))
+
+(defun docker-path (name-regexp  &optional extended-path)
+  (if extended-path
+      (format "/docker:%s:/%s" (docker-match name-regexp) extended-path)
+    (format "/docker:%s:/" (docker-match name-regexp))))
+
+(docker-path "minimal_python")
+#+END_SRC
