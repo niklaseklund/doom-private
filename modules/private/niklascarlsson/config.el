@@ -448,6 +448,9 @@
 (when (and (executable-find "fish")
            (require 'fish-completion nil t))
   (global-fish-completion-mode))
+;; fix pcomplete-completions-at-point uses a deprecated calling function
+(add-hook 'eshell-mode-hook (lambda ()
+                              (remove-hook 'completion-at-point-functions #'pcomplete-completions-at-point t)))
 ;; aliases
 (after! eshell
   (set-eshell-alias!
