@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Ex26
+# key: ex26
+# --
+
+So I wrote a function which wraps the the existing export function but adds the
+parts that I was missing. It ended up looking like this:
+
+#+BEGIN_SRC elisp
+(defun org-latex-export-to-pdf-and-open ()
+"Export current buffer to LaTeX then process through to PDF and open the
+resulting file"
+  (interactive)
+  (let* ((file-name (file-name-nondirectory buffer-file-name))
+        (name (file-name-sans-extension file-name)))
+  (org-latex-export-to-pdf)
+  (find-file (concat name ".pdf"))))
+#+END_SRC

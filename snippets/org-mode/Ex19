@@ -11,8 +11,10 @@ samples = linspace(1, 20, length(data))'
 
 figure( 1, "visible", "off" );
 hold on
-plot(samples, truth, 'g-')
-plot(samples, estimate, 'r-x')
+plot(samples, truth-estimate, 'r-x')
+xlabel ("Sample");
+ylabel ("Error");
+title("The error between the truth and estimate")
 print -dpng .images/performance.png -S400;
 ans = ".images/performance.png";
 #+END_SRC

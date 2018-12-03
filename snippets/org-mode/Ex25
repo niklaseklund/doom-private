@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Ex25
+# key: ex25
+# --
+
+I was exporting an Org-mode document to a LaTeX PDF file. When I was searching
+for the right command I found that ~M-x org-latex-export-to-pdf~ was working the
+best. However I was lacking the function that was provided by the ~pandoc~
+alternative which was to open the file after export.

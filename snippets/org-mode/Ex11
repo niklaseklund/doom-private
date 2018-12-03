@@ -3,7 +3,8 @@
 # key: ex11
 # --
 
-I want to have a function which can return to me a TRAMP compliant path to a
+I want to have a function which can return to me a
+[[https://www.emacswiki.org/emacs/TrampMode][TRAMP]] compliant path to a
 running docker image. Implementing that in Emacs lisp can look like this:
 #+BEGIN_SRC elisp
 (defun docker-match (name-regexp)
