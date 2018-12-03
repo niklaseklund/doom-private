@@ -66,6 +66,10 @@
 (add-hook 'ediff-prepare-buffer-hook #'outline-show-all)
 
 
+;; Command-log-mode
+(setq command-log-mode-window-size 60)
+
+
 ;; Flyspell
 ;; this should be set to nil for performance
 ;; https://www.emacswiki.org/emacs/FlySpell
