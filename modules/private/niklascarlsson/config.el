@@ -691,5 +691,22 @@ session as the current block. ARG has same meaning as in
 
 ;; Autoformat in C++ files using clang-format
 (add-hook 'c++-mode-hook #'+format|enable-on-save)
-;;
+
+
+;; LaTeX export
+(require 'ox-latex)
+(add-to-list 'org-latex-packages-alist '("" "minted"))
+(setq org-latex-listings 'minted)
+;; (setq org-latex-pdf-process
+;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+(setq org-latex-pdf-process
+  '("xelatex -shell-escape -interaction nonstopmode %f"
+  "xelatex -shell-escape -interaction nonstopmode %f"
+     "xelatex -shell-escape -interaction nonstopmode %f"))
+;; https://orgmode.org/manual/LaTeX-specific-export-settings.html
+(add-to-list 'org-latex-minted-langs '(calc "mathematica"))
+
+
 ;;   :config
