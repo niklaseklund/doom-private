@@ -695,7 +695,7 @@ session as the current block. ARG has same meaning as in
 
 ;; LaTeX export
 (require 'ox-latex)
-(add-to-list 'org-latex-packages-alist '("newfloat" "minted"))
+;; (add-to-list 'org-latex-packages-alist '("newfloat" "minted"))
 (setq org-latex-listings 'minted)
 ;; set minted options
 (setq org-latex-minted-options
