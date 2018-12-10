@@ -695,18 +695,31 @@ session as the current block. ARG has same meaning as in
 
 ;; LaTeX export
 (require 'ox-latex)
-(add-to-list 'org-latex-packages-alist '("" "minted"))
+(add-to-list 'org-latex-packages-alist '("newfloat" "minted"))
 (setq org-latex-listings 'minted)
-;; (setq org-latex-pdf-process
-;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+;; set minted options
+(setq org-latex-minted-options
+        '(("frame" "lines")))
+;; set pdf generation process
 (setq org-latex-pdf-process
-  '("xelatex -shell-escape -interaction nonstopmode %f"
-  "xelatex -shell-escape -interaction nonstopmode %f"
-     "xelatex -shell-escape -interaction nonstopmode %f"))
-;; https://orgmode.org/manual/LaTeX-specific-export-settings.html
+      '("xelatex -shell-escape -interaction nonstopmode %f"
+        "xelatex -shell-escape -interaction nonstopmode %f"
+        "xelatex -shell-escape -interaction nonstopmode %f"))
 (add-to-list 'org-latex-minted-langs '(calc "mathematica"))
+;; Add org-latex-class
+(add-to-list 'org-latex-classes
+             '("zarticle"
+                   "\\documentclass[11pt,Wordstyle]{Zarticle}
+                    \\usepackage[utf8]{inputenc}
+                    \\usepackage{graphicx}
+                        [NO-DEFAULT-PACKAGES]
+                        [PACKAGES]
+                        [EXTRA] "
+                    ("\\section{%s}" . "\\section*{%s}")
+                    ("\\subsection{%s}" . "\\subsection*{%s}")
+                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                    ("\\paragraph{%s}" . "\\paragraph*{%s}")))
+
 
 
 ;;   :config
