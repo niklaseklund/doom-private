@@ -384,6 +384,9 @@
 (add-hook 'git-commit-setup-hook 'git-commit-turn-on-flyspell)
 ;; mitigate terminal is dumb
 (setenv "EDITOR" "emacsclient")
+;; submodules
+(with-eval-after-load 'magit-status-mode
+  (add-hook 'magit-status-sections-hook #'magit-insert-modules))
 
 
 ;; Multi-Term
