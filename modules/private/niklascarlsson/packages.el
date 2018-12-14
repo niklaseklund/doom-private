@@ -14,4 +14,3 @@
 (package! ox-hugo)
 (package! writeroom-mode)
 (package! helm-org-rifle)
-(package! ob-async)
