@@ -12,6 +12,7 @@
 (package! org-super-agenda)
 (package! org-brain)
 (package! ox-hugo)
+(package! org-ref)
 (package! writeroom-mode)
 (package! helm-org-rifle)
 (package! spinner)                      ; required by ccls
