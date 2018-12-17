@@ -418,7 +418,44 @@
 
 ;; LSP-Mode
 (def-package! lsp-mode
-  :commands (lsp-mode))
+  :commands lsp
+  :init
+  (setq lsp-auto-guess-root t))
+
+
+;; LSP-UI
+;;https://github.com/MaskRay/Config
+(def-package! lsp-ui
+  :demand t
+  :config
+  (setq
+   ;; Disable sideline hints
+   lsp-ui-sideline-enable nil
+   lsp-ui-sideline-ignore-duplicate t
+   ;; Disable imenu
+   lsp-ui-imenu-enable nil
+   ;; Disable ui-doc (already present in minibuffer)
+   lsp-ui-doc-enable nil
+   lsp-ui-doc-header nil
+   lsp-ui-doc-include-signature nil
+   lsp-ui-doc-background (doom-color 'base4)
+   lsp-ui-doc-border (doom-color 'fg)
+   ;; Enable ui-peek
+   lsp-ui-peek-enable t
+   ;lsp-ui-peek-fontify t
+   lsp-ui-peek-always-show t
+   lsp-ui-peek-force-fontify nil
+   lsp-ui-peek-expand-function (lambda (xs) (mapcar #'car xs))
+   ;; Flycheck
+   lsp-ui-flycheck-enable t
+   )
+
+  (custom-set-faces
+   '(ccls-sem-global-variable-face ((t (:underline t :weight extra-bold))))
+   '(lsp-face-highlight-read ((t (:background "sea green"))))
+   '(lsp-face-highlight-write ((t (:background "brown4"))))
+   '(lsp-ui-sideline-current-symbol ((t (:foreground "grey38" :box nil))))
+   '(lsp-ui-sideline-symbol ((t (:foreground "grey30" :box nil))))))
 
 
 ;; LSP-Company
@@ -429,7 +466,8 @@
         company-lsp-async t
         company-lsp-cache-candidates nil
         company-lsp-enable-snippet t))
-(set-company-backend! '(c-mode c++-mode) '(company-lsp company-files company-yasnippet))
+(set-company-backend! '(c-mode c++-mode)
+  '(company-lsp company-files company-yasnippet))
 
 
 ;; LSP-Flycheck
@@ -496,19 +534,37 @@
         ccls-cache-dir (concat doom-cache-dir ".ccls_cached_index")
         ccls-sem-highlight-method 'font-lock)
   (setq ccls-extra-args '("--log-file=/tmp/cc.log"))
-  (setq ccls-extra-init-params
+  (setq ccls-initialization-options
         '(:completion (:detailedLabel t) :xref (:container t)
                       :diagnostics (:frequencyMs 5000)))
   (set-company-backend! '(c-mode c++-mode) '(company-lsp))
   )
 ;; run ccls by default in C++ files
-(defun ccls//enable ()
-  (condition-case nil
-      (lsp-ccls-enable)
-    (user-error nil)))
-  (use-package ccls
-    :commands lsp-ccls-enable
-    :init (add-hook 'c-mode-common-hook #'ccls//enable))
+(defun +ccls//enable ()
+  (require 'ccls)
+  (lsp))
+
+(use-package ccls
+  :commands lsp-ccls-enable
+  :init (add-hook 'c-mode-common-hook #'+ccls//enable))
+
+;; Recommended CCLS helpers from
+;; https://github.com/MaskRay/ccls/wiki/Emacs
+(defun ccls/callee ()
+  (interactive)
+  (lsp-ui-peek-find-custom 'callee "$ccls/call" '(:callee t)))
+(defun ccls/caller ()
+  (interactive)
+  (lsp-ui-peek-find-custom 'caller "$ccls/call"))
+(defun ccls/vars (kind)
+  (lsp-ui-peek-find-custom 'vars "$ccls/vars" `(:kind ,kind)))
+(defun ccls/base (levels)
+  (lsp-ui-peek-find-custom 'base "$ccls/inheritance" `(:levels ,levels)))
+(defun ccls/derived (levels)
+  (lsp-ui-peek-find-custom 'derived "$ccls/inheritance" `(:levels ,levels :derived t)))
+(defun ccls/member (kind)
+  (interactive)
+  (lsp-ui-peek-find-custom 'member "$ccls/member" `(:kind ,kind)))
 
 
 ;; org-caputre snippets
