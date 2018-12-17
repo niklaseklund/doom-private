@@ -13,6 +13,6 @@
   )
 
 ;; Set the theme
-(setq doom-theme 'doom-one)
-;; (setq doom-theme 'doom-dracula)
+;; (setq doom-theme 'doom-one)
+(setq doom-theme 'doom-dracula)
 ;; (setq doom-theme 'doom-nord-light)
