@@ -566,6 +566,9 @@
   (interactive)
   (lsp-ui-peek-find-custom 'member "$ccls/member" `(:kind ,kind)))
 
+;; Autoformat in C++ files using clang-format
+(add-hook 'c++-mode-hook #'+format|enable-on-save)
+
 
 ;; org-caputre snippets
 ;; http://www.howardism.org/Technical/Emacs/capturing-content.html
@@ -749,10 +752,6 @@ session as the current block. ARG has same meaning as in
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 (add-hook 'octave-mode-hook (lambda ()
                             (flycheck-mode -1)))
-
-
-;; Autoformat in C++ files using clang-format
-(add-hook 'c++-mode-hook #'+format|enable-on-save)
 
 
 ;; LaTeX export
