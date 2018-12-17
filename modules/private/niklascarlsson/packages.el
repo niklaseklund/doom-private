@@ -1,7 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; config/niklascarlsson/packages.el
 
-(package! lsp-mode)
 (package! company-lsp)
 (package! lsp-ui)
 (package! ccls)
