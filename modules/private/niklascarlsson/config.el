@@ -782,7 +782,4 @@ session as the current block. ARG has same meaning as in
                     ("\\paragraph{%s}" . "\\paragraph*{%s}")))
 
 
-;; Async org
-(require 'ob-async)
-
 ;;   :config
