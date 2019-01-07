@@ -370,7 +370,6 @@
 (use-package ox-hugo
   :ensure t                      ;Auto-install the package from Melpa (optional)
   :after ox)
-(use-package ox-hugo-auto-export) ;If you want the auto-exporting on file saves
 
 
 ;; Pop-rule
