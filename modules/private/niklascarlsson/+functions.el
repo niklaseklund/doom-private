@@ -87,3 +87,31 @@ return it together with the language"
                                 (setq profile-directory (concat firefox-path content))))
                           (forward-line 1)))
     profile-directory))
+
+
+(defun my/tangle-os-list (systems tangle-path)
+  "Function to be used for conditional tangling based on Operating System.
+SYSTEMS are a list of different Operating Systems. If the current system is
+found in the list PATH is returned by the function. Otherwise NO is returned."
+  (my/tangle-cond systems
+                  (lambda () (with-temp-buffer (shell-command "uname -a" t)
+                                               (goto-char (point-max))
+                                               (cond ((string-match-p "arch" (buffer-string)) "arch")
+                                                     ((string-match-p "ubuntu" (buffer-string)) "ubuntu")
+                                                     ((string-match-p "darwin" (buffer-string)) "macos")
+                                                     (t "alien"))))
+                  tangle-path))
+
+
+(defun my/tangle-cond (keys get-value-function path)
+  "General function to be used for conditional tangling. KEYS are a list of
+values that should be matched to the value passed by the GET-VALUE-FUNCTION. If
+the value is found PATH is returned otherwise NO."
+  (let ((value (get-value-function))
+        (key-found nil))
+    (while keys
+      (cond ((string-match-p (car keys) value) (setq key-found t)))
+      (setq keys (cdr keys)))
+    (if key-found
+        (format "%s" path)
+      (format "no"))))
