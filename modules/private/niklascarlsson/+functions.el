@@ -107,7 +107,7 @@ found in the list PATH is returned by the function. Otherwise NO is returned."
   "General function to be used for conditional tangling. KEYS are a list of
 values that should be matched to the value passed by the GET-VALUE-FUNCTION. If
 the value is found PATH is returned otherwise NO."
-  (let ((value (get-value-function))
+  (let ((value (funcall get-value-function))
         (key-found nil))
     (while keys
       (cond ((string-match-p (car keys) value) (setq key-found t)))
