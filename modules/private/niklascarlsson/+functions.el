@@ -73,3 +73,17 @@ return it together with the language"
             (setq session block-session)
             (setq language block-lang))))
       (format "%s :session %s" language session))))
+
+
+(defun my/firefox-profile-directory ()
+  "Find the path to the Firefox profile directory where settings recide."
+  (let ((profile-directory '())
+        (firefox-path (expand-file-name "~/.mozilla/firefox/")))
+    (with-temp-buffer (shell-command (concat "ls " firefox-path) t)
+                      (goto-char (point-min))
+                      (while (not (eobp))
+                          (let ((content (string-trim (thing-at-point 'line))))
+                            (if (string-match "default" content)
+                                (setq profile-directory (concat firefox-path content))))
+                          (forward-line 1)))
+    profile-directory))
