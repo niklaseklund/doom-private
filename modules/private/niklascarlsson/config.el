@@ -74,7 +74,8 @@
 ;; this should be set to nil for performance
 ;; https://www.emacswiki.org/emacs/FlySpell
 (setq flyspell-issue-message-flag nil)
-
+;; aspell is the successor to ispell so let's use
+(setq ispell-program-name "aspell")
 
 ;; Flycheck
 ;; disable using hooks
