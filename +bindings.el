@@ -9,9 +9,7 @@
       :desc "Find with projectile" :n "f" #'+helm/projectile-find-file)
       ;; Open
       (:prefix "o"
-        :desc "Open mail" :n "m" #'=mail
-        :desc "Open agenda" :n "a" #'org-agenda
-        :desc "Open calendar" :n "c" #'=calendar)
+        :desc "Open mail" :n "m" #'=mail)
       ;; Toggle
       (:prefix "t"
         :desc "Zen writing" :n "z" #'writeroom-mode
