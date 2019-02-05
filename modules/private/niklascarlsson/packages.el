@@ -8,7 +8,6 @@
 (package! esh-autosuggest)
 (package! fish-completion)
 (package! docker-tramp)
-(package! org-brain)
 (package! ox-hugo)
 (package! org-ref)
 (package! writeroom-mode)

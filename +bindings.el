@@ -11,8 +11,7 @@
       (:prefix "o"
         :desc "Open mail" :n "m" #'=mail
         :desc "Open agenda" :n "a" #'org-agenda
-        :desc "Open calendar" :n "c" #'=calendar
-        :desc "Open brain" :n "b" #'org-brain-visualize)
+        :desc "Open calendar" :n "c" #'=calendar)
       ;; Toggle
       (:prefix "t"
         :desc "Zen writing" :n "z" #'writeroom-mode

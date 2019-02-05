@@ -120,7 +120,6 @@
 (setq org-directory "~/org")
 ;; set which directories agenda should look for todos
 (setq org-agenda-files '("~/org"
-                         "~/org/brain"
                          "~/org/work"))
 
 
@@ -134,27 +133,6 @@
 ;; Setup
 (setq org-noter-always-create-frame nil
       org-noter-auto-save-last-location t)
-
-
-;; Org-brain
-(use-package org-brain :ensure t
-  :init
-  ;; For Evil users
-  (with-eval-after-load 'evil
-    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
-  :config
-  (setq org-id-track-globally t)
-  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
-  (push '("b" "Brain" plain (function org-brain-goto-end)
-          "* %i%?" :empty-lines 1)
-        org-capture-templates)
-  (setq org-brain-visualize-default-choices 'all)
-  (setq org-brain-title-max-length 12))
-;; Rifle the org-brain directory
-(defun helm-org-rifle-brain ()
-  "Rifle files in `org-brain-path'."
-  (interactive)
-  (helm-org-rifle-directories (list org-brain-path)))
 
 
 ;; Projectile
