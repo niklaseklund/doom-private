@@ -34,8 +34,6 @@
 (setq python-indent-guess-indent-offset nil)
 ;; maximize first frame
 (set-frame-parameter nil 'fullscreen 'maximized)
-;; remove trailing whitespaces (globaly)
-(add-hook 'before-save-hook #'delete-trailing-whitespace)
 
 
 ;; Load custom functions
