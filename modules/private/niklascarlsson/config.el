@@ -278,7 +278,6 @@
    "/d" "+helm/project-search-from-cwd"
    "l"   "ls -l"
    "la"  "ls -la"
-   "d"   "dired $1"
    "gl"  "(call-interactively 'magit-log-current)"
    "gs"  "magit-status"
    "gc"  "magit-commit"
@@ -301,6 +300,12 @@
 (dired-quick-sort-setup)
 (after! evil-snipe
         (push 'dired-mode evil-snipe-disabled-modes))
+;; Functions
+(defun eshell/d (&optional dir)
+"Open a dired buffer in DIR. If DIR is not provided open dired in current dir."
+  (if dir
+    (dired dir)
+      (dired default-directory)))
 
 
 ;; ccls
