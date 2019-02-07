@@ -293,6 +293,10 @@
 ;; Dired
 ;; Make it possible to move files between two open Direds easily
 (setq dired-dwim-target t)
+;; Make it possible to edit permissions in wdired
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Wdired.html
+(after! wdired
+  (setq wdired-allow-to-change-permissions t))
 (require 'dired-quick-sort)
 (dired-quick-sort-setup)
 (after! evil-snipe
