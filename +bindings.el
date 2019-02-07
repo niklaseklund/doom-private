@@ -83,3 +83,7 @@
  )
 
 ;;; ~/.doom.d/+bindings.el -*- lexical-binding: t; -*-
+(map!
+ (:after dired
+   (:map dired-mode-map
+     :nvmei "S" 'hydra-dired-quick-sort/body)))

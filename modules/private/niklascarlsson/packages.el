@@ -13,3 +13,4 @@
 (package! writeroom-mode)
 (package! helm-org-rifle)
 (package! spinner)                      ; required by ccls
+(package! dired-quick-sort)

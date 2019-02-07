@@ -293,6 +293,10 @@
 ;; Dired
 ;; Make it possible to move files between two open Direds easily
 (setq dired-dwim-target t)
+(require 'dired-quick-sort)
+(dired-quick-sort-setup)
+(after! evil-snipe
+        (push 'dired-mode evil-snipe-disabled-modes))
 
 
 ;; ccls
