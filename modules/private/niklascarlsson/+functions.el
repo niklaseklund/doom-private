@@ -115,3 +115,13 @@ the value is found PATH is returned otherwise NO."
     (if key-found
         (format "%s" path)
       (format "no"))))
+
+
+(defun my/github-search-code (query)
+  ;; Search GitHub for Elisp code with QUERY as search string. The
+  ;; QUERY should consist of words separated with a space.
+  (interactive "MSearch for: \n")
+  (let ((language "Emacs+Lisp"))
+    (setq query (replace-regexp-in-string " " "+" query))
+    (browse-url-firefox (format "https://github.com/search?l=%s&q=%s&type=Code" language query))
+    (quiet! (shell-command "wmctrl -x -a Navigator.Firefox"))))
