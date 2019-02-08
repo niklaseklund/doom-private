@@ -117,11 +117,23 @@ the value is found PATH is returned otherwise NO."
       (format "no"))))
 
 
-(defun my/github-search-code (query)
-  ;; Search GitHub for Elisp code with QUERY as search string. The
-  ;; QUERY should consist of words separated with a space.
-  (interactive "MSearch for: \n")
-  (let ((language "Emacs+Lisp"))
+(defun my/github-search-code (begin end)
+  "Search GitHub's code base. If the function is called with a visual selection
+that will be used as the search query. Otherwise the user is prompted for search
+words"
+  (interactive "r")
+  (let ((language nil)
+        (query nil))
+    ;; Set search query
+    (if (eq begin end)
+        (setq query (read-string "Search for: "))
+      (setq query (buffer-substring-no-properties begin end)))
     (setq query (replace-regexp-in-string " " "+" query))
+    ;; Set language for query
+    (setq language
+          (cond ((string-match-p "emacs-lisp-mode" (format "%s" major-mode)) "Emacs+Lisp")
+                ((string-match-p "python-mode" (format "%s" major-mode)) "Python")
+                ;; Default is Emacs Lisp
+                (t "Emacs+Lisp")))
     (browse-url-firefox (format "https://github.com/search?l=%s&q=%s&type=Code" language query))
     (quiet! (shell-command "wmctrl -x -a Navigator.Firefox"))))
