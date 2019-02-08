@@ -94,6 +94,15 @@
 ;; Docker-Tramp
 (require 'docker-tramp)
 
+;; Screencast
+(use-package gif-screencast
+  :ensure t
+  :config
+  (with-eval-after-load 'gif-screencast
+    (define-key gif-screencast-mode-map (kbd "<f12>") 'gif-screencast-toggle-pause)
+    (define-key gif-screencast-mode-map (kbd "<f11>") 'gif-screencast-stop))
+)
+
 
 ;; Org-mode
 ;; customize org-settings
