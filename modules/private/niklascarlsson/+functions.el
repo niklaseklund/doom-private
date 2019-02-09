@@ -121,6 +121,9 @@ the value is found PATH is returned otherwise NO."
   "Search GitHub's code base. If the function is called with a visual selection
 that will be used as the search query. Otherwise the user is prompted for search
 words"
+  ;; Improvements
+  ;; 1) Should region text be treated as one word or many? Should wrap it in
+  ;; quotes in case of one
   (interactive "r")
   (let ((language nil)
         (query nil))
@@ -131,8 +134,8 @@ words"
     (setq query (replace-regexp-in-string " " "+" query))
     ;; Set language for query
     (setq language
-          (cond ((string-match-p "emacs-lisp-mode" (format "%s" major-mode)) "Emacs+Lisp")
-                ((string-match-p "python-mode" (format "%s" major-mode)) "Python")
+          (cond ((string-match-p "emacs-lisp-mode" (symbol-name major-mode)) "Emacs+Lisp")
+                ((string-match-p "python-mode" (symbol-name major-mode)) "Python")
                 ;; Default is Emacs Lisp
                 (t "Emacs+Lisp")))
     (browse-url-firefox (format "https://github.com/search?l=%s&q=%s&type=Code" language query))
