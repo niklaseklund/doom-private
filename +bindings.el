@@ -4,49 +4,51 @@
 
 ;; Override other keys
 (map! (:leader
-      ;; File
-      (:prefix "f"
-      :desc "Find with projectile" :n "f" #'+helm/projectile-find-file)
-      ;; Open
-      (:prefix "o"
-        :desc "Open mail" :n "m" #'=mail)
-      ;; Toggle
-      (:prefix "t"
-        :desc "Zen writing" :n "z" #'writeroom-mode
-        :desc "Wrap lines to fit screen" :n "v" #'visual-line-mode
-        :desc "Column-indicator" :n "c" #'fci-mode)
-      ;; Noter
-      (:prefix "n"
-        :desc "Open org-noter" :n "o" #'org-noter
-        :desc "Kill org-noter session" :n "k" #'org-noter-kill-session
-        :desc "Insert org-note" :n "i" #'org-noter-insert-note
-        :desc "Insert precise org-note" :n "p" #'org-noter-insert-precise-note
-        :desc "Sync current note" :n "." #'org-noter-sync-current-note
-        :desc "Sync next note" :n "]" #'org-noter-sync-next-note
-        :desc "Sync previous note" :n "[" #'org-noter-sync-prev-note)
-      ;; Search
-      (:prefix "/"
-        :desc "Helm rifle the org files" :n "o" #'helm-org-rifle
-        :desc "Search github code base" :n "g" #'my/github-search-code)
-      ;; Code
-      (:prefix "c"
-        :desc "Member functions" :n "f" (lambda! (ccls/member 2))
-        :desc "Member types"     :n       "t" (lambda! (ccls/member 2))
-        :desc "Member functions"  :n      "f" (lambda! (ccls/member 3))
-        :desc "Member vars (/other)" :n   "m" (lambda! (ccls/member 0))
-        :desc "Member hierarchy" :n       "M" #'ccls-member-hierarchy
-        ;; $ccls/vars
-        ;; https://github.com/maskray/ccls/blob/master/src/messages/ccls_vars.cc
-        :desc "Vars (field or local)" :n  "v" (lambda! (ccls/vars 3))
-        :desc "Vars (field)" :n           "V" (lambda! (ccls/vars 1))
-        :desc "Vars (any)" :n "C-v" (lambda! (ccls/vars 7))))
+        ;; File
+        (:prefix "f"
+          :desc "Find with projectile" :n "f" #'+helm/projectile-find-file)
+        ;; Open
+        (:prefix "o"
+          :desc "Open mail" :n "m" #'=mail)
+        ;; Toggle
+        (:prefix "t"
+          :desc "Zen writing" :n "z" #'writeroom-mode
+          :desc "Wrap lines to fit screen" :n "v" #'visual-line-mode
+          :desc "Column-indicator" :n "c" #'fci-mode)
+        ;; Noter
+        (:prefix "n"
+          :desc "Open org-noter" :n "o" #'org-noter
+          :desc "Kill org-noter session" :n "k" #'org-noter-kill-session
+          :desc "Insert org-note" :n "i" #'org-noter-insert-note
+          :desc "Insert precise org-note" :n "p" #'org-noter-insert-precise-note
+          :desc "Sync current note" :n "." #'org-noter-sync-current-note
+          :desc "Sync next note" :n "]" #'org-noter-sync-next-note
+          :desc "Sync previous note" :n "[" #'org-noter-sync-prev-note)
+        ;; Search
+        (:prefix "/"
+          :desc "Helm rifle the org files" :n "o" #'helm-org-rifle
+          :desc "Search github code base" :n "g" #'my/github-search-code)
+        ;; Code
+        (:prefix "c"
+          :desc "Member functions" :n "f" (lambda! (ccls/member 2))
+          :desc "Member types"     :n       "t" (lambda! (ccls/member 2))
+          :desc "Member functions"  :n      "f" (lambda! (ccls/member 3))
+          :desc "Member vars (/other)" :n   "m" (lambda! (ccls/member 0))
+          :desc "Member hierarchy" :n       "M" #'ccls-member-hierarchy
+          ;; $ccls/vars
+          ;; https://github.com/maskray/ccls/blob/master/src/messages/ccls_vars.cc
+          :desc "Vars (field or local)" :n  "v" (lambda! (ccls/vars 3))
+          :desc "Vars (field)" :n           "V" (lambda! (ccls/vars 1))
+          :desc "Vars (any)" :n "C-v" (lambda! (ccls/vars 7))))
       ;; Vimesque keys
       (:prefix "["
         :n "SPC" #'evil-unimpaired/insert-space-above)
       (:prefix "]"
         :n "SPC" #'evil-unimpaired/insert-space-below)
       ;; Swedish escape
-      :i "C-å" #'evil-normal-state)
+      :i "C-å" #'evil-normal-state
+      ;; avy go to char
+      :nvmei "C-;" #'evil-avy-goto-char-2)
 
 ;; Bring back the leader in pdf-tools by unbinding comma
 (map!
