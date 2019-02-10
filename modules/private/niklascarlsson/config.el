@@ -317,6 +317,10 @@
       (dired default-directory)))
 
 
+;; Snipe
+(evil-snipe-override-mode 1)
+
+
 ;; ccls
 (def-package! ccls
   :commands (lsp-ccls-enable)
