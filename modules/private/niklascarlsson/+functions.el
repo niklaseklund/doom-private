@@ -140,3 +140,17 @@ words"
                 (t "Emacs+Lisp")))
     (browse-url-firefox (format "https://github.com/search?l=%s&q=%s&type=Code" language query))
     (quiet! (shell-command "wmctrl -x -a Navigator.Firefox"))))
+
+
+(defun my/tangle-get-filename ()
+  "Returns the filename for tangling that applies to the current subtree."
+  (let ((subtree-properties nil)
+        (tangle-param nil))
+    ;; org-babel-params-from-properties returns the properties that applies to
+    ;; the current subtree. It will handle a tree structure with multiple
+    ;; definitions of properties.
+    (setq subtree-properties (org-babel-params-from-properties))
+    (setq tangle-param (cdr (assoc :tangle (car subtree-properties))))
+    (if tangle-param
+        tangle-param
+      nil)))
