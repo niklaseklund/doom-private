@@ -151,6 +151,4 @@ words"
     ;; definitions of properties.
     (setq subtree-properties (org-babel-params-from-properties))
     (setq tangle-param (cdr (assoc :tangle (car subtree-properties))))
-    (if tangle-param
-        tangle-param
-      nil)))
+    tangle-param))
