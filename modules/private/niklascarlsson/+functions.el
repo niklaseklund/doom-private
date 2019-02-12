@@ -89,32 +89,28 @@ return it together with the language"
     profile-directory))
 
 
-(defun my/tangle-os-list (systems tangle-path)
-  "Function to be used for conditional tangling based on Operating System.
-SYSTEMS are a list of different Operating Systems. If the current system is
-found in the list PATH is returned by the function. Otherwise NO is returned."
-  (my/tangle-cond systems
-                  (lambda () (with-temp-buffer (shell-command "uname -a" t)
-                                               (goto-char (point-max))
-                                               (cond ((string-match-p "arch" (buffer-string)) "arch")
-                                                     ((string-match-p "ubuntu" (buffer-string)) "ubuntu")
-                                                     ((string-match-p "darwin" (buffer-string)) "macos")
-                                                     (t "alien"))))
-                  tangle-path))
+(defun my/tangle-os (oses &optional filename)
+  "The input OSES is a list of valid operating systems. The values are remaped
+to a regexp that will be used in the conditional lambda function"
+  (let* ((os-map '((arch . "arch")
+                      (ubuntu . "Ubuntu")
+                      (macos . "Darwin")))
+    (remaped-oses (mapcar (lambda (os) (cdr (assoc os os-map))) oses))
+    (cond-func (lambda (os) (string-match-p os (shell-command-to-string "uname -a")))))
+    (my/tangle-cond remaped-oses cond-func filename)))
 
 
-(defun my/tangle-cond (keys get-value-function path)
-  "General function to be used for conditional tangling. KEYS are a list of
-values that should be matched to the value passed by the GET-VALUE-FUNCTION. If
-the value is found PATH is returned otherwise NO."
-  (let ((value (funcall get-value-function))
-        (key-found nil))
-    (while keys
-      (cond ((string-match-p (car keys) value) (setq key-found t)))
-      (setq keys (cdr keys)))
-    (if key-found
-        (format "%s" path)
-      (format "no"))))
+(defun my/tangle-cond (conditionals cond-func &optional filename)
+  ;; http://ergoemacs.org/misc/emacs_lisp_some_and_every.html
+  (require 'cl-extra)
+  (let ((tangle-file "none"))
+    (when (cl-some #'identity (mapcar cond-func conditionals))
+      (if filename
+          (setq tangle-file filename)
+        (setq tangle-file (my/tangle-get-filename)))
+      (when (null tangle-file)
+        (error "You haven't specified a tangle filename")))
+    tangle-file))
 
 
 (defun my/github-search-code (begin end)
