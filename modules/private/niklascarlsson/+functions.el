@@ -103,7 +103,7 @@ to a regexp that will be used in the conditional lambda function"
 (defun my/tangle-cond (conditionals cond-func &optional filename)
   ;; http://ergoemacs.org/misc/emacs_lisp_some_and_every.html
   (require 'cl-extra)
-  (let ((tangle-file "none"))
+  (let ((tangle-file "no"))
     (when (cl-some #'identity (mapcar cond-func conditionals))
       (if filename
           (setq tangle-file filename)
