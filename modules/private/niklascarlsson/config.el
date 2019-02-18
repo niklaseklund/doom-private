@@ -370,12 +370,6 @@
 ;; http://www.howardism.org/Technical/Emacs/capturing-content.html
 (require 'which-func)
 
-(defun my/org-capture-clip-snippet (f)
-  "Given a file, F, this captures the currently selected text
-within an Org EXAMPLE block and a backlink to the file."
-  (with-current-buffer (find-buffer-visiting f)
-    (my/org-capture-fileref-snippet f "EXAMPLE" "" nil)))
-
 (defun my/org-capture-code-snippet (f)
   "Given a file, F, this captures the currently selected text
 within an Org SRC block with a language based on the current mode
@@ -403,6 +397,22 @@ and a backlink to the function and the file."
    #+BEGIN_%s %s
 %s
    #+END_%s" initial-txt type headers code-snippet type)))
+;; Hugo
+;; Populates only the EXPORT_FILE_NAME property in the inserted headline.
+(defun org-hugo-new-subtree-post-capture-template ()
+  "Returns `org-capture' template string for new Hugo post.
+See `org-capture-templates' for more information."
+  (let* ((title (read-from-minibuffer "Post Title: ")) ;Prompt to enter the post title
+         (fname (org-hugo-slug title)))
+    (mapconcat #'identity
+               `(
+                 ,(concat "* TODO " title)
+                 ":PROPERTIES:"
+                 ,(concat ":EXPORT_FILE_NAME: " fname)
+                 ":END:"
+                 "%?\n")                ;Place the cursor here finally
+               "\n")))
+
 
 ;; Org-capture
 ;; Personal snippets
@@ -411,64 +421,25 @@ and a backlink to the function and the file."
              '("s" "Code snippet"  entry
                (file "~/org/code/snippets.org")
                "* %?\n%(my/org-capture-code-snippet \"%F\")"))
-;; Example block snippet
+;; Work  capture templates
 (add-to-list 'org-capture-templates
-             '("e" "Example snippet"  entry
-               (file "~/org/snippets.org")
-               "* %?\n%(my/org-capture-clip-snippet \"%F\")"))
-;; Google calendar appointment
+             '("w" "Work entries"))
 (add-to-list 'org-capture-templates
-             '("a" "Appointment" entry (file  "~/Dropbox/org/gcal.org" )
-               "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n"))
-;; Journal
-(add-to-list 'org-capture-templates
-             '("j" "Journal" entry (file+olp+datetree "~/Dropbox/org/journal.org")
-               "* %?" :append t))
-;; Emacs ideas
-(add-to-list 'org-capture-templates
-             '("t" "Todo" entry (file+headline "~/org/todo.org" "Inbox")
-               "* TODO %?\n%i" :prepend t :kill-buffer t))
-;; Work snippets
-(add-to-list 'org-capture-templates
-             '("S" "Work code snippet"  entry
+             '("ws" "Code snippet"  entry
                (file "~/org/work/snippets.org")
                "* %?\n%(my/org-capture-code-snippet \"%F\")"))
 (add-to-list 'org-capture-templates
-             '("E" "Work example snippet"  entry
-               (file "~/org/work/snippets.org")
-               "* %?\n%(my/org-capture-clip-snippet \"%F\")"))
-(add-to-list 'org-capture-templates
-  '("T" "Work todo" entry (file+headline "~/org/work/todo.org" "Inbox")
+  '("wt" "Todo" entry (file+headline "~/org/work/todo.org" "Inbox")
      "* [ ] %?\n%i" :prepend t :kill-buffer t))
 (add-to-list 'org-capture-templates
-             '("J" "Work journal" entry (file+olp+datetree "~/org/work/journal.org")
-               "* %?\nEntered on %U\n %i\n %a"))
-;; Hugo
-;; Populates only the EXPORT_FILE_NAME property in the inserted headline.
-(with-eval-after-load 'org-capture
-  (defun org-hugo-new-subtree-post-capture-template ()
-    "Returns `org-capture' template string for new Hugo post.
-See `org-capture-templates' for more information."
-    (let* ((title (read-from-minibuffer "Post Title: ")) ;Prompt to enter the post title
-           (fname (org-hugo-slug title)))
-      (mapconcat #'identity
-                 `(
-                   ,(concat "* TODO " title)
-                   ":PROPERTIES:"
-                   ,(concat ":EXPORT_FILE_NAME: " fname)
-                   ":END:"
-                   "%?\n")          ;Place the cursor here finally
-                 "\n")))
-
-  (add-to-list 'org-capture-templates
-               '("h"                ;`org-capture' binding + h
-                 "Hugo post"
-                 entry
-                 ;; It is assumed that below file is present in `org-directory'
-                 ;; and that it has a "Blog Ideas" heading. It can even be a
-                 ;; symlink pointing to the actual location of all-posts.org!
-                 (file+olp "todo.org" "Blog Ideas")
-                 (function org-hugo-new-subtree-post-capture-template))))
+              '("h"                ;`org-capture' binding + h
+                "Hugo blog post"
+                entry
+                ;; It is assumed that below file is present in `org-directory'
+                ;; and that it has a "Blog Ideas" heading. It can even be a
+                ;; symlink pointing to the actual location of all-posts.org!
+                (file+olp "todo.org" "Blog Ideas")
+                (function org-hugo-new-subtree-post-capture-template)))
 
 ;; Org-babel
 (defun src-block-in-session-p (&optional name)
