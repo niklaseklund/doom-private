@@ -321,6 +321,10 @@
 (evil-snipe-override-mode 1)
 
 
+;; Avy
+;; Make avy operate on all visable windows
+(setq avy-all-windows t)
+
 ;; ccls
 (def-package! ccls
   :commands (lsp-ccls-enable)
