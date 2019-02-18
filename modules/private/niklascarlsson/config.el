@@ -187,13 +187,13 @@
   ;; Add entry hook
   (add-hook 'evil-insert-state-entry-hook
             ;; switch language when entering insert mode to insert mode layout
-            (lambda () (shell-command (concat "xkb-switch -s " insert-mode-keyboard-layout))))
+            (lambda () (quiet! (shell-command (concat "xkb-switch -s " insert-mode-keyboard-layout)))))
 
   ;; Add exit hook
   (add-hook 'evil-insert-state-exit-hook
             ;; save current insert mode layout and reset layouot to english
             (lambda () (setq insert-mode-keyboard-layout (shell-command-to-string "xkb-switch -p"))
-              (shell-command (concat "xkb-switch -s " normal-mode-keyboard-layout)))))
+              (quiet! (shell-command (concat "xkb-switch -s " normal-mode-keyboard-layout))))))
 
 ;; LSP-Mode
 (def-package! lsp-mode
