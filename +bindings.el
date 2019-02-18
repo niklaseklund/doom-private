@@ -4,9 +4,6 @@
 
 ;; Override other keys
 (map! (:leader
-        ;; File
-        (:prefix "f"
-          :desc "Find with projectile" :n "f" #'+helm/projectile-find-file)
         ;; Open
         (:prefix "o"
           :desc "Open mail" :n "m" #'=mail)
