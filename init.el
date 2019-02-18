@@ -72,7 +72,8 @@
        ;;gist              ; interacting with github gists
        ;;macos             ; MacOS-specific commands
        make              ; run make tasks from Emacs
-       magit             ;a git porcelain for Emacs
+       (magit            ;a git porcelain for Emacs
+        +forge)          ; new magit funcitonality
        password-store    ; password manager for nerds
          ;; +auth
        pdf               ; pdf enhancements
