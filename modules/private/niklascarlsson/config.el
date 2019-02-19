@@ -281,10 +281,10 @@
 ;; aliases
 (after! eshell
   (set-eshell-alias!
-   "ff"  "+helm/projectile-find-file"
-   "fd"  "helm-projectile-find-dir"
-   "/p" "+helm/project-search"
-   "/d" "+helm/project-search-from-cwd"
+   "ff"  "+ivy/projectile-find-file"
+   "fd"  "counsel-projectile-find-dir"
+   "/p" "+ivy/project-search"
+   "/d" "+ivy/project-search-from-cwd"
    "l"   "ls -l"
    "la"  "ls -la"
    "gl"  "(call-interactively 'magit-log-current)"
