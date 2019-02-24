@@ -8,19 +8,16 @@
        (lookup           ; helps you navigate your code and documentation
         +docsets)        ; ...or in Dash docsets locally
        snippets          ; my elves. They type so I don't have to
-       spellcheck        ; tasing you for misspelling mispelling
-       (syntax-checker   ; tasing you for every semicolon you forget
-        +childframe)     ; use childframes for error popups (Emacs 26+ only)
        workspaces        ; tab emulation, persistence & separate workspaces
 
        :completion
        (company        ; the ultimate code completion backend
         +auto)           ; as-you-type code completion
-       (helm             ; the *other* search engine for love and life
-        +fuzzy)          ; enable fuzzy search backend for helm
+       ;; (helm             ; the *other* search engine for love and life
+       ;;  +fuzzy)          ; enable fuzzy search backend for helm
        ;;ido               ; the other *other* search engine...
-       ;;(ivy              ; a search engine for love and life
-       ;; +fuzzy)          ; enable fuzzy search backend for ivy
+       (ivy              ; a search engine for love and life
+       +fuzzy)          ; enable fuzzy search backend for ivy
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -61,7 +58,7 @@
        electric          ; smarter, keyword-based electric-indent
        eshell            ; a consistent, cross-platform shell (WIP)
        imenu             ; an imenu sidebar and searchable code index
-       term              ; terminals in Emacs
+       ;;term              ; terminals in Emacs
        vc                ; version-control and Emacs, sitting in a tree
 
        :tools
@@ -69,7 +66,11 @@
        docker
        editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
+       (flycheck             ; tasing you for every semicolon you forget
+        +childframe)     ; use childframes for error popups (Emacs 26+ only)
+       flyspell         ; tasing you for misspelling mispelling
        ;;gist              ; interacting with github gists
+       ;;lsp
        ;;macos             ; MacOS-specific commands
        make              ; run make tasks from Emacs
        (magit            ;a git porcelain for Emacs
@@ -83,6 +84,7 @@
        ;;tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
        ;;wakatime
+       ;; vterm             ; another terminals in Emacs
 
        :lang
        ;;assembly          ; assembly for fun or debugging
