@@ -5,10 +5,12 @@
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
                mac-option-modifier 'alt
-               mac-command-modifier 'meta
-	)
+               mac-command-modifier 'meta)
 
 
+;; Just show the splash screen when switching project. Don't always want to
+;; select a file
+(setq-default +workspaces-switch-project-function #'ignore)
 ;; Arch setup
 (if (string-match "ARCH"
          (with-temp-buffer (shell-command "uname -r" t)
