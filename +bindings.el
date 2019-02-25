@@ -82,6 +82,7 @@
    )
  )
 
+;; Update dired map
 (map!
  (:after dired
    (:map dired-mode-map
