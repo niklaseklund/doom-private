@@ -1,9 +1,5 @@
 ;;; config/niklascarlsson/init.el -*- lexical-binding: t; -*-
 
-;; Override the doom leader keys
-(setq doom-leader-key ","
-      doom-localleader-key ", m")
-
 ;; Set the font
 (when IS-MAC
   (setq doom-font (font-spec :family "Roboto Mono" :size 13))
