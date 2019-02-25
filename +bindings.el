@@ -97,5 +97,10 @@
         "C-h" 'evil-window-left
         "C-l" 'evil-window-right))
 
+;; Align minbuffer-local-map with other minbuffer-maps
+(map! (:map minibuffer-local-map
+        "C-n" 'next-line-or-history-element
+        "C-p" 'previous-line-or-history-element))
+
 
 ;;; ~/.doom.d/+bindings.el -*- lexical-binding: t; -*-
