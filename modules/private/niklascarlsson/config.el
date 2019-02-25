@@ -40,6 +40,8 @@
 
 ;; Load custom functions
 (load! "+functions")
+;; Load helm customization
+(load! "+helm")
 
 
 ;; Unimpaired functions
