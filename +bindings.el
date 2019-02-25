@@ -82,8 +82,20 @@
    )
  )
 
-;;; ~/.doom.d/+bindings.el -*- lexical-binding: t; -*-
 (map!
  (:after dired
    (:map dired-mode-map
      :nvmei "S" 'hydra-dired-quick-sort/body)))
+
+ ;; Easier window movement
+(map! :n "C-h" 'evil-window-left
+      :n "C-j" 'evil-window-down
+      :n "C-k" 'evil-window-up
+      :n "C-l" 'evil-window-right
+
+      (:map evil-treemacs-state-map
+        "C-h" 'evil-window-left
+        "C-l" 'evil-window-right))
+
+
+;;; ~/.doom.d/+bindings.el -*- lexical-binding: t; -*-
