@@ -7,7 +7,6 @@
                mac-option-modifier 'alt
                mac-command-modifier 'meta)
 
-
 ;; Just show the splash screen when switching project. Don't always want to
 ;; select a file
 (setq-default +workspaces-switch-project-function #'ignore)
@@ -125,7 +124,8 @@
 (load! "+eshell")
 ;; Helm-rifle
 (require 'helm-org-rifle)
-
+;; Disable line-numbers in org-mode
+(add-hook 'org-mode-hook #'doom|disable-line-numbers)
 ;; Agenda
 ;; specify the main org-directory
 (setq org-directory "~/org")
