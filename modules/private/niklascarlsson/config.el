@@ -309,16 +309,8 @@
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Wdired.html
 (after! wdired
   (setq wdired-allow-to-change-permissions t))
-(require 'dired-quick-sort)
-(dired-quick-sort-setup)
-(after! evil-snipe
-        (push 'dired-mode evil-snipe-disabled-modes))
-;; Functions
-(defun eshell/d (&optional dir)
-"Open a dired buffer in DIR. If DIR is not provided open dired in current dir."
-  (if dir
-    (dired dir)
-      (dired default-directory)))
+;; Override dired-mode so it uses deer
+(add-hook! dired-mode #'ranger-override-dired-fn)
 
 
 ;; Snipe

@@ -14,5 +14,4 @@
 (package! helm-org-rifle)
 (package! helm-lsp)
 (package! spinner)                      ; required by ccls
-(package! dired-quick-sort)
 (package! gif-screencast)

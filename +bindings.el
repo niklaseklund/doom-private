@@ -82,12 +82,6 @@
    )
  )
 
-;; Update dired map
-(map!
- (:after dired
-   (:map dired-mode-map
-     :nvmei "S" 'hydra-dired-quick-sort/body)))
-
  ;; Easier window movement
 (map! :n "C-h" 'evil-window-left
       :n "C-j" 'evil-window-down
