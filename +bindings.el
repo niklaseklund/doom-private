@@ -24,19 +24,7 @@
         ;; Search
         (:prefix "/"
           :desc "Helm rifle the org files" :n "o" #'helm-org-rifle
-          :desc "Search github code base" :n "g" #'my/github-search-code)
-        ;; Code
-        (:prefix "c"
-          :desc "Member functions" :n "f" (lambda! (ccls/member 2))
-          :desc "Member types"     :n       "t" (lambda! (ccls/member 2))
-          :desc "Member functions"  :n      "f" (lambda! (ccls/member 3))
-          :desc "Member vars (/other)" :n   "m" (lambda! (ccls/member 0))
-          :desc "Member hierarchy" :n       "M" #'ccls-member-hierarchy
-          ;; $ccls/vars
-          ;; https://github.com/maskray/ccls/blob/master/src/messages/ccls_vars.cc
-          :desc "Vars (field or local)" :n  "v" (lambda! (ccls/vars 3))
-          :desc "Vars (field)" :n           "V" (lambda! (ccls/vars 1))
-          :desc "Vars (any)" :n "C-v" (lambda! (ccls/vars 7))))
+          :desc "Search github code base" :n "g" #'my/github-search-code))
       ;; Vimesque keys
       (:prefix "["
         :n "SPC" #'evil-unimpaired/insert-space-above)

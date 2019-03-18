@@ -69,7 +69,7 @@
         +childframe)     ; use childframes for error popups (Emacs 26+ only)
        flyspell         ; tasing you for misspelling mispelling
        ;;gist              ; interacting with github gists
-       ;;lsp
+       lsp
        ;;macos             ; MacOS-specific commands
        make              ; run make tasks from Emacs
        (magit            ;a git porcelain for Emacs
@@ -88,7 +88,8 @@
        :lang
        ;;assembly          ; assembly for fun or debugging
        ;;clojure           ; java with a lisp
-       cc                ; C/C++/Obj-C madness
+       (cc                 ; C/C++/Obj-C madness
+        +lsp)
        common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c

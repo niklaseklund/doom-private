@@ -1,9 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; config/niklascarlsson/packages.el
 
-(package! company-lsp)
-(package! lsp-ui)
-(package! ccls)
 (package! org-noter)
 (package! esh-autosuggest)
 (package! fish-completion)
@@ -13,5 +10,4 @@
 (package! writeroom-mode)
 (package! helm-org-rifle)
 (package! helm-lsp)
-(package! spinner)                      ; required by ccls
 (package! gif-screencast)
