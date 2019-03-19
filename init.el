@@ -27,6 +27,7 @@
        evil-goggles      ; display visual hints when editing in evil
        fci               ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE tags
+       ;;indent-guides     ; highlighted indent columns
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink the current line after jumping
        ;;neotree           ; a project drawer, like NERDTree for vim
@@ -63,7 +64,7 @@
        :tools
        ;;ansible
        docker
-       editorconfig      ; let someone else argue about tabs vs spaces
+       ;; editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        (flycheck             ; tasing you for every semicolon you forget
         +childframe)     ; use childframes for error popups (Emacs 26+ only)
@@ -71,9 +72,9 @@
        ;;gist              ; interacting with github gists
        lsp
        ;;macos             ; MacOS-specific commands
-       make              ; run make tasks from Emacs
        (magit            ;a git porcelain for Emacs
         +forge)          ; new magit funcitonality
+       make              ; run make tasks from Emacs
        password-store    ; password manager for nerds
          ;; +auth
        pdf               ; pdf enhancements
