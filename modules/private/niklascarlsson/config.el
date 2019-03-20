@@ -231,10 +231,6 @@
 (setq gdb-many-windows t)
 
 
-;; Fill column indication
-;; turn it off by default
-(remove-hook! (text-mode prog-mode conf-mode) #'turn-on-fci-mode)
-
 ;; eshell
 ;; add fish-like autocompletion
 (def-package! esh-autosuggest)
