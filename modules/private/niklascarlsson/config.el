@@ -287,8 +287,9 @@
 (setq avy-all-windows t)
 
 ;; Autoformat in C++ files using clang-format
-(add-hook 'c++-mode-hook #'+format|enable-on-save)
+;; (add-hook 'c++-mode-hook #'+format|enable-on-save)
 (add-hook 'before-save-hook (lambda ()  (when (eq major-mode 'python-mode) (lsp-format-buffer))))
+
 
 
 ;; org-caputre snippets
