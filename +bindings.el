@@ -10,8 +10,7 @@
         ;; Toggle
         (:prefix "t"
           :desc "Zen writing" :n "z" #'writeroom-mode
-          :desc "Wrap lines to fit screen" :n "v" #'visual-line-mode
-          :desc "Column-indicator" :n "c" #'fci-mode)
+          :desc "Wrap lines to fit screen" :n "v" #'visual-line-mode)
         ;; Noter
         (:prefix "n"
           :desc "Open org-noter" :n "o" #'org-noter
