@@ -215,6 +215,14 @@
   (add-hook 'lsp-after-open-hook (lambda () (lsp-ui-flycheck-enable t)))
   (add-hook 'c-mode-common-hook 'flycheck-mode)) ;; Turn on flycheck for C++ buffers
 
+;; dap
+(def-package! dap-mode
+  :ensure t
+  :after lsp-mode
+  :config
+  (dap-mode t)
+(dap-ui-mode t))
+(require 'dap-python)
 
 ;; GDB
 ;; Disable realgud safe prompt after command
