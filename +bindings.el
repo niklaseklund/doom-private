@@ -41,7 +41,13 @@
  :nvmei "," nil
  )
 
- ;; Easier window movement
+;; Modify ranger map
+(map!
+ :after ranger
+ :map ranger-mode-map
+ :nvmei ";=" #'+ora/ediff-files)
+
+;; Easier window movement
 (map! :n "C-h" 'evil-window-left
       :n "C-j" 'evil-window-down
       :n "C-k" 'evil-window-up

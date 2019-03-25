@@ -154,3 +154,25 @@ If no visual selection has been made the user is prompted for search words"
     (setq subtree-properties (org-babel-params-from-properties))
     (setq tangle-param (cdr (assoc :tangle (car subtree-properties))))
     tangle-param))
+
+
+;; https://oremacs.com/2017/03/18/dired-ediff/
+(defun +ora/ediff-files ()
+  (interactive)
+  (let ((files (dired-get-marked-files))
+        (wnd (current-window-configuration)))
+    (if (<= (length files) 2)
+        (let ((file1 (car files))
+              (file2 (if (cdr files)
+                         (cadr files)
+                       (read-file-name
+                        "file: "
+                        (dired-dwim-target-directory)))))
+          (if (file-newer-than-file-p file1 file2)
+              (ediff-files file2 file1)
+            (ediff-files file1 file2))
+          (add-hook 'ediff-after-quit-hook-internal
+                    (lambda ()
+                      (setq ediff-after-quit-hook-internal nil)
+                      (set-window-configuration wnd))))
+      (error "no more than 2 files should be marked"))))
