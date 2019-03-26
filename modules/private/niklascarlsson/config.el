@@ -221,8 +221,9 @@
   :after lsp-mode
   :config
   (dap-mode t)
-(dap-ui-mode t))
-(require 'dap-python)
+  (dap-ui-mode t)
+  (require 'dap-python))
+
 
 ;; GDB
 ;; Disable realgud safe prompt after command
