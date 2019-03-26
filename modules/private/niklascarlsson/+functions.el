@@ -112,6 +112,15 @@ to a regexp that will be used in the conditional lambda function"
         (error "You haven't specified a tangle filename")))
     tangle-file))
 
+(defun my/tangle-app (apps &optional filename)
+  "The input APPS is a list of valid applications."
+  (let* ((cond-func (lambda (app) (executable-find  (prin1-to-string app)))))
+    (my/tangle-cond apps cond-func filename)))
+
+(defun my/tangle-not-app (apps &optional filename)
+  "The input APPS is a list of invalid applications."
+  (let* ((cond-func (lambda (app) (not (executable-find  (prin1-to-string app))))))
+    (my/tangle-cond apps cond-func filename)))
 
 (defun my/github-search-code (begin end)
   "Search GitHub's code base. If the function is called with a visual selection
