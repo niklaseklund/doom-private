@@ -145,6 +145,7 @@
        ;; toward a specific purpose. They may have additional dependencies and
        ;; should be loaded late.
        :app
+       notmuch
        ;;(email +gmail)    ; emacs as an email client
        ;;irc               ; how neckbeards socialize
        ;;(rss +org)        ; emacs as an RSS reader
@@ -169,5 +170,5 @@
        (default +bindings +smartparens)
        :private
        niklascarlsson  ; personal tweaks
-       email           ; a notmuch based email setup
+       ;; email           ; a notmuch based email setup
        )

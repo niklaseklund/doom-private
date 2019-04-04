@@ -43,6 +43,12 @@
 (load! "+helm")
 
 
+;; notmuch
+(setq send-mail-function 'sendmail-send-it
+        message-send-mail-function 'message-send-mail-with-sendmail
+        sendmail-program "msmtp")
+
+
 ;; Unimpaired functions
 (defun evil-unimpaired/insert-space-above (count)
   (interactive "p")
