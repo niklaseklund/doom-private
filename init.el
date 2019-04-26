@@ -63,7 +63,7 @@
 
        :tools
        ;;ansible
-       ;;debugger          ; FIXME stepping through code, to help you add bugs
+       debugger          ; FIXME stepping through code, to help you add bugs
        ;;direnv
        docker
        ;; editorconfig      ; let someone else argue about tabs vs spaces
@@ -78,8 +78,8 @@
         +docsets)        ; ...or in Dash docsets locally
        lsp
        ;;macos             ; MacOS-specific commands
--      (magit            ;a git porcelain for Emacs
--       +forge)          ; new magit funcitonality
+       (magit            ;a git porcelain for Emacs
+        +forge)          ; new magit funcitonality
        ;;make              ; run make tasks from Emacs
        ;;password-store    ; password manager for nerds
        pdf               ; pdf enhancements
@@ -94,8 +94,8 @@
        :lang
        ;;agda              ; types of types of types of types...
        ;;assembly          ; assembly for fun or debugging
-       ;; (cc                 ; C/C++/Obj-C madness
-       ;;  +lsp)
+       (cc                 ; C/C++/Obj-C madness
+        +lsp)
        ;;clojure           ; java with a lisp
        common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
