@@ -12,3 +12,4 @@
 (package! helm-lsp)
 (package! dap-mode)
 (package! gif-screencast)
+(package! org-jira)

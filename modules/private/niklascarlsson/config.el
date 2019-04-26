@@ -139,6 +139,25 @@
 (setq org-agenda-files '("~/org"
                          "~/org/work"))
 
+;; Jira
+(use-package org-jira
+  :ensure t
+  :config
+  (setq jiralib-url "https://jira.zenuity.com"
+        org-jira-users `("Niklas Carlsson" . ,(shell-command-to-string "printf %s \"$(pass show work/zenuity/login | sed -n 2p | awk '{print $2}')\""))
+        jiralib-token `("Cookie". ,(my/init-jira-cookie))))
+
+;;Streamlined transition flow
+;; You can define your own streamlined issue progress flow as such:
+; If your Jira is set up to display a status in the issue differently
+; than what is shown in the button on Jira, your alist may look like
+; this (use the labels shown in the org-jira Status when setting it
+; up, or manually work out the workflows being used through standard
+; C-c iw options/usage):
+ (defconst org-jira-progress-issue-flow
+   '(("To Do" . "In Progress")
+     ("In Progress" . "Review")
+     ("Review" . "Done")))
 
 ;; Org-Noter
 (def-package! org-noter
