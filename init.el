@@ -170,5 +170,4 @@
        (default +bindings +smartparens)
        :private
        niklascarlsson  ; personal tweaks
-       ;; email           ; a notmuch based email setup
        )

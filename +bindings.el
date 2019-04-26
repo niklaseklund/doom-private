@@ -6,7 +6,7 @@
 (map! (:leader
         ;; Open
         (:prefix "o"
-          :desc "Open mail" :n "m" #'=mail)
+          :desc "Open mail" :n "m" #'=notmuch)
         ;; Toggle
         (:prefix "t"
           :desc "Zen writing" :n "z" #'writeroom-mode
