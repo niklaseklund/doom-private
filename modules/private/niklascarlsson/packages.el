@@ -1,13 +1,21 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; config/niklascarlsson/packages.el
 
+;; writing
 (package! org-noter)
+(package! org-jira)
+(package! ox-hugo)
+(package! writeroom-mode)
+
+;; shell
 (package! esh-autosuggest)
 (package! fish-completion)
-(package! docker-tramp)
-(package! ox-hugo)
-(package! org-ref)
-(package! writeroom-mode)
+
+;; debugging
 (package! dap-mode)
+
+;; recording
 (package! gif-screencast)
-(package! org-jira)
+
+;; interaction
+(package! docker-tramp)
