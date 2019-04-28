@@ -298,8 +298,11 @@
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Wdired.html
 (after! wdired
   (setq wdired-allow-to-change-permissions t))
-;; Override dired-mode so it uses deer
-(add-hook! dired-mode #'ranger-override-dired-fn)
+;; use deer instead of dired
+(after! dired
+  (add-hook! dired-mode #'ranger-override-dired-fn)
+  (setq ranger-deer-show-details t
+        ranger-show-hidden t))
 
 
 ;; Snipe
