@@ -102,8 +102,8 @@
 (require 'docker-tramp)
 
 ;; Screencast
-(use-package gif-screencast
-  :ensure t
+(def-package! gif-screencast
+  :defer t
   :config
   (with-eval-after-load 'gif-screencast
     (define-key gif-screencast-mode-map (kbd "<f12>") 'gif-screencast-toggle-pause)
@@ -136,8 +136,8 @@
                          "~/org/work"))
 
 ;; Jira
-(use-package org-jira
-  :ensure t
+(def-package! org-jira
+  :defer t
   :config
   (setq jiralib-url "https://jira.zenuity.com"
         org-jira-users `("Niklas Carlsson" . ,(shell-command-to-string "printf %s \"$(pass show work/zenuity/login | sed -n 2p | awk '{print $2}')\""))
@@ -157,6 +157,8 @@
 
 ;; Org-Noter
 (def-package! org-noter
+  :defer t
+  :after org-mode
   :config
   (map!
    (:leader
@@ -172,8 +174,8 @@
 
 
 ;; Hugo
-(use-package ox-hugo
-  :ensure t                      ;Auto-install the package from Melpa (optional)
+(def-package! ox-hugo
+  :defer t                      ;Auto-install the package from Melpa (optional)
   :after ox)
 
 
@@ -238,7 +240,7 @@
 
 ;; dap
 (def-package! dap-mode
-  :ensure t
+  :defer t
   :after lsp-mode
   :config
   (dap-mode t)
@@ -255,12 +257,16 @@
 
 ;; eshell
 ;; add fish-like autocompletion
-(def-package! esh-autosuggest)
-(add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
-;; utilize completion from fish
-(when (and (executable-find "fish")
-           (require 'fish-completion nil t))
-  (global-fish-completion-mode))
+(def-package! esh-autosuggest
+  :defer t
+  :after eshell-mode
+  :config
+  (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
+  ;; utilize completion from fish
+  (when (and (executable-find "fish")
+             (require 'fish-completion nil t))
+    (global-fish-completion-mode)))
+
 ;; fix pcomplete-completions-at-point uses a deprecated calling function
 (add-hook 'eshell-mode-hook (lambda ()
                               (remove-hook 'completion-at-point-functions #'pcomplete-completions-at-point t)))
