@@ -39,8 +39,6 @@
 
 ;; Load custom functions
 (load! "+functions")
-;; Load helm customization
-(load! "+helm")
 
 
 ;; notmuch
@@ -128,8 +126,6 @@
 (setq org-latex-caption-above nil)
 ;; Enable eshell in babel blocks
 (load! "+eshell")
-;; Helm-rifle
-(require 'helm-org-rifle)
 ;; Disable line-numbers in org-mode
 (add-hook 'org-mode-hook #'doom|disable-line-numbers)
 ;; Agenda

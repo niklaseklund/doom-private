@@ -8,8 +8,6 @@
 (package! ox-hugo)
 (package! org-ref)
 (package! writeroom-mode)
-(package! helm-org-rifle)
-(package! helm-lsp)
 (package! dap-mode)
 (package! gif-screencast)
 (package! org-jira)
