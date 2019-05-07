@@ -137,6 +137,7 @@
        plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
        (python             ; beautiful is better than ugly
+        +pyenv
         +lsp)
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
@@ -151,12 +152,16 @@
        ;;web               ; the tubes
        ;;vala              ; GObjective-C
 
+       :email
+       ;;(mu4e +gmail)       ; WIP
+       notmuch             ; WIP
+       ;;(wanderlust +gmail) ; WIP
+
        ;; Applications are complex and opinionated modules that transform Emacs
        ;; toward a specific purpose. They may have additional dependencies and
        ;; should be loaded late.
        :app
-       notmuch
-       ;;(email +gmail)    ; emacs as an email client
+       ;;calendar
        ;;irc               ; how neckbeards socialize
        ;;(rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
@@ -179,5 +184,4 @@
        ;; reference for your own modules.
        (default +bindings +smartparens)
        :private
-       niklascarlsson  ; personal tweaks
-       )
+       niklascarlsson) ; personal tweaks
