@@ -320,7 +320,10 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
           (dap-ui-locals))
         ;; display sessions
         (unless (+dap/window-visible dap-ui--sessions-buffer)
-          (dap-ui-sessions)))))
+          (dap-ui-sessions))
+        ;; display repl
+        (dap-ui-repl))
+      ))
 
   (defun +dap/hide-debug-windows (session)
     "Hide debug windows when all debug sessions are dead."
