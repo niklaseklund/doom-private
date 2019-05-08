@@ -239,6 +239,8 @@
   (add-hook 'c-mode-common-hook 'flycheck-mode)) ;; Turn on flycheck for C++ buffers
 
 ;; dap
+;; check out this configuration
+;; https://github.com/zsxh/emacs.d/blob/acb1e760656210de69a93a1a8ab670f7800a96e6/lisp/init-debugger.el
 (def-package! dap-mode
   :defer t
   :commands dap-mode
@@ -249,13 +251,7 @@
   (set-company-backend! 'dap-ui-repl-mode 'company-dap-ui-repl)
   (require 'dap-python))
 
-
-;; GDB
-;; Disable realgud safe prompt after command
-(setq realgud-safe-mode nil)
-;; Open debugging window style
-(setq gdb-many-windows t)
-
+(add-hook 'python-mode-hook 'dap-mode)
 
 ;; eshell
 ;; add fish-like autocompletion
