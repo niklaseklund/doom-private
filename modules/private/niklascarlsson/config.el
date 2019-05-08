@@ -241,10 +241,12 @@
 ;; dap
 (def-package! dap-mode
   :defer t
+  :commands dap-mode
   :after lsp-mode
+  :hook
+  ((dap-mode . dap-ui-mode))
   :config
-  (dap-mode t)
-  (dap-ui-mode t)
+  (set-company-backend! 'dap-ui-repl-mode 'company-dap-ui-repl)
   (require 'dap-python))
 
 
