@@ -6,7 +6,8 @@
 (map! (:leader
         ;; Open
         (:prefix "o"
-          :desc "Open mail" :n "m" #'=notmuch)
+          :desc "Open mail" :n "m" #'=notmuch
+          :desc "Open debugger" :n "d" #'dap-hydra)
         ;; Toggle
         (:prefix "t"
           :desc "Zen writing" :n "z" #'writeroom-mode
