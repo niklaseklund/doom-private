@@ -6,8 +6,7 @@
 (map! (:leader
         ;; Open
         (:prefix "o"
-          :desc "Open mail" :n "m" #'=notmuch
-          :desc "Open debugger" :n "d" #'dap-hydra)
+          :desc "Open mail" :n "m" #'=notmuch)
         ;; Toggle
         (:prefix "t"
           :desc "Zen writing" :n "z" #'writeroom-mode
@@ -63,4 +62,9 @@
         "C-n" 'next-line-or-history-element
         "C-p" 'previous-line-or-history-element))
 
+;; ;; Debugger map
+(map!
+ (:leader
+   (:prefix "o"
+     :desc "Open debugger" :n "d" #'hydra-debugger-control/body)))
 ;;; ~/.doom.d/+bindings.el -*- lexical-binding: t; -*-
