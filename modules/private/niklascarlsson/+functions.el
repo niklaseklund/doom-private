@@ -203,3 +203,17 @@ If no visual selection has been made the user is prompted for search words"
                       (forward-line 1)
                       (setq id (car (last (split-string (string-trim (thing-at-point 'line))))))
                       (format "atlasian.xsrf.token=%s;JSESSIONID=%s" token id))))
+
+
+(defun my/eshell-bat (file)
+  "Like `cat' but output with Emacs syntax highlighting."
+  (with-temp-buffer
+    (insert-file-contents file)
+    (let ((buffer-file-name file))
+      (delay-mode-hooks
+        (set-auto-mode)
+        (if (fboundp 'font-lock-ensure)
+            (font-lock-ensure)
+          (with-no-warnings
+            (font-lock-fontify-buffer)))))
+    (buffer-string)))
