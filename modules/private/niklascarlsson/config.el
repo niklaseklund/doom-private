@@ -124,8 +124,6 @@
 (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 ;; place latex-captions below figures and tables
 (setq org-latex-caption-above nil)
-;; Enable eshell in babel blocks
-(load! "+eshell")
 ;; Disable line-numbers in org-mode
 (add-hook 'org-mode-hook #'doom|disable-line-numbers)
 ;; Agenda
