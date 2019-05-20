@@ -93,8 +93,9 @@ return it together with the language"
   "The input OSES is a list of valid operating systems. The values are remaped
 to a regexp that will be used in the conditional lambda function"
   (let* ((os-map '((arch . "arch")
-                      (ubuntu . "Ubuntu")
-                      (macos . "Darwin")))
+                   (ubuntu . "Ubuntu")
+                   (macos . "Darwin")
+                   (android . "Android")))
     (remaped-oses (mapcar (lambda (os) (cdr (assoc os os-map))) oses))
     (cond-func (lambda (os) (string-match-p os (shell-command-to-string "uname -a")))))
     (my/tangle-cond remaped-oses cond-func filename)))
