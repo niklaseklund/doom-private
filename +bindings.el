@@ -22,7 +22,6 @@
           :desc "Sync previous note" :n "[" #'org-noter-sync-prev-note)
         ;; Search
         (:prefix "/"
-          :desc "Helm rifle the org files" :n "o" #'helm-org-rifle
           :desc "Search github code base" :n "g" #'my/github-search-code))
       ;; Vimesque keys
       (:prefix "["
