@@ -455,7 +455,7 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
 
 ;; Avy
 ;; Make avy operate on all visable windows
-(setq avy-all-windows t)
+;; (setq avy-all-windows t)
 
 ;; Autoformat in C++ files using clang-format
 ;; (add-hook 'c++-mode-hook #'+format|enable-on-save)
