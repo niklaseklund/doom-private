@@ -76,6 +76,28 @@
 ;; TRAMP
 ;; make tramp assume ssh to avoid typing it when connecting to remote host
 (setq tramp-default-method "ssh")
+;; solution for getting around a server with warning message about a not fully
+;; functional terminal. This is due to the fact that tramp is set to "dumb"
+(with-eval-after-load 'tramp-sh
+  ;; Found a similar problem to mine here:
+  ;; http://emacs.1067599.n8.nabble.com/problem-getting-files-under-SunOS-from-cygwin-td277890.html
+  ;; there is also an example there about an interactive user input version if I ever need that :)
+  (defconst my-tramp-press-return-prompt-regexp
+    "\\(-  (press RETURN)\\)\\s-*"
+    "Regular expression matching my login prompt request.")
+
+  (defun my-tramp-press-return-action (proc vec)
+    "Enter \"?\^M\" to send a carriage return."
+    (save-window-excursion
+      (message "%s" vec)
+      (with-current-buffer (tramp-get-connection-buffer vec)
+        (tramp-message vec 6 "\n%s" (buffer-string))
+        ;; The control character for Enter is ^M
+        ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Ctl_002dChar-Syntax.html#Ctl_002dChar-Syntax
+        (tramp-send-string vec "?\^M"))))
+
+  (add-to-list 'tramp-actions-before-shell
+               '(my-tramp-press-return-prompt-regexp my-tramp-press-return-action)))
 
 
 ;; Ediff
