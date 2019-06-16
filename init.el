@@ -188,6 +188,4 @@
        ;; provides a Spacemacs-inspired keybinding scheme and a smartparens
        ;; config. Use it as a reference for your own modules.
        ;; reference for your own modules.
-       (default +bindings +smartparens)
-       :private
-       niklascarlsson) ; personal tweaks
+       (default +bindings +smartparens))
