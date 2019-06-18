@@ -685,6 +685,9 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
 (add-hook 'octave-mode-hook (lambda ()
                             (flycheck-mode -1)))
 
+;; Markdown
+(add-to-list 'auto-mode-alist '("\\.MD\\'" . markdown-mode))
+
 
 ;; ;; LaTeX export
 ;; (require 'ox-latex)
