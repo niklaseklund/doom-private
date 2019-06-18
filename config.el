@@ -680,10 +680,10 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
 ;;       (org-babel-remove-result))))
 
 
-;; ;; Matlab files (use octave mode)
-;; (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
-;; (add-hook 'octave-mode-hook (lambda ()
-;;                             (flycheck-mode -1)))
+;; Matlab files (use octave mode)
+(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
+(add-hook 'octave-mode-hook (lambda ()
+                            (flycheck-mode -1)))
 
 
 ;; ;; LaTeX export
