@@ -103,6 +103,9 @@
   (add-to-list 'tramp-actions-before-shell
                '(my-tramp-press-return-prompt-regexp my-tramp-press-return-action)))
 
+(with-eval-after-load 'tramp
+;; Docker-Tramp
+(require 'docker-tramp))
 
 ;; Ediff
 (add-hook 'ediff-prepare-buffer-hook #'outline-show-all)
@@ -133,10 +136,6 @@
 ;; Let the scratch buffer have elisp major mode by default
 ;; if set to t it has the same mode as previous buffer
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
-
-
-;; Docker-Tramp
-;; (require 'docker-tramp)
 
 ;; Screencast
 (def-package! gif-screencast
