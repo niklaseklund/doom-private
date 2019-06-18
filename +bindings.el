@@ -23,11 +23,6 @@
         ;; Search
         (:prefix "/"
           :desc "Search github code base" :n "g" #'my/github-search-code))
-      ;; Vimesque keys
-      (:prefix "["
-        :n "SPC" #'evil-unimpaired/insert-space-above)
-      (:prefix "]"
-        :n "SPC" #'evil-unimpaired/insert-space-below)
       ;; Swedish escape
       :i "C-å" #'evil-normal-state
       ;; avy go to char

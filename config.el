@@ -71,15 +71,6 @@
         sendmail-program "msmtp")
 
 
-;; Unimpaired functions
-(defun evil-unimpaired/insert-space-above (count)
-  (interactive "p")
-  (dotimes (_ count) (save-excursion (evil-insert-newline-above))))
-(defun evil-unimpaired/insert-space-below (count)
-  (interactive "p")
-  (dotimes (_ count) (save-excursion (evil-insert-newline-below))))
-
-
 ;; Writeroom
 (add-hook 'writeroom-mode-hook (lambda ()
                                  (progn
