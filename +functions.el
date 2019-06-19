@@ -220,3 +220,11 @@ If no visual selection has been made the user is prompted for search words"
     (buffer-string)))
 
 
+(defun my/os-match (os)
+  (string-match os (with-temp-buffer (shell-command "uname -a" t)
+                                     (goto-char (point-max))
+                                     (delete-char -1)
+                                     (buffer-string))))
+
+(defun my/multi-screen-setup-p ()
+  ( > (string-to-number (shell-command-to-string "printf %s \"$(xrandr -q | grep -c ' connected')\"")) 1))

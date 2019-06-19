@@ -1,5 +1,8 @@
 ;;;  -*- lexical-binding: t; -*-
 
+;; Load functions
+(load! "+functions")
+
 ;;
 ;; User
 (setq user-full-name    "Niklas Carlsson"
@@ -22,26 +25,18 @@
 
 ;;
 ;; Host configuration
-(when (string-match "ARCH"
-                    (with-temp-buffer (shell-command "uname -a" t)
-                                      (goto-char (point-max))
-                                      (delete-char -1)
-                                      (buffer-string)))
-  (if (eq (string-to-number (shell-command-to-string "printf %s \"$(xrandr -q | grep -c ' connected')\"")) 1)
-      (setq doom-font (font-spec :family "Roboto Mono" :size 20)
-            doom-big-font (font-spec :family "Roboto Mono" :size 36)
-            doom-variable-pitch-font (font-spec :family "Iosevka Term" :size 18))
-    (setq doom-font (font-spec :family "Roboto Mono" :size 16)
+(when (my/os-match "ARCH")
+  (if (my/multi-screen-setup-p)
+      (setq doom-font (font-spec :family "Roboto Mono" :size 16)
           doom-big-font (font-spec :family "Roboto Mono" :size 22)
-          doom-variable-pitch-font (font-spec :family "Iosevka Term" :size 14)))
+          doom-variable-pitch-font (font-spec :family "Iosevka Term" :size 14))
+    (setq doom-font (font-spec :family "Roboto Mono" :size 20)
+            doom-big-font (font-spec :family "Roboto Mono" :size 36)
+            doom-variable-pitch-font (font-spec :family "Iosevka Term" :size 18)))
   (font-put doom-font :weight 'semi-light)
   (setq x-super-keysym 'meta
         x-alt-keysym 'alt))
-(when (string-match "Ubuntu"
-                  (with-temp-buffer (shell-command "uname -a" t)
-                                    (goto-char (point-max))
-                                    (delete-char -1)
-                                    (buffer-string)))
+(when (my/os-match "Ubuntu")
     (setq doom-font (font-spec :family "Roboto Mono" :size 14)))
 (when IS-MAC
   (setq ns-use-thin-smoothing t)
@@ -223,10 +218,8 @@
 (setenv "PAGER" "cat")
 
 
-;; Deer
-;; TODO: investigate why ranger seems sad when combined with notmuch built in Doom module
+;; deer/ranger
 (after! dired
-  (add-hook! dired-mode #'ranger-override-dired-fn)
   (setq ranger-deer-show-details t
         ranger-show-hidden t))
 
@@ -256,7 +249,6 @@
 ;;
 ;; Load other config files
 (load! "+bindings")
-(load! "+functions")
 (load! "+org")
 (load! "+lsp")
 
