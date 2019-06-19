@@ -26,7 +26,7 @@
       ;; Swedish escape
       :i "C-å" #'evil-normal-state
       ;; avy go to char
-      :nvmei "C-;" #'evil-avy-goto-char-2)
+      :nvmei "C-;" #'evil-avy-goto-char-timer)
 
 ;; Bring back the leader in pdf-tools by unbinding comma
 (map!
