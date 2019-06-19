@@ -1,5 +1,14 @@
 ;;;  -*- lexical-binding: t; -*-
 
+;; TODO divide into different sections
+;; 1) user settings
+;; 2) emacs core settings
+;; 3) doom looks settings
+;; 4) doom core settings
+;; 5) doom package settings
+;; 6) custom package settings
+;; 7) load my own "module" files
+
 ;; Load functions
 (load! "+functions")
 
