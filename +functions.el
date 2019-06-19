@@ -220,23 +220,3 @@ If no visual selection has been made the user is prompted for search words"
     (buffer-string)))
 
 
-;; http://seanbowman.me/blog/emacs-evil-function-objects/
-;; (evil-define-text-object my/textobj-inner-defun (count &optional beg end type)
-;;   (save-excursion
-;;     (mark-defun)
-;;     (re-search-forward "{")
-;;     (exchange-point-and-mark)
-;;     (re-search-backward "}")
-;;     (evil-range (region-beginning) (region-end) type :expanded t)))
-(evil-define-text-object my/textobj-outer-defun (count &optional beg end type)
-  :type line
-  (save-excursion
-    (mark-defun)
-    (if (looking-at "[:space:]*$")
-        (forward-line))
-    (exchange-point-and-mark)
-    (unless (save-excursion
-              (forward-line)
-              (looking-at "[:space:]*$"))
-      (forward-line))
-    (evil-range (region-beginning) (region-end) type :expanded t)))
