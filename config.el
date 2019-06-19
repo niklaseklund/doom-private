@@ -131,8 +131,8 @@
 
 
 ;; Elisp
-;; prettify lambdas in elisp
-(add-hook 'emacs-lisp-mode-hook #'prettify-symbols-mode)
+(setq +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
+
 ;; Let the scratch buffer have elisp major mode by default
 ;; if set to t it has the same mode as previous buffer
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
