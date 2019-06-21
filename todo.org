@@ -1,0 +1,13 @@
+#+TITLE: todo
+
+* Inbox
+** TODO dap-mode hydra
+
+Improve the hydra by adding the following:
+- [ ] toggle windows (inspect, local, repl) etc
+- [ ] kill option that terminates the session and closes all windows
+
+[[file:~/.config/doom/+dap.el::;;%20TODO:%20add%20binding%20for%20toggling%20the%20repl%20window,%20and%20for%20terminating%20debugging%20and%20closing%20all%20windows]]
+** TODO this is something that works
+
+[[file:~/.config/doom/config.el::(load!%20"+org")]]
