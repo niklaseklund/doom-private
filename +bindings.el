@@ -22,9 +22,7 @@
         (:prefix "/"
           :desc "Search github code base" :n "g" #'my/github-search-code))
       ;; Swedish escape
-      :i "C-å" #'evil-normal-state
-      ;; avy go to char
-      :nvmei "C-;" #'evil-avy-goto-char-timer)
+      :i "C-å" #'evil-normal-state)
 
 ;; Bring back the leader in pdf-tools by unbinding comma
 (map!
