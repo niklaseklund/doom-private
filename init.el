@@ -19,7 +19,7 @@
        ;;ido               ; the other *other* search engine...
        (ivy              ; a search engine for love and life
        ;; +prescient      ; new alternative fuzzy backend
-       ;; +fuzzy
+       +fuzzy
        )          ; enable fuzzy search backend for ivy
 
        :ui
@@ -79,7 +79,7 @@
        ;; editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        eval              ; run code, run (also, repls)
-       flycheck             ; tasing you for every semicolon you forget
+       (flycheck +childframe)        ; tasing you for every semicolon you forget
        flyspell          ; tasing you for misspelling mispelling
        ;;gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
@@ -122,8 +122,8 @@
        ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
-       (latex             ; writing papers in Emacs has never been so fun
-         +pdf-tools)
+       ;; (latex             ; writing papers in Emacs has never been so fun
+       ;;   +pdf-tools)
        ;;ledger            ; an accounting system in Emacs
        ;;lua               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
