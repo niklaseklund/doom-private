@@ -1,7 +1,5 @@
 ;;;  -*- lexical-binding: t; -*-
 
-; (map!
-
 ;; Override other keys
 (map! (:leader
         ;; Open
@@ -61,9 +59,5 @@
  (:leader
    (:prefix "o"
      :desc "Open debugger" :n "d" #'hydra-debugger-control/body)))
-
-;; Evil bindings
-(map! (:map override
-        :textobj "f" #'my/textobj-outer-defun #'my/textobj-outer-defun))
 
 ;;; ~/.doom.d/+bindings.el -*- lexical-binding: t; -*-
