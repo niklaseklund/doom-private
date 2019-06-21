@@ -1,7 +1,7 @@
 ;;;  -*- lexical-binding: t; -*-
 
 ;;
-;; dap
+;; Debug Adapter Protocol
 (def-package! dap-mode
   :after lsp-mode
   :config
@@ -16,12 +16,8 @@
 (dap-ui-mode t))
 
 
-;; aditional configuration
-;; TODO: add binding for toggling the repl window, and for terminating debugging and closing all windows
 (with-eval-after-load 'dap-mode
-;; The following is from zsxh's configuration found at:
-;; https://github.com/zsxh/emacs.d/blob/acb1e760656210de69a93a1a8ab670f7800a96e6/lisp/init-debugger.el
-  ;; Debugger Cheatsheet
+  ;; Override the built-in dap hydra to add additional keybindings
   (defhydra hydra-debugger-control (:color purple :hint nil :foreign-keys run)
     "
 ^Stepping^             ^Switch^           ^Breakpoints^          ^Eval^                        ^Debug
@@ -68,6 +64,7 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
 
     ("q" nil "quit"))
 
+  ;;
   ;; Display debug windows on session startup
   ;; https://github.com/emacs-lsp/dap-mode/wiki/HowTo:-Display-debug-windows-on-session-startup
   (add-hook 'dap-ui-repl-mode-hook
@@ -92,8 +89,7 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
           (dap-ui-sessions))
         ;; display repl
         ;; (dap-ui-repl)
-        )
-      ))
+        )))
 
   (defun +dap/hide-debug-windows (session)
     "Hide debug windows when all debug sessions are dead."
@@ -107,11 +103,11 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
       (and (get-buffer dap-ui--locals-buffer)
            (kill-buffer dap-ui--locals-buffer))))
 
-  ;; (add-hook 'dap-stopped-hook (lambda (debug-session) (hydra-debugger-control/body)))
   (add-hook 'dap-stopped-hook '+dap/show-debug-windows)
   (add-hook 'dap-terminated-hook '+dap/hide-debug-windows)
 
-  ;; add debug templates
+  ;;
+  ;; add custom debug templates
   (dap-register-debug-template "Python :: Run Free"
                              (list :type "python"
                                    :args "deep-fry -s 10 --force-evaluation tools/fry/scenarios/monovision_mega_vor.json"
