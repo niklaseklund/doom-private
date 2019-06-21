@@ -6,6 +6,10 @@
 (package! ox-hugo)
 (package! writeroom-mode)
 
+;; shell
+(package! esh-autosuggest)
+(package! fish-completion)
+
 ;; debugging
 (package! dap-mode)
 

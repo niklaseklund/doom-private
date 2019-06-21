@@ -190,6 +190,16 @@
               (quiet! (shell-command (concat "xkb-switch -s " normal-mode-keyboard-layout))))))
 
 
+;;
+;; eshell
+;; fish-like auto-suggestions
+(def-package! esh-autosuggest
+  :after eshell
+  :config
+  (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
+  (when (and (executable-find "fish")
+             (require 'fish-completion nil t))
+    (global-fish-completion-mode)))
 ;; aliases
 (after! eshell
   (set-eshell-alias!
@@ -207,8 +217,6 @@
    "gbS" "my/git-branch-match $1"
    "rg"  "rg --color=always $*"
    "bat" "my/eshell-bat $1")
-  ;; Improvements from howard abrahams
-  ;; programs that want to pause the output uses cat instead
   (setenv "PAGER" "cat"))
 
 
