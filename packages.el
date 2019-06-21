@@ -15,6 +15,3 @@
 
 ;; recording
 (package! gif-screencast)
-
-;; interaction
-(package! docker-tramp)
