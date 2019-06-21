@@ -24,16 +24,20 @@
 
 ;; Org-Noter
 (def-package! org-noter
-  :defer t
-  :after org-mode
+  :after org
   :config
-  (map!
-   (:leader
-     (:prefix "n"
-       :desc "Org-noter-insert" :n "i" #'org-noter-insert-note))))
-;; Setup
-(setq org-noter-always-create-frame nil
-      org-noter-auto-save-last-location t)
+  (setq org-noter-always-create-frame nil
+        org-noter-auto-save-last-location t)
+  (map! :localleader
+        :map org-mode-map
+        (:prefix-map ("n" . "org-noter")
+          :desc "Open org-noter" :n "o" #'org-noter
+          :desc "Kill org-noter session" :n "k" #'org-noter-kill-session
+          :desc "Insert org-note" :n "i" #'org-noter-insert-note
+          :desc "Insert precise org-note" :n "p" #'org-noter-insert-precise-note
+          :desc "Sync current note" :n "." #'org-noter-sync-current-note
+          :desc "Sync next note" :n "]" #'org-noter-sync-next-note
+          :desc "Sync previous note" :n "[" #'org-noter-sync-prev-note)))
 
 ;; Hugo
 (def-package! ox-hugo

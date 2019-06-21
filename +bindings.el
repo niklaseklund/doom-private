@@ -26,15 +26,6 @@
         (:prefix "t"
           :desc "Zen writing" :n "z" #'writeroom-mode
           :desc "Wrap lines to fit screen" :n "v" #'visual-line-mode)
-        ;; Noter
-        (:prefix "n"
-          :desc "Open org-noter" :n "o" #'org-noter
-          :desc "Kill org-noter session" :n "k" #'org-noter-kill-session
-          :desc "Insert org-note" :n "i" #'org-noter-insert-note
-          :desc "Insert precise org-note" :n "p" #'org-noter-insert-precise-note
-          :desc "Sync current note" :n "." #'org-noter-sync-current-note
-          :desc "Sync next note" :n "]" #'org-noter-sync-next-note
-          :desc "Sync previous note" :n "[" #'org-noter-sync-prev-note)
         ;; Search
         (:prefix "/"
           :desc "Search github code base" :n "g" #'my/github-search-code)))
