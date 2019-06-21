@@ -39,7 +39,7 @@
       (setq doom-font (font-spec :family "Roboto Mono" :size 16)
           doom-big-font (font-spec :family "Roboto Mono" :size 22)
           doom-variable-pitch-font (font-spec :family "Iosevka Term" :size 14))
-    (setq doom-font (font-spec :family "Roboto Mono" :size 20)
+    (setq doom-font (font-spec :family "Roboto Mono" :size 18)
             doom-big-font (font-spec :family "Roboto Mono" :size 36)
             doom-variable-pitch-font (font-spec :family "Iosevka Term" :size 18)))
   (font-put doom-font :weight 'semi-light)
