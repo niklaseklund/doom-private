@@ -190,21 +190,6 @@
               (quiet! (shell-command (concat "xkb-switch -s " normal-mode-keyboard-layout))))))
 
 
-;; eshell
-;; add fish-like autocompletion
-(def-package! esh-autosuggest
-  :defer t
-  :after eshell-mode
-  :config
-  (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
-  ;; utilize completion from fish
-  (when (and (executable-find "fish")
-             (require 'fish-completion nil t))
-    (global-fish-completion-mode)))
-
-;; fix pcomplete-completions-at-point uses a deprecated calling function
-;; (add-hook 'eshell-mode-hook (lambda ()
-;;                               (remove-hook 'completion-at-point-functions #'pcomplete-completions-at-point t)))
 ;; aliases
 (after! eshell
   (set-eshell-alias!
@@ -221,15 +206,15 @@
    "gbD" "my/git-branch-delete-regexp $1"
    "gbS" "my/git-branch-match $1"
    "rg"  "rg --color=always $*"
-   "bat" "my/eshell-bat $1"))
-;; Improvements from howard abrahams
-;; programs that want to pause the output uses cat instead
-(setenv "PAGER" "cat")
+   "bat" "my/eshell-bat $1")
+  ;; Improvements from howard abrahams
+  ;; programs that want to pause the output uses cat instead
+  (setenv "PAGER" "cat"))
 
 
-;; deer/ranger
-(after! dired
-  (setq ranger-show-hidden t))
+;; ;; deer/ranger
+;; (after! dired
+;;   (setq ranger-show-hidden t))
 
 
 ;; Snipe
