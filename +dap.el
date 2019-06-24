@@ -115,3 +115,13 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
                                    :target-module "-m tools.free.free"
                                    :request "launch"
                                    :name "Python :: Run Free")))
+
+
+;;
+;; Emacs gdb
+(defun my/gdb-mi ()
+  "Use build folder from project root as start for selection of binary to debug."
+  (let* ((start-directory (concat (projectile-project-root) "build"))
+         (file-name (read-file-name "Select binary to debug: " start-directory)))
+    (gdb (concat "gdb -mi " file-name))))
+(my/gdb-mi)
