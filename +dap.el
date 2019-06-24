@@ -131,3 +131,49 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
   (cond ((eq major-mode 'python-mode) (hydra-debugger-control/body))
         ((eq major-mode 'c++-mode) (message "Calling the C++ hydra"))
         (t (message "Not implemented"))))
+
+(defhydra gdb-hydra (:color purple :hint nil :foreign-keys run)
+  "
+^Stepping^             ^Switch^           ^Breakpoints^          ^Eval^                        ^Debug
+^^^^^^^^------------------------------------------------------------------------------------------------------------
+_n_: Next          _ss_: Session          _bt_: Toggle          _ee_: Eval                     _dd_: Debug
+_i_: Step in       _st_: Thread           _bd_: Delete          _er_: Eval region              _de_: Debug edit
+_o_: Step out      _sf_: Stack frame      _ba_: Add             _es_: Eval thing at point      ^ ^
+_c_: Continue      _sl_: List locals      _bc_: Set condition   _eii_: Inspect                 ^ ^
+_r_: Restart frame _sb_: List breakpoints _bh_: Set hit count   _eir_: Inspect region          ^ ^
+_Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect thing at point  ^ ^
+^ ^                 ^ ^                   _bD_: Delete all      ^ ^                            ^ ^
+"
+  ("n" gud-next)
+  ("i" gud-step)
+  ("o" gud-finish)
+  ("c" gud-cont)
+  ("r" gud-run)
+  ("Q" gud-disconnect)
+
+  ("ss" nil)
+  ("st" nil)
+  ("sf" nil)
+  ("sl" nil)
+  ("sb" nil)
+  ("sS" nil)
+
+  ("bt" nil)
+  ("bd" gud-remove)
+  ("bD" nil)
+  ("ba" gud-break)
+  ("bc" nil)
+  ("bh" nil)
+  ("bl" nil)
+
+  ("ee" gud-statement)
+  ("er" nil)
+  ("es" gud-print)
+  ("eii" nil)
+  ("eir" nil)
+  ("eis" gud-pstar)
+
+  ("dd" my/gdb-mi)
+  ("de" nil)
+
+  ("q" nil "quit"))
