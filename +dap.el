@@ -124,3 +124,10 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
   (let* ((start-directory (concat (projectile-project-root) "build"))
          (file-name (read-file-name "Select binary to debug: " start-directory)))
     (gdb (concat "gdb -mi " file-name))))
+
+(defun my/open-debug ()
+  "A function that opens a debug hydra based on major mode."
+  (interactive)
+  (cond ((eq major-mode 'python-mode) (hydra-debugger-control/body))
+        ((eq major-mode 'c++-mode) (message "Calling the C++ hydra"))
+        (t (message "Not implemented"))))

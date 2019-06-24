@@ -20,7 +20,7 @@
       (:leader
         ;; Open
         (:prefix "o"
-          :desc "Open debugger" :n "d" #'hydra-debugger-control/body
+          :desc "Open debugger" :n "d" #'my/open-debug
           :desc "Open mail" :n "m" #'=notmuch)
         ;; Toggle
         (:prefix "t"
