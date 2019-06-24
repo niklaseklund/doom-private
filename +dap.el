@@ -124,4 +124,3 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
   (let* ((start-directory (concat (projectile-project-root) "build"))
          (file-name (read-file-name "Select binary to debug: " start-directory)))
     (gdb (concat "gdb -mi " file-name))))
-(my/gdb-mi)
