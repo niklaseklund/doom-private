@@ -252,6 +252,6 @@
 (load! "+bindings")
 (load! "+org")
 (load! "+lsp")
-(load! "+dap")
+(load! "+debug")
 
 ;;   :config

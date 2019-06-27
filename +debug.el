@@ -16,7 +16,8 @@
   (dap-ui-mode t))
 
 ;; Customize more after it's b
-(after! 'dap-mode
+(with-eval-after-load 'dap-mode
+
   ;; customize company in repl-mode
   (add-hook 'dap-ui-repl-mode-hook
             (lambda ()
