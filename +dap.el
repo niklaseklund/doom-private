@@ -13,19 +13,24 @@
   ;; configure dap
   (set-company-backend! 'dap-ui-repl-mode 'company-dap-ui-repl)
   (dap-mode t)
-(dap-ui-mode t))
+  (dap-ui-mode t))
 
+;; Customize more after it's b
+(after! 'dap-mode
+  ;; customize company in repl-mode
+  (add-hook 'dap-ui-repl-mode-hook
+            (lambda ()
+              (setq-local company-minimum-prefix-length 1)))
 
-(with-eval-after-load 'dap-mode
   ;; Override the built-in dap hydra to add additional keybindings
-  (defhydra hydra-debugger-control (:color purple :hint nil :foreign-keys run)
+  (defhydra +dap-hydra (:color purple :hint nil :foreign-keys run)
     "
 ^Stepping^             ^Switch^           ^Breakpoints^          ^Eval^                        ^Debug
-^^^^^^^^------------------------------------------------------------------------------------------------------------
+^^^^^^^^--------------------------------------------------------------------------------------------------------------------
 _n_: Next          _ss_: Session          _bt_: Toggle          _ee_: Eval                     _dd_: Debug
-_i_: Step in       _st_: Thread           _bd_: Delete          _er_: Eval region              _de_: Debug edit
-_o_: Step out      _sf_: Stack frame      _ba_: Add             _es_: Eval thing at point      ^ ^
-_c_: Continue      _sl_: List locals      _bc_: Set condition   _eii_: Inspect                 ^ ^
+_i_: Step in       _st_: Thread           _bd_: Delete          _er_: Eval region              _dr_: Debug recent
+_o_: Step out      _sf_: Stack frame      _ba_: Add             _es_: Eval thing at point      _dl_: Debug last
+_c_: Continue      _sl_: List locals      _bc_: Set condition   _eii_: Inspect                 _dt_: Debug edit template
 _r_: Restart frame _sb_: List breakpoints _bh_: Set hit count   _eir_: Inspect region          ^ ^
 _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect thing at point  ^ ^
 ^ ^                 ^ ^                   _bD_: Delete all      ^ ^                            ^ ^
@@ -60,17 +65,14 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
     ("eis" dap-ui-inspect-thing-at-point)
 
     ("dd" dap-debug)
-    ("de" dap-debug-edit-template)
+    ("dr" dap-debug-recent)
+    ("dl" dap-debug-last)
+    ("dt" dap-debug-edit-template)
 
     ("q" nil "quit"))
 
-  ;;
-  ;; Display debug windows on session startup
+  ;; Display some debug windows on session startup
   ;; https://github.com/emacs-lsp/dap-mode/wiki/HowTo:-Display-debug-windows-on-session-startup
-  (add-hook 'dap-ui-repl-mode-hook
-            (lambda ()
-              (setq-local company-minimum-prefix-length 1)))
-
   (defun +dap/window-visible (b-name)
     "Return whether B-NAME is visible."
     (-> (-compose 'buffer-name 'window-buffer)
@@ -81,40 +83,39 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
     "Show debug windows."
     (let ((lsp--cur-workspace (dap--debug-session-workspace session)))
       (save-excursion
-        ;; display locals
         (unless (+dap/window-visible dap-ui--locals-buffer)
           (dap-ui-locals))
-        ;; display sessions
         (unless (+dap/window-visible dap-ui--sessions-buffer)
-          (dap-ui-sessions))
-        ;; display repl
-        ;; (dap-ui-repl)
-        )))
+          (dap-ui-sessions)))))
 
+  ;; hide windows upon session termination
   (defun +dap/hide-debug-windows (session)
     "Hide debug windows when all debug sessions are dead."
     (unless (-filter 'dap--session-running (dap--get-sessions))
       (and (get-buffer dap-ui--sessions-buffer)
            (kill-buffer dap-ui--sessions-buffer))
-      (and (get-buffer "*dap-ui-repl*")
-           (kill-buffer "*dap-ui-repl*"))
-      ;; (and (get-buffer "*compilation*")
-      ;;      (kill-buffer "*compilation*"))
       (and (get-buffer dap-ui--locals-buffer)
-           (kill-buffer dap-ui--locals-buffer))))
+           (kill-buffer dap-ui--locals-buffer))
+      (and (get-buffer "*Breakpoints*")
+           (kill-buffer "*Breakpoints*"))))
 
   (add-hook 'dap-stopped-hook '+dap/show-debug-windows)
   (add-hook 'dap-terminated-hook '+dap/hide-debug-windows)
 
-  ;;
   ;; add custom debug templates
-  (dap-register-debug-template "Python :: Run Free"
-                             (list :type "python"
-                                   :args "deep-fry -s 10 --force-evaluation tools/fry/scenarios/monovision_mega_vor.json"
-                                   :cwd (projectile-project-root)
-                                   :target-module "-m tools.free.free"
-                                   :request "launch"
-                                   :name "Python :: Run Free")))
+  (dap-register-debug-template "Python::Run Free"
+                               (list :type "python"
+                                     :args "deep-fry -s 10 --force-evaluation tools/fry/scenarios/monovision_mega_vor.json"
+                                     :cwd (projectile-project-root)
+                                     :target-module "-m tools.free.free"
+                                     :request "launch"
+                                     :name "Python :: Run Free"))
+  (dap-register-debug-template "GDB::Run Stringent"
+                               (list :type "gdb"
+                                     :request "launch"
+                                     :name "GDB::Run"
+                                     :target nil
+                                     :cwd (projectile-project-root))))
 
 
 ;;
