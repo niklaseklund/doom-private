@@ -120,61 +120,29 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
 
 ;;
 ;; Emacs gdb
+(after! gdb-mi
+  (setq-default gdb-show-main nil))
+
 (defun my/gdb-mi ()
   "Use build folder from project root as start for selection of binary to debug."
-  (let* ((start-directory (concat (projectile-project-root) "build"))
-         (file-name (read-file-name "Select binary to debug: " start-directory)))
-    (gdb (concat "gdb -mi " file-name))))
-
-(defun my/open-debug ()
-  "A function that opens a debug hydra based on major mode."
   (interactive)
-  (cond ((eq major-mode 'python-mode) (hydra-debugger-control/body))
-        ((eq major-mode 'c++-mode) (message "Calling the C++ hydra"))
-        (t (message "Not implemented"))))
+  (let* ((start-directory (concat (projectile-project-root) "build/bin"))
+         (file-name (read-file-name "Select binary to debug: " start-directory))
+         (cwd (concat " --cd=" (projectile-project-root))))
+    (gdb (concat "gdb -i=mi " file-name cwd))
+    (gdb-many-windows)))
 
-(defhydra gdb-hydra (:color purple :hint nil :foreign-keys run)
-  "
-^Stepping^             ^Switch^           ^Breakpoints^          ^Eval^                        ^Debug
-^^^^^^^^------------------------------------------------------------------------------------------------------------
-_n_: Next          _ss_: Session          _bt_: Toggle          _ee_: Eval                     _dd_: Debug
-_i_: Step in       _st_: Thread           _bd_: Delete          _er_: Eval region              _de_: Debug edit
-_o_: Step out      _sf_: Stack frame      _ba_: Add             _es_: Eval thing at point      ^ ^
-_c_: Continue      _sl_: List locals      _bc_: Set condition   _eii_: Inspect                 ^ ^
-_r_: Restart frame _sb_: List breakpoints _bh_: Set hit count   _eir_: Inspect region          ^ ^
-_Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect thing at point  ^ ^
-^ ^                 ^ ^                   _bD_: Delete all      ^ ^                            ^ ^
-"
-  ("n" gud-next)
-  ("i" gud-step)
-  ("o" gud-finish)
-  ("c" gud-cont)
-  ("r" gud-run)
-  ("Q" gud-disconnect)
-
-  ("ss" nil)
-  ("st" nil)
-  ("sf" nil)
-  ("sl" nil)
-  ("sb" nil)
-  ("sS" nil)
-
-  ("bt" nil)
-  ("bd" gud-remove)
-  ("bD" nil)
-  ("ba" gud-break)
-  ("bc" nil)
-  ("bh" nil)
-  ("bl" nil)
-
-  ("ee" gud-statement)
-  ("er" nil)
-  ("es" gud-print)
-  ("eii" nil)
-  ("eir" nil)
-  ("eis" gud-pstar)
-
-  ("dd" my/gdb-mi)
-  ("de" nil)
-
-  ("q" nil "quit"))
+;; https://emacs.stackexchange.com/questions/7991/how-can-i-delete-all-the-gdb-related-windows-buffers-after-q-in-gdb-cli-window
+  (defun my/gud-kill-all-buffers ()
+    "Kill all gud buffers including Debugger, Locals, Frames, Breakpoints."
+    (interactive)
+    (let ((gud-buffers '(gud-mode comint-mode gdb-locals-mode gdb-frames-mode gdb-breakpoints-mode)))
+      (save-excursion
+        (let ((count 0))
+          (dolist (buffer (buffer-list))
+            (set-buffer buffer)
+            (when (member major-mode gud-buffers)
+              (setq count (1+ count))
+              (kill-buffer buffer)
+              (delete-other-windows))) ;; fix the remaining two windows issue
+          (message "Killed %i buffer(s)." count)))))
