@@ -221,8 +221,10 @@
 
 
 ;; ;; deer/ranger
-;; (after! dired
-;;   (setq ranger-show-hidden t))
+(after! ranger
+  ;; Make the result of find-name-dired not open in a popup window but rather
+  ;; reuse the current one
+  (set-popup-rule! "^\\*Find\\*" :ignore t))
 
 
 ;; Snipe
