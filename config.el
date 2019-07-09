@@ -224,8 +224,14 @@
 (after! ranger
   ;; Make the result of find-name-dired not open in a popup window but rather
   ;; reuse the current one
-  (set-popup-rule! "^\\*Find\\*" :ignore t))
-
+  (set-popup-rule! "^\\*Find\\*" :ignore t)
+  ;; Run ranger-refresh directly after find-name-dired has executed. For some
+  ;; reason it doesn't play entirely well with ranger so to avoid having to
+  ;; manually refresh I advice the function.
+  (defun my/find-name-dired (orig-fun &rest args)
+    (apply orig-fun args)
+    (ranger-refresh))
+  (advice-add 'find-name-dired :around #'my/find-name-dired))
 
 ;; Snipe
 (evil-snipe-override-mode 1)
