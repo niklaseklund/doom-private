@@ -231,11 +231,6 @@
 (evil-snipe-override-mode 1)
 
 
-;; Avy
-;; Make avy operate on all visable windows
-(setq avy-all-windows t)
-
-
 ;; Autoformat in C++ files using clang-format
 ;; (add-hook 'c++-mode-hook #'+format|enable-on-save)
 (add-hook 'before-save-hook (lambda ()  (when (eq major-mode 'python-mode) (lsp-format-buffer))))
