@@ -24,7 +24,7 @@
           :desc "Open mail" :n "m" #'=notmuch)
         ;; Toggle
         (:prefix "t"
-          :desc "Zen writing" :n "z" #'writeroom-mode
+          :desc "Zen writing" :n "z" #'my/writeroom
           :desc "Wrap lines to fit screen" :n "v" #'visual-line-mode)
         ;; Search
         (:prefix "/"

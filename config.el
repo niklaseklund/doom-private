@@ -76,10 +76,24 @@
 
 ;;
 ;; Writeroom
-(add-hook 'writeroom-mode-hook (lambda ()
-                                 (progn
-                                   (visual-line-mode 1)
-                                   (hl-line-mode -1))))
+(def-package! writeroom-mode
+  :after org
+  :init
+  (setq writeroom-width 100)
+  :config
+  (defun my/writeroom ()
+    (interactive)
+    (if writeroom-mode
+        ;; disable
+        (progn
+          (writeroom-mode -1)
+          (git-gutter-mode)
+          (visual-line-mode -1))
+      ;; enable
+      (progn (writeroom-mode)
+             (git-gutter-mode -1)
+             (visual-line-mode)))))
+
 
 ;;
 ;; TRAMP
