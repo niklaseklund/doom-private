@@ -81,6 +81,7 @@
   :init
   (setq writeroom-width 100)
   :config
+  ;; create keybinding for toggling zen-writing
   (defun my/writeroom ()
     (interactive)
     (if writeroom-mode
@@ -92,7 +93,10 @@
       ;; enable
       (progn (writeroom-mode)
              (git-gutter-mode -1)
-             (visual-line-mode)))))
+             (visual-line-mode))))
+  (map! :localleader
+        :map org-mode-map
+        :desc "Toggle zen writing" :n "z" #'my/writeroom))
 
 
 ;;
