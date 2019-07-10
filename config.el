@@ -80,23 +80,21 @@
   :after org
   :init
   (setq writeroom-width 100)
+  (add-hook 'writeroom-mode-hook #'my/writeroom)
   :config
   ;; create keybinding for toggling zen-writing
   (defun my/writeroom ()
     (interactive)
     (if writeroom-mode
-        ;; disable
-        (progn
-          (writeroom-mode -1)
-          (git-gutter-mode)
-          (visual-line-mode -1))
-      ;; enable
-      (progn (writeroom-mode)
-             (git-gutter-mode -1)
-             (visual-line-mode))))
+        ;; enter
+        (progn (git-gutter-mode -1)
+               (visual-line-mode))
+      ;; exit
+      (progn (git-gutter-mode)
+             (visual-line-mode -1))))
   (map! :localleader
         :map org-mode-map
-        :desc "Toggle zen writing" :n "z" #'my/writeroom))
+        :desc "Toggle zen writing" :n "z" #'writeroom-mode))
 
 
 ;;
