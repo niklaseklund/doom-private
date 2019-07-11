@@ -16,12 +16,12 @@
 
       (:map ranger-mode-map
         :nvmei ";=" #'+ora/ediff-files)
-
       (:leader
         ;; Open
         (:prefix "o"
           :desc "Open debugger" :n "d" #'+dap-hydra/body
-          :desc "Open mail" :n "m" #'=notmuch)
+          :desc "Open mail" :n "m" #'=notmuch
+          :desc "Org-brain visualize" :n "v" #'org-brain-visualize)
         ;; Search
         (:prefix "/"
           :desc "Search github code base" :n "g" #'my/github-search-code)))

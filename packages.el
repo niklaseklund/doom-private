@@ -5,6 +5,7 @@
 (package! org-jira)
 (package! ox-hugo)
 (package! writeroom-mode)
+(package! org-brain)
 
 ;; shell
 (package! esh-autosuggest)
