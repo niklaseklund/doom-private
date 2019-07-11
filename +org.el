@@ -53,7 +53,8 @@
        :m "p" #'org-brain-add-parent
        :m "c" #'org-brain-add-child
        :m "f" #'org-brain-add-friendship
-       :m "r" #'org-brain-add-resource)
+       :m "r" #'org-brain-add-resource
+       :m "h" #'org-brain-add-child-headline)
 
      (:desc "set" :prefix "s"
        :m "a" #'org-brain-visualize-attach
