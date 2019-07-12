@@ -6,7 +6,6 @@
 (package! ox-hugo)
 (package! writeroom-mode)
 (package! org-brain)
-(package! ascii-art-to-unicode)
 
 ;; shell
 (package! esh-autosuggest)

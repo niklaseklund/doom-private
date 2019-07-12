@@ -86,22 +86,6 @@
      :m "o" #'org-brain-goto-current
      :m "v" #'org-brain-visualize
      :m "q" #'org-brain-visualize-quit))
-;; convert ascii-art to unicode for org-brain
-(def-package! ascii-art-to-unicode
-  :after org-brain
-  :config
-(defface aa2u-face '((t . nil))
-  "Face for aa2u box drawing characters")
-(advice-add #'aa2u-1c :filter-return
-            (lambda (str) (propertize str 'face 'aa2u-face)))
-(defun aa2u-org-brain-buffer ()
-  (let ((inhibit-read-only t))
-    (make-local-variable 'face-remapping-alist)
-    (add-to-list 'face-remapping-alist
-                 '(aa2u-face . org-brain-wires))
-    (ignore-errors (aa2u (point-min) (point-max)))))
-(add-hook 'org-brain-after-visualize-hook #'aa2u-org-brain-buffer))
-
 
 
 ;; Org-Noter
