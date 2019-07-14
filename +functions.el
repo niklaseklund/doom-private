@@ -123,37 +123,6 @@ to a regexp that will be used in the conditional lambda function"
   (let* ((cond-func (lambda (app) (not (executable-find  (prin1-to-string app))))))
     (my/tangle-cond apps cond-func filename)))
 
-(defun my/github-search-code (begin end)
-  "Search GitHub's code base. If the function is called with a visual selection
-that will be used as the search query. Multiple lines will be quoted separately.
-If no visual selection has been made the user is prompted for search words"
-  (interactive "r")
-  (let ((language nil)
-        (query nil)
-        (unreserved `(,@url-unreserved-chars 32))
-        (bool-vec (make-vector 256 nil)))
-  (mapcar (lambda (index) (aset bool-vec index t)) unreserved)
-    ;; Set search query
-    (if (not mark-active)
-        (setq query (read-string "Search for: "))
-      ;; Removing potential line ending with string-trim, adding quotes with
-      ;; prin1-to-string
-      (setq query (prin1-to-string (string-trim (buffer-substring-no-properties begin end)))))
-    ;; Remove new lines inside the string. Make it so each line is considered
-    ;; it's own entity
-    (setq query (replace-regexp-in-string "\n" "\" \"" query))
-    (setq language
-          (cond ((string-match-p "emacs-lisp-mode" (symbol-name major-mode)) "Emacs+Lisp")
-                ((string-match-p "python-mode" (symbol-name major-mode)) "Python")
-                ((string-match-p (regexp-quote "c++-mode") (symbol-name major-mode)) "C++")
-                ;; Default is Emacs Lisp
-                (t "Emacs+Lisp")))
-    ;; hexify query and language
-    (setq query (url-hexify-string query bool-vec))
-    (setq language (url-hexify-string language bool-vec))
-    (browse-url-firefox (format "https://github.com/search?l=%s&q=%s&type=Code" language query))
-    (quiet! (shell-command "wmctrl -x -a Navigator.Firefox"))))
-
 (defun my/tangle-get-filename ()
   "Returns the filename for tangling that applies to the current subtree."
   (let ((subtree-properties nil)
