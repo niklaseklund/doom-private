@@ -258,6 +258,15 @@
 (add-hook 'before-save-hook (lambda ()  (when (eq major-mode 'python-mode) (lsp-format-buffer))))
 
 
+;; Docsets
+(after! python
+  (set-docsets! 'python-mode "Python 3" "NumPy" "SciPy" "Pandas"))
+(after! dockerfile
+  (set-docsets! 'dockerfile-mode "Docker"))
+(after! cmake
+  (set-docsets! 'cmake-mode "CMake"))
+
+
 ;; Matlab files (use octave mode)
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 (add-hook 'octave-mode-hook (lambda ()
