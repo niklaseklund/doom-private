@@ -227,6 +227,14 @@
 
 
 ;;
+;; Flycheck
+(add-hook 'text-mode-hook (lambda ()
+                            (flycheck-mode -1)))
+(add-hook 'org-mode-hook (lambda ()
+                           (flycheck-mode -1)))
+
+
+;;
 ;; Auto-formatting
 ;; (add-hook 'c++-mode-hook #'+format|enable-on-save)
 (add-hook 'before-save-hook (lambda ()  (when (eq major-mode 'python-mode) (lsp-format-buffer))))
