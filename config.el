@@ -262,8 +262,9 @@
 ;;
 ;; Load other config files
 (load! "+bindings")
-(load! "+org")
-(load! "+lsp")
+(load! "+brain")
 (load! "+debug")
+(load! "+lsp")
+(load! "+org")
 
 ;;   :config
