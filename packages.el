@@ -16,3 +16,6 @@
 
 ;; recording
 (package! gif-screencast)
+
+;; gtd
+(package! org-super-agenda)
