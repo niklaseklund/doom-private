@@ -184,19 +184,23 @@
   (setq magit-module-sections-nested nil))
 
 
-;; Automatically switch back to English in normal mode
-;; Set default normal/insert-mode language to English
+;;
+;; Multi-language
+;; automatic switch-back to English layout in normal mode
 (let* ((normal-mode-keyboard-layout "us")
        (insert-mode-keyboard-layout normal-mode-keyboard-layout))
   ;; Add entry hook
   (add-hook 'evil-insert-state-entry-hook
             ;; switch language when entering insert mode to insert mode layout
-            (lambda () (quiet! (shell-command (concat "xkb-switch -s " insert-mode-keyboard-layout)))))
+            (lambda () (start-process "switch-to-previous-language" nil "xkb-switch" "-s" insert-mode-keyboard-layout)))
   ;; Add exit hook
   (add-hook 'evil-insert-state-exit-hook
-            ;; save current insert mode layout and reset layouot to english
-            (lambda () (setq insert-mode-keyboard-layout (shell-command-to-string "xkb-switch -p"))
-              (quiet! (shell-command (concat "xkb-switch -s " normal-mode-keyboard-layout))))))
+            ;; save current insert mode layout and reset layout to English
+            (lambda () (setq insert-mode-keyboard-layout (with-temp-buffer
+                                                      (call-process "xkb-switch" nil t "-p")
+                                                      (goto-char (point-min))
+                                                      (string-trim-right (buffer-substring-no-properties (point) (line-end-position)))))
+              (start-process "switch-to-normal" nil "xkb-switch" "-s" normal-mode-keyboard-layout))))
 
 
 ;;
