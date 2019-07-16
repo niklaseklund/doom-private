@@ -21,6 +21,7 @@
 ;; set which directories agenda should look for todos
 (setq org-agenda-files '("~/org" "~/org/brain"))
 
+;;
 ;; Org-Noter
 (def-package! org-noter
   :after org
@@ -38,39 +39,11 @@
           :desc "Sync next note" :n "]" #'org-noter-sync-next-note
           :desc "Sync previous note" :n "[" #'org-noter-sync-prev-note)))
 
+;;
 ;; Hugo
 (def-package! ox-hugo
   :defer t                      ;Auto-install the package from Melpa (optional)
   :after ox)
-
-;; ;; LaTeX export
-(after! 'org
-  (require  'ox-latex)
-  ;; (add-to-list 'org-latex-packages-alist '("newfloat" "minted"))
-  (setq org-latex-listings 'minted)
-  ;; set minted options
-  (setq org-latex-minted-options
-        '(("frame" "lines")))
-  ;; set pdf generation process
-  (setq org-latex-pdf-process
-        '("xelatex -shell-escape -interaction nonstopmode %f"
-          "xelatex -shell-escape -interaction nonstopmode %f"
-          "xelatex -shell-escape -interaction nonstopmode %f"))
-  (add-to-list 'org-latex-minted-langs '(calc "mathematica"))
-  ;; Add org-latex-class
-  (add-to-list 'org-latex-classes
-               '("zarticle"
-                 "\\documentclass[11pt,Wordstyle]{Zarticle}
-                    \\usepackage[utf8]{inputenc}
-                    \\usepackage{graphicx}
-                        [NO-DEFAULT-PACKAGES]
-                        [PACKAGES]
-                        [EXTRA] "
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}"))))
-
 
 ;;
 ;; Jira
