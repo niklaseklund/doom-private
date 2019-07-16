@@ -127,8 +127,3 @@
    '(("To Do" . "In Progress")
      ("In Progress" . "Review")
      ("Review" . "Done")))
-
-;;
-;; org-capture
-;; the following solves an error when in org-capture
-(add-hook 'org-capture-mode-hook #'yas-abort-snippet)
