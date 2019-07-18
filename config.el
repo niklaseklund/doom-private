@@ -223,7 +223,14 @@
   (defun my/find-name-dired (orig-fun &rest args)
     (apply orig-fun args)
     (ranger-refresh))
-  (advice-add 'find-name-dired :around #'my/find-name-dired))
+  (advice-add 'find-name-dired :around #'my/find-name-dired)
+  ;; Make it easier to move between windows
+  (map!
+   (:map ranger-mode-map
+     "C-h" #'evil-window-left
+     "C-l" #'evil-window-right
+     "C-k" #'evil-window-up
+     "C-j" #'evil-window-down)))
 
 
 ;;
