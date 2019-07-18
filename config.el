@@ -250,12 +250,15 @@
 
 ;;
 ;; Documentation
+;; right docsets for major-modes
 (after! python
   (set-docsets! 'python-mode "Python 3" "NumPy" "SciPy" "Pandas"))
 (after! dockerfile
   (set-docsets! 'dockerfile-mode "Docker"))
 (after! cmake
   (set-docsets! 'cmake-mode "CMake"))
+;; add archwiki to online providers
+(add-to-list '+lookup-provider-url-alist '("ArchWiki" . "https://wiki.archlinux.org/index.php?search=%s"))
 
 
 ;;
