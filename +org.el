@@ -10,7 +10,7 @@
         org-agenda-files '("~/org" "~/org/brain")
         org-latex-caption-above nil)
   ;; Org-links to emails
-  (require 'org-notmuch))
+  (require 'ol-notmuch))
 ;; Hooks
 (add-hook 'org-mode-hook (lambda ()
                            (hl-line-mode -1)))
