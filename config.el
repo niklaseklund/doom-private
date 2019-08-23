@@ -78,38 +78,6 @@
 
 
 ;;
-;; Shell/Terminal
-(after! eshell
-  (set-eshell-alias!
-   "ff"  "+ivy/projectile-find-file"
-   "fd"  "counsel-projectile-find-dir"
-   "/p" "+ivy/project-search"
-   "/d" "+ivy/project-search-from-cwd"
-   "d"   "deer $1"
-   "l"   "ls -l"
-   "la"  "ls -la"
-   "gl"  "(call-interactively 'magit-log-current)"
-   "gs"  "magit-status"
-   "gc"  "magit-commit"
-   "gbD" "my/git-branch-delete-regexp $1"
-   "gbS" "my/git-branch-match $1"
-   "rg"  "rg --color=always $*"
-   "bat" "my/eshell-bat $1")
-  (setenv "PAGER" "cat"))
-;; fish-like auto-suggestions
-(def-package! esh-autosuggest
-  :after eshell
-  :config
-  (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
-  (when (and (executable-find "fish")
-             (require 'fish-completion nil t))
-    (global-fish-completion-mode)))
-;; improved terminal emulator
-(after! vterm
-  (setq vterm-max-scrollback 50000))
-
-
-;;
 ;; Writing
 (def-package! writeroom-mode
   :after org
@@ -275,6 +243,7 @@
 (load! "+bindings")
 (load! "+brain")
 (load! "+debug")
+(load! "+eshell")
 (load! "+lsp")
 (load! "+org")
 
