@@ -43,6 +43,7 @@
 (use-package! eshell-detach
   :after eshell
   :config
+  (setq eshell-detach-max-file-name-length 60)
   (add-hook! 'eshell-first-time-mode-hook
     (defun eshell-detach-init-keymap-h ()
       (map! :map eshell-mode-map
