@@ -88,6 +88,22 @@ return it together with the language"
                           (forward-line 1)))
     profile-directory))
 
+(defun my/tangle-system (systems &optional filename)
+  "The input SYSTEMS is a list of valid systems. The systems are remaped using
+  an alist with values corresponding to known system-names."
+  (let* ((system-names-alist '((archbook . archbook)
+                               (tuxedo . u445bfa80-2ca8)))
+         (systems (mapcar (lambda (system) (alist-get system system-names-alist)) systems))
+         (node-name (with-temp-buffer
+                      (process-file "uname" nil t nil "-n")
+                      (goto-char (point-min))
+                      (string-trim-right (buffer-substring-no-properties (point) (line-end-position)))))
+         (remote (file-remote-p default-directory))
+         (filename (or filename (my/tangle-get-filename))))
+    ;; can the current system name be found in the list of remaped names?
+    (if (and filename (member (intern-soft node-name) systems))
+        (concat remote filename)
+      "no")))
 
 (defun my/tangle-os (oses &optional filename)
   "The input OSES is a list of valid operating systems. The values are remaped
@@ -96,8 +112,8 @@ to a regexp that will be used in the conditional lambda function"
                    (ubuntu . "Ubuntu")
                    (macos . "Darwin")
                    (android . "Android")))
-    (remaped-oses (mapcar (lambda (os) (cdr (assoc os os-map))) oses))
-    (cond-func (lambda (os) (string-match-p os (shell-command-to-string "uname -a")))))
+         (remaped-oses (mapcar (lambda (os) (cdr (assoc os os-map))) oses))
+         (cond-func (lambda (os) (string-match-p os (shell-command-to-string "uname -a")))))
     (my/tangle-cond remaped-oses cond-func filename)))
 
 
