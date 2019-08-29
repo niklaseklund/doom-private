@@ -91,8 +91,10 @@ return it together with the language"
 (defun my/tangle-system (systems &optional filename)
   "The input SYSTEMS is a list of valid systems. The systems are remaped using
   an alist with values corresponding to known system-names."
-  (let* ((system-names-alist '((archbook . archbook)
-                               (tuxedo . u445bfa80-2ca8)))
+  (let* ((system-names-alist '((arch . archbook)
+                               (work . u445bfa80-2ca8)
+                               (pi . raspberrypi)
+                               (termux . localhost)))
          (systems (mapcar (lambda (system) (alist-get system system-names-alist)) systems))
          (node-name (with-temp-buffer
                       (process-file "uname" nil t nil "-n")
