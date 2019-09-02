@@ -4,7 +4,7 @@
 ;;
 ;; UI
 (setq user-full-name    "Niklas Carlsson"
-      user-mail-address "carlsson.niklas@gmail.com")
+      user-mail-address "niklas.carlsson@posteo.net")
 
 ;; looks
 (setq doom-modeline-height 40
