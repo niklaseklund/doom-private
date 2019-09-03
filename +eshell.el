@@ -1,6 +1,11 @@
 ;;; +eshell.el -*- lexical-binding: t; -*-
 
 (after! eshell
+  ;; enable sudo
+  (require 'em-tramp)
+  (setq eshell-prefer-lisp-functions t
+        eshell-prefer-lisp-variables t)
+
   ;;
   ;; Keybindings
   ;; Keys must be bound in a hook because eshell resets its keymap every
@@ -28,7 +33,8 @@
    "gbD" "my/git-branch-delete-regexp $1"
    "gbS" "my/git-branch-match $1"
    "rg" "rg --color=always $*"
-   "bat" "my/eshell-bat $1")
+   "bat" "my/eshell-bat $1"
+   "sudo" "eshell/sudo $*")
   (setenv "PAGER" "cat")
 
   ;;
