@@ -213,5 +213,25 @@ to a regexp that will be used in the conditional lambda function"
                                      (delete-char -1)
                                      (buffer-string))))
 
+
 (defun my/multi-screen-setup-p ()
   ( > (string-to-number (shell-command-to-string "printf %s \"$(xrandr -q | grep -c ' connected')\"")) 1))
+
+
+(defun nc/sudo-this-file ()
+  "Open the current file as root."
+  (interactive)
+  (let ((buffer buffer-file-name)
+        (original-point (point)))
+    (counsel-find-file-as-root buffer)
+    ;; return to the same position as non-root
+    (goto-char original-point)))
+
+
+(defun nc/sudo-find-file (file)
+  "Find file X with root privileges."
+  (interactive "FOpen file as root: ")
+  (when (file-writable-p file)
+    (user-error "File is user writeable, aborting sudo"))
+  (find-file file)
+  (nc/sudo-this-file))

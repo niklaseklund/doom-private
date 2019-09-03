@@ -23,4 +23,8 @@
         (:prefix "o"
           :desc "Open debugger" :n "d" #'+dap-hydra/body
           :desc "Open mail" :n "m" #'=notmuch
-          :desc "Open visualize brain" :n "v" #'org-brain-visualize)))
+          :desc "Open visualize brain" :n "v" #'org-brain-visualize)
+        (:prefix "b"
+          :desc "Make buffer sudo" :n "S" #'nc/sudo-this-file)
+        (:prefix "f"
+          :desc "Find file as root" :n "S" #'nc/sudo-find-file)))
