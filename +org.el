@@ -7,7 +7,7 @@
         org-cycle-separator-lines 2
         org-log-done 'time
         org-directory "~/org"
-        org-agenda-files '("~/org" "~/org/brain")
+        org-agenda-files '("~/org" "~/org/brain" "~/sync/org")
         org-latex-caption-above nil)
   ;; Org-links to emails
   (require 'ol-notmuch))
