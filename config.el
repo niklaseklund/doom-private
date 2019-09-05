@@ -103,6 +103,13 @@
 ;;
 ;; Remote editing
 (with-eval-after-load 'tramp-sh
+  ;; Create persistent connections
+  (customize-set-variable
+   'tramp-ssh-controlmaster-options
+   (concat
+    "-o ControlPath=/tmp/ssh-ControlPath-%%r@%%h:%%p "
+    "-o ControlMaster=auto -o ControlPersist=yes"))
+  (customize-set-variable 'tramp-use-ssh-controlmaster-options nil)
   ;; solution for getting around a server with warning message about a not fully
   ;; functional terminal. This is due to the fact that tramp is set to "dumb"
   ;; Found a similar problem to mine here:
