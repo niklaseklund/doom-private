@@ -23,4 +23,6 @@
         (:prefix "o"
           :desc "Open debugger" :n "d" #'+dap-hydra/body
           :desc "Open mail" :n "m" #'=notmuch
-          :desc "Open visualize brain" :n "v" #'org-brain-visualize)))
+          :desc "Open brain" :n "b" #'org-brain-visualize
+         :desc "Default browser" :n "B" #'browse-url-of-file
+          :desc "Open (Password-)Store" :n "s" #'pass)))
