@@ -257,7 +257,10 @@
      "C-k" #'evil-window-up
      "C-j" #'evil-window-down
      ;; Batch rename files
-     :m "r" #'find-name-dired)))
+     :m "r" #'find-name-dired
+     ;; Goto project root
+     :m ";g" (λ! () (find-file (projectile-project-root)))
+     )))
 
 
 ;;
