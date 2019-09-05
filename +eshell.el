@@ -6,16 +6,27 @@
   (setq eshell-prefer-lisp-functions t
         eshell-prefer-lisp-variables t)
 
+  ;; customize variables
+  (setq eshell-hist-ignoredups t
+        eshell-buffer-maximum-lines 1024
+        eshell-history-size 10000)
+
   ;;
   ;; Keybindings
   ;; Keys must be bound in a hook because eshell resets its keymap every
   ;; time `eshell-mode' is enabled.
   (add-hook! 'eshell-first-time-mode-hook
     (defun my/+eshell-init-keymap-h ()
-      (map! :map eshell-mode-map
-            :i "C-p" 'eshell-previous-input
-            :i "C-n" 'eshell-next-input
-            :i "M-c" 'counsel-projectile-find-dir)))
+      (map!
+       :map eshell-mode-map
+       :i "C-p" 'eshell-previous-input
+       :i "C-n" 'eshell-next-input
+       :i "M-c" 'counsel-projectile-find-dir
+       :i "C-k" #'evil-window-up
+       :i "C-j" #'evil-window-down
+       :i "C-h" #'evil-window-left
+       :i "C-l" #'evil-window-right
+       )))
 
 
   ;;
@@ -35,13 +46,7 @@
    "rg" "rg --color=always $*"
    "bat" "my/eshell-bat $1"
    "sudo" "eshell/sudo $*")
-  (setenv "PAGER" "cat")
-
-  ;;
-  ;; Detach
-  ;; (load! "eshell-detach")
-
-  )
+  (setenv "PAGER" "cat"))
 
 
 ;;
