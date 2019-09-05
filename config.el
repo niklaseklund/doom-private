@@ -156,6 +156,58 @@
 
 
 ;;
+;; Pass
+(after! pass
+  ;; enter evil mode
+  (add-to-list 'evil-motion-state-modes 'pass-mode)
+  ;; disable snipe to have access to those keys
+  (push 'pass-mode evil-snipe-disabled-modes)
+  ;; don't show the bindings
+  (setq pass-show-keybindings nil)
+  ;; define the looks
+  (set-popup-rule! "*Password-Store*" :size 0.3 :side 'left :select t :autosave t)
+  ;; Let's make the password shown directly
+  (add-hook 'pass-view-mode-hook 'pass-view-toggle-password)
+
+  ;;
+  ;; Keybindings
+  ;; Pass-mode
+  (map!
+   :map pass-mode-map
+   :m "C-k" #'evil-window-up
+   :m "C-j" #'evil-window-down
+   :m "C-h" #'evil-window-left
+   :m "C-l" #'evil-window-right
+   (:desc "Copy" :prefix "y"
+     :desc "Copy password" :m "y" #'pass-copy
+     :desc "Copy field" :m "f" #'pass-copy-field
+     :desc "Copy username" :m "u" #'pass-copy-username
+     :desc "Copy username" :m "U" #'pass-copy-url)
+   :desc "Insert" :m "i" #'pass-insert
+   :desc "Insert generated" :m "I" #'pass-insert-generated
+   :desc "Rename" :m "r" #'pass-rename
+   :desc "Next entry" :m "j" #'pass-next-entry
+   :desc "Previous entry" :m "k" #'pass-prev-entry
+   (:desc "Extra keys" :prefix "g"
+     :desc "Next directory" :m "j" #'pass-next-directory
+     :desc "Previous directory" :m "k" #'pass-prev-directory
+     :desc "Refresh" :m "r" #'pass-update-buffer)
+   :desc "Open entry" :m "o" #'pass-view
+   :desc "OTP options" :m "Options" #'pass-otp-options
+   :desc "Delete entry" :m "d" #'pass-kill
+   :desc "Go to entry" :m "f" #'pass-goto-entry)
+  ;; Pass-view-mode
+  (map! :localleader
+        :map pass-view-mode-map
+        :desc "Toggle password" :m "t" #'pass-view-toggle-password
+        :desc "View qr-code" :m "Q" #'pass-view-qrcode
+        :desc "Copy password" :m "y" #'pass-view-copy-password
+        :desc "Quit" :m "q" #'pass-quit)
+  ;; TODO: improve the pass-quit function to properly clean-up the window layout
+  )
+
+
+;;
 ;; Version control
 ;; spell check commit messages
 (add-hook 'git-commit-setup-hook 'git-commit-turn-on-flyspell)
