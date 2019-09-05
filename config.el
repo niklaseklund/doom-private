@@ -110,6 +110,9 @@
     "-o ControlPath=/tmp/ssh-ControlPath-%%r@%%h:%%p "
     "-o ControlMaster=auto -o ControlPersist=yes"))
   (customize-set-variable 'tramp-use-ssh-controlmaster-options nil)
+  ;; Add the remote host path
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+
   ;; solution for getting around a server with warning message about a not fully
   ;; functional terminal. This is due to the fact that tramp is set to "dumb"
   ;; Found a similar problem to mine here:
