@@ -182,23 +182,15 @@
 ;;
 ;; Dired/Ranger
 (after! ranger
-  ;; Make the result of find-name-dired not open in a popup window but rather
-  ;; reuse the current one
-  (set-popup-rule! "^\\*Find\\*" :ignore t)
-  ;; Run ranger-refresh directly after find-name-dired has executed. For some
-  ;; reason it doesn't play entirely well with ranger so to avoid having to
-  ;; manually refresh I advice the function.
-  (defun my/find-name-dired (orig-fun &rest args)
-    (apply orig-fun args)
-    (ranger-refresh))
-  (advice-add 'find-name-dired :around #'my/find-name-dired)
-  ;; Make it easier to move between windows
   (map!
    (:map ranger-mode-map
+     ;; Make it easier to move between windows
      "C-h" #'evil-window-left
      "C-l" #'evil-window-right
      "C-k" #'evil-window-up
-     "C-j" #'evil-window-down)))
+     "C-j" #'evil-window-down
+     ;; Batch rename files
+     :m "r" #'find-name-dired)))
 
 
 ;;
