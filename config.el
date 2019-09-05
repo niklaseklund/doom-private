@@ -159,6 +159,16 @@
 
 
 ;;
+;; Disk usage
+(use-package! disk-usage
+  :config
+  (map!
+   :map disk-usage-mode-map
+   :desc "Reset cache" :nmi "r" #'disk-usage-reset-cache
+   :desc "Dired here" :nmi "D" (λ! () (dired default-directory))))
+
+
+;;
 ;; Pass
 (after! pass
   ;; enter evil mode
@@ -261,7 +271,9 @@
      ;; Batch rename files
      :m "r" #'find-name-dired
      ;; Goto project root
-     :m ";g" (λ! () (find-file (projectile-project-root)))
+     :m ";gp" (λ! () (find-file (projectile-project-root)))
+     ;; Goto disk usage tool
+     :m ";gd" #'disk-usage-here
      )))
 
 

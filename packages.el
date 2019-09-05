@@ -20,3 +20,6 @@
 
 ;; gtd
 (package! org-super-agenda)
+
+;; system
+(package! disk-usage)
