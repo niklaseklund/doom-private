@@ -10,6 +10,12 @@
         "C-h" 'evil-window-left
         "C-l" 'evil-window-right)
 
+      ;; window
+      (:leader
+        (:prefix "w"
+          :desc "Select window" :n "w" #'ace-window
+          ))
+
       (:map minibuffer-local-map
         "C-n" 'next-line-or-history-element
         "C-p" 'previous-line-or-history-element)
@@ -24,5 +30,5 @@
           :desc "Open debugger" :n "d" #'+dap-hydra/body
           :desc "Open mail" :n "m" #'=notmuch
           :desc "Open brain" :n "b" #'org-brain-visualize
-         :desc "Default browser" :n "B" #'browse-url-of-file
+          :desc "Default browser" :n "B" #'browse-url-of-file
           :desc "Open (Password-)Store" :n "s" #'pass)))
