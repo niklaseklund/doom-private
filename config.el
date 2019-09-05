@@ -14,7 +14,7 @@
 
 ;; prettify modes
 (setq +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
-(set-frame-parameter nil 'fullscreen 'maximized)
+;; (set-frame-parameter nil 'fullscreen 'maximized)
 
 ;; host os configuration
 (load! "+functions")
@@ -299,6 +299,19 @@
 (add-hook 'octave-mode-hook (lambda ()
                             (flycheck-mode -1)))
 (add-to-list 'auto-mode-alist '("\\.MD\\'" . markdown-mode))
+
+
+;;
+;; Emacs daemon
+;; Fix issue with theme not loading properly
+;; https://github.com/arcticicestudio/nord-emacs/issues/59
+(if (daemonp)
+    (cl-labels ((load-dracula (frame)
+                              (with-selected-frame frame
+                                (load-theme 'doom-dracula t))
+                              (remove-hook 'after-make-frame-functions #'load-dracula)))
+      (add-hook 'after-make-frame-functions #'load-dracula))
+  (load-theme 'doom-dracula t))
 
 
 ;;
