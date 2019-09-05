@@ -144,6 +144,11 @@
 
 
 ;;
+;; Proced
+(set-popup-rule! "*Proced*" :size 0.4 :side 'bottom :select t :autosave t)
+
+
+;;
 ;; Version control
 ;; spell check commit messages
 (add-hook 'git-commit-setup-hook 'git-commit-turn-on-flyspell)
