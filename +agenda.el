@@ -1,6 +1,13 @@
 ;;; +agenda.el -*- lexical-binding: t; -*-
 
 ;;
+;; org-agenda
+ (after! org-agenda
+   (setq org-agenda-window-setup 'only-window
+         org-agenda-restore-windows-after-quit t))
+
+
+;;
 ;; The org super agenda
 (def-package! org-super-agenda
   :after org
