@@ -176,7 +176,8 @@
   ;; disable snipe to have access to those keys
   (push 'pass-mode evil-snipe-disabled-modes)
   ;; don't show the bindings
-  (setq pass-show-keybindings nil)
+  (setq pass-show-keybindings nil
+        password-store-password-length 20)
   ;; define the looks
   (set-popup-rule! "*Password-Store*" :size 0.3 :side 'left :select t :autosave t)
   ;; Let's make the password shown directly
