@@ -238,6 +238,12 @@
 
 
 ;;
+;; Chat
+(after! erc
+  (setq erc-nick "niklascarlsson"))
+
+
+;;
 ;; Multi-language
 ;; automatic switch-back to English layout in normal mode
 (let* ((normal-mode-keyboard-layout "us")
