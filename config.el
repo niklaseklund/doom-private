@@ -250,7 +250,7 @@
        (insert-mode-keyboard-layout normal-mode-keyboard-layout))
   ;; Will work on remote, but requires xkb-switch to be installed locally
   (when (executable-find "xkb\-switch")
-  ;; Add entry hook
+    ;; Add entry hook
     (add-hook 'evil-insert-state-entry-hook
               ;; switch language when entering insert mode to insert mode layout
               (lambda () (start-process "switch-to-previous-language" nil "xkb-switch" "-s" insert-mode-keyboard-layout)))
