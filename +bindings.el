@@ -5,6 +5,9 @@
       :n "C-k" 'evil-window-up
       :n "C-l" 'evil-window-right
 
+      ;; quit
+      "s-q" #'doom/delete-frame
+
       ;; evilify movement
       (:map evil-treemacs-state-map
         "C-h" 'evil-window-left
