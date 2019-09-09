@@ -38,6 +38,9 @@
                mac-option-modifier 'alt
                mac-command-modifier 'meta)
 
+;; Define meta and super keys
+(setq x-super-keysym 'super
+        x-meta-keysym  'meta)
 
 ;;
 ;; Core Emacs
