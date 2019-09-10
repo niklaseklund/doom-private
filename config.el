@@ -371,10 +371,7 @@
 ;;
 ;; Override lazy-loading
 (+eshell/here)
-(dired-jump)
-(+eshell/here)
 (org-agenda-list)
 (notmuch-search "tag:inbox")
-(magit-status)
 
 ;;   :config
