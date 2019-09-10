@@ -23,3 +23,7 @@
 
 ;; system
 (package! disk-usage)
+
+;; Feeder
+(package! elfeed)
+(package! elfeed-org)

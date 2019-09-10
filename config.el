@@ -337,6 +337,27 @@
 
 
 ;;
+;; Feeder
+(use-package! elfeed
+  :config
+  (setq elfeed-db-directory "~/sync/elfeed/db")
+  ;; Gotta make doom treat elfeed-search-buffer as real. Otherwise exiting a
+  ;; show buffer doesn't bring me back to the feed, but instead the latest
+  ;; "real" buffer.
+  (defun +elfeed-buffer-p (buf)
+    "Return non-nil if BUF is a `elfeed-mode' buffer."
+    (with-current-buffer buf
+      (or
+       (derived-mode-p 'elfeed-search-mode))))
+  (add-hook 'doom-real-buffer-functions #'+elfeed-buffer-p))
+;; Improve defining feeds
+(use-package! elfeed-org
+  :config
+  (elfeed-org)
+  (setq rmh-elfeed-org-files (list "~/sync/elfeed/elfeed.org")))
+
+
+;;
 ;; Load other config files
 (load! "+agenda")
 (load! "+bindings")
