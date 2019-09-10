@@ -24,6 +24,9 @@
 ;; system
 (package! disk-usage)
 
+;; chat
+(package! erc-hl-nicks)
+
 ;; Feeder
 (package! elfeed)
 (package! elfeed-org)

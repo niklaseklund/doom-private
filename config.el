@@ -241,12 +241,6 @@
 
 
 ;;
-;; Chat
-(after! erc
-  (setq erc-nick "niklascarlsson"))
-
-
-;;
 ;; Multi-language
 ;; automatic switch-back to English layout in normal mode
 (let* ((normal-mode-keyboard-layout "us")
@@ -362,6 +356,7 @@
 (load! "+agenda")
 (load! "+bindings")
 (load! "+brain")
+(load! "+chat")
 (load! "+debug")
 (load! "+eshell")
 (load! "+lsp")
