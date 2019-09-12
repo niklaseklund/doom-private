@@ -18,7 +18,7 @@
 
 ;; host os configuration
 (load! "+functions")
-(when (my/os-match "ARCH")
+(when (string= (system-name) "archbook")
   (if (my/multi-screen-setup-p)
       (setq doom-font (font-spec :family "Roboto Mono" :size 14)
           doom-big-font (font-spec :family "Roboto Mono" :size 22)
@@ -29,14 +29,9 @@
   (font-put doom-font :weight 'semi-light)
   (setq x-super-keysym 'meta
         x-alt-keysym 'alt))
-(when (my/os-match "Ubuntu")
+(when (string= (system-name) "u445bfa80-2ca8")
     (setq doom-font (font-spec :family "Roboto Mono" :size 14)))
-(when IS-MAC
-  (setq ns-use-thin-smoothing t)
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . dark))
-               mac-option-modifier 'alt
-               mac-command-modifier 'meta)
+
 
 ;; Define meta and super keys
 (setq x-super-keysym 'super
