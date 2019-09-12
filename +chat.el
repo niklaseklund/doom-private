@@ -8,7 +8,7 @@
   (erc-fill-static-center 22)
   (erc-header-line-format nil)
   (erc-hide-list '("JOIN" "PART" "QUIT"))
-  (erc-join-buffer 'bury)
+  (erc-join-buffer 'buffer)
   (erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
   (erc-prompt-for-nickserv-password nil)
   (erc-server-reconnect-attempts 5)
