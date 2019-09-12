@@ -124,6 +124,13 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
 (after! gdb-mi
   (setq-default gdb-show-main nil))
 
+;; TODO: In progress
+(defun my/gdb-mi-new-frame ()
+  "Use build folder from project root as start for selection of binary to debug."
+  (interactive)
+  (let ((command (split-string-and-unquote  "bspc node -d 5 -f")))
+    (apply 'start-process "create-gdb-frame" nil command)))
+
 (defun my/gdb-mi ()
   "Use build folder from project root as start for selection of binary to debug."
   (interactive)
