@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: TODO
+# uuid: todo
+# key: todo
+# condition: t        
+# --
+// TODO(niklas.carlsson, `(insert (shell-command-to-string "echo -n $(date +%Y%m%d)"))`): $0
