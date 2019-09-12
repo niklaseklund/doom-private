@@ -156,11 +156,6 @@
 
 
 ;;
-;; Proced
-(set-popup-rule! "*Proced*" :size 0.4 :side 'bottom :select t :autosave t)
-
-
-;;
 ;; Disk usage
 (use-package! disk-usage
   :config
@@ -327,6 +322,12 @@
                               (remove-hook 'after-make-frame-functions #'load-dracula)))
       (add-hook 'after-make-frame-functions #'load-dracula))
   (load-theme 'doom-dracula t))
+
+
+;;
+;; Pop-ups
+(set-popup-rule! "^\\*Customize Group:*" :side 'right :size 0.4)
+(set-popup-rule! "*Proced*" :size 0.4 :side 'bottom :select t :autosave t)
 
 
 ;;
