@@ -11,6 +11,11 @@
         eshell-buffer-maximum-lines 1024
         eshell-history-size 10000)
 
+  ;; Visual commands require a proper terminal. Eshell can't handle that, so
+  ;; it delegates these commands to a term buffer.
+  (after! em-term
+    (pushnew! eshell-visual-commands "bluetoothctl"))
+
   ;;
   ;; Keybindings
   ;; Keys must be bound in a hook because eshell resets its keymap every
