@@ -14,6 +14,8 @@
 ;; Hooks
 (add-hook 'org-mode-hook (lambda ()
                            (hl-line-mode -1)))
+(add-hook 'org-mode-hook (lambda ()
+            (flycheck-mode -1)))
 (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 (add-hook 'org-mode-hook #'doom-disable-line-numbers-h)
 

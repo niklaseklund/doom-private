@@ -271,11 +271,9 @@
 
 
 ;;
-;; Flycheck
-(add-hook 'text-mode-hook (lambda ()
-                            (flycheck-mode -1)))
-(add-hook 'org-mode-hook (lambda ()
-                           (flycheck-mode -1)))
+;; Disable flycheck
+(add-hook! 'text-mode-hook (lambda ()
+            (flycheck-mode -1)))
 
 
 ;;
