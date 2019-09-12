@@ -3,15 +3,12 @@
 (use-package! erc
   :defer t
   :custom
-  (erc-autojoin-channels-alist '(("freenode.net" "#archlinux" "##c++"
-                                  "#emacs" "#python")))
   (erc-autojoin-timing 'ident)
-  (erc-autojoin-delay 60)
   (erc-fill-function 'erc-fill-static)
   (erc-fill-static-center 22)
   (erc-header-line-format nil)
   (erc-hide-list '("JOIN" "PART" "QUIT"))
-  (erc-join-buffer 'buffer)
+  (erc-join-buffer 'bury)
   (erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
   (erc-prompt-for-nickserv-password nil)
   (erc-server-reconnect-attempts 5)
@@ -25,7 +22,30 @@
   (erc-update-modules)
   (setq erc-nick "niklascarlsson")
   (add-hook 'erc-mode-hook (lambda () (flycheck-mode -1)))
-  )
+
+  ;; autojoin channels
+  (defmacro erc-autojoin (&rest args)
+    `(add-hook 'erc-after-connect
+               '(lambda (server nick)
+                  (cond
+                   ,@(mapcar (lambda (servers+channels)
+                               (let ((servers (car servers+channels))
+                                     (channels (cdr servers+channels)))
+                                 `((member erc-session-server ',servers)
+                                   (mapc 'erc-join-channel ',channels))))
+                             args)))))
+  (erc-autojoin
+   (("irc.freenode.net") "#emacs"))
+
+  ;; join channels
+  (defun my/erc-join-channel ()
+    "Select a channel to join."
+    (interactive)
+    (let* ((channels '("#archlinux" "#python" "#emacsconf"))
+           (join-channel (completing-read "Join channel: "
+                                          (cl-sort channels 'string-lessp :key 'downcase) nil t)))
+      (erc-join-channel join-channel))))
+
 
 (use-package! erc-hl-nicks
   :after erc)
