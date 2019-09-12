@@ -1,17 +1,10 @@
 ;;; +agenda.el -*- lexical-binding: t; -*-
 
 ;;
-;; org-agenda
- (after! org-agenda
-   (setq org-agenda-window-setup 'only-window
-         org-agenda-restore-windows-after-quit t))
-
-
-;;
 ;; The org super agenda
-(def-package! org-super-agenda
-  :after org
-  :init
+(use-package! org-super-agenda
+  :after org-agenda
+  :config
   (setq org-super-agenda-groups
         '((:name "Today"
                  :time-grid t
@@ -22,7 +15,6 @@
                  :priority "A")
           (:name "Due soon"
                  :deadline future)))
-  :config
   (org-super-agenda-mode)
   ;; evilify bindings for header-map
   (map!

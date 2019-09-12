@@ -152,7 +152,6 @@
 ;;
 ;; Windows (not the operating system)
 (after! org
-  (set-popup-rule! "^\\*Org Agenda.*\\*$" :size 0.5 :side 'right :select t :ttl nil :autosave t)
   (set-popup-rule! "^CAPTURE.*\\.org$" :size 0.4 :side 'bottom :select t :autosave t))
 
 
