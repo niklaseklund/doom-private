@@ -234,4 +234,4 @@ to a regexp that will be used in the conditional lambda function"
     ;; delete the current frame
     (call-interactively 'delete-frame)
     ;; focus on the previous node
-    (apply 'start-process "reload-sxhkd" nil command)))
+    (apply 'start-process "switch-to-previous-node" nil command)))
