@@ -227,11 +227,25 @@ to a regexp that will be used in the conditional lambda function"
     (mapcar (lambda (mount-drive) (shut-up (shell-command (concat mount-command mount-drive)))) drives)))
 
 
-(defun nc/delete-frame ()
+(defun nc/delete-frame-and-switch ()
   "Delete the current frame and jump to the previous bspwm window."
   (interactive)
   (let ((command (split-string-and-unquote  "bspc node older -f")))
     ;; delete the current frame
     (call-interactively 'delete-frame)
     ;; focus on the previous node
-    (apply 'start-process "switch-to-previous-node" nil command)))
+    (apply 'start-process "switch-to-previous-node" nil command)
+    ))
+
+
+(defun nc/delete-frame-and-stay ()
+  "Delete the current frame and stay focused on the current desktop."
+  (interactive)
+  (let* ((desktop-ids (split-string (string-trim (shell-command-to-string "bspc query -D"))))
+         (current-desktop (string-trim (shell-command-to-string "bspc query -D -d")))
+         (current-desktop-index (+ 1  (cl-position current-desktop desktop-ids :test #'equal)))
+         (command (split-string-and-unquote (format "bspc desktop -f ^%s" current-desktop-index))))
+    ;; delete the current frame
+    (call-interactively 'delete-frame)
+    ;; focus on the previous node
+    (apply 'start-process "keep-focus" nil command)))
