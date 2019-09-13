@@ -216,3 +216,12 @@ to a regexp that will be used in the conditional lambda function"
 
 (defun my/multi-screen-setup-p ()
   ( > (string-to-number (shell-command-to-string "printf %s \"$(xrandr -q | grep -c ' connected')\"")) 1))
+
+
+(defun nc/mount-drives ()
+  "Mount my drives."
+  (let ((drives '("regtt01"
+                  "zebra01"
+                  "driveme01"))
+        (mount-command "PASSWD=$(pass work/zenuity/login | sed -n 1p) mount /mnt/"))
+    (mapcar (lambda (mount-drive) (shut-up (shell-command (concat mount-command mount-drive)))) drives)))
