@@ -38,7 +38,7 @@
    (("irc.freenode.net") "#emacs"))
 
   ;; join channels
-  (defun my/erc-join-channel ()
+  (defun nc/erc-join-channel ()
     "Select a channel to join."
     (interactive)
     (let* ((channels '("#archlinux" "#python" "#emacsconf"))

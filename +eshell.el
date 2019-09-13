@@ -21,7 +21,7 @@
   ;; Keys must be bound in a hook because eshell resets its keymap every
   ;; time `eshell-mode' is enabled.
   (add-hook! 'eshell-first-time-mode-hook
-    (defun my/+eshell-init-keymap-h ()
+    (defun nc/+eshell-init-keymap-h ()
       (map!
        :map eshell-mode-map
        :i "C-p" 'eshell-previous-input
@@ -46,10 +46,10 @@
    "gl" "(call-interactively 'magit-log-current)"
    "gs" "magit-status"
    "gc" "magit-commit"
-   "gbD" "my/git-branch-delete-regexp $1"
-   "gbS" "my/git-branch-match $1"
+   "gbD" "nc/git-branch-delete-regexp $1"
+   "gbS" "nc/git-branch-match $1"
    "rg" "rg --color=always $*"
-   "bat" "my/eshell-bat $1"
+   "bat" "nc/eshell-bat $1"
    "sudo" "eshell/sudo $*")
   (setenv "PAGER" "cat"))
 

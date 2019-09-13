@@ -1,6 +1,6 @@
 ;;; private/niklascarlsson/+functions.el -*- lexical-binding: t; -*-
 
-(defun my/git-branch-match (name-regexp)
+(defun nc/git-branch-match (name-regexp)
 ;; Creates a list of all git branches that matches in input NAME-REGEXP
   (with-temp-buffer (shell-command "git branch" t)
                     (goto-char (point-min))
@@ -14,12 +14,12 @@
                         (forward-line 1))
                       branch-matches)))
 
-(defun my/git-branch-show (name)
+(defun nc/git-branch-show (name)
   ;; Display git-branches matching input regular expression NAME
   (interactive "sEnter git branch pattern: ")
-  (message "%s" (my/git-branch-match name)))
+  (message "%s" (nc/git-branch-match name)))
 
-(defun my/git-delete-branch (branch)
+(defun nc/git-delete-branch (branch)
 ;; Deletes BRANCH from the current git project. Has guarding against removal of
 ;; master branch or current branch.
   (if (and (string-match "^[^*]" branch)
@@ -28,14 +28,14 @@
         (shell-command (format "git branch -D %s" branch))
         (format "Branch %s was removed" branch))))
 
-(defun my/git-branch-delete-regexp (name-regexp)
+(defun nc/git-branch-delete-regexp (name-regexp)
   ;; Removes all git branches which matches NAME-REGEXP
   (interactive "sEnter git branch pattern: ")
-  (let ((branches (my/git-branch-match name-regexp)))
-    (mapcar 'my/git-delete-branch branches)))
+  (let ((branches (nc/git-branch-match name-regexp)))
+    (mapcar 'nc/git-delete-branch branches)))
 
 
-(defun my/docker-match (name-regexp)
+(defun nc/docker-match (name-regexp)
   ;; return the name of the last docker image which matches the input
   ;; NAME-REGEXP
   (with-temp-buffer (shell-command "docker ps" t)
@@ -50,13 +50,13 @@
                         (forward-line 1))
                       name-match)))
 
-(defun my/docker-path (name-regexp  &optional extended-path)
+(defun nc/docker-path (name-regexp  &optional extended-path)
   (if extended-path
-      (format "/docker:%s:/%s" (my/docker-match name-regexp) extended-path)
-    (format "/docker:%s:/" (my/docker-match name-regexp))))
+      (format "/docker:%s:/%s" (nc/docker-match name-regexp) extended-path)
+    (format "/docker:%s:/" (nc/docker-match name-regexp))))
 
 
-(defun my/org-babel-previous-session ()
+(defun nc/org-babel-previous-session ()
   "Find the previous src code block which contains the session argument and
 return it together with the language"
   (interactive)
@@ -75,7 +75,7 @@ return it together with the language"
       (format "%s :session %s" language session))))
 
 
-(defun my/firefox-profile-directory ()
+(defun nc/firefox-profile-directory ()
   "Find the path to the Firefox profile directory where settings recide."
   (let ((profile-directory '())
         (firefox-path (expand-file-name "~/.mozilla/firefox/")))
@@ -88,7 +88,7 @@ return it together with the language"
                           (forward-line 1)))
     profile-directory))
 
-(defun my/tangle-system (systems &optional filename)
+(defun nc/tangle-system (systems &optional filename)
   "The input SYSTEMS is a list of valid systems. The systems are remaped using
   an alist with values corresponding to known system-names."
   (let* ((system-names-alist '((arch . archbook)
@@ -101,13 +101,13 @@ return it together with the language"
                       (goto-char (point-min))
                       (string-trim-right (buffer-substring-no-properties (point) (line-end-position)))))
          (remote (file-remote-p default-directory))
-         (filename (or filename (my/tangle-get-filename))))
+         (filename (or filename (nc/tangle-get-filename))))
     ;; can the current system name be found in the list of remaped names?
     (if (and filename (member (intern-soft node-name) systems))
         (concat remote filename)
       "no")))
 
-(defun my/tangle-os (oses &optional filename)
+(defun nc/tangle-os (oses &optional filename)
   "The input OSES is a list of valid operating systems. The values are remaped
 to a regexp that will be used in the conditional lambda function"
   (let* ((os-map '((arch . "arch")
@@ -116,32 +116,32 @@ to a regexp that will be used in the conditional lambda function"
                    (android . "Android")))
          (remaped-oses (mapcar (lambda (os) (cdr (assoc os os-map))) oses))
          (cond-func (lambda (os) (string-match-p os (shell-command-to-string "uname -a")))))
-    (my/tangle-cond remaped-oses cond-func filename)))
+    (nc/tangle-cond remaped-oses cond-func filename)))
 
 
-(defun my/tangle-cond (conditionals cond-func &optional filename)
+(defun nc/tangle-cond (conditionals cond-func &optional filename)
   ;; http://ergoemacs.org/misc/emacs_lisp_some_and_every.html
   (require 'cl-extra)
   (let ((tangle-file "no"))
     (when (cl-some #'identity (mapcar cond-func conditionals))
       (if filename
           (setq tangle-file filename)
-        (setq tangle-file (my/tangle-get-filename)))
+        (setq tangle-file (nc/tangle-get-filename)))
       (when (null tangle-file)
         (error "You haven't specified a tangle filename")))
     tangle-file))
 
-(defun my/tangle-app (apps &optional filename)
+(defun nc/tangle-app (apps &optional filename)
   "The input APPS is a list of valid applications."
   (let* ((cond-func (lambda (app) (executable-find  (prin1-to-string app)))))
-    (my/tangle-cond apps cond-func filename)))
+    (nc/tangle-cond apps cond-func filename)))
 
-(defun my/tangle-not-app (apps &optional filename)
+(defun nc/tangle-not-app (apps &optional filename)
   "The input APPS is a list of invalid applications."
   (let* ((cond-func (lambda (app) (not (executable-find  (prin1-to-string app))))))
-    (my/tangle-cond apps cond-func filename)))
+    (nc/tangle-cond apps cond-func filename)))
 
-(defun my/tangle-get-filename ()
+(defun nc/tangle-get-filename ()
   "Returns the filename for tangling that applies to the current subtree."
   (let ((subtree-properties nil)
         (tangle-param nil))
@@ -174,7 +174,7 @@ to a regexp that will be used in the conditional lambda function"
                       (set-window-configuration wnd))))
       (error "no more than 2 files should be marked"))))
 
-(defun my/init-jira-cookie ()
+(defun nc/init-jira-cookie ()
   (let* ((token nil)
          (id nil)
          (header (prin1-to-string "Content-Type: application/json"))
@@ -193,7 +193,7 @@ to a regexp that will be used in the conditional lambda function"
                       (format "atlasian.xsrf.token=%s;JSESSIONID=%s" token id))))
 
 
-(defun my/eshell-bat (file)
+(defun nc/eshell-bat (file)
   "Like `cat' but output with Emacs syntax highlighting."
   (with-temp-buffer
     (insert-file-contents file)
@@ -207,14 +207,14 @@ to a regexp that will be used in the conditional lambda function"
     (buffer-string)))
 
 
-(defun my/os-match (os)
+(defun nc/os-match (os)
   (string-match os (with-temp-buffer (shell-command "uname -a" t)
                                      (goto-char (point-max))
                                      (delete-char -1)
                                      (buffer-string))))
 
 
-(defun my/multi-screen-setup-p ()
+(defun nc/multi-screen-setup-p ()
   ( > (string-to-number (shell-command-to-string "printf %s \"$(xrandr -q | grep -c ' connected')\"")) 1))
 
 

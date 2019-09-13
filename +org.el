@@ -54,7 +54,7 @@
   ;; Fix access
   (setq jiralib-url "https://jira.zenuity.com"
         org-jira-users `("Niklas Carlsson" . ,(shell-command-to-string "printf %s \"$(pass show work/zenuity/login | sed -n 2p | awk '{print $2}')\""))
-        jiralib-token `("Cookie". ,(my/init-jira-cookie)))
+        jiralib-token `("Cookie". ,(nc/init-jira-cookie)))
   ;; Customization jira query
   (setq org-jira-custom-jqls
         '(

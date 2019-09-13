@@ -3,6 +3,6 @@
 # key: <ss
 # --
 
-#+BEGIN_SRC `(my/org-babel-previous-session)`
+#+BEGIN_SRC `(nc/org-babel-previous-session)`
 $0
 #+END_SRC

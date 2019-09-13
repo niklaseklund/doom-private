@@ -19,7 +19,7 @@
 ;; host os configuration
 (load! "+functions")
 (when (string= (system-name) "archbook")
-  (if (my/multi-screen-setup-p)
+  (if (nc/multi-screen-setup-p)
       (setq doom-font (font-spec :family "Roboto Mono" :size 14)
           doom-big-font (font-spec :family "Roboto Mono" :size 22)
           doom-variable-pitch-font (font-spec :family "Iosevka Term" :size 14))

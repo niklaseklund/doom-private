@@ -131,7 +131,7 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
   (let ((command (split-string-and-unquote  "bspc node -d 5 -f")))
     (apply 'start-process "create-gdb-frame" nil command)))
 
-(defun my/gdb-mi ()
+(defun nc/gdb-mi ()
   "Use build folder from project root as start for selection of binary to debug."
   (interactive)
   (let* ((start-directory (concat (projectile-project-root) "build/bin"))
@@ -142,7 +142,9 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
 
 ;; https://emacs.stackexchange.com/questions/7991/how-can-i-delete-all-the-gdb-related-windows-buffers-after-q-in-gdb-cli-window
   (defun my/gud-kill-all-buffers ()
+  (defun nc/gud-kill-all-buffers ()
     "Kill all gud buffers including Debugger, Locals, Frames, Breakpoints."
+    ;; https://emacs.stackexchange.com/questions/7991/how-can-i-delete-all-the-gdb-related-windows-buffers-after-q-in-gdb-cli-window
     (interactive)
     (let ((gud-buffers '(gud-mode comint-mode gdb-locals-mode gdb-frames-mode gdb-breakpoints-mode)))
       (save-excursion
