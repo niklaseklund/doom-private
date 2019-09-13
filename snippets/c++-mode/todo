@@ -2,6 +2,6 @@
 # name: TODO
 # uuid: todo
 # key: todo
-# condition: t        
+# condition: t
 # --
-// TODO(niklas.carlsson, `(insert (shell-command-to-string "echo -n $(date +%Y%m%d)"))`): $0
+// TODO(`user-login-name`, `(insert (shell-command-to-string "echo -n $(date +%Y%m%d)"))`): $0
