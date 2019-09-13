@@ -126,7 +126,6 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
 
 (defun nc/gdb-mi ()
   "Use build folder from project root as start for selection of binary to debug."
-  (interactive)
   (let* ((start-directory (concat (projectile-project-root) "build/bin"))
          (file-name (read-file-name "Select binary to debug: " start-directory))
          (cwd (concat " --cd=" (projectile-project-root))))
@@ -136,7 +135,7 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
 (defun nc/gdb-mi-new-frame ()
   "Use build folder from project root as start for selection of binary to debug."
   (interactive)
-  (let ((command (split-string-and-unquote  "bspc node -d 5 -f"))
+  (let ((command (split-string-and-unquote  "bspc node -d ^7 -f"))
         (cur-buffer buffer-file-name))
     ;; create a new frame
     (select-frame (make-frame))
