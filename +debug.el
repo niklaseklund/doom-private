@@ -124,13 +124,6 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
 (after! gdb-mi
   (setq-default gdb-show-main nil))
 
-;; TODO: In progress
-(defun my/gdb-mi-new-frame ()
-  "Use build folder from project root as start for selection of binary to debug."
-  (interactive)
-  (let ((command (split-string-and-unquote  "bspc node -d 5 -f")))
-    (apply 'start-process "create-gdb-frame" nil command)))
-
 (defun nc/gdb-mi ()
   "Use build folder from project root as start for selection of binary to debug."
   (interactive)
@@ -140,8 +133,19 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
     (gdb (concat "gdb -i=mi " file-name cwd))
     (gdb-many-windows)))
 
-;; https://emacs.stackexchange.com/questions/7991/how-can-i-delete-all-the-gdb-related-windows-buffers-after-q-in-gdb-cli-window
-  (defun my/gud-kill-all-buffers ()
+(defun nc/gdb-mi-new-frame ()
+  "Use build folder from project root as start for selection of binary to debug."
+  (interactive)
+  (let ((command (split-string-and-unquote  "bspc node -d 5 -f"))
+        (cur-buffer buffer-file-name))
+    ;; create a new frame
+    (select-frame (make-frame))
+    ;; send it to a new place
+    (apply 'start-process "create-gdb-frame" nil command)
+    ;; select a binary
+    (find-file cur-buffer)
+    (nc/gdb-mi)))
+
   (defun nc/gud-kill-all-buffers ()
     "Kill all gud buffers including Debugger, Locals, Frames, Breakpoints."
     ;; https://emacs.stackexchange.com/questions/7991/how-can-i-delete-all-the-gdb-related-windows-buffers-after-q-in-gdb-cli-window
