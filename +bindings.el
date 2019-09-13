@@ -28,6 +28,22 @@
       (:map ranger-mode-map
         :nvmei ";=" #'+ora/ediff-files)
 
+      ;; c++ bindings
+      (:localleader
+        :map c++-mode-map
+        (:prefix-map ("d" . "debug")
+          :desc "Set breakpoint" :n "b" #'gud-break
+          :desc "Remove breakpoint" :n "B" #'gud-remove
+          :desc "Jump here" :n "j" #'gud-jump
+          :desc "Continue" :n "c" #'gud-cont
+          :desc "Next" :n "n" #'gud-next
+          :desc "Step" :n "s" #'gud-step
+          :desc "Run" :n "r" #'gud-run
+          :desc "Up" :n "u" #'gud-up
+          :desc "Down" :n "d" #'gud-down
+          :desc "Kill" :n "K" #'nc/gud-kill-all-buffers
+          :desc "Start" :n "g" #'nc/gdb-mi-new-frame))
+
       ;; create custom leader bindings
       (:leader
         (:prefix "o"
