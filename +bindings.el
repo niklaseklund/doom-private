@@ -7,7 +7,7 @@
 
       ;; quit
       "s-q" (λ! ()
-              (delete-frame))
+                (nc/delete-frame))
 
       ;; evilify movement
       (:map evil-treemacs-state-map

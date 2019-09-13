@@ -225,3 +225,13 @@ to a regexp that will be used in the conditional lambda function"
                   "driveme01"))
         (mount-command "PASSWD=$(pass work/zenuity/login | sed -n 1p) mount /mnt/"))
     (mapcar (lambda (mount-drive) (shut-up (shell-command (concat mount-command mount-drive)))) drives)))
+
+
+(defun nc/delete-frame ()
+  "Delete the current frame and jump to the previous bspwm window."
+  (interactive)
+  (let ((command (split-string-and-unquote  "bspc node older -f")))
+    ;; delete the current frame
+    (call-interactively 'delete-frame)
+    ;; focus on the previous node
+    (apply 'start-process "reload-sxhkd" nil command)))
