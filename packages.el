@@ -30,3 +30,8 @@
 ;; Feeder
 (package! elfeed)
 (package! elfeed-org)
+
+;; mail
+(package! notmuch)
+(package! org-mime)
+(package! counsel-notmuch)

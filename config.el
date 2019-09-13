@@ -55,13 +55,6 @@
 
 
 ;;
-;; Mail
-(setq send-mail-function 'sendmail-send-it
-      message-send-mail-function 'message-send-mail-with-sendmail
-      sendmail-program "msmtp")
-
-
-;;
 ;; Screencast
 (def-package! gif-screencast
   :defer t
@@ -350,6 +343,7 @@
 (load! "+bindings")
 (load! "+brain")
 (load! "+chat")
+(load! "+mail")
 (load! "+debug")
 (load! "+eshell")
 (load! "+lsp")
