@@ -51,7 +51,8 @@
    "rg" "rg --color=always $*"
    "bat" "nc/eshell-bat $1"
    "sudo" "eshell/sudo $*"
-   "nm" "nc/enwc")
+   "nm" "nc/enwc"
+   "locate" "counsel-locate $1")
   (setenv "PAGER" "cat"))
 
 
