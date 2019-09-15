@@ -68,7 +68,6 @@
 (setq command-log-mode-window-size 60)
 
 
-;;
 ;; Writing
 (def-package! writeroom-mode
   :after org
@@ -141,16 +140,6 @@
 ;; Windows (not the operating system)
 (after! org
   (set-popup-rule! "^CAPTURE.*\\.org$" :size 0.4 :side 'bottom :select t :autosave t))
-
-
-;;
-;; Disk usage
-(use-package! disk-usage
-  :config
-  (map!
-   :map disk-usage-mode-map
-   :desc "Reset cache" :nmi "r" #'disk-usage-reset-cache
-   :desc "Dired here" :nmi "D" (λ! () (dired default-directory))))
 
 
 ;;
@@ -313,7 +302,6 @@
 ;;
 ;; Pop-ups
 (set-popup-rule! "^\\*Customize Group:*" :side 'right :size 0.4)
-(set-popup-rule! "*Proced*" :size 0.4 :side 'bottom :select t :autosave t)
 
 
 ;;
@@ -343,11 +331,12 @@
 (load! "+bindings")
 (load! "+brain")
 (load! "+chat")
-(load! "+mail")
 (load! "+debug")
 (load! "+eshell")
 (load! "+lsp")
 (load! "+org")
+(load! "+mail")
+(load! "+system")
 
 
 ;;

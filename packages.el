@@ -23,6 +23,9 @@
 
 ;; system
 (package! disk-usage)
+(package! transmission)
+(package! pulseaudio-control)
+(package! enwc)
 
 ;; chat
 (package! erc-hl-nicks)

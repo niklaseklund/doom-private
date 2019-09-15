@@ -50,7 +50,8 @@
    "gbS" "nc/git-branch-match $1"
    "rg" "rg --color=always $*"
    "bat" "nc/eshell-bat $1"
-   "sudo" "eshell/sudo $*")
+   "sudo" "eshell/sudo $*"
+   "nm" "nc/enwc")
   (setenv "PAGER" "cat"))
 
 
