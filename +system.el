@@ -8,7 +8,8 @@
 (use-package! enwc
   :config
   ;; TODO: Add custom keymap
-  (setq enwc-default-backend 'nm)
+  (setq enwc-default-backend 'nm
+        enwc-display-mode-line nil)
   (defun nc/enwc ()
     "A custom enwc setup function that is compatible with popup rules."
     (interactive)
@@ -16,7 +17,9 @@
     (enwc-setup-buffer t)
     (enwc-scan t)
     (pop-to-buffer "*ENWC*"))
-  (set-popup-rule! "*ENWC*" :size 0.4 :side 'bottom :select t :autosave t))
+  (set-popup-rule! "*ENWC*" :size 0.4 :side 'bottom :select t :autosave t)
+
+  )
 
 
 ;;
