@@ -238,6 +238,8 @@ to a regexp that will be used in the conditional lambda function"
     ))
 
 
+;; TODO: Simplify the code below, to get the number of the current desktop:
+;; bspc query -D -d --names
 (defun nc/delete-frame-and-stay ()
   "Delete the current frame and stay focused on the current desktop."
   (interactive)
