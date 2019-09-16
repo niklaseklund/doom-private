@@ -338,6 +338,14 @@
 
 
 ;;
+;; PDF
+(after! pdf-tools
+(map!
+   :map pdf-view-mode-map
+   :desc "pdf-occur" :nmi "C-s" #'pdf-occur))
+
+
+;;
 ;; Load other config files
 (load! "+agenda")
 (load! "+bindings")
