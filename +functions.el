@@ -220,6 +220,7 @@ to a regexp that will be used in the conditional lambda function"
 
 (defun nc/mount-drives ()
   "Mount my drives."
+  (interactive)
   (let ((drives '("regtt01"
                   "zebra01"
                   "driveme01"))

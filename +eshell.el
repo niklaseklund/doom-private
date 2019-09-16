@@ -53,7 +53,8 @@
    "sudo" "eshell/sudo $*"
    "nm" "nc/enwc"
    "locate" "counsel-locate $1"
-   "cal" "calendar")
+   "cal" "calendar"
+   "mountdrives" "nc/mount-drives")
   (setenv "PAGER" "cat"))
 
 
