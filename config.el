@@ -240,7 +240,8 @@
         browse-url-browser-function 'browse-url-generic
         browse-url-generic-program "firefox"
         ;; ivy-youtube-play-at "/usr/bin/mpv"
-        ivy-youtube-play-at "/usr/bin/vlc"))
+        ivy-youtube-play-at "/usr/bin/vlc"
+        ivy-youtube-history-file (concat doom-local-dir "ivy-youtube-history")))
 
 
 ;;
