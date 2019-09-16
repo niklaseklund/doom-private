@@ -232,6 +232,16 @@
                 (start-process "switch-to-normal" nil "xkb-switch" "-s" normal-mode-keyboard-layout)))))
 
 
+;;
+;; Youtube
+(use-package! ivy-youtube
+  :config
+  (setq ivy-youtube-key (shell-command-to-string "printf %s $(pass show web/youtube/api-key | sed -n 1p)")
+        browse-url-browser-function 'browse-url-generic
+        browse-url-generic-program "firefox"
+        ;; ivy-youtube-play-at "/usr/bin/mpv"
+        ivy-youtube-play-at "/usr/bin/vlc"))
+
 
 ;;
 ;; Dired/Ranger

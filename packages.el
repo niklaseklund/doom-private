@@ -15,8 +15,9 @@
 ;; debugging
 (package! dap-mode)
 
-;; recording
+;; media
 (package! gif-screencast)
+(package! ivy-youtube)
 
 ;; gtd
 (package! org-super-agenda)
@@ -30,7 +31,7 @@
 ;; chat
 (package! erc-hl-nicks)
 
-;; Feeder
+;; rss
 (package! elfeed)
 (package! elfeed-org)
 
