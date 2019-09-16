@@ -52,7 +52,8 @@
    "bat" "nc/eshell-bat $1"
    "sudo" "eshell/sudo $*"
    "nm" "nc/enwc"
-   "locate" "counsel-locate $1")
+   "locate" "counsel-locate $1"
+   "cal" "calendar")
   (setenv "PAGER" "cat"))
 
 
