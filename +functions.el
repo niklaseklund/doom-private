@@ -252,3 +252,22 @@ to a regexp that will be used in the conditional lambda function"
     (call-interactively 'delete-frame)
     ;; focus on the previous node
     (apply 'start-process "keep-focus" nil command)))
+
+(defun nc/buffer-copy (new-buffer-name)
+  "Copy a buffer content into a buffer named NEW-BUFFER-NAME."
+  (interactive)
+  (let ((text (buffer-substring (window-start) (window-end nil t)))
+        (outbuf (get-buffer-create new-buffer-name)))
+    (switch-to-buffer outbuf)
+    (erase-buffer)
+    (insert text)
+    (nc/set-region-writeable (window-start) (window-end nil t))))
+
+(defun nc/set-region-writeable (begin end)
+  "Removes the read-only text property from the marked region."
+  ;; See http://stackoverflow.com/questions/7410125
+  (interactive "r")
+  (let ((modified (buffer-modified-p))
+        (inhibit-read-only t))
+    (remove-text-properties begin end '(read-only t))
+    (set-buffer-modified-p modified)))
