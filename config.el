@@ -351,6 +351,7 @@
 (use-package! zone
   :config
   ;; TODO: Can I make this run on all frames somehow?
+  ;; TODO: Why doesn't it work when eshell window is selected?
   (defun +zone/all-windows ()
     "Make zone clone the current buffer on to all windows before running zone."
     (interactive)
