@@ -351,8 +351,6 @@
 (use-package! zone
  :config
  ;; TODO: Can I make this run on all frames somehow?
- ;; TODO: Why doesn't it work when eshell window is selected? (possible make the content of the buffer not read only)
- ;; https://emacs.stackexchange.com/questions/37702/is-it-possible-to-modify-the-emacs-buffer-with-read-only-text
  (defun +zone/all-windows ()
    "Make zone clone the current buffer on to all windows before running zone."
    (interactive)
@@ -366,6 +364,8 @@
        (switch-to-buffer "*zone*"))
      ;; Switch back to the current window
      (select-window current-window)
+     ;; Make a copy of the current buffer, this way it works even for buffers like eshell
+     (nc/buffer-copy "*zone-copy*")
      ;; Start zone on current buffer, creates the buffer *zone*
      (zone)))
 
@@ -376,8 +376,8 @@
      (set-process-sentinel
       (start-process "my-lock" nil "my-lock")
       '(lambda (process event)
-         ;; Abort the zone upon unlocking
-         (print "Logged in")))
+         ;; Kill the *zone-copy* upon unlocking (don't need it anymore)
+         (kill-buffer "*zone-copy*")))
      (+zone/all-windows))))
 
 
