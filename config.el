@@ -356,6 +356,7 @@
 (load! "+lsp")
 (load! "+org")
 (load! "+mail")
+(load! "+syncthing")
 (load! "+system")
 
 
