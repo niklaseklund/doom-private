@@ -349,36 +349,37 @@
 ;;
 ;; Zone
 (use-package! zone
-  :config
-  ;; TODO: Can I make this run on all frames somehow?
-  ;; TODO: Why doesn't it work when eshell window is selected? (possible make the content of the buffer not read only)
-  ;; https://emacs.stackexchange.com/questions/37702/is-it-possible-to-modify-the-emacs-buffer-with-read-only-text
-  (defun +zone/all-windows ()
-    "Make zone clone the current buffer on to all windows before running zone."
-    (interactive)
-    (let* ((current-window (car (window-list)))
-           (other-windows (cdr (window-list)))
-           (zone-buffer (get-buffer-create "*zone*")))
-      ;; Visit all other windows and switch to the zone-buffer
-      (while other-windows
-        (select-window (car other-windows))
-        (setq other-windows (cdr other-windows))
-        (switch-to-buffer "*zone*"))
-      ;; Switch back to the current window
-      (select-window current-window)
-      ;; Start zone on current buffer, creates the buffer *zone*
-      (zone-when-idle 1)))
+ :config
+ ;; TODO: Can I make this run on all frames somehow?
+ ;; TODO: Why doesn't it work when eshell window is selected? (possible make the content of the buffer not read only)
+ ;; https://emacs.stackexchange.com/questions/37702/is-it-possible-to-modify-the-emacs-buffer-with-read-only-text
+ (defun +zone/all-windows ()
+   "Make zone clone the current buffer on to all windows before running zone."
+   (interactive)
+   (let* ((current-window (car (window-list)))
+          (other-windows (cdr (window-list)))
+          (zone-buffer (get-buffer-create "*zone*")))
+     ;; Visit all other windows and switch to the zone-buffer
+     (while other-windows
+       (select-window (car other-windows))
+       (setq other-windows (cdr other-windows))
+       (switch-to-buffer "*zone*"))
+     ;; Switch back to the current window
+     (select-window current-window)
+     ;; Start zone on current buffer, creates the buffer *zone*
+     (zone)))
 
-  (defun +zone/lock-screen ()
-    "Lock screen using (zone) and pyxtrlock
- calls +zone/all-windows and runs pyxtrlock."
-    (interactive)
-    (save-window-excursion
-      (set-process-sentinel
-       (start-process "my-lock" nil "my-lock")
-       '(lambda (process event)
-          (zone-leave-me-alone)))
-      (+zone/all-window))))
+ (defun +zone/lock-screen ()
+   "Lock screen using (zone) and pyxtrlock calls +zone/all-windows and runs pyxtrlock."
+   (interactive)
+   (save-window-excursion
+     (set-process-sentinel
+      (start-process "my-lock" nil "my-lock")
+      '(lambda (process event)
+         ;; Abort the zone upon unlocking
+         (print "Logged in")))
+     (+zone/all-windows))))
+
 
 
 ;;
