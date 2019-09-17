@@ -349,36 +349,45 @@
 ;;
 ;; Zone
 (use-package! zone
- :config
- ;; TODO: Can I make this run on all frames somehow?
- (defun +zone/all-windows ()
-   "Make zone clone the current buffer on to all windows before running zone."
-   (interactive)
-   (let* ((current-window (car (window-list)))
-          (other-windows (cdr (window-list)))
-          (zone-buffer (get-buffer-create "*zone*")))
-     ;; Visit all other windows and switch to the zone-buffer
-     (while other-windows
-       (select-window (car other-windows))
-       (setq other-windows (cdr other-windows))
-       (switch-to-buffer "*zone*"))
-     ;; Switch back to the current window
-     (select-window current-window)
-     ;; Make a copy of the current buffer, this way it works even for buffers like eshell
-     (nc/buffer-copy "*zone-copy*")
-     ;; Start zone on current buffer, creates the buffer *zone*
-     (zone)))
+  :config
+  ;; TODO: Can I make this run on all frames somehow?
+  (defun +zone/all-windows ()
+    "Make zone clone the current buffer on to all windows before running zone."
+    (interactive)
+    (let* ((current-window (car (window-list)))
+           (other-windows (cdr (window-list)))
+           (zone-buffer (get-buffer-create "*zone*")))
+      ;; Visit all other windows and switch to the zone-buffer
+      (while other-windows
+        (select-window (car other-windows))
+        (setq other-windows (cdr other-windows))
+        (switch-to-buffer "*zone*"))
+      ;; Switch back to the current window
+      (select-window current-window)
+      ;; Make a copy of the current buffer, this way it works even for buffers like eshell
+      (nc/buffer-copy "*zone-copy*")
+      ;; Start zone on current buffer, creates the buffer *zone*
+      (zone)))
 
- (defun +zone/lock-screen ()
-   "Lock screen using (zone) and pyxtrlock calls +zone/all-windows and runs pyxtrlock."
-   (interactive)
-   (save-window-excursion
-     (set-process-sentinel
-      (start-process "my-lock" nil "my-lock")
-      '(lambda (process event)
-         ;; Kill the *zone-copy* upon unlocking (don't need it anymore)
-         (kill-buffer "*zone-copy*")))
-     (+zone/all-windows))))
+  (defun +zone/all-frames ()
+    "An all frame version."
+    (interactive)
+    (let ((all-frames (frame-list))
+          (current-frame (selected-frame))
+          (current-window (selected-window)))
+      (select-frame (car all-frames))
+      (switch-to-buffer "check_content.py")))
+
+  (defun +zone/lock-screen ()
+    "Lock screen using (zone) and pyxtrlock calls +zone/all-windows and runs pyxtrlock."
+    (interactive)
+    (save-window-excursion
+      (set-process-sentinel
+       (start-process "my-lock" nil "my-lock")
+       '(lambda (process event)
+          ;; Kill the *zone-copy* upon unlocking (don't need it anymore)
+          (kill-buffer "*zone-copy*")))
+      (+zone/all-windows))))
 
 
 
