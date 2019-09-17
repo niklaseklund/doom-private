@@ -253,15 +253,19 @@ to a regexp that will be used in the conditional lambda function"
     ;; focus on the previous node
     (apply 'start-process "keep-focus" nil command)))
 
+
 (defun nc/buffer-copy (new-buffer-name)
   "Copy a buffer content into a buffer named NEW-BUFFER-NAME."
   (interactive)
-  (let ((text (buffer-substring (window-start) (window-end nil t)))
-        (outbuf (get-buffer-create new-buffer-name)))
+  (let ((text (buffer-substring (point-min) (point-max)))
+        (outbuf (get-buffer-create new-buffer-name))
+        (current-point (point)))
     (switch-to-buffer outbuf)
     (erase-buffer)
     (insert text)
-    (nc/set-region-writeable (window-start) (window-end nil t))))
+    (nc/set-region-writeable (point-min) (point-max))
+    (goto-char current-point)))
+
 
 (defun nc/set-region-writeable (begin end)
   "Removes the read-only text property from the marked region."

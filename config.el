@@ -350,33 +350,57 @@
 ;; Zone
 (use-package! zone
   :config
-  ;; TODO: Can I make this run on all frames somehow?
   (defun +zone/all-windows ()
     "Make zone clone the current buffer on to all windows before running zone."
     (interactive)
     (let* ((current-window (car (window-list)))
-           (other-windows (cdr (window-list)))
+           (all-windows (window-list))
            (zone-buffer (get-buffer-create "*zone*")))
-      ;; Visit all other windows and switch to the zone-buffer
-      (while other-windows
-        (select-window (car other-windows))
-        (setq other-windows (cdr other-windows))
-        (switch-to-buffer "*zone*"))
-      ;; Switch back to the current window
-      (select-window current-window)
-      ;; Make a copy of the current buffer, this way it works even for buffers like eshell
+      ;; Make a copy of the current buffer,
+      ;; this way it works even for buffers like eshell
       (nc/buffer-copy "*zone-copy*")
+      ;; Visit all windows and switch to the soon to be used zone-buffer
+      (while all-windows
+        (select-window (car  all-windows))
+        (setq  all-windows (cdr  all-windows))
+        (switch-to-buffer "*zone*"))
+      ;; Switch back to the starting window and change that to zone-copy buffer
+      (select-window current-window)
+      (switch-to-buffer "*zone-copy*")
       ;; Start zone on current buffer, creates the buffer *zone*
       (zone)))
 
-  (defun +zone/all-frames ()
-    "An all frame version."
-    (interactive)
-    (let ((all-frames (frame-list))
-          (current-frame (selected-frame))
-          (current-window (selected-window)))
-      (select-frame (car all-frames))
-      (switch-to-buffer "check_content.py")))
+(defun +zone/all-frames ()
+  "Make current buffer be shown on all windows/frames and run zone."
+  (interactive)
+  (let ((start-frame (selected-frame))
+        (start-window (selected-window))
+        (current-frame)
+        (windows)
+        (zone-buffer (get-buffer-create "*zone*")))
+    ;; copy the current window
+    (nc/buffer-copy "*zone-copy*")
+    ;; As long as we haven't returned to the starting frame
+    (while (not (eq current-frame start-frame))
+      ;; get all the windows on the current frame
+      (setq windows (window-list))
+      (while windows
+        (select-window (car windows))
+        (setq windows (cdr windows))
+        (switch-to-buffer "*zone*"))
+      ;; switch to next frame
+      (select-frame (next-frame current-frame nil))
+      ;; make next frame current
+      (setq current-frame (selected-frame)))
+    ;; Switch back to the starting frame and window and change that to zone-copy buffer
+    (select-frame start-frame)
+    (select-window start-window)
+    (switch-to-buffer "*zone-copy*")
+    ;; Give the windows a chance to catch up, the position becomes inacurate otherwise
+    (sit-for 0.1)
+    ;; Start zone on current buffer, creates the buffer *zone*
+    (zone)))
+
 
   (defun +zone/lock-screen ()
     "Lock screen using (zone) and pyxtrlock calls +zone/all-windows and runs pyxtrlock."
@@ -387,7 +411,7 @@
        '(lambda (process event)
           ;; Kill the *zone-copy* upon unlocking (don't need it anymore)
           (kill-buffer "*zone-copy*")))
-      (+zone/all-windows))))
+      (+zone/all-frames))))
 
 
 
