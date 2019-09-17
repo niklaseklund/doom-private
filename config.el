@@ -350,6 +350,7 @@
 ;; Zone
 (use-package! zone
   :config
+  ;; TODO: Can I make this run on all frames somehow?
   (defun +zone/all-windows ()
     "Make zone clone the current buffer on to all windows before running zone."
     (interactive)
