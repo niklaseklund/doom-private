@@ -347,10 +347,31 @@
 
 
 ;;
+;; Zone
+(use-package! zone
+  :config
+(defun +zone/all-window ()
+  "Make zone clone the current buffer on to all windows before running zone."
+  (interactive)
+  (let* ((current-window (car (window-list)))
+         (other-windows (cdr (window-list)))
+         (zone-buffer (get-buffer-create "*zone*")))
+    ;; Visit all other windows and switch to the zone-buffer
+    (while other-windows
+      (select-window (car other-windows))
+      (setq other-windows (cdr other-windows))
+      (switch-to-buffer "*zone*"))
+    ;; Switch back to the current window
+    (select-window current-window)
+    ;; Start zone on current buffer, creates the buffer *zone*
+    (zone))))
+
+
+
+;;
 ;; Load other config files
 (load! "+agenda")
 (load! "+bindings")
-(load! "+brain")
 (load! "+chat")
 (load! "+debug")
 (load! "+eshell")
