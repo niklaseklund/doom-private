@@ -370,36 +370,36 @@
       ;; Start zone on current buffer, creates the buffer *zone*
       (zone)))
 
-(defun +zone/all-frames ()
-  "Make current buffer be shown on all windows/frames and run zone."
-  (interactive)
-  (let ((start-frame (selected-frame))
-        (start-window (selected-window))
-        (current-frame)
-        (windows)
-        (zone-buffer (get-buffer-create "*zone*")))
-    ;; copy the current window
-    (nc/buffer-copy "*zone-copy*")
-    ;; As long as we haven't returned to the starting frame
-    (while (not (eq current-frame start-frame))
-      ;; get all the windows on the current frame
-      (setq windows (window-list))
-      (while windows
-        (select-window (car windows))
-        (setq windows (cdr windows))
-        (switch-to-buffer "*zone*"))
-      ;; switch to next frame
-      (select-frame (next-frame current-frame nil))
-      ;; make next frame current
-      (setq current-frame (selected-frame)))
-    ;; Switch back to the starting frame and window and change that to zone-copy buffer
-    (select-frame start-frame)
-    (select-window start-window)
-    (switch-to-buffer "*zone-copy*")
-    ;; Give the windows a chance to catch up, the position becomes inacurate otherwise
-    (sit-for 0.1)
-    ;; Start zone on current buffer, creates the buffer *zone*
-    (zone)))
+  (defun +zone/all-frames ()
+    "Make current buffer be shown on all windows/frames and run zone."
+    (interactive)
+    (let ((start-frame (selected-frame))
+          (start-window (selected-window))
+          (current-frame)
+          (windows)
+          (zone-buffer (get-buffer-create "*zone*")))
+      ;; copy the current window
+      (nc/buffer-copy "*zone-copy*")
+      ;; As long as we haven't returned to the starting frame
+      (while (not (eq current-frame start-frame))
+        ;; get all the windows on the current frame
+        (setq windows (window-list))
+        (while windows
+          (select-window (car windows))
+          (setq windows (cdr windows))
+          (switch-to-buffer "*zone*"))
+        ;; switch to next frame
+        (select-frame (next-frame current-frame nil))
+        ;; make next frame current
+        (setq current-frame (selected-frame)))
+      ;; Switch back to the starting frame and window and change that to zone-copy buffer
+      (select-frame start-frame)
+      (select-window start-window)
+      (switch-to-buffer "*zone-copy*")
+      ;; Give the windows a chance to catch up, the position becomes inacurate otherwise
+      (sit-for 0.1)
+      ;; Start zone on current buffer, creates the buffer *zone*
+      (zone)))
 
 
   (defun +zone/lock-screen ()
@@ -411,7 +411,11 @@
        '(lambda (process event)
           ;; Kill the *zone-copy* upon unlocking (don't need it anymore)
           (kill-buffer "*zone-copy*")))
-      (+zone/all-frames))))
+      (+zone/all-frames)))
+
+  ;; bindings
+  (map!
+   :desc "Lock and run" :nvi "<f2>" '+zone/lock-screen))
 
 
 
