@@ -1,5 +1,7 @@
 ;;; +eshell.el -*- lexical-binding: t; -*-
 
+;; TODO: Make an init function, not everything is ran for all eshells, just the
+;; first one
 (after! eshell
   ;; enable sudo
   (require 'em-tramp)
@@ -14,7 +16,7 @@
   ;; Visual commands require a proper terminal. Eshell can't handle that, so
   ;; it delegates these commands to a term buffer.
   (after! em-term
-    (pushnew! eshell-visual-commands "bluetoothctl"))
+    (pushnew! eshell-visual-commands "bluetoothctl" "vlccast"))
 
   ;;
   ;; Keybindings
@@ -30,8 +32,7 @@
        :i "C-k" #'evil-window-up
        :i "C-j" #'evil-window-down
        :i "C-h" #'evil-window-left
-       :i "C-l" #'evil-window-right
-       )))
+       :i "C-l" #'evil-window-right)))
 
 
   ;;
@@ -80,3 +81,9 @@
   (when (and (executable-find "fish")
              (require 'fish-completion nil t))
     (global-fish-completion-mode)))
+
+
+;;
+;; Term-mode (used for visual commands)
+(after! term
+  (add-hook 'term-mode-hook #'hide-mode-line-mode))
