@@ -8,7 +8,8 @@
         org-log-done 'time
         org-directory "~/org"
         org-agenda-files '("~/org" "~/org/brain" "~/sync/org")
-        org-latex-caption-above nil)
+        org-latex-caption-above nil
+        org-ditaa-jar-path "~/.emacs.d/.local/straight/repos/org/contrib/scripts/ditaa.jar")
   ;; Org-links to emails
   (require 'ol-notmuch))
 ;; Hooks
