@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: TODO
+# uuid: python-todo
+# key: todo
+# condition: t
+# --
+# TODO(`user-login-name`, `(insert (shell-command-to-string "echo -n $(date +%Y%m%d)"))`): $0
