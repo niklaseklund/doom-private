@@ -82,6 +82,8 @@
 
   (defun +zone/all-frames ()
     "Make current buffer be shown on all windows/frames and run zone."
+    ;; TODO: integrate with bspwm later, don't need to run on frames that are
+    ;; hidden, or on desktop that aren't currently shown.
     (interactive)
     (let ((start-frame (selected-frame))
           (start-window (selected-window))
