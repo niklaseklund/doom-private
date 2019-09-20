@@ -119,7 +119,7 @@ to a regexp that will be used in the conditional lambda function"
 
 
 ;; https://oremacs.com/2017/03/18/dired-ediff/
-(defun +ora/ediff-files ()
+(defun nc/ediff-files ()
   (interactive)
   (let ((files (dired-get-marked-files))
         (wnd (current-window-configuration)))

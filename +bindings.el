@@ -26,7 +26,7 @@
 
       ;; use ediff for diffing in ranger
       (:map ranger-mode-map
-        :nvmei ";=" #'+ora/ediff-files)
+        :nvmei ";=" #'nc/ediff-files)
 
       ;; c++ bindings
       (:localleader
