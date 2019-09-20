@@ -351,7 +351,7 @@
 (load! "+agenda")
 (load! "+bindings")
 (load! "+chat")
-(load! "+debug")
+(load! "+dap")
 (load! "+eshell")
 (load! "+lsp")
 (load! "+org")
