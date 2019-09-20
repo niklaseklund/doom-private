@@ -1,40 +1,5 @@
 ;;; private/niklascarlsson/+functions.el -*- lexical-binding: t; -*-
 
-(defun nc/git-branch-match (name-regexp)
-;; Creates a list of all git branches that matches in input NAME-REGEXP
-  (with-temp-buffer (shell-command "git branch" t)
-                    (goto-char (point-min))
-                    (let ((branch-matches '()))
-                      (while (not (eobp))
-                        ;; use string-trim to remove starting and ending whitespace
-                        (let ((branch (string-trim (thing-at-point 'line))))
-                          (if (string-match name-regexp branch)
-                              ;; append string to list
-                              (setq branch-matches (cons (format "%s" branch) branch-matches))))
-                        (forward-line 1))
-                      branch-matches)))
-
-(defun nc/git-branch-show (name)
-  ;; Display git-branches matching input regular expression NAME
-  (interactive "sEnter git branch pattern: ")
-  (message "%s" (nc/git-branch-match name)))
-
-(defun nc/git-delete-branch (branch)
-;; Deletes BRANCH from the current git project. Has guarding against removal of
-;; master branch or current branch.
-  (if (and (string-match "^[^*]" branch)
-       (not (string-match "master" branch)))
-      (progn
-        (shell-command (format "git branch -D %s" branch))
-        (format "Branch %s was removed" branch))))
-
-(defun nc/git-branch-delete-regexp (name-regexp)
-  ;; Removes all git branches which matches NAME-REGEXP
-  (interactive "sEnter git branch pattern: ")
-  (let ((branches (nc/git-branch-match name-regexp)))
-    (mapcar 'nc/git-delete-branch branches)))
-
-
 (defun nc/docker-match (name-regexp)
   ;; return the name of the last docker image which matches the input
   ;; NAME-REGEXP
