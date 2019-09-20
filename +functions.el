@@ -158,20 +158,6 @@ to a regexp that will be used in the conditional lambda function"
                       (format "atlasian.xsrf.token=%s;JSESSIONID=%s" token id))))
 
 
-(defun nc/eshell-bat (file)
-  "Like `cat' but output with Emacs syntax highlighting."
-  (with-temp-buffer
-    (insert-file-contents file)
-    (let ((buffer-file-name file))
-      (delay-mode-hooks
-        (set-auto-mode)
-        (if (fboundp 'font-lock-ensure)
-            (font-lock-ensure)
-          (with-no-warnings
-            (font-lock-fontify-buffer)))))
-    (buffer-string)))
-
-
 (defun nc/os-match (os)
   (string-match os (with-temp-buffer (shell-command "uname -a" t)
                                      (goto-char (point-max))
