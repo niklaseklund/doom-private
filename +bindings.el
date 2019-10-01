@@ -51,4 +51,6 @@
           :desc "Open mail" :n "m" #'=notmuch
           :desc "Open brain" :n "b" #'org-brain-visualize
           :desc "Default browser" :n "B" #'browse-url-of-file
-          :desc "Open (Password-)Store" :n "s" #'pass)))
+          :desc "Open (Password-)Store" :n "s" #'pass)
+        (:prefix "/"
+          :desc "Search Youtube" :n "y" #'ivy-youtube)))
