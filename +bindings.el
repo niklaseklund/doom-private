@@ -24,6 +24,9 @@
         "C-n" 'next-line-or-history-element
         "C-p" 'previous-line-or-history-element)
 
+      ;; Use this binding to harmonize with ivy/swiper
+      (map! :n "C-'" 'avy-goto-line)
+
       ;; use ediff for diffing in ranger
       (:map ranger-mode-map
         :nvmei ";=" #'nc/ediff-files)
