@@ -16,7 +16,7 @@
   ;; Visual commands require a proper terminal. Eshell can't handle that, so
   ;; it delegates these commands to a term buffer.
   (after! em-term
-    (pushnew! eshell-visual-commands "bluetoothctl" "vlccast"))
+    (pushnew! eshell-visual-commands "bluetoothctl" "vlccast" "tizonia"))
 
   ;;
   ;; Keybindings
