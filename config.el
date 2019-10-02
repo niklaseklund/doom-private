@@ -350,6 +350,7 @@
 ;; Load other config files
 (load! "+agenda")
 (load! "+bindings")
+(load! "+brain")
 (load! "+chat")
 (load! "+dap")
 (load! "+eshell")
