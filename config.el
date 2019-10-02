@@ -363,10 +363,10 @@
 
 ;;
 ;; Override lazy-loading
-(+eshell/here)
-(org-agenda-list)
-(notmuch-search "tag:inbox")
-(require 'magit)
-(require 'projectile)
+;; (+eshell/here)
+;; (org-agenda-list)
+;; (notmuch-search "tag:inbox")
+;; (require 'magit)
+;; (require 'projectile)
 
 ;;   :config
