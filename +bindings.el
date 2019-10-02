@@ -5,6 +5,9 @@
       :n "C-k" 'evil-window-up
       :n "C-l" 'evil-window-right
 
+      ;; Use this binding to harmonize with ivy/swiper
+      :n "C-'" 'avy-goto-line
+
       ;; quit
       "s-q" (λ! ()
                 (nc/delete-frame-and-stay))
@@ -23,9 +26,6 @@
       (:map minibuffer-local-map
         "C-n" 'next-line-or-history-element
         "C-p" 'previous-line-or-history-element)
-
-      ;; Use this binding to harmonize with ivy/swiper
-      (map! :n "C-'" 'avy-goto-line)
 
       ;; use ediff for diffing in ranger
       (:map ranger-mode-map
