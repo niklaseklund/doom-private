@@ -56,7 +56,12 @@
    "locate" "counsel-locate $1"
    "cal" "calendar"
    "mountdrives" "nc/mount-drives")
-  (setenv "PAGER" "cat"))
+  (setenv "PAGER" "cat")
+
+
+  ;; Always save history
+  (add-hook! 'eshell-first-time-mode-hook
+    (lambda () (add-hook 'eshell-pre-command-hook 'eshell-save-some-history))))
 
 
 ;;
