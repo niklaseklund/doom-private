@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Dude Jira Issue
+# uuid: dude
+# key: dude
+# condition: t
+# --
+
+Jira issue DUDE-$0
