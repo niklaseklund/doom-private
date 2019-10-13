@@ -344,7 +344,9 @@
 ;;
 ;; PDF
 (after! pdf-tools
-(map!
+  ;; customize midnight-mode colors
+  (setq pdf-view-midnight-colors '("#ffffff" . "#000000"))
+  (map!
    :map pdf-view-mode-map
    :desc "pdf-occur" :nmi "C-s" #'pdf-occur))
 
