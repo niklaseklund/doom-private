@@ -2,7 +2,7 @@
 
 ;;
 ;; Debug Adapter Protocol
-(def-package! dap-mode
+(use-package! dap-mode
   :after lsp-mode
   :config
   ;; c++

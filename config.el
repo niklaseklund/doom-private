@@ -59,7 +59,7 @@
 
 ;;
 ;; Screencast
-(def-package! gif-screencast
+(use-package! gif-screencast
   :defer t
   :config
   (with-eval-after-load 'gif-screencast
@@ -72,7 +72,7 @@
 
 
 ;; Writing
-(def-package! writeroom-mode
+(use-package! writeroom-mode
   :after org
   :init
   (setq writeroom-width 100)

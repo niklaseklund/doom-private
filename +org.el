@@ -23,7 +23,7 @@
 
 ;;
 ;; Notes
-(def-package! org-noter
+(use-package! org-noter
   :after org
   :config
   (setq org-noter-always-create-frame nil
@@ -42,14 +42,14 @@
 
 ;;
 ;; Blog
-(def-package! ox-hugo
+(use-package! ox-hugo
   :defer t                      ;Auto-install the package from Melpa (optional)
   :after ox)
 
 
 ;;
 ;; Jira
-(def-package! org-jira
+(use-package! org-jira
   :defer t
   :config
   ;; Fix access

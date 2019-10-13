@@ -2,7 +2,7 @@
 
 ;;
 ;; The org brain
-(def-package! org-brain
+(use-package! org-brain
   :commands (org-brain-visualize)
   :init (add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
   :config
