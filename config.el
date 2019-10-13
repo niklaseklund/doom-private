@@ -239,7 +239,6 @@
   (setq ivy-youtube-key (shell-command-to-string "printf %s $(pass show web/youtube/api-key | sed -n 1p)")
         browse-url-browser-function 'browse-url-generic
         browse-url-generic-program "firefox"
-        ;; ivy-youtube-play-at "/usr/bin/mpv"
         ivy-youtube-play-at "/usr/bin/vlc"
         ivy-youtube-history-file (concat doom-local-dir "ivy-youtube-history")))
 
