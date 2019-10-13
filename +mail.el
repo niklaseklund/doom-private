@@ -13,6 +13,7 @@
 (after! notmuch
   ;; treat notmuch buffers as reall buffer (going from show->search will work)
   (add-hook 'doom-real-buffer-functions #'notmuch-interesting-buffer)
+  (add-hook 'notmuch-search-mode-hook #'hide-mode-line-mode)
 
   ;;
   ;; bindings
