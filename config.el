@@ -238,6 +238,7 @@
 ;;
 ;; Youtube
 (use-package! ivy-youtube
+  :defer t
   :config
   (setq ivy-youtube-key (shell-command-to-string "printf %s $(pass show web/youtube/api-key | sed -n 1p)")
         browse-url-browser-function 'browse-url-generic
