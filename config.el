@@ -52,6 +52,9 @@
 
 ;; Don't bother
 (setq confirm-kill-emacs nil)
+;; Save customizations elsewhere
+(setq custom-file (expand-file-name "custom.el" doom-etc-dir))
+(load custom-file)
 
 
 ;;
