@@ -329,7 +329,8 @@
     (with-current-buffer buf
       (or
        (derived-mode-p 'elfeed-search-mode))))
-  (add-hook 'doom-real-buffer-functions #'+elfeed-buffer-p))
+  (add-hook 'doom-real-buffer-functions #'+elfeed-buffer-p)
+  (add-hook 'elfeed-search-update-hook #'hide-mode-line-mode))
 ;; Improve defining feeds
 (use-package! elfeed-org
   :config
