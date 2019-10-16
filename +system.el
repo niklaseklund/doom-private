@@ -71,6 +71,28 @@
 
 
 ;;
+;; Gerrit CI
+(use-package! gerrit-ci
+  :config
+
+  ;; Popup window
+  (set-popup-rule! "\\*GERRIT-CI-.*\\*" :size 0.3 :side 'bottom :select t :autosave t)
+
+  ;; Keybindings
+  (map!
+   (:map gerrit-ci-mode-map
+     :n "RET" #'gerrit-ci-jobs
+     :n "q" #'gerrit-ci-quit)
+
+   (:map gerrit-ci-jobs-mode-map
+    :n "RET" #'gerrit-ci-log
+    :n "q" #'gerrit-ci-quit)
+
+   (:map gerrit-ci-log-mode-map
+    :n "q" #'gerrit-ci-quit)))
+
+
+;;
 ;; Lock screen
 (use-package! zone
   :config

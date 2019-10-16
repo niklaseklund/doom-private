@@ -27,6 +27,7 @@
 (package! transmission)
 (package! pulseaudio-control)
 (package! enwc)
+(package! gerrit-ci :recipe (:local-repo "~/opensource/gerrit-ci"))
 
 ;; chat
 (package! erc-hl-nicks)
