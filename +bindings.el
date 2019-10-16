@@ -50,11 +50,11 @@
       (:leader
         :desc "Resume Avy" :n "\"" #'avy-resume
         (:prefix "o"
+          :desc "Open brain" :n "b" #'org-brain-visualize
           :desc "Open debugger" :n "d" #'+dap-hydra/body
           :desc "Open mail" :n "m" #'=notmuch
-          :desc "Open brain" :n "b" #'org-brain-visualize
-          :desc "Default browser" :n "B" #'browse-url-of-file
-          :desc "Open ivy-pass" :n "s" #'ivy-pass
-          :desc "Open (Password-)Store" :n "S" #'pass)
+          :desc "Open (ivy-pass-)store" :n "s" #'ivy-pass
+          :desc "Open (pass-)store" :n "S" #'pass
+          :desc "Open gerrit" :n "g" #'gerrit-ci)
         (:prefix "/"
           :desc "Search Youtube" :n "y" #'ivy-youtube)))
