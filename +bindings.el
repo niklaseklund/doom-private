@@ -20,8 +20,7 @@
       ;; window
       (:leader
         (:prefix "w"
-          :desc "Select window" :n "w" #'ace-window
-          ))
+          :desc "Select window" :n "w" #'ace-window))
 
       (:map minibuffer-local-map
         "C-n" 'next-line-or-history-element
@@ -49,6 +48,7 @@
 
       ;; create custom leader bindings
       (:leader
+        :desc "Resume Avy" :n "\"" #'avy-resume
         (:prefix "o"
           :desc "Open debugger" :n "d" #'+dap-hydra/body
           :desc "Open mail" :n "m" #'=notmuch
