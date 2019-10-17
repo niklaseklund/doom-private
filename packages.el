@@ -28,6 +28,7 @@
 (package! pulseaudio-control)
 (package! enwc)
 (package! gerrit-ci :recipe (:local-repo "~/opensource/gerrit-ci"))
+(package! emacs-conflicts :recipe (:host github :repo "ibizaman/emacs-conflicts" :branch "master"))
 
 ;; chat
 (package! erc-hl-nicks)
