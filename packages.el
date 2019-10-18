@@ -28,6 +28,7 @@
 (package! pulseaudio-control)
 (package! enwc)
 (package! gerrit-ci :recipe (:local-repo "~/opensource/gerrit-ci"))
+(package! magit-gerrit :recipe (:host github :repo "niklascarlsson/magit-gerrit"))
 
 ;; chat
 (package! erc-hl-nicks)
