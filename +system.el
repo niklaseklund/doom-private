@@ -95,6 +95,11 @@
 (use-package! emacs-conflict)
 
 
+(use-package! magit-gerrit
+  :config
+  (setq magit-gerrit-ssh-creds "nikcar@gerrit.zenuity.com"
+        magit-gerrit-popup-prefix "R"))
+
 ;;
 ;; Lock screen
 (use-package! zone
