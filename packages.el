@@ -29,6 +29,7 @@
 (package! enwc)
 (package! gerrit-ci :recipe (:local-repo "~/opensource/gerrit-ci"))
 (package! magit-gerrit :recipe (:host github :repo "niklascarlsson/magit-gerrit"))
+(package! emacs-conflicts :recipe (:host github :repo "ibizaman/emacs-conflicts" :branch "master"))
 
 ;; chat
 (package! erc-hl-nicks)

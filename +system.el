@@ -90,6 +90,9 @@
 
    (:map gerrit-ci-log-mode-map
     :n "q" #'gerrit-ci-quit)))
+;;
+;; Conflicts
+(use-package! emacs-conflict)
 
 
 (use-package! magit-gerrit
