@@ -14,19 +14,27 @@
   ;; treat notmuch buffers as reall buffer (going from show->search will work)
   (add-hook 'doom-real-buffer-functions #'notmuch-interesting-buffer)
   (add-hook! '(notmuch-search-mode-hook
-               notmuch-show-mode-hook) #'hide-mode-line-mode)
+               notmuch-show-mode-hook
+               notmuch-message-mode-hook) #'hide-mode-line-mode)
+
+  ;; Customize the look of messages
+  (add-hook! '(notmuch-show-mode-hook
+               notmuch-message-mode-hook) #'nc/notmuch-mail-mode)
+  (defun nc/notmuch-mail-mode ()
+    (sleep-for 0.1)
+    (writeroom-mode 1))
+  (add-hook 'notmuch-message-mode-hook #'doom-disable-line-numbers-h)
+
+  ;; TODO: How to deal with closing of windows?
 
   ;;
   ;; bindings
-  ;; avoid killing notmuch search window
-  ;; TODO: create a better solution for not killing windows. I should have
-  ;; notmuch start window as default buffer?
   (map!
    (:map notmuch-search-mode-map
-    :nv "q" nil
-    :nv "C-s" #'counsel-notmuch)
+     ;; :nv "q" nil
+     :nv "C-s" #'counsel-notmuch)
    (:map notmuch-tree-mode-map
-    :nv "d" nil))
+     :nv "d" nil))
 
   ;; Other mail related settings
   (setq send-mail-function 'sendmail-send-it
