@@ -340,7 +340,7 @@
   (defun nc/elfeed-search-show-entry (orig-fn &rest args)
     (apply orig-fn args)
     (hide-mode-line-mode)
-    (sleep-for 0.05)
+    (sleep-for 0.1)
     (writeroom-mode 1))
   (advice-add 'elfeed-search-show-entry :around #'nc/elfeed-search-show-entry))
 
