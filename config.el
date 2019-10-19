@@ -334,7 +334,17 @@
       (or
        (derived-mode-p 'elfeed-search-mode))))
   (add-hook 'doom-real-buffer-functions #'+elfeed-buffer-p)
-  (add-hook 'elfeed-search-update-hook #'hide-mode-line-mode))
+  (add-hook 'elfeed-search-update-hook #'hide-mode-line-mode)
+
+  ;; Customize show entry
+  (defun nc/elfeed-search-show-entry (orig-fn &rest args)
+    (apply orig-fn args)
+    (hide-mode-line-mode)
+    (sleep-for 0.05)
+    (writeroom-mode 1))
+  (advice-add 'elfeed-search-show-entry :around #'nc/elfeed-search-show-entry))
+
+
 ;; Improve defining feeds
 (use-package! elfeed-org
   :config
