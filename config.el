@@ -291,19 +291,6 @@
 
 
 ;;
-;; Emacs daemon
-;; Fix issue with theme not loading properly
-;; https://github.com/arcticicestudio/nord-emacs/issues/59
-(if (daemonp)
-    (cl-labels ((load-dracula (frame)
-                              (with-selected-frame frame
-                                (load-theme 'doom-dracula t))
-                              (remove-hook 'after-make-frame-functions #'load-dracula)))
-      (add-hook 'after-make-frame-functions #'load-dracula))
-  (load-theme 'doom-dracula t))
-
-
-;;
 ;; Pop-ups
 (set-popup-rule! "^\\*Customize Group:*" :side 'right :size 0.4)
 
@@ -362,14 +349,4 @@
 (load! "+org")
 (load! "+mail")
 (load! "+system")
-
-
-;;
-;; Override lazy-loading
-;; (+eshell/here)
-;; (org-agenda-list)
-;; (notmuch-search "tag:inbox")
-;; (require 'magit)
-;; (require 'projectile)
-
-;;   :config
+(load! "+daemon")
