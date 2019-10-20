@@ -40,6 +40,10 @@
 ;; Git
 (require 'magit)
 
+;; Irc
+(require 'erc)
+(require 'flyspell)
+
 ;; Misc
 (require 'writeroom-mode)
 (require 'ws-butler)
