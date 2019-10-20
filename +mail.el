@@ -23,7 +23,7 @@
   (defun +notmuch-setup-mail-mode ()
     (writeroom-mode 1)
     (doom-disable-line-numbers-h)
-    (visual-line-mode -1))
+    (visual-line-mode))
 
   ;; TODO: How to deal with closing of windows?
 
