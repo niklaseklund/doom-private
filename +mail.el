@@ -17,13 +17,13 @@
                notmuch-show-mode-hook
                notmuch-message-mode-hook) #'hide-mode-line-mode)
 
-  ;; Customize the look of messages
+  ;; (add-hook 'notmuch-message-mode-hook #'doom-disable-line-numbers-h)
   (add-hook! '(notmuch-show-mode-hook
-               notmuch-message-mode-hook) #'nc/notmuch-mail-mode)
-  (defun nc/notmuch-mail-mode ()
-    (sleep-for 0.1)
-    (writeroom-mode 1))
-  (add-hook 'notmuch-message-mode-hook #'doom-disable-line-numbers-h)
+               notmuch-message-mode-hook) #'+notmuch-setup-mail-mode)
+  (defun +notmuch-setup-mail-mode ()
+    (writeroom-mode 1)
+    (doom-disable-line-numbers-h)
+    (visual-line-mode -1))
 
   ;; TODO: How to deal with closing of windows?
 
