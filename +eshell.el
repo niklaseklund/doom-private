@@ -8,6 +8,9 @@
   (setq eshell-prefer-lisp-functions t
         eshell-prefer-lisp-variables t)
 
+  ;; disable def-advice from DOOM, I want to use authinfo for sudo
+  (advice-remove 'tramp-read-passwd #'+default-inhibit-authinfo-for-sudo-a)
+
   ;; customize variables
   (setq eshell-hist-ignoredups t
         eshell-buffer-maximum-lines 1024
