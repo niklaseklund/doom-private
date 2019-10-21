@@ -41,13 +41,6 @@
 
 
 ;;
-;; Blog
-(use-package! ox-hugo
-  :defer t                      ;Auto-install the package from Melpa (optional)
-  :after ox)
-
-
-;;
 ;; Jira
 (use-package! org-jira
   :defer t
