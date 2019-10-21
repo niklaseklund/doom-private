@@ -40,7 +40,7 @@
   ;; Autocomplete
   ;; Company doesn't make it easy to "fuzzy" match the completions. Have it
   ;; disabled for now.
-  ;; (remove-hook 'eshell-first-time-mode-hook #'+eshell-init-company-h)
+  (remove-hook 'eshell-first-time-mode-hook #'+eshell-init-company-h)
 
   ;;
   ;; Aliases
