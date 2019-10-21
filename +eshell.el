@@ -34,6 +34,9 @@
        :i "C-h" #'evil-window-left
        :i "C-l" #'evil-window-right)))
 
+  ;; Use company for completion
+  (add-hook 'eshell-first-time-mode-hook
+            #'+eshell-init-company-h)
 
   ;;
   ;; Aliases
@@ -78,15 +81,10 @@
 
 
 ;;
-;; Auto-suggestion
-(use-package! esh-autosuggest
-  :after eshell
-  :config
-  (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
-  (when (and (executable-find "fish")
+;; Fish completion
+(when (and (executable-find "fish")
              (require 'fish-completion nil t))
-    (global-fish-completion-mode)))
-
+    (global-fish-completion-mode))
 
 ;;
 ;; Term-mode (used for visual commands)

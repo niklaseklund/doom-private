@@ -7,7 +7,6 @@
 (package! org-brain)
 
 ;; shell
-(package! esh-autosuggest)
 (package! fish-completion)
 (package! eshell-detach :recipe (:host gitlab :repo "niklascarlsson/eshell-detach"))
 
