@@ -71,9 +71,19 @@
 
 
 ;;
-;; Gerrit CI
+;; Gerrit-CI
 (use-package! gerrit-ci
   :config
+  (setq gerrit-ci-status-alist '(("Starting check jobs" . "running")
+                                 ("recheck" . "waiting")
+                                 ("regate" . "waiting")
+                                 ("Build failed" . "failed")
+                                 ("Build succeeded" . "success"))
+        gerrit-ci-jobs-alist '(("Build failed" . "failed")
+                               ("Build succeeded" . "success"))
+        gerrit-ci-url "gerrit.zenuity.com"
+        gerrit-ci-email "niklas.carlsson@zenuity.com")
+
 
   ;; Popup window
   (set-popup-rule! "\\*GERRIT-CI-.*\\*" :size 0.3 :side 'bottom :select t :autosave t)
@@ -85,11 +95,13 @@
      :n "q" #'gerrit-ci-quit)
 
    (:map gerrit-ci-jobs-mode-map
-    :n "RET" #'gerrit-ci-log
-    :n "q" #'gerrit-ci-quit)
+     :n "RET" #'gerrit-ci-log
+     :n "q" #'gerrit-ci-quit)
 
    (:map gerrit-ci-log-mode-map
-    :n "q" #'gerrit-ci-quit)))
+     :n "q" #'gerrit-ci-quit)))
+
+
 ;;
 ;; Conflicts
 (use-package! emacs-conflict)

@@ -25,8 +25,8 @@
 (package! transmission)
 (package! pulseaudio-control)
 (package! enwc)
-(package! gerrit-ci :recipe (:local-repo "~/opensource/gerrit-ci"))
 (package! magit-gerrit :recipe (:host github :repo "niklascarlsson/magit-gerrit"))
+(package! gerrit-ci :recipe (:host gitlab :repo "niklascarlsson/gerrit-ci" :branch "master"))
 (package! emacs-conflicts :recipe (:host github :repo "ibizaman/emacs-conflicts" :branch "master"))
 
 ;; chat
