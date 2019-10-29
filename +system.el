@@ -102,15 +102,16 @@
      :n "q" #'gerrit-ci-quit)))
 
 
-;;
-;; Conflicts
-(use-package! emacs-conflict)
-
-
 (use-package! magit-gerrit
   :config
   (setq magit-gerrit-ssh-creds "nikcar@gerrit.zenuity.com"
         magit-gerrit-popup-prefix "R"))
+
+
+;;
+;; Conflicts
+(use-package! emacs-conflict)
+
 
 ;;
 ;; Lock screen
