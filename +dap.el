@@ -5,6 +5,7 @@
 (use-package! dap-mode
   :after lsp-mode
   :config
+  (setq dap-breakpoints-file (concat doom-local-dir ".dap-breakpoints"))
   ;; c++
   (require 'dap-gdb-lldb)
   (dap-gdb-lldb-setup)
