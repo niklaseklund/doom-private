@@ -50,9 +50,9 @@
        :editor
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
-       ;;god               ; run Emacs commands without modifier keys
        fold              ; (nigh) universal code folding
-       ;; (format +onsave)  ; automated prettiness
+       ;;(format +onsave)  ; automated prettiness
+       ;;god               ; run Emacs commands without modifier keys
        lispy             ; vim for lisp, for people who dont like vim
        multiple-cursors  ; editing in many places at once
        ;;objed             ; text object editing for the innocent
@@ -83,7 +83,7 @@
        docker
        ;; editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
-       eval              ; run code, run (also, repls)
+       (eval +overlay)     ; run code, run (also, repls)
        (flycheck +childframe)        ; tasing you for every semicolon you forget
        (flyspell +aspell)          ; tasing you for misspelling mispelling
        ;;gist              ; interacting with github gists
@@ -106,18 +106,18 @@
        :lang
        ;;agda              ; types of types of types of types...
        ;;assembly          ; assembly for fun or debugging
-       (cc                 ; C/C++/Obj-C madness
-        +lsp)
+       ;; (cc                 ; C/C++/Obj-C madness
+       ;;  +lsp)
        ;;clojure           ; java with a lisp
-       ;;common-lisp       ; if you've seen one lisp, you've seen them all
+       common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
        ;;csharp            ; unity, .NET, and mono shenanigans
        data              ; config/data formats
-       ;;erlang            ; an elegant language for a more civilized age
        ;;elixir            ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
+       ;;erlang            ; an elegant language for a more civilized age
        ;;ess               ; emacs speaks statistics
        ;;faust             ; dsp, but you get to keep your soul
        ;;fsharp           ; ML stands for Microsoft's Language
@@ -166,7 +166,7 @@
 
        :email
        ;;(mu4e +gmail)       ; WIP
-       ;; notmuch             ; WIP
+       ;;notmuch             ; WIP
        ;;(wanderlust +gmail) ; WIP
 
        ;; Applications are complex and opinionated modules that transform Emacs
