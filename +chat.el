@@ -20,7 +20,7 @@
   (add-to-list 'erc-modules 'spelling)
   (erc-services-mode 1)
   (erc-update-modules)
-  (setq erc-nick "niklascarlsson")
+  (setq erc-nick '("niklas" "downfall" "niklascarlsson"))
   (add-hook 'erc-mode-hook (lambda () (flycheck-mode -1)))
 
   ;; autojoin channels
@@ -41,7 +41,12 @@
   (defun nc/erc-join-channel ()
     "Select a channel to join."
     (interactive)
-    (let* ((channels '("#archlinux" "#python" "#emacsconf"))
+    (let* ((channels '("#archlinux"
+                       "#python"
+                       "#emacsconf"
+                       "#next-browser"
+                       "#lisp"
+                       "#stumpwm"))
            (join-channel (completing-read "Join channel: "
                                           (cl-sort channels 'string-lessp :key 'downcase) nil t)))
       (erc-join-channel join-channel))))
