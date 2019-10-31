@@ -51,6 +51,7 @@
         :desc "Resume Avy" :n "\"" #'avy-resume
         (:prefix "o"
           :desc "Open brain" :n "b" #'org-brain-visualize
+          :desc "Open chat" :n "c" #'erc-switch-to-buffer
           :desc "Open debugger" :n "d" #'+dap-hydra/body
           :desc "Open mail" :n "m" #'=notmuch
           :desc "Open (ivy-pass-)store" :n "s" #'ivy-pass

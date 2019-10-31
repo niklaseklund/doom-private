@@ -8,7 +8,7 @@
   (erc-fill-static-center 22)
   (erc-header-line-format nil)
   (erc-hide-list '("JOIN" "PART" "QUIT"))
-  (erc-join-buffer 'buffer)
+  (erc-join-buffer 'bury)
   (erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
   (erc-prompt-for-nickserv-password nil)
   (erc-server-reconnect-attempts 5)
@@ -20,8 +20,9 @@
   (add-to-list 'erc-modules 'spelling)
   (erc-services-mode 1)
   (erc-update-modules)
-  (setq erc-nick '("niklas" "downfall" "niklascarlsson"))
+  (setq erc-nick '("niklascarlsson" "downfall" "niklas"))
   (add-hook 'erc-mode-hook (lambda () (flycheck-mode -1)))
+  (add-hook 'erc-mode-hook #'hide-mode-line-mode)
 
   ;; autojoin channels
   (defmacro erc-autojoin (&rest args)
@@ -35,22 +36,10 @@
                                    (mapc 'erc-join-channel ',channels))))
                              args)))))
   (erc-autojoin
-   (("irc.freenode.net") "#emacs"))
+   (("irc.freenode.net") "#emacs" "#emacsconf" "#python" "#next-browser" "#lisp" "#stumpwm")))
 
-  ;; join channels
-  (defun nc/erc-join-channel ()
-    "Select a channel to join."
-    (interactive)
-    (let* ((channels '("#archlinux"
-                       "#python"
-                       "#emacsconf"
-                       "#next-browser"
-                       "#lisp"
-                       "#stumpwm"))
-           (join-channel (completing-read "Join channel: "
-                                          (cl-sort channels 'string-lessp :key 'downcase) nil t)))
-      (erc-join-channel join-channel))))
-
+;; TODO: Create a workspace layout that I can call which creates a layout of the
+;; channels that I use the most?
 
 (use-package! erc-hl-nicks
   :after erc)
