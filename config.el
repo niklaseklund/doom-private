@@ -344,6 +344,18 @@
 
 
 ;;
+;; Help/Documentation
+(defun cmake-doc ()
+  (interactive)
+  (setq-local dash-docs-docsets '("CMake")))
+(add-hook 'cmake-mode-hook 'cmake-doc)
+
+(defun docker-doc ()
+  (interactive)
+  (setq-local dash-docs-docsets '("Docker")))
+(add-hook 'dockerfile-mode-hook 'docker-doc)
+
+;;
 ;; Load other config files
 (load! "+agenda")
 (load! "+bindings")
