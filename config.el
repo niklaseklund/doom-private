@@ -342,6 +342,9 @@
    :map pdf-view-mode-map
    :desc "pdf-occur" :nmi "C-s" #'pdf-occur))
 
+;;
+;; Common Lisp
+(add-hook 'lisp-mode-hook #'lispy-mode)
 
 ;;
 ;; Help/Documentation
