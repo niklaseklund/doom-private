@@ -46,6 +46,11 @@
           :desc "Kill" :n "K" #'nc/gud-kill-all-buffers
           :desc "Start" :n "g" #'nc/gdb-mi-new-frame))
 
+      ;; common lisp bindings
+      (:localleader
+        :map lisp-mode-map
+        :desc "Sly connect" "\"" #'sly-connect)
+
       ;; create custom leader bindings
       (:leader
         :desc "Resume Avy" :n "\"" #'avy-resume
