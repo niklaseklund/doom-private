@@ -32,10 +32,10 @@
        :i "C-p" 'eshell-previous-input
        :i "C-n" 'eshell-next-input
        :i "M-c" 'counsel-projectile-find-dir
-       :i "C-k" #'evil-window-up
-       :i "C-j" #'evil-window-down
-       :i "C-h" #'evil-window-left
-       :i "C-l" #'evil-window-right)))
+       :ni "C-k" #'evil-window-up
+       :ni "C-j" #'evil-window-down
+       :ni "C-h" #'evil-window-left
+       :ni "C-l" #'evil-window-right)))
 
   ;;
   ;; Aliases
