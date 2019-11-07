@@ -40,6 +40,23 @@
 
 
 ;;
+;; LaTeX
+(after! org
+  (require 'ox-latex)
+  ;; Fontify source code, use minted package opposed to listings.
+  (setq org-latex-listings 'minted)
+  ;; Add latex packages (options, package, snippet-flag)
+  (add-to-list 'org-latex-packages-alist '("" "minted" t))
+  (add-to-list 'org-latex-packages-alist '("" "newfloat"))
+  (add-to-list 'org-latex-packages-alist '("" "geometry"))
+  ;; Shell commands to run upon compilation
+  (setq org-latex-pdf-process
+        '("xelatex -shell-escape -interaction nonstopmode %f"
+          "xelatex -shell-escape -interaction nonstopmode %f"
+          "xelatex -shell-escape -interaction nonstopmode %f")))
+
+
+;;
 ;; Jira
 (use-package! org-jira
   :defer t
