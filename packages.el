@@ -5,6 +5,7 @@
 (package! org-jira)
 (package! writeroom-mode)
 (package! org-brain)
+(package! org-ref)
 
 ;; shell
 (package! fish-completion)

@@ -43,12 +43,13 @@
 ;; LaTeX
 (after! org
   (require 'ox-latex)
+  ;; Make it possible to reference code blocks, figures etc.
+  (require 'org-ref)
   ;; Fontify source code, use minted package opposed to listings.
   (setq org-latex-listings 'minted)
-  ;; Add latex packages (options, package, snippet-flag)
-  (add-to-list 'org-latex-packages-alist '("" "minted" t))
-  (add-to-list 'org-latex-packages-alist '("" "newfloat"))
-  (add-to-list 'org-latex-packages-alist '("" "geometry"))
+  ;; Specify options section, newfloat to minted to be able to setup the listing
+  ;; environment for the code blocks properly
+  (add-to-list 'org-latex-packages-alist '("section,newfloat" "minted" t))
   ;; Shell commands to run upon compilation
   (setq org-latex-pdf-process
         '("xelatex -shell-escape -interaction nonstopmode %f"
