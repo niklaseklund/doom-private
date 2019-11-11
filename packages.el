@@ -2,10 +2,10 @@
 
 ;; writing
 (package! org-noter)
-(package! org-jira)
 (package! writeroom-mode)
 (package! org-brain)
 (package! org-ref)
+(package! ejira :recipe (:host github :repo "niklascarlsson/ejira"))
 
 ;; shell
 (package! fish-completion)

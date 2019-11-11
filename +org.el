@@ -59,25 +59,4 @@
 
 ;;
 ;; Jira
-(use-package! org-jira
-  :defer t
-  :config
-  ;; Fix access
-  (setq jiralib-url "https://jira.zenuity.com"
-        org-jira-users `("Niklas Carlsson" . ,(shell-command-to-string "printf %s \"$(pass show work/zenuity/login | sed -n 2p | awk '{print $2}')\""))
-        jiralib-token `("Cookie". ,(nc/init-jira-cookie)))
-  ;; Customization jira query
-  (setq org-jira-custom-jqls
-        '(
-          (:jql " project = DUDE AND issuetype = Sub-task AND sprint in openSprints() AND sprint NOT IN futureSprints()"
-                :limit 50
-                :filename "dude-current-sprint-sub-tasks")
-          (:jql " project = DUDE AND assignee = currentuser() order by created DESC "
-                :limit 20
-                :filename "dude-niklas")
-          ))
-  ;; Customize the flow
-  (defconst org-jira-progress-issue-flow
-    '(("To Do" . "In Progress")
-      ("In Progress" . "Review")
-      ("Review" . "Done"))))
+(use-package ejira)
