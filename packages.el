@@ -29,6 +29,7 @@
 (package! magit-gerrit :recipe (:host github :repo "niklascarlsson/magit-gerrit"))
 (package! gerrit-ci :recipe (:host gitlab :repo "niklascarlsson/gerrit-ci" :branch "master"))
 (package! emacs-conflicts :recipe (:host github :repo "ibizaman/emacs-conflicts" :branch "master"))
+(package! bluetooth)
 
 ;; chat
 (package! erc-hl-nicks)

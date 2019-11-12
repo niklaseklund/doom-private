@@ -63,10 +63,19 @@
    :desc "Reset cache" :nmi "r" #'disk-usage-reset-cache
    :desc "Dired here" :nmi "D" (λ! () (dired default-directory))))
 
+
 ;;
 ;; Pulse audio control
 (use-package! pulseaudio-control
   ;; TODO: Implement transient to control the separate functions?
+  )
+
+;;
+;; Bluetooth
+(use-package! bluetooth
+  :config
+  (set-popup-rule! "*Bluetooth*" :size 0.4 :side 'bottom :select t :autosave t)
+  (pop-to-buffer "*Bluetooth*")
   )
 
 
