@@ -74,9 +74,14 @@
 ;; Bluetooth
 (use-package! bluetooth
   :config
-  (set-popup-rule! "*Bluetooth*" :size 0.4 :side 'bottom :select t :autosave t)
-  (pop-to-buffer "*Bluetooth*")
-  )
+  ;; Ensure bluetooth buffer is delegated to the popup system.
+  (defadvice! +popup--bluetooth-pop-to-buffer (orig-fn &rest args)
+    "Use `pop-to-buffer' instead of `switch-to-buffer' to open buffer.'"
+    :around #'bluetooth-list-devices
+    (pop-to-buffer bluetooth-buffer-name))
+
+  ;; Configure popup rule
+  (set-popup-rule! "*Bluetooth*" :size 0.4 :side 'bottom :select t :autosave t))
 
 
 ;;
