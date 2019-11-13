@@ -30,6 +30,7 @@
 (package! gerrit-ci :recipe (:host gitlab :repo "niklascarlsson/gerrit-ci" :branch "master"))
 (package! emacs-conflicts :recipe (:host github :repo "ibizaman/emacs-conflicts" :branch "master"))
 (package! bluetooth)
+(package! dired-recent)
 
 ;; chat
 (package! erc-hl-nicks)

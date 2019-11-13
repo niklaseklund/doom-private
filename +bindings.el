@@ -26,10 +26,6 @@
         "C-n" 'next-line-or-history-element
         "C-p" 'previous-line-or-history-element)
 
-      ;; use ediff for diffing in ranger
-      (:map ranger-mode-map
-        :nvmei ";=" #'nc/ediff-files)
-
       ;; c++ bindings
       (:localleader
         :map c++-mode-map

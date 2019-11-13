@@ -242,22 +242,37 @@
 
 
 ;;
-;; Dired/Ranger
-(after! ranger
+
+
+;;
+;; Dired
+(use-package dired-recent
+  :after dired
+  :config
+  ;; Enable recent directories in dired
+  (dired-recent-mode 1))
+(after! dired
+  ;; Remove DOOM's advice
+  (advice-remove #'find-dired #'fd-dired)
+  ;; Define localleader bindings
   (map!
-   (:map ranger-mode-map
-     ;; Make it easier to move between windows
-     "C-h" #'evil-window-left
-     "C-l" #'evil-window-right
-     "C-k" #'evil-window-up
-     "C-j" #'evil-window-down
-     ;; Batch rename files
-     :m "r" #'find-name-dired
-     ;; Goto project root
-     :m ";gp" (λ! () (find-file (projectile-project-root)))
-     ;; Goto disk usage tool
-     :m ";gd" #'disk-usage-here
-     )))
+   (:localleader
+     :map dired-mode-map
+     :desc "Find name dired" :n "r" #'find-name-dired
+     (:prefix-map ("g" . "Go to")
+       :desc "Project root" :n "p" (λ! () (find-file (projectile-project-root))))
+     ;; Bindings for conflicts
+     (:prefix-map ("c" . "Conflicts")
+       :desc "Show conflicts" :n "s" #'+emacs-conflict-show-conflicts-dired-at-point
+       :desc "Resolve marked files or at point" :n "r" #'emacs-conflict-resolve-conflict-dired))
+   ;; Define or redefine dired bindings
+   (:map dired-mode-map
+     :desc "Ediff files" :n "=" #'nc/ediff-files
+     :desc "Up" :n "h" #'dired-up-directory
+     :desc "Down" :n "l" #'dired-find-file
+     :desc "Find" :n "f" #'find-file
+     :desc "Recent files" :n "zz" #'dired-recent-open
+     :desc "Home" :n "gh" (λ! () (find-file "~")))))
 
 
 ;;
