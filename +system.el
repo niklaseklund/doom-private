@@ -74,6 +74,7 @@
 ;; Bluetooth
 (use-package! bluetooth
   :config
+
   ;; Ensure bluetooth buffer is delegated to the popup system.
   (defadvice! +popup--bluetooth-pop-to-buffer ()
     "Use `pop-to-buffer' instead of `switch-to-buffer' to open buffer.'"
@@ -81,7 +82,24 @@
     (pop-to-buffer "*Bluetooth*"))
 
   ;; Configure popup rule
-  (set-popup-rule! "*Bluetooth*" :size 0.4 :side 'bottom :select t :autosave t))
+  (set-popup-rule! "*Bluetooth*" :size 0.3 :side 'bottom :select t :autosave t)
+
+  ;; Keybindings
+  (map!
+   :map bluetooth-mode-map
+   :desc "Connect" :n "c" #'bluetooth-connect
+   :desc "Disconnect" :n "x" #'bluetooth-disconnect
+   :desc "Information" :n "RET" #'bluetooth-show-device-info
+   :desc "Remove" :n "X" #'bluetooth-remove-device
+   (:prefix ("t" . "Toggle")
+     :desc "Power" :n  "p" #'bluetooth-toggle-power
+     :desc "Pairable" :n "P" #'bluetooth-toggle-pairable
+     :desc "Discoverable" :n "d" #'bluetooth-toggle-discoverable
+     :desc "Blocked" :n "b" #'bluetooth-toggle-blocked
+     :desc "Trusted" :n "t" #'bluetooth-toggle-trusted)
+   (:prefix ("d" . "Discover")
+     :desc "Begin" :n "b" #'bluetooth-start-discovery
+     :desc "Stop" :n "s" #'bluetooth-stop-discovery)))
 
 
 ;;
