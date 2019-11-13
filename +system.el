@@ -7,19 +7,20 @@
 ;; Network manager
 (use-package! enwc
   :config
-  ;; TODO: Add custom keymap
+  ;; Customize settings
   (setq enwc-default-backend 'nm
-        enwc-display-mode-line nil)
-  (defun nc/enwc ()
-    "A custom enwc setup function that is compatible with popup rules."
-    (interactive)
-    (enwc-setup)
-    (enwc-setup-buffer t)
-    (enwc-scan t)
+        enwc-display-mode-line nil
+        enwc-wireless-device "wlp3s0"
+        enwc-wired-device "lo"
+        enwc-ask-to-save-interfaces nil
+        enwc-warn-if-already-setup nil)
+  ;; Ensure enwc buffer is delegated to the popup system.
+  (defadvice! +popup--enwc-pop-to-buffer ()
+    "Use `pop-to-buffer' instead of `switch-to-buffer' to open buffer.'"
+    :before #'enwc
     (pop-to-buffer "*ENWC*"))
-  (set-popup-rule! "*ENWC*" :size 0.4 :side 'bottom :select t :autosave t)
-
-  )
+  ;; Customize popup buffer
+  (set-popup-rule! "*ENWC*" :size 0.3 :side 'bottom :select t :autosave t))
 
 
 ;;
