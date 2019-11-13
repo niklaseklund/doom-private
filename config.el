@@ -252,13 +252,11 @@
   ;; Enable recent directories in dired
   (dired-recent-mode 1))
 (after! dired
-  ;; Remove DOOM's advice
-  (advice-remove #'find-dired #'fd-dired)
   ;; Define localleader bindings
   (map!
    (:localleader
      :map dired-mode-map
-     :desc "Find name dired" :n "r" #'find-name-dired
+     :desc "Find name dired" :n "f" #'find-dired
      (:prefix-map ("g" . "Go to")
        :desc "Project root" :n "p" (λ! () (find-file (projectile-project-root))))
      ;; Bindings for conflicts
