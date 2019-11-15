@@ -250,6 +250,8 @@
   :after dired
   :config
   ;; Enable recent directories in dired
+  (setq dired-recent-directories-file
+        (expand-file-name "dired-history" doom-etc-dir))
   (dired-recent-mode 1))
 (use-package dired-subtree
   :after dired
