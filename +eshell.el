@@ -40,20 +40,15 @@
   ;;
   ;; Aliases
   (set-eshell-alias!
-   "ff" "+ivy/projectile-find-file"
-   "/p" "+ivy/project-search"
-   "/d" "+ivy/project-search-from-cwd"
    "d" "dired $1"
-   "l" "ls -l"
-   "la" "ls -la"
    "gl" "(call-interactively 'magit-log-current)"
    "gs" "magit-status"
    "gc" "magit-commit"
-   "rg" "rg --color=always $*"
    "bat" "nc/eshell-bat $1"
    "sudo" "eshell/sudo $*"
    "nm" "nc/enwc"
    "locate" "counsel-locate $1"
+   "tm" "transmission"
    "cal" "calendar"
    "mountdrives" "nc/mount-drives")
   (setenv "PAGER" "cat")
