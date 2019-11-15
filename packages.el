@@ -31,6 +31,7 @@
 (package! emacs-conflicts :recipe (:host github :repo "ibizaman/emacs-conflicts" :branch "master"))
 (package! bluetooth)
 (package! dired-recent)
+(package! dired-subtree)
 
 ;; chat
 (package! erc-hl-nicks)
