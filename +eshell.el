@@ -98,3 +98,17 @@
           (with-no-warnings
             (font-lock-fontify-buffer)))))
     (buffer-string)))
+
+
+;;
+;; Shell
+
+;; Customize the shell to use per host
+;; https://www.gnu.org/software/tramp/
+(connection-local-set-profile-variables
+ 'remote-bash
+ '((explicit-shell-file-name . "/bin/bash")
+   (explicit-bash-args . ("-i"))))
+(connection-local-set-profiles
+  '(:application tramp :protocol "ssh" :machine "pi")
+  'remote-bash)
