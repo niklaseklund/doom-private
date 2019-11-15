@@ -49,8 +49,6 @@
    "gl" "(call-interactively 'magit-log-current)"
    "gs" "magit-status"
    "gc" "magit-commit"
-   "gbD" "nc/git-branch-delete-regexp $1"
-   "gbS" "nc/git-branch-match $1"
    "rg" "rg --color=always $*"
    "bat" "nc/eshell-bat $1"
    "sudo" "eshell/sudo $*"
