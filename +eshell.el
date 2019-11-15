@@ -43,7 +43,7 @@
    "ff" "+ivy/projectile-find-file"
    "/p" "+ivy/project-search"
    "/d" "+ivy/project-search-from-cwd"
-   "d" "deer $1"
+   "d" "dired $1"
    "l" "ls -l"
    "la" "ls -la"
    "gl" "(call-interactively 'magit-log-current)"
