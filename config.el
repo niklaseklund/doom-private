@@ -266,7 +266,7 @@
   (map!
    (:localleader
      :map dired-mode-map
-     :desc "Find name dired" :n "f" #'find-dired
+     :desc "Search recursively" :n "s" #'find-dired
      (:prefix-map ("g" . "Go to")
        :desc "Project root" :n "p" (λ! () (find-file (projectile-project-root))))
      ;; Bindings for conflicts
