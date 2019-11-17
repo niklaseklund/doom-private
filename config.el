@@ -261,6 +261,14 @@
      :desc "Toggle subtree" :n [tab] #'dired-subtree-toggle
      :desc "Cycle subtree" :n "<backtab>" #'dired-subtree-cycle
      :desc "Close subtree" :n "<C-tab>" #'dired-subtree-remove)))
+(use-package! dired-narrow
+  :after dired
+  :config
+  (map!
+   (:localleader
+     :map dired-mode-map
+     :desc "Narrow buffer fuzzy" :n "n" #'dired-narrow-fuzzy
+     :desc "Narrow buffer fuzzy" :n "N" #'dired-narrow-regex)))
 (after! dired
   ;; Define localleader bindings
   (map!

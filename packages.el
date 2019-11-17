@@ -32,6 +32,7 @@
 (package! bluetooth)
 (package! dired-recent)
 (package! dired-subtree)
+(package! dired-narrow)
 
 ;; chat
 (package! erc-hl-nicks)
