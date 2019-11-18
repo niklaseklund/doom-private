@@ -5,6 +5,7 @@
 (package! writeroom-mode)
 (package! org-brain)
 (package! org-ref)
+(package! jupyter)
 
 ;; shell
 (package! fish-completion)
