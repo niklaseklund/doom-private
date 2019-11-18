@@ -5,7 +5,6 @@
 (package! writeroom-mode)
 (package! org-brain)
 (package! org-ref)
-(package! ejira :recipe (:host github :repo "nyyManni/ejira"))
 
 ;; shell
 (package! fish-completion)
@@ -20,6 +19,7 @@
 
 ;; gtd
 (package! org-super-agenda)
+(package! ejira :recipe (:host github :repo "nyyManni/ejira"))
 
 ;; system
 (package! disk-usage)
