@@ -21,4 +21,8 @@
    :map org-super-agenda-header-map
    "k" #'org-agenda-previous-line
    "j" #'org-agenda-next-line
-   "SPC" nil))
+   "SPC" nil)
+  ;; Add bindings for org-agenda
+  (map! :after org-agenda
+   :map org-agenda-mode-map
+   :desc "Avy goto line" :mn "C-'" #'avy-goto-line))
