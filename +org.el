@@ -77,6 +77,21 @@
 
 ;;
 ;; Jira
+(defun +ejira ()
+  (interactive)
+  (+ejira-init)
+  ;; Call ejira
+  (require 'ejira)
+  (org-agenda nil "j"))
+
+(defun +ejira-init ()
+  (require 'jiralib2)
+  (unless jiralib2--session
+    ;; Authentication
+    (require 'auth-source-pass)
+    ;; Figure out what is not loaded properly when I use the :after org config.
+    (jiralib2-session-login "niklas.carlsson@zenuity.com"
+                            (auth-source-pass-get 'secret "work/zenuity/login"))))
 (use-package! ejira
   :defer t
   :init
@@ -125,10 +140,4 @@
                  ((org-agenda-overriding-header "Unassigned")))
       (ejira-jql "project = DUDE and sprint = \"Zvision\" and status != Done and assignee != currentUser()"
                  ((org-agenda-overriding-header "Others"))))))
-
-  ;; Authentication
-  (require 'jiralib2)
-  (require 'auth-source)
-  ;; Figure out what is not loaded properly when I use the :after org config.
-  (jiralib2-session-login "niklas.carlsson@zenuity.com"
-                          (auth-source-pass-get 'secret "work/zenuity/login")))
+  )

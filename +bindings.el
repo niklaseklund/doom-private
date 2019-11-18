@@ -57,6 +57,7 @@
           :desc "Open mail" :n "m" #'=notmuch
           :desc "Open (ivy-pass-)store" :n "s" #'ivy-pass
           :desc "Open (pass-)store" :n "S" #'pass
-          :desc "Open gerrit" :n "g" #'gerrit-ci)
+          :desc "Open gerrit" :n "g" #'gerrit-ci
+          :desc "Open Jira" :n "j" #'+ejira)
         (:prefix "s"
           :desc "Search Youtube" :n "y" #'ivy-youtube)))
