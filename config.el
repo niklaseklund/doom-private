@@ -123,9 +123,6 @@
 ;; if set to t it has the same mode as previous buffer
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
 
-;; disable highlight indent
-(add-hook 'emacs-lisp-mode-hook #'+indent-guides-disable-maybe-h)
-
 
 ;;
 ;; Projects
