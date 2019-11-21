@@ -61,15 +61,27 @@
 
 ;;
 ;; Detach
-(use-package! eshell-detach
-  :after eshell
+(use-package! detached
+  :load-path "~/opensource/detached"
+  :ensure nil
   :config
-  (setq eshell-detach-max-file-name-length 60)
-  (add-hook! 'eshell-first-time-mode-hook
-    (defun eshell-detach-init-keymap-h ()
-      (map! :map eshell-mode-map
-            :ni [C-return] #'eshell-detach-attach
-            :ni [S-return] #'eshell-detach-send-input))))
+  (setq detached-database-file (expand-file-name "detached.db" doom-etc-dir))
+
+  ;; Customize popups
+  (set-popup-rule! detached-shell-command-buffer :size 0.3 :side 'bottom :select t :autosave t)
+  (set-popup-rule! detached-sessions-buffer :size 0.3 :side 'bottom :select t :autosave t))
+
+;; ;;
+;; ;; Detach
+;; (use-package! eshell-detach
+;;   :after eshell
+;;   :config
+;;   (setq eshell-detach-max-file-name-length 60)
+;;   (add-hook! 'eshell-first-time-mode-hook
+;;     (defun eshell-detach-init-keymap-h ()
+;;       (map! :map eshell-mode-map
+;;             :ni [C-return] #'eshell-detach-attach
+;;             :ni [S-return] #'eshell-detach-send-input))))
 
 
 ;;
