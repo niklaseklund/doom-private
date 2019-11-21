@@ -69,6 +69,7 @@
 
   ;; Customize popups
   (set-popup-rule! detached-shell-command-buffer :size 0.3 :side 'bottom :select t :autosave t)
+  (set-popup-rule! detached-shell-output-buffer :size 0.3 :side 'bottom :select t :autosave t)
   (set-popup-rule! detached-sessions-buffer :size 0.3 :side 'bottom :select t :autosave t))
 
 ;; ;;
