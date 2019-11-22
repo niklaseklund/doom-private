@@ -55,8 +55,8 @@
           :desc "Open chat" :n "c" #'erc-switch-to-buffer
           :desc "Open debugger" :n "d" #'+dap-hydra/body
           :desc "Open mail" :n "m" #'=notmuch
-          :desc "Open (ivy-pass-)store" :n "s" #'ivy-pass
-          :desc "Open (pass-)store" :n "S" #'pass
+          :desc "Open (pass-)store" :n "s" #'pass
+          :desc "Open (ivy-pass-)store" :n "S" #'ivy-pass
           :desc "Open gerrit" :n "g" #'gerrit-ci
           :desc "Open Jira" :n "j" #'+ejira)
         (:prefix "s"
