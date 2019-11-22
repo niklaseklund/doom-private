@@ -267,6 +267,9 @@
      :desc "Narrow buffer fuzzy" :n "n" #'dired-narrow-fuzzy
      :desc "Narrow buffer fuzzy" :n "N" #'dired-narrow-regex)))
 (after! dired
+  ;; Override DOOM settings
+  (remove-hook 'dired-after-readin-hook '+dired-enable-git-info-h)
+  (remove-hook 'dired-mode-hook 'dired-hide-details-mode)
   ;; Define localleader bindings
   (map!
    (:localleader
