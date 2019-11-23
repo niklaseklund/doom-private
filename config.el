@@ -20,17 +20,19 @@
 (load! "+functions")
 (when (string= (system-name) "archbook")
   (if (nc/multi-screen-setup-p)
-      (setq doom-font (font-spec :family "Roboto Mono" :size 14)
-          doom-big-font (font-spec :family "Roboto Mono" :size 22)
-          doom-variable-pitch-font (font-spec :family "Iosevka Term" :size 14))
-    (setq doom-font (font-spec :family "Roboto Mono" :size 14)
-            doom-big-font (font-spec :family "Roboto Mono" :size 36)
-            doom-variable-pitch-font (font-spec :family "Iosevka Term" :size 14)))
+      (setq doom-font (font-spec :family "Fira Code" :size 16)
+            doom-big-font-increment 8
+            doom-variable-pitch-font (font-spec :family "Fira Sans"))
+    (setq doom-font (font-spec :family "Fira Code" :size 20)
+          doom-big-font-increment 8
+          doom-variable-pitch-font (font-spec :family "Fira Sans")))
   (font-put doom-font :weight 'semi-light)
   (setq x-super-keysym 'meta
         x-alt-keysym 'alt))
 (when (string= (system-name) "u445bfa80-2ca8")
-    (setq doom-font (font-spec :family "Roboto Mono" :size 14)))
+  (setq doom-font (font-spec :family "Fira Code" :size 14)
+        doom-big-font-increment 8
+        doom-variable-pitch-font (font-spec :family "Fira Sans")))
 
 
 ;; Define meta and super keys
