@@ -9,6 +9,7 @@
 
 ;; shell
 (package! fish-completion)
+(package! esh-autosuggest)
 (package! eshell-detach :recipe (:host gitlab :repo "niklascarlsson/eshell-detach"))
 
 ;; debugging

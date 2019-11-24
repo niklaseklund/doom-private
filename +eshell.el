@@ -10,6 +10,9 @@
 
   ;; disable def-advice from DOOM, I want to use authinfo for sudo
   (advice-remove 'tramp-read-passwd #'+default-inhibit-authinfo-for-sudo-a)
+  ;; remove pcomplete
+  (remove-hook 'eshell-mode-hook '+eshell-init-company-h)
+
 
   ;; customize variables
   (setq eshell-hist-ignoredups t
@@ -86,10 +89,27 @@
 
 
 ;;
-;; Fish completion
-(when (and (executable-find "fish")
+;; Auto-suggestion
+(use-package! esh-autosuggest
+  :after eshell
+  :config
+  (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
+  (when (and (executable-find "fish")
              (require 'fish-completion nil t))
-    (global-fish-completion-mode))
+    (global-fish-completion-mode)))
+;; completion with ivy
+(define-key esh-autosuggest-active-map (kbd "<tab>") 'company-complete-selection)
+(setq ivy-do-completion-in-region t) ; this is the default
+(defun setup-eshell-ivy-completion ()
+  (map! :map eshell-mode-map
+        [remap eshell-pcomplete] 'completion-at-point)
+  ;; only if you want to use the minibuffer for completions instead of the
+  ;; in-buffer interface
+  (setq-local ivy-display-functions-alist
+              (remq (assoc 'ivy-completion-in-region ivy-display-functions-alist)
+                    ivy-display-functions-alist)))
+(add-hook 'eshell-mode-hook #'setup-eshell-ivy-completion)
+
 
 ;;
 ;; Term-mode (used for visual commands)
