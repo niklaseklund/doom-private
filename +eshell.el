@@ -118,11 +118,16 @@
   :config
   (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
   ;; enable fish-completion
-  (when (and (executable-find "fish")
-             (require 'fish-completion nil t))
+  (use-package! fish-completion
+    :config
+    (setq fish-completion-fallback-on-bash-p t)
     (global-fish-completion-mode))
+  ;; enable fallback, bash-completion
+  (use-package! bash-comletion
+    :config
+  (setq bash-completion-prog (executable-find "bash")))
   ;; Use ivy for completion (esh-autosuggest page)
-  (setq ivy-do-completion-in-region t) ; this is the default
+  (setq ivy-do-completion-in-region t)  ; this is the default
   (defun setup-eshell-ivy-completion ()
     (map! :map eshell-mode-map
           [remap eshell-pcomplete] 'completion-at-point)
