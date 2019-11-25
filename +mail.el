@@ -16,8 +16,6 @@
   (add-hook! '(notmuch-search-mode-hook
                notmuch-show-mode-hook
                notmuch-message-mode-hook) #'hide-mode-line-mode)
-
-  ;; (add-hook 'notmuch-message-mode-hook #'doom-disable-line-numbers-h)
   (add-hook! '(notmuch-show-mode-hook
                notmuch-message-mode-hook) #'+notmuch-setup-mail-mode)
   (defun +notmuch-setup-mail-mode ()
@@ -26,16 +24,6 @@
     (visual-line-mode))
 
   ;; TODO: How to deal with closing of windows?
-
-  ;;
-  ;; bindings
-  ;; (map!
-  ;;  (:map notmuch-search-mode-map
-  ;;    ;; :nv "q" nil
-  ;;    :nv "C-s" #'counsel-notmuch)
-  ;;  (:map notmuch-tree-mode-map
-  ;;    :nv "d" nil))
-
   (map!
    (:map notmuch-search-mode-map
      :nv "gr" #'notmuch-refresh-this-buffer))
@@ -50,9 +38,3 @@
         sendmail-program "msmtp"
         message-kill-buffer-on-exit t
         notmuch-message-headers-visible nil))
-
-;; (defun +notmuch-dont-confirm-on-kill-process-a (orig-fn &rest args)
-;;   "Don't prompt for confirmation when killing notmuch sentinel."
-;;   (let (confirm-kill-processes)
-;;     (apply orig-fn args)))
-;; (advice-add #'notmuch-start-notmuch-sentinel :around #'+notmuch-dont-confirm-on-kill-process-a)
