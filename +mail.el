@@ -43,7 +43,9 @@
 
   ;; Other mail related settings
   (setq send-mail-function 'sendmail-send-it
-        notmuch-fcc-dirs nil            ; creates a copy of the mail, disable
+        notmuch-fcc-dirs
+        '(("niklas.carlsson@posteo.net" . "posteo/Sent -inbox +sent -unread +private")
+          ("niklas.carlsson@zenuity.com" . "zenuity/Sent -inbox +sent -unread +work"))
         message-send-mail-function 'message-send-mail-with-sendmail
         sendmail-program "msmtp"
         message-kill-buffer-on-exit t
