@@ -66,6 +66,7 @@
    "gl" "(call-interactively 'magit-log-current)"
    "gs" "magit-status"
    "gc" "magit-commit"
+   "gb" "(call-interactively #'magit-branch-checkout)"
    "bat" "nc/eshell-bat $1"
    "sudo" "eshell/sudo $*"
    "nm" "nc/enwc"
