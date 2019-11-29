@@ -104,37 +104,35 @@
 
 
 ;;
-;; Gerrit-CI
-(use-package! gerrit-ci
+;; CI-Gerrit
+(use-package! ci-gerrit
+  :init
+  (use-package! navigel
+    :load-path "~/opensource/navigel"
+    :ensure nil)
+
+  ;; :load-path "~/opensource/gerrit-ci"
   :config
-  (setq gerrit-ci-status-alist '(("Starting check jobs" . "running")
-                                 ("recheck" . "waiting")
-                                 ("regate" . "waiting")
-                                 ("Build failed" . "failed")
-                                 ("Build succeeded" . "success"))
-        gerrit-ci-jobs-alist '(("Build failed" . "failed")
-                               ("Build succeeded" . "success"))
-        gerrit-ci-url "gerrit.zenuity.com"
-        gerrit-ci-email "niklas.carlsson@zenuity.com")
+  (setq cig-change-ci-status-alist '(("Starting check jobs" . "Running")
+                                     ("recheck" . "Waiting")
+                                     ("regate" . "Waiting")
+                                     ("Build failed" . "Failed")
+                                     ("Merge failed" . "Failed")
+                                     ("Build succeeded" . "Success"))
+        cig-ci-job-comment-alist '(("Build failed" . "Failed")
+                                   ("Build succeeded" . "Success"))
+        cig-gerrit-project "stringent"
+        cig-gerrit-url "gerrit.zenuity.com"
+        cig-email "niklas.carlsson@zenuity.com"
+        cig-ci-jobs-regexp  "^-\\s-*stringent--check-stringent-\\(.*\\)-stringent\\b\\s-*\\(\\bhttps.*/\\)\\s-*:\\s-*\\(\\b.*\\b\\)\\s-*in\\s-*\\(\\b.*\\b\\)")
+
+  ;; Popup windows
+  (set-popup-rule! "\\*cig-change*" :size 0.3 :side 'bottom :select t :autosave t)
+  (set-popup-rule! "\\*cig-job*" :size 0.3 :side 'right :select t :autosave t))
 
 
-  ;; Popup window
-  (set-popup-rule! "\\*GERRIT-CI-.*\\*" :size 0.3 :side 'bottom :select t :autosave t)
-
-  ;; Keybindings
-  (map!
-   (:map gerrit-ci-mode-map
-     :n "RET" #'gerrit-ci-jobs
-     :n "q" #'gerrit-ci-quit)
-
-   (:map gerrit-ci-jobs-mode-map
-     :n "RET" #'gerrit-ci-log
-     :n "q" #'gerrit-ci-quit)
-
-   (:map gerrit-ci-log-mode-map
-     :n "q" #'gerrit-ci-quit)))
-
-
+;;
+;; Magit Gerrit
 (use-package! magit-gerrit
   :config
   (setq magit-gerrit-popup-prefix "R"))
