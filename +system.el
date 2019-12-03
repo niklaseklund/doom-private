@@ -104,31 +104,37 @@
 
 
 ;;
-;; CI-Gerrit
-(use-package! ci-gerrit
+;; Gerrit-CI
+(use-package! gci
   :init
-  (use-package! navigel
-    :load-path "~/opensource/navigel"
-    :ensure nil)
-
-  ;; :load-path "~/opensource/gerrit-ci"
+(use-package! navigel
+  :load-path "~/opensource/navigel"
+  :ensure nil)
+  :load-path "~/opensource/gerrit-ci"
   :config
-  (setq cig-change-ci-status-alist '(("Starting check jobs" . "Running")
+  (setq gci-change-ci-status-alist '(("Starting check jobs" . "Running")
                                      ("recheck" . "Waiting")
                                      ("regate" . "Waiting")
                                      ("Build failed" . "Failed")
                                      ("Merge failed" . "Failed")
-                                     ("Build succeeded" . "Success"))
-        cig-ci-job-comment-alist '(("Build failed" . "Failed")
+                                     ("Build succeeded" . "Success")
+                                     ("Uploaded patch set" . "Idle"))
+        gci-ci-job-comment-alist '(("Build failed" . "Failed")
                                    ("Build succeeded" . "Success"))
-        cig-gerrit-project "stringent"
-        cig-gerrit-url "gerrit.zenuity.com"
-        cig-email "niklas.carlsson@zenuity.com"
-        cig-ci-jobs-regexp  "^-\\s-*stringent--check-stringent-\\(.*\\)-stringent\\b\\s-*\\(\\bhttps.*/\\)\\s-*:\\s-*\\(\\b.*\\b\\)\\s-*in\\s-*\\(\\b.*\\b\\)")
+        gci-gerrit-project "stringent"
+        gci-gerrit-url "gerrit.zenuity.com"
+        gci-email "niklas.carlsson@zenuity.com"
+        gci-ci-jobs-regexp  "^-\\s-*stringent--check-stringent-\\(.*\\)-stringent\\b\\s-*\\(\\bhttps.*/\\)\\s-*:\\s-*\\(\\b.*\\b\\)\\s-*in\\s-*\\(\\b.*\\b\\)")
 
   ;; Popup windows
-  (set-popup-rule! "\\*cig-change*" :size 0.3 :side 'bottom :select t :autosave t)
-  (set-popup-rule! "\\*cig-job*" :size 0.3 :side 'right :select t :autosave t))
+  (set-popup-rule! "\\*gci-change*" :size 0.3 :side 'bottom :select t :autosave 'ignore)
+  (set-popup-rule! "\\*gci-job-output\\*" :size 0.3 :side 'right :select t :autosave 'ignore)
+
+  ;; Keymap
+  (map!
+   (:map gci-tablist-mode-map
+     :n "^" #'navigel-open-parent
+     :n "b" #'gci-browse)))
 
 
 ;;
