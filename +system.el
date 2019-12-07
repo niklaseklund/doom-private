@@ -104,6 +104,37 @@
 
 
 ;;
+;; yequake
+(use-package! yequake
+  :config
+  (setq yequake-frames
+        '(("elfeed"
+           (buffer-fns . (elfeed))
+           (width . 0.75)
+           (height . 0.5)
+           (alpha . 0.95)
+           (frame-parameters . ((undecorated . t)
+                                (skip-taskbar . t)
+                                (sticky . t))))
+          ("org-agenda"
+           (buffer-fns . (org-agenda-list))
+           (width . 0.75)
+           (height . 0.5)
+           (alpha . 0.95)
+           (frame-parameters . ((undecorated . t)
+                                (skip-taskbar . t)
+                                (sticky . t))))
+          ("org-capture"
+           (buffer-fns . (yequake-org-capture))
+           (width . 0.75)
+           (height . 0.5)
+           (alpha . 0.95)
+           (frame-parameters . ((undecorated . t)
+                                (skip-taskbar . t)
+                                (sticky . t)))))))
+
+
+;;
 ;; Gerrit-CI
 (use-package! gci
   :init
