@@ -60,4 +60,6 @@
           :desc "Open gerrit" :n "g" #'gerrit-ci
           :desc "Open Jira" :n "j" #'+ejira)
         (:prefix "s"
-          :desc "Search Youtube" :n "y" #'ivy-youtube)))
+          :desc "Search Youtube" :n "y" #'ivy-youtube)
+        (:prefix "h"
+          :desc "Keycast" :n "L" #'global-command-log-mode)))

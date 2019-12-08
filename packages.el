@@ -36,6 +36,7 @@
 (package! dired-recent)
 (package! dired-subtree)
 (package! dired-narrow)
+(package! command-log-mode)
 
 ;; chat
 (package! erc-hl-nicks)

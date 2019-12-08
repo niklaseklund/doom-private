@@ -299,7 +299,17 @@
 ;;
 ;; Disable flycheck
 (add-hook! 'text-mode-hook (lambda ()
-            (flycheck-mode -1)))
+                             (flycheck-mode -1)))
+
+;;
+;; Command Log
+(use-package! command-log-mode
+  :commands global-command-log-mode
+  :config
+  (setq command-log-mode-auto-show t
+        command-log-mode-open-log-turns-on-mode nil
+        command-log-mode-is-global t
+        command-log-mode-window-size 50))
 
 
 ;;
