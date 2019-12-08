@@ -20,7 +20,7 @@
 (load! "+functions")
 (when (string= (system-name) "archbook")
   (if (nc/multi-screen-setup-p)
-      (setq doom-font (font-spec :family "Fira Code" :size 16)
+      (setq doom-font (font-spec :family "Fira Code" :size 14)
             doom-big-font-increment 8
             doom-variable-pitch-font (font-spec :family "Fira Sans"))
     (setq doom-font (font-spec :family "Fira Code" :size 20)
