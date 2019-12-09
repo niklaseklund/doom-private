@@ -17,11 +17,11 @@
                            (hl-line-mode -1)))
 (add-hook 'org-mode-hook (lambda ()
                            (flycheck-mode -1))
-          (add-hook 'org-mode-hook #'doom-disable-line-numbers-h)
+          (add-hook 'org-mode-hook #'doom-disable-line-numbers-h))
 
-          ;;
-          ;; Links
-
+;;
+;; Links
+(after! org-compat
           (defvar yt-iframe-format
             ;; You may want to change your width and height.
             (concat "<iframe width=\"1600\""
@@ -29,19 +29,18 @@
                     " src=\"https://www.youtube.com/embed/%s\""
                     " frameborder=\"0\""
                     " allowfullscreen>%s</iframe>"))
-
-          (org-add-link-type
-           "yt"
-           (lambda (handle)
-             (browse-url
-              (concat "https://www.youtube.com/embed/"
-                      handle)))
-           (lambda (path desc backend)
-             (cl-case backend
-               (html (format yt-iframe-format
-                             path (or desc "")))
-               (latex (format "\href{%s}{%s}"
-                              path (or desc "video")))))))
+(org-add-link-type
+ "yt"
+ (lambda (handle)
+   (browse-url
+    (concat "https://www.youtube.com/embed/"
+            handle)))
+ (lambda (path desc backend)
+   (cl-case backend
+     (html (format yt-iframe-format
+                   path (or desc "")))
+     (latex (format "\href{%s}{%s}"
+                    path (or desc "video")))))))
 
 
 ;;
