@@ -2,9 +2,7 @@
 
 ;;
 ;; Debug Adapter Protocol
-(use-package! dap-mode
-  :after lsp-mode
-  :config
+(after! lsp-mode
   (setq dap-breakpoints-file (concat doom-local-dir "dap/breakpoints")
         dap-utils-extension-path (concat doom-local-dir "dap/extension"))
   ;; c++
@@ -103,21 +101,4 @@ _Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect t
            (kill-buffer "*Breakpoints*"))))
 
   (add-hook 'dap-stopped-hook '+dap/show-debug-windows)
-  (add-hook 'dap-terminated-hook '+dap/hide-debug-windows)
-
-  ;; add custom debug templates
-  (dap-register-debug-template "Python::Run Free"
-                               (list :type "python"
-                                     :args "deep-fry -s 10 --force-evaluation tools/fry/scenarios/monovision_mega_vor.json"
-                                     :cwd (projectile-project-root)
-                                     :target-module "-m tools.free.free"
-                                     :request "launch"
-                                     :name "Python :: Run Free"))
-  (dap-register-debug-template "GDB::Run Stringent"
-                               (list :type "gdb"
-                                     :request "launch"
-                                     :name "GDB::Run"
-                                     :target nil
-                                     :cwd (projectile-project-root))))
-
-
+  (add-hook 'dap-terminated-hook '+dap/hide-debug-windows))

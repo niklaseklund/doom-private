@@ -13,9 +13,6 @@
 (package! eshell-detach :recipe (:host gitlab :repo "niklascarlsson/eshell-detach"))
 (package! yequake)
 
-;; debugging
-(package! dap-mode)
-
 ;; media
 (package! gif-screencast)
 (package! ivy-youtube)
