@@ -100,26 +100,10 @@
 
 ;;
 ;; Jira
-(defun +ejira ()
-  (interactive)
-  (+ejira-init)
-  ;; Call ejira
-  (require 'ejira)
-  (org-agenda nil "j"))
-
-(defun +ejira-init ()
-  (require 'jiralib2)
-  (unless jiralib2--session
-    ;; Authentication
-    (require 'auth-source-pass)
-    ;; Figure out what is not loaded properly when I use the :after org config.
-    (jiralib2-session-login "niklas.carlsson@zenuity.com"
-                            (auth-source-pass-get 'secret "work/zenuity/login"))))
 (use-package! ejira
-  :defer t
   :init
   (setq jiralib2-url              "https://jira.zenuity.com"
-        jiralib2-auth             'cookie
+        jiralib2-auth             'basic
         jiralib2-user-login-name  "niklas.carlsson@zenuity.com"
         jiralib2-token            nil
 
@@ -157,10 +141,9 @@
   ;; Add an agenda view with customized sections based on sprint content
   (org-add-agenda-custom-command
    '("j" "JIRA issues"
-     ((ejira-jql "project = DUDE and sprint = \"Zvision\" and status != Done and assignee = currentUser()"
+     ((ejira-jql "project = DUDE and status != Done and assignee = currentUser()"
                  ((org-agenda-overriding-header "Assigned to me")))
-      (ejira-jql "project = DUDE and sprint = \"Zvision\" and status != Done and assignee is EMPTY"
+      (ejira-jql "project = DUDE and sprint = \"Rap-a-map\" and status != Done and assignee is EMPTY"
                  ((org-agenda-overriding-header "Unassigned")))
-      (ejira-jql "project = DUDE and sprint = \"Zvision\" and status != Done and assignee != currentUser()"
-                 ((org-agenda-overriding-header "Others"))))))
-  )
+      (ejira-jql "project = DUDE and sprint = \"Rap-a-map\" and status != Done and assignee != currentUser()"
+                 ((org-agenda-overriding-header "Others")))))))
