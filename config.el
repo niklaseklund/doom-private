@@ -66,8 +66,7 @@
   :config
   (with-eval-after-load 'gif-screencast
     (define-key gif-screencast-mode-map (kbd "<f12>") 'gif-screencast-toggle-pause)
-    (define-key gif-screencast-mode-map (kbd "<f11>") 'gif-screencast-stop))
-)
+    (define-key gif-screencast-mode-map (kbd "<f11>") 'gif-screencast-stop)))
 
 ;; make window larger
 (setq command-log-mode-window-size 60)
@@ -272,9 +271,6 @@
      :desc "Narrow buffer fuzzy" :n "n" #'dired-narrow-fuzzy
      :desc "Narrow buffer fuzzy" :n "N" #'dired-narrow-regex)))
 (after! dired
-  ;; Override DOOM settings
-  (remove-hook 'dired-after-readin-hook '+dired-enable-git-info-h)
-  (remove-hook 'dired-mode-hook 'dired-hide-details-mode)
   ;; Define localleader bindings
   (map!
    (:localleader
