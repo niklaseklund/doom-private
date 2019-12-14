@@ -169,6 +169,23 @@ to a regexp that will be used in the conditional lambda function"
   ( > (string-to-number (shell-command-to-string "printf %s \"$(xrandr -q | grep -c ' connected')\"")) 1))
 
 
+
+;; TODO: Make a more general mount
+;; select from a list of the directories in /mnt
+(defun nc/mount-drive ()
+  (interactive)
+  (let ((default-directory "/sudo:root@localhost:/mnt/")
+        (mount-command "PASSWD=$(pass devices/archbook/root | sed -n 1p) mount /mnt/")
+        drive)
+    (with-temp-buffer
+      (call-process "ls" nil t "")
+      (setq drive (completing-read "Mount drive:"
+                                   (split-string (string-trim (buffer-string )) "\n")
+                                   nil t
+                                   )))
+    (shell-command (concat mount-command drive))))
+
+
 (defun nc/mount-drives ()
   "Mount my drives."
   (interactive)

@@ -75,6 +75,7 @@
    "cal" "calendar"
    "pass" "(pass)"
    "fd" "eshell/fd $1"
+   "fo" "find-file-other-window $1"
    "rgi" "+default/search-cwd"
    "mountdrives" "nc/mount-drives")
   (setenv "PAGERQ" "cat")

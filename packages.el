@@ -16,6 +16,7 @@
 ;; media
 (package! gif-screencast)
 (package! ivy-youtube)
+(package! emms)
 
 ;; gtd
 (package! org-super-agenda)
@@ -46,3 +47,7 @@
 (package! notmuch)
 (package! org-mime)
 (package! counsel-notmuch)
+
+;; databases
+(package! emacsql)
+(package! emacsql-sqlite)

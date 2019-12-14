@@ -7,11 +7,14 @@
         org-cycle-separator-lines 2
         org-log-done 'time
         org-directory "~/org"
-        org-agenda-files '("~/org/incubate.org"
-                           "~/org/todo.org"
+        org-agenda-files '("~/org/todo.org"
+                           "~/org/incubate.org"
                            "~/org/projects.org"
-                           "~/sync/org/Inbox.org")
+                           "~/sync/org/Inbox.org"
+                           "~/sync/org/Ideer.org"
+                           "~/sync/org/Intressen.org")
         org-latex-caption-above nil
+        org-html-table-caption-above nil
         org-ditaa-jar-path "~/.emacs.d/.local/straight/repos/org/contrib/scripts/ditaa.jar")
   ;; Org-links to emails
   (require 'ol-notmuch))
