@@ -329,7 +329,7 @@
 (after! dockerfile
   (set-docsets! 'dockerfile-mode "Docker"))
 ;; add archwiki to online providers
-(add-to-list '+lookup-provider-url-alist '("ArchWiki" . "https://wiki.archlinux.org/index.php?search=%s"))
+(add-to-list '+lookup-provider-url-alist '("ArchWiki" "https://wiki.archlinux.org/index.php?search=%s"))
 ;; remove providers that I don't use
 (setq +lookup-provider-url-alist (assoc-delete-all "Google images" +lookup-provider-url-alist))
 (setq +lookup-provider-url-alist (assoc-delete-all "Google maps" +lookup-provider-url-alist))
