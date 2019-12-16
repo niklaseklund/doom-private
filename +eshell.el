@@ -67,6 +67,7 @@
    "gs" "magit-status"
    "gc" "magit-commit"
    "gb" "(call-interactively #'magit-branch-checkout)"
+   "gbc" "(call-interactively #'magit-branch-create)"
    "bat" "nc/eshell-bat $1"
    "sudo" "eshell/sudo $*"
    "nm" "nc/enwc"
