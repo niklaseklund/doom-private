@@ -131,8 +131,16 @@
 
 ;;
 ;; Projects
-(setq projectile-enable-caching nil
-      projectile-project-search-path '("~/src/" "~/opensource"))
+(after! projectile
+  (setq projectile-enable-caching t
+        projectile-project-search-path '("~/src/" "~/opensource")
+        ;; Follow suggestion to reorder root functions to find the .projectile file
+        ;; https://old.reddit.com/r/emacs/comments/920psp/projectile_ignoring_projectile_files/
+        projectile-project-root-files-functions #'(projectile-root-top-down
+                                                   projectile-root-top-down-recurring
+                                                   projectile-root-bottom-up
+                                                   projectile-root-local))
+  (add-to-list 'projectile-project-root-files ".projectile"))
 
 
 ;;
