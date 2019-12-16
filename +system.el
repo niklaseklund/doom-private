@@ -143,37 +143,38 @@
 
 
 ;;
-;; ;; Gerrit-CI
-;; (use-package! gci
-;;   :init
-;;   (use-package! navigel
-;;     :load-path "~/opensource/navigel"
-;;     :ensure nil)
-;;   :load-path "~/opensource/gerrit-ci"
-;;   :config
-;;   (setq gci-change-ci-status-alist '(("Starting check jobs" . "Running")
-;;                                      ("recheck" . "Waiting")
-;;                                      ("regate" . "Waiting")
-;;                                      ("Build failed" . "Failed")
-;;                                      ("Merge failed" . "Failed")
-;;                                      ("Build succeeded" . "Success")
-;;                                      ("Uploaded patch set" . "Idle"))
-;;         gci-ci-job-comment-alist '(("Build failed" . "Failed")
-;;                                    ("Build succeeded" . "Success"))
-;;         gci-gerrit-project "stringent"
-;;         gci-gerrit-url "gerrit.zenuity.com"
-;;         gci-email "niklas.carlsson@zenuity.com"
-;;         gci-ci-jobs-regexp  "^-\\s-*stringent--check-stringent-\\(.*\\)-stringent\\b\\s-*\\(\\bhttps.*/\\)\\s-*:\\s-*\\(\\b.*\\b\\)\\s-*in\\s-*\\(\\b.*\\b\\)")
+;; Gerrit-CI
+(use-package! gci
+  :init
+  (use-package! navigel
+    :load-path "~/opensource/navigel"
+    :ensure nil)
+  :load-path "~/opensource/gerrit-ci"
+  :config
+  (setq gci-change-ci-status-alist '(("Starting check jobs" . "Running")
+                                     ("recheck" . "Waiting")
+                                     ("regate" . "Waiting")
+                                     ("Build failed" . "Failed")
+                                     ("Merge failed" . "Failed")
+                                     ("Build succeeded" . "Success")
+                                     ("Uploaded patch set" . "Idle"))
+        gci-ci-job-comment-alist '(("Build failed" . "Failed")
+                                   ("Build succeeded" . "Success"))
+        gci-gerrit-project "src"
+        gci-gerrit-url "gerrit.zenuity.com"
+        gci-email "niklas.carlsson@zenuity.com"
+        gci-enable-compile-mode t
+        gci-ci-jobs-regexp  "^-\\s-*src--check-src-\\(.*\\)-src\\b\\s-*\\(\\bhttps.*/\\)\\s-*:\\s-*\\(\\b.*\\b\\)\\s-*in\\s-*\\(\\b.*\\b\\)")
 
-;;   ;; Popup windows
-;;   (set-popup-rule! "\\*gci-change*" :size 0.3 :side 'bottom :select t :autosave 'ignore)
-;;   (set-popup-rule! "\\*gci-job-output\\*" :size 0.3 :side 'right :select t :autosave 'ignore)
+  ;; Popup windows
+  (set-popup-rule! "\\*gci-change*" :size 0.3 :side 'bottom :select t :autosave 'ignore)
+  (set-popup-rule! "\\*gci-job-output\\*" :size 0.3 :side 'right :select t :autosave 'ignore)
 
-;;   ;; Keymap
-;;   (map!
-;;    (:map gci-tablist-mode-map
-;;      :n "^" #'navigel-open-parent
-;;      :n "b" #'gci-browse)))
+  ;; Keymap
+  (map!
+   (:map gci-tablist-mode-map
+     :n "^" #'navigel-open-parent
+     :n "b" #'gci-browse)))
 
 
 ;;
