@@ -163,7 +163,6 @@
         gci-gerrit-project "src"
         gci-gerrit-url "gerrit.zenuity.com"
         gci-email "niklas.carlsson@zenuity.com"
-        gci-enable-compile-mode t
         gci-ci-jobs-regexp  "^-\\s-*src--check-src-\\(.*\\)-src\\b\\s-*\\(\\bhttps.*/\\)\\s-*:\\s-*\\(\\b.*\\b\\)\\s-*in\\s-*\\(\\b.*\\b\\)")
 
   ;; Popup windows

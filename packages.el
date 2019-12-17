@@ -48,6 +48,7 @@
 (package! org-mime)
 (package! counsel-notmuch)
 
-;; databases
+;; development
+(package! navigel)
 (package! emacsql)
 (package! emacsql-sqlite)
