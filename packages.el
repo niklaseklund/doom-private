@@ -28,7 +28,6 @@
 (package! pulseaudio-control)
 (package! enwc)
 (package! magit-gerrit :recipe (:host github :repo "niklascarlsson/magit-gerrit"))
-;; (package! gci :recipe (:host gitlab :repo "niklascarlsson/gerrit-ci" :branch "navigel"))
 (package! emacs-conflicts :recipe (:host github :repo "ibizaman/emacs-conflicts" :branch "master"))
 (package! bluetooth)
 (package! dired-recent)
