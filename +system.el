@@ -165,15 +165,21 @@
         gci-email "niklas.carlsson@zenuity.com"
         gci-ci-jobs-regexp  "^-\\s-*src--check-src-\\(.*\\)-src\\b\\s-*\\(\\bhttps.*/\\)\\s-*:\\s-*\\(\\b.*\\b\\)\\s-*in\\s-*\\(\\b.*\\b\\)")
 
-  ;; Popup windows
-  (set-popup-rule! "\\*gci-change*" :size 0.3 :side 'bottom :select t :autosave 'ignore)
-  (set-popup-rule! "\\*gci-job-output\\*" :size 0.3 :side 'right :select t :autosave 'ignore)
+  ;; Popup control
+  (add-hook 'navigel-init-done-hook 'gci--make-popup-buffer)
+  (set-popup-rule! "\\*gci-changes\\*" :size 0.3 :side 'bottom :vslot -20 :select t :autosave 'ignore)
+  (set-popup-rule! "\\*gci-change-*" :size 0.3 :side 'bottom :vslot -20 :select t :autosave 'ignore)
+  (set-popup-rule! "\\*gci-transient\\*" :size 0.3 :side 'bottom :vslot -10 :select t :autosave 'ignore)
+  (set-popup-rule! "\\*gci-job*" :size 0.5 :side 'right :select t :autosave 'ignore)
 
   ;; Keymap
   (map!
    (:map gci-tablist-mode-map
      :n "^" #'navigel-open-parent
-     :n "b" #'gci-browse)))
+     :n "b" #'gci-browse
+     :n "r" (lambda! () (gci--open-transient 'gci-changes-transient)))))
+
+
 
 
 ;;
