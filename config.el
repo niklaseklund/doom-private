@@ -74,13 +74,13 @@
 
 ;;
 ;; Writing
-(use-package! writeroom-mode
-  :init
-  (setq writeroom-width 100)
-  :config
-  (map! :localleader
-        :map org-mode-map
-        :desc "Toggle zen writing" :n "z" #'writeroom-mode))
+;; (use-package! writeroom-mode
+;;   :init
+;;   (setq writeroom-width 100)
+;;   :config
+;;   (map! :localleader
+;;         :map org-mode-map
+;;         :desc "Toggle zen writing" :n "z" #'writeroom-mode))
 
 
 ;;

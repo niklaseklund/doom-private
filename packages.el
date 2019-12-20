@@ -2,7 +2,6 @@
 
 ;; writing
 (package! org-noter)
-(package! writeroom-mode)
 (package! org-brain)
 (package! org-ref)
 
