@@ -30,9 +30,10 @@
   (setq x-super-keysym 'meta
         x-alt-keysym 'alt))
 (when (string= (system-name) "u445bfa80-2ca8")
-  (setq doom-font (font-spec :family "Fira Code" :size 14)
+  (setq doom-font (font-spec :family "Iosevka Term SS04" :size 16)
         doom-big-font-increment 8
-        doom-variable-pitch-font (font-spec :family "Fira Sans")))
+        doom-variable-pitch-font (font-spec :family "Iosevka"))
+  (font-put doom-font :weight 'regular))
 
 
 ;; Define meta and super keys
