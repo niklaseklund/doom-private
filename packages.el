@@ -2,7 +2,6 @@
 
 ;; writing
 (package! org-noter)
-(package! org-brain)
 (package! org-ref)
 
 ;; shell

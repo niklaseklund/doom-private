@@ -2,19 +2,8 @@
 
 ;;
 ;; The org brain
-(use-package! org-brain
-  :commands (org-brain-visualize)
-  :init (add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
-  :config
-  (add-hook! org-brain-visualize-mode 'visual-line-mode)
-  (set-popup-rule! "*org-brain*" :ignore t)
-  (setq org-id-locations-file (concat doom-local-dir ".org-id-locations"))
-  (setq org-brain-visualize-default-choices 'all) ; could be set to files for increased performance
-  (setq org-brain-title-max-length 20)
-  (setq org-brain-refile-max-level 3)   ; max level for refiling
-  (push 'org-brain-visualize-mode evil-snipe-disabled-modes)
-
-  ;; define keybindings
+(after! org-brain
+(add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
   (map!
    :map org-brain-visualize-mode-map
    :m "C-k" #'evil-window-up
