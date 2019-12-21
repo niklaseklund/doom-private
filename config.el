@@ -128,7 +128,8 @@
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
 ;; Enable lispy in elisp repl
 (add-hook 'ielm-mode-hook 'lispy-mode)
-
+;; I want the default lispy-bindings
+(push 'lispy +evil-collection-disabled-list)
 
 ;;
 ;; Projects
