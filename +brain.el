@@ -3,7 +3,16 @@
 ;;
 ;; The org brain
 (after! org-brain
-(add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
+  ;; Integrate with Org-noter according to Org-brain documentation.
+  (add-hook 'org-noter-insert-heading-hook #'org-id-get-create)
+  (defun org-brain-open-org-noter (entry)
+    "Open `org-noter' on the ENTRY.
+If run interactively, get ENTRY from context."
+    (interactive (list (org-brain-entry-at-pt)))
+    (org-with-point-at (org-brain-entry-marker entry)
+      (org-noter)))
+
+  (add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
   (map!
    :map org-brain-visualize-mode-map
    :m "C-k" #'evil-window-up
