@@ -151,6 +151,22 @@
   (add-hook 'term-mode-hook #'hide-mode-line-mode))
 
 
+;; Vterm
+(after! vterm
+  (map!
+   (:map vterm-mode-map
+     :desc "Search history" :i "C-s" (lambda! () (vterm-send-key "r" nil nil t))
+     :desc "Paste from evil register" :i "C-r" #'+vterm/paste-from-register))
+
+  (defun +vterm/paste-from-register ()
+    (interactive)
+    (let ((content))
+      (with-temp-buffer
+        (call-interactively #'evil-paste-from-register)
+        (setq content (buffer-substring-no-properties (point-min) (point-max))))
+      (vterm-send-string content))))
+
+
 ;;
 ;; Shell
 ;; Customize the shell to use per host
