@@ -20,7 +20,17 @@
 
 
 
+;;
+;; Linting
+;; Henrik's idea based of major-mode-local-vars-hook implementation
+(after! lsp-ui
+  (add-hook! 'lsp-ui-mode-hook
+    (run-hooks (intern (format "%s-lsp-ui-hook" major-mode)))))
 
+(defun nc/python-flycheck-setup ()
+  (flycheck-add-next-checker 'lsp-ui 'python-pylint))
+(add-hook 'python-mode-lsp-ui-hook
+          #'nc/python-flycheck-setup)
 
 ;;
 ;; Formatting
