@@ -32,7 +32,7 @@
 (when (string= (system-name) "u445bfa80-2ca8")
   (setq doom-font (font-spec :family "Iosevka Term SS04" :size 16)
         doom-big-font-increment 8
-        doom-variable-pitch-font (font-spec :family "Iosevka"))
+        doom-variable-pitch-font (font-spec :family "EtBembo" :size 18))
   (font-put doom-font :weight 'regular))
 
 
