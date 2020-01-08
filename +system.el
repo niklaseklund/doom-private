@@ -198,6 +198,20 @@
     (interactive)
     (emacs-conflict-show-conflicts-dired (dired-get-file-for-visit))))
 
+;;
+;; Notifications
+(use-package! alert
+  :config
+  (setq alert-default-style 'libnotify)
+
+  ;; Notify me when a compilation buffer finished
+  (defun nc/edit/maybe-notify-compile-finish (_buffer string)
+    "Show an alert when compilation finished."
+    (if (string-match "^finished" string)
+        (alert "Compilation finished OK!" :title "Compilation Successful" :category 'compile :id 'compile-ok)
+      (alert "Compilation Failed" :title "Compilation Failed" :category 'compile :id 'compile-fail)))
+  (add-hook 'compilation-finish-functions 'nc/edit/maybe-notify-compile-finish))
+
 
 ;;
 ;; Lock screen

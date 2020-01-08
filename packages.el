@@ -32,6 +32,7 @@
 (package! dired-subtree)
 (package! dired-narrow)
 (package! command-log-mode)
+(package! alert)
 
 ;; chat
 (package! erc-hl-nicks)
