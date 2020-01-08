@@ -54,3 +54,4 @@
 ;; wip
 (package! which-key-posframe)
 (package! hydra-posframe :recipe (:host github :repo "Ladicle/hydra-posframe"))
+(package! counsel-spotify)
