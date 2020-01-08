@@ -54,4 +54,5 @@
 ;; wip
 (package! which-key-posframe)
 (package! hydra-posframe :recipe (:host github :repo "Ladicle/hydra-posframe"))
+(package! ebuku :recipe (:host github :repo "flexibeast/ebuku"))
 (package! counsel-spotify)
