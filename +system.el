@@ -204,21 +204,22 @@
   :config
   (setq alert-default-style 'libnotify)
 
-  (defun nc/compile-start-time (process)
+  (defun nc/compile-start-time (_process)
     "Record the start time of the compilation."
     (setq-local compile-start-time (time-to-seconds)))
   (add-hook 'compilation-start-hook 'nc/compile-start-time)
 
-  ;; Notify me when a compilation buffer finished
   (defun nc/compile-notify-finish (_buffer string)
-    "Show an alert when compilation finishes."
+    "Conditionally show a notification when a compilation finishes.
+Always notify about compilations that are failing. Notify about successful ones
+if they have been running for enough time."
     (let* ((duration-threshold 10)
            (compilation-end-time (time-to-seconds))
            (compile-duration (float-time (time-subtract compilation-end-time compile-start-time))))
-      (when (> compile-duration duration-threshold)
-        (if (string-match "^finished" string)
-            (alert "Compilation finished OK!" :title "Compilation Successful" :severity 'moderate :category 'compile :id 'compile-ok)
-          (alert "Compilation Failed" :title "Compilation Failed" :severity 'high :category 'compile :id 'compile-fail)))))
+      (if (string-match "^finished" string)
+          (when (> compile-duration duration-threshold)
+            (alert "Compilation finished OK!" :title "Compilation Successful" :severity 'moderate :category 'compile :id 'compile-ok))
+        (alert "Compilation Failed" :title "Compilation Failed" :severity 'high :category 'compile :id 'compile-fail))))
   (add-hook 'compilation-finish-functions 'nc/compile-notify-finish))
 
 
