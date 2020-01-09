@@ -35,3 +35,14 @@
 ;;
 ;; Formatting
 (add-to-list '+format-on-save-enabled-modes 'python-mode t)
+
+;;
+;; Repl
+;; Make sure that the virtual environment is used when opening the repl
+
+(defadvice! python-setup-virtual-repl-a (orig-fn &rest args)
+  :around #'+python/open-repl
+  (if (getenv "VIRTUAL_ENV")
+      (let ((python-shell-interpreter (executable-find "python")))
+        (apply orig-fn args))
+    (apply orig-fn args)))
