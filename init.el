@@ -19,6 +19,7 @@
        ;;ido               ; the other *other* search engine...
        (ivy              ; a search engine for love and life
        +prescient      ; new alternative fuzzy backend
+       +childframe
        ;; +fuzzy
        )          ; enable fuzzy search backend for ivy
 
