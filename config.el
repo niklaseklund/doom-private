@@ -33,7 +33,7 @@
   (setq doom-font (font-spec :family "Iosevka Term SS04" :size 16)
         doom-big-font-increment 8
         doom-variable-pitch-font (font-spec :family "EtBembo" :size 18))
-  (font-put doom-font :weight 'regular))
+  (font-put doom-font :weight 'semi-light))
 
 
 ;; Define meta and super keys
