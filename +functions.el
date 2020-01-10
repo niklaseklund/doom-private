@@ -243,3 +243,9 @@ to a regexp that will be used in the conditional lambda function"
         (inhibit-read-only t))
     (remove-text-properties begin end '(read-only t))
     (set-buffer-modified-p modified)))
+
+
+(defun nc/select-info-manual ()
+  "Search and open an info manual."
+  (info "dir")
+  (call-interactively #'Info-menu))

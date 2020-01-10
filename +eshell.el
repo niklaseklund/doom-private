@@ -73,6 +73,7 @@
    "nm" "nc/enwc"
    "locate" "counsel-locate $1"
    "man" "(+default/man-or-woman)"
+   "info" "nc/select-info-manual"
    "tm" "transmission"
    "cal" "calendar"
    "pass" "(pass)"
