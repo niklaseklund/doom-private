@@ -72,6 +72,7 @@
    "sudo" "eshell/sudo $*"
    "nm" "nc/enwc"
    "locate" "counsel-locate $1"
+   "man" "(+default/man-or-woman)"
    "tm" "transmission"
    "cal" "calendar"
    "pass" "(pass)"
