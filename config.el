@@ -246,7 +246,7 @@
 (use-package! ivy-youtube
   :defer t
   :config
-  (setq ivy-youtube-key (auth-source-pass-get 'secret "web/youtube/api-key")
+  (setq ivy-youtube-key (+pass-get-secret "web/youtube/api-key")
         browse-url-browser-function 'browse-url-generic
         browse-url-generic-program "firefox"
         ivy-youtube-play-at "/usr/bin/vlc"

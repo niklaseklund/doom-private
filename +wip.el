@@ -19,5 +19,5 @@
 (use-package! counsel-spotify
   :defer t
   :config
-  (setq counsel-spotify-client-id (auth-source-pass-get "user" "web/spotify/spotify.el")
-        counsel-spotify-client-secret (auth-source-pass-get 'secret "web/spotify/spotify.el")))
+  (setq counsel-spotify-client-id (+pass-get-user "web/spotify/spotify.el")
+        counsel-spotify-client-secret (+pass-get-secret "web/spotify/spotify.el")))
