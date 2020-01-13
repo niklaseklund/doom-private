@@ -39,3 +39,37 @@ that the daemon always runs when needed."
             (with-no-warnings
               (font-lock-fontify-buffer)))))
       (buffer-string)))
+
+
+;;;###autoload
+(defun +vterm/paste-from-register ()
+    (interactive)
+    (let ((content))
+      (with-temp-buffer
+        (call-interactively #'evil-paste-from-register)
+        (setq content (buffer-substring-no-properties (point-min) (point-max))))
+      (vterm-send-string content)))
+
+
+;;;###autoload
+(defun +dired/ediff-files ()
+  "Ediff two marked files in a dired buffer.
+The function originates from, https://oremacs.com/2017/03/18/dired-ediff/"
+  (interactive)
+  (let ((files (dired-get-marked-files))
+        (wnd (current-window-configuration)))
+    (if (<= (length files) 2)
+        (let ((file1 (car files))
+              (file2 (if (cdr files)
+                         (cadr files)
+                       (read-file-name
+                        "file: "
+                        (dired-dwim-target-directory)))))
+          (if (file-newer-than-file-p file1 file2)
+              (ediff-files file2 file1)
+            (ediff-files file1 file2))
+          (add-hook 'ediff-after-quit-hook-internal
+                    (lambda ()
+                      (setq ediff-after-quit-hook-internal nil)
+                      (set-window-configuration wnd))))
+      (error "no more than 2 files should be marked"))))
