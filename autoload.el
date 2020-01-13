@@ -11,3 +11,10 @@ that the daemon always runs when needed."
                    (list-system-processes)))
     (call-process "transmission-daemon")
     (sleep-for 1)))
+
+
+;;;###autoload
+(defun nc/select-info-manual ()
+  "Select and open an info manual."
+  (info "dir")
+  (call-interactively #'Info-menu))
