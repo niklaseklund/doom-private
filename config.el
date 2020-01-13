@@ -126,10 +126,6 @@
 ;; Let the scratch buffer have elisp major mode by default
 ;; if set to t it has the same mode as previous buffer
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
-;; Enable lispy in elisp repl
-(add-hook 'ielm-mode-hook 'lispy-mode)
-;; I want the default lispy-bindings
-;; (push 'lispy +evil-collection-disabled-list)
 
 ;;
 ;; Projects
@@ -390,12 +386,6 @@
    :map pdf-view-mode-map
    :desc "pdf-occur" :nmi "C-s" #'pdf-occur))
 
-;;
-;; Common Lisp
-(add-hook 'lisp-mode-hook #'lispy-mode)
-(after! sly
-  (add-to-list 'sly-contribs 'sly-retro nil #'eq))
-
 
 ;;
 ;; Help/Documentation
@@ -417,9 +407,9 @@
 (load! "+bindings")
 (load! "+brain")
 (load! "+chat")
+(load! "+code")
 (load! "+dap")
 (load! "+eshell")
-(load! "+lsp")
 (load! "+org")
 (load! "+mail")
 (load! "+system")
