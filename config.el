@@ -276,7 +276,7 @@
        :desc "Resolve marked files or at point" :n "r" #'emacs-conflict-resolve-conflict-dired))
    ;; Define or redefine dired bindings
    (:map dired-mode-map
-     :desc "Ediff files" :n "=" #'nc/ediff-files
+     :desc "Ediff files" :n "=" #'+dired/ediff-files
      :desc "Up" :n "h" #'dired-up-directory
      :desc "Down" :n "l" #'dired-find-file
      :desc "Find" :n "f" #'find-file
