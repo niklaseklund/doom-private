@@ -32,31 +32,6 @@
 
 
 ;;
-;; Torrents
-(use-package! transmission
-  :config
-  (setq  transmission-refresh-modes '(transmission-mode
-                                      transmission-files-mode
-                                      transmission-info-mode
-                                      transmission-peers-mode))
-  (set-popup-rule! "*transmission*" :size 0.3 :side 'bottom :select t :autosave t)
-  (with-eval-after-load 'transmission
-    ;; `transmission' will fail to start and will not run any hook if the daemon
-    ;; is not up yet.
-    ;; We need to advice the function :before to guarantee it starts.
-    (defun nc/transmission-start-daemon ()
-      (unless (member "transmission-da"
-                      (mapcar
-                       (lambda (pid) (alist-get 'comm (process-attributes pid)))
-                       (list-system-processes)))
-        (call-process "transmission-daemon")
-        (sleep-for 1)))
-    (advice-add 'transmission :before 'nc/transmission-start-daemon)
-    (setq transmission-refresh-modes '(transmission-mode transmission-files-mode transmission-info-mode transmission-peers-mode)
-          transmission-refresh-interval 1)))
-
-
-;;
 ;; Process manager
 (use-package! proced
   :config

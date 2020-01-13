@@ -11,13 +11,3 @@
   ;; can be used at the same time. Could this be some inspiration?
   ;; https://github.com/sandinmyjoints/.emacs.d/blob/1070cfae96d6a197fc6422d27f509d626e01ba07/setup-lisp/services.el
   (setq hydra-posframe-poshandler 'posframe-poshandler-frame-top-center))
-
-(use-package! ebuku
-  :config
-  (setq ebuku-buku-path "/usr/bin/buku"))
-
-(use-package! counsel-spotify
-  :defer t
-  :config
-  (setq counsel-spotify-client-id (+pass-get-user "web/spotify/spotify.el")
-        counsel-spotify-client-secret (+pass-get-secret "web/spotify/spotify.el")))

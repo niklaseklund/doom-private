@@ -241,16 +241,7 @@
                 (start-process "switch-to-normal" nil "xkb-switch" "-s" normal-mode-keyboard-layout)))))
 
 
-;;
-;; Youtube
-(use-package! ivy-youtube
-  :defer t
-  :config
-  (setq ivy-youtube-key (+pass-get-secret "web/youtube/api-key")
-        browse-url-browser-function 'browse-url-generic
-        browse-url-generic-program "firefox"
-        ivy-youtube-play-at "/usr/bin/vlc"
-        ivy-youtube-history-file (concat doom-local-dir "ivy-youtube-history")))
+
 
 
 ;;
@@ -422,6 +413,7 @@
 ;;
 ;; Load other config files
 (load! "+agenda")
+(load! "+app")
 (load! "+bindings")
 (load! "+brain")
 (load! "+chat")

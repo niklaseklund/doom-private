@@ -1,5 +1,11 @@
 ;;; packages.el -*- lexical-binding: t; -*-
 
+;; apps
+(package! ebuku :recipe (:host github :repo "flexibeast/ebuku"))
+(package! counsel-spotify)
+(package! ivy-youtube)
+(package! transmission)
+
 ;; writing
 (package! org-noter)
 (package! org-ref)
@@ -13,7 +19,6 @@
 
 ;; media
 (package! gif-screencast)
-(package! ivy-youtube)
 (package! emms)
 
 ;; gtd
@@ -22,7 +27,6 @@
 
 ;; system
 (package! disk-usage)
-(package! transmission)
 (package! pulseaudio-control)
 (package! enwc)
 (package! magit-gerrit :recipe (:host github :repo "niklascarlsson/magit-gerrit"))
@@ -54,5 +58,3 @@
 ;; wip
 (package! which-key-posframe)
 (package! hydra-posframe :recipe (:host github :repo "Ladicle/hydra-posframe"))
-(package! ebuku :recipe (:host github :repo "flexibeast/ebuku"))
-(package! counsel-spotify)
