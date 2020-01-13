@@ -1,44 +1,33 @@
 ;;; +eshell.el -*- lexical-binding: t; -*-
 
+;;
+;;; Eshell core
 (after! eshell
-  ;; enable sudo through TRAMP
-  (require 'em-tramp)
-
-  ;;
-  ;; DOOM overrides
-  ;; disable def-advice from DOOM, I want to use authinfo for sudo
-  (advice-remove 'tramp-read-passwd #'+default-inhibit-authinfo-for-sudo-a)
-  ;; remove DOOM pcomplete setup
-  (remove-hook 'eshell-mode-hook '+eshell-init-company-h)
-
-  ;;
-  ;; Customize variables
   (setq eshell-hist-ignoredups t
         eshell-buffer-maximum-lines 1024
         eshell-history-size 10000)
+
+  ;; Enable TRAMP to use sudo.
+  (require 'em-tramp)
+
+  ;; Handle visual commands
+  (after! term
+    (add-hook 'term-mode-hook #'hide-mode-line-mode))
   (after! em-term
-    (pushnew! eshell-visual-commands "bluetoothctl" "vlccast" "tizonia"))
+    (pushnew! eshell-visual-commands "bluetoothctl"))
 
-
-  ;;
   ;; Keybindings
-  ;; Keys must be bound in a hook because eshell resets its keymap every
-  ;; time `eshell-mode' is enabled.
-  (add-hook! 'eshell-first-time-mode-hook :append
-    (defun nc/+eshell-init-keymap-h ()
-      (map!
-       :map eshell-mode-map
-       :i "C-p" 'eshell-previous-input
-       :i "C-n" 'eshell-next-input
-       :i "M-c" 'counsel-projectile-find-dir
-       :ni "C-k" #'evil-window-up
-       :ni "C-j" #'evil-window-down
-       :ni "C-h" #'evil-window-left
-       :ni "C-l" #'evil-window-right
-       :i "TAB" #'completion-at-point
-       :i [tab] #'completion-at-point)))
+  (map! :map eshell-mode-map
+        :i "C-p" 'eshell-previous-input
+        :i "C-n" 'eshell-next-input
+        :i "M-c" 'counsel-projectile-find-dir
+        :ni "C-k" #'evil-window-up
+        :ni "C-j" #'evil-window-down
+        :ni "C-h" #'evil-window-left
+        :ni "C-l" #'evil-window-right
+        :i "TAB" #'completion-at-point
+        :i [tab] #'completion-at-point)
 
-  ;;
   ;; Aliases
   (set-eshell-alias!
    "d" "dired $1"
@@ -62,74 +51,43 @@
    "mountdrives" "nc/mount-drives")
   (setenv "PAGERQ" "cat")
 
-
-  ;;
-  ;; History (always save it)
+  ;; Save history (always).
   (add-hook! 'eshell-first-time-mode-hook
-    (lambda () (add-hook 'eshell-pre-command-hook 'eshell-save-some-history))))
+    (lambda () (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)))
+ 
+  ;; Don't use company for completion.
+  (remove-hook 'eshell-mode-hook '+eshell-init-company-h))
 
 
 ;;
-;; Detach
-(use-package! detached
-  :load-path "~/src/detached"
-  :ensure nil
-  :config
-  (setq detached-database-file (expand-file-name "detached.db" doom-etc-dir))
+;;; Completion
 
-  ;; Customize popups
-  (set-popup-rule! detached-shell-command-buffer :size 0.3 :side 'bottom :select t :autosave t)
-  (set-popup-rule! detached-shell-output-buffer :size 0.3 :side 'bottom :select t :autosave t)
-  (set-popup-rule! detached-sessions-buffer :size 0.3 :side 'bottom :select t :autosave t))
-
-
-;; ;;
-;; ;; Detach
-;; (use-package! eshell-detach
-;;   :after eshell
-;;   :config
-;;   (setq eshell-detach-max-file-name-length 60)
-;;   (add-hook! 'eshell-first-time-mode-hook
-;;     (defun eshell-detach-init-keymap-h ()
-;;       (map! :map eshell-mode-map
-;;             :ni [C-return] #'eshell-detach-attach
-;;             :ni [S-return] #'eshell-detach-send-input))))
-
-
-;;
-;; Auto-suggestion
 (use-package! esh-autosuggest
   :after eshell
   :config
-  (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
-  ;; enable fish-completion
-  (use-package! fish-completion
-    :config
-    (setq fish-completion-fallback-on-bash-p t)
-    (global-fish-completion-mode))
-  ;; enable fallback, bash-completion
-  (use-package! bash-completion
-    :config
-    (setq bash-completion-prog (executable-find "bash")))
-  ;; Use ivy for completion (esh-autosuggest page)
   (setq ivy-do-completion-in-region t)
-  ;; this is the default
-  (defun setup-eshell-ivy-completion ()
+
+  (defun setup-eshell-ivy-completion-h ()
+    "Use ivy mini-buffer for completion.
+This works pretty nice with childframes I think."
     (map! :map eshell-mode-map
           [remap eshell-pcomplete] 'completion-at-point)
-    ;; only if you want to use the minibuffer for completions instead of the
-    ;; in-buffer interface
     (setq-local ivy-display-functions-alist
                 (remq (assoc 'ivy-completion-in-region ivy-display-functions-alist)
                       ivy-display-functions-alist)))
-  (add-hook 'eshell-mode-hook #'setup-eshell-ivy-completion))
+ 
+  (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
+  (add-hook 'eshell-mode-hook #'setup-eshell-ivy-completion-h))
 
+(use-package! fish-completion
+  :config
+  (setq fish-completion-fallback-on-bash-p t)
+  (global-fish-completion-mode))
 
+(use-package! bash-completion
+  :config
+  (setq bash-completion-prog (executable-find "bash")))
 
-;;
-;; Term-mode (used for visual commands)
-(after! term
-  (add-hook 'term-mode-hook #'hide-mode-line-mode))
 
 
 ;; Vterm
@@ -137,15 +95,7 @@
   (map!
    (:map vterm-mode-map
      :desc "Search history" :i "C-s" (lambda! () (vterm-send-key "r" nil nil t))
-     :desc "Paste from evil register" :i "C-r" #'+vterm/paste-from-register))
-
-  (defun +vterm/paste-from-register ()
-    (interactive)
-    (let ((content))
-      (with-temp-buffer
-        (call-interactively #'evil-paste-from-register)
-        (setq content (buffer-substring-no-properties (point-min) (point-max))))
-      (vterm-send-string content))))
+     :desc "Paste from evil register" :i "C-r" #'+vterm/paste-from-register)))
 
 
 ;;
