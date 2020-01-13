@@ -34,6 +34,7 @@
 
 ;;; Torrents
 (use-package! transmission
+  :defer t
   :config
   (setq  transmission-refresh-modes '(transmission-mode
                                       transmission-files-mode
