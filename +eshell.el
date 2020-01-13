@@ -11,27 +11,6 @@
   ;; remove DOOM pcomplete setup
   (remove-hook 'eshell-mode-hook '+eshell-init-company-h)
 
-
-  ;;
-  ;; Custom functions
-  (defun eshell/fd (regexp)
-    "Recursively find items matching REGEXP and open in dired."
-    (fd-dired default-directory regexp))
-
-  (defun nc/eshell-bat (file)
-    "Like `cat' but output the content of FILE with Emacs syntax highlighting."
-    (with-temp-buffer
-      (insert-file-contents file)
-      (let ((buffer-file-name file))
-        (delay-mode-hooks
-          (set-auto-mode)
-          (if (fboundp 'font-lock-ensure)
-              (font-lock-ensure)
-            (with-no-warnings
-              (font-lock-fontify-buffer)))))
-      (buffer-string)))
-
-
   ;;
   ;; Customize variables
   (setq eshell-hist-ignoredups t
@@ -68,16 +47,16 @@
    "gc" "magit-commit"
    "gb" "(call-interactively #'magit-branch-checkout)"
    "gbc" "(call-interactively #'magit-branch-create)"
-   "bat" "nc/eshell-bat $1"
+   "bat" "+eshell/bat $1"
    "sudo" "eshell/sudo $*"
    "nm" "nc/enwc"
    "locate" "counsel-locate $1"
    "man" "(+default/man-or-woman)"
-   "info" "nc/select-info-manual"
+   "info" "+eshell/info-manual"
    "tm" "transmission"
    "cal" "calendar"
    "pass" "(pass)"
-   "fd" "eshell/fd $1"
+   "fd" "+eshell/fd $1"
    "fo" "find-file-other-window $1"
    "rgi" "+default/search-cwd"
    "mountdrives" "nc/mount-drives")

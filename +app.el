@@ -42,7 +42,7 @@
                                       transmission-peers-mode))
   (set-popup-rule! "*transmission*" :size 0.3 :side 'bottom :select t :autosave t)
   (with-eval-after-load 'transmission
-    (advice-add 'transmission :before 'nc/transmission-start-daemon-a)
+    (advice-add 'transmission :before '+transmission-start-daemon-a)
     (setq transmission-refresh-modes '(transmission-mode
                                        transmission-files-mode
                                        transmission-info-mode
