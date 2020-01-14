@@ -121,9 +121,6 @@
 ;; Gerrit-CI
 (use-package! gci
   :init
-  (use-package! navigel
-    :load-path "~/opensource/navigel"
-    :ensure nil)
   :load-path "~/opensource/gerrit-ci"
   :config
   (setq gci-change-ci-status-alist '(("Starting check jobs" . "Running")
@@ -140,21 +137,19 @@
         gci-email "niklas.carlsson@zenuity.com"
         gci-ci-jobs-regexp  "^-\\s-*src--check-src-\\(.*\\)-src\\b\\s-*\\(\\bhttps.*/\\)\\s-*:\\s-*\\(\\b.*\\b\\)\\s-*in\\s-*\\(\\b.*\\b\\)")
 
-  ;; Popup control
-  (add-hook 'navigel-init-done-hook 'gci--make-popup-buffer)
-  (set-popup-rule! "\\*gci-changes\\*" :size 0.3 :side 'bottom :vslot -20 :select t :autosave 'ignore)
-  (set-popup-rule! "\\*gci-change-*" :size 0.3 :side 'bottom :vslot -20 :select t :autosave 'ignore)
-  (set-popup-rule! "\\*gci-transient\\*" :size 0.3 :side 'bottom :vslot -10 :select t :autosave 'ignore)
-  (set-popup-rule! "\\*gci-job*" :size 0.5 :side 'right :select t :autosave 'ignore)
+  (defadvice! +gci/list-changes-a ()
+    "Split windows."
+    :before #'gci-list-changes
+    (when (get-buffer "*gci-changes*") (kill-buffer "*gci-changes*"))
+    (switch-to-buffer-other-window "*gci-changes*"))
 
+  (set-popup-rule! "\\*gci-*" :ignore t)
   ;; Keymap
   (map!
    (:map gci-tablist-mode-map
      :n "^" #'navigel-open-parent
      :n "b" #'gci-browse
-     :n "r" (lambda! () (gci--open-transient 'gci-changes-transient)))))
-
-
+     :n "r" #'gci-changes-transient)))
 
 
 ;;
