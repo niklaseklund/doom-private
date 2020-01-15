@@ -141,14 +141,18 @@
     "Split windows."
     :before #'gci-list-changes
     (when (get-buffer "*gci-changes*") (kill-buffer "*gci-changes*"))
+    (when (get-buffer "*gci-jobs*") (kill-buffer "*gci-jobs*"))
     (switch-to-buffer-other-window "*gci-changes*"))
 
   (set-popup-rule! "\\*gci-*" :ignore t)
+
   ;; Keymap
   (map!
    (:map gci-tablist-mode-map
      :n "^" #'navigel-open-parent
+     :n "?" #'gci-dispatch
      :n "b" #'gci-browse
+     :n "m" #'gic-message-transient
      :n "r" #'gci-changes-transient)))
 
 
