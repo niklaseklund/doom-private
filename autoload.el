@@ -43,12 +43,22 @@ that the daemon always runs when needed."
 
 ;;;###autoload
 (defun +vterm/paste-from-register ()
+  "Paste from evil register."
     (interactive)
-    (let ((content))
-      (with-temp-buffer
-        (call-interactively #'evil-paste-from-register)
-        (setq content (buffer-substring-no-properties (point-min) (point-max))))
-      (vterm-send-string content)))
+    (let ((inhibit-read-only t))
+      (cl-letf (((symbol-function 'insert-for-yank)
+                 #'(lambda (str) (vterm-send-string str t))))
+        (call-interactively #'evil-paste-from-register))))
+
+
+;;;###autoload
+(defun +vterm/yank-pop ()
+  "Interactively select what text to insert from the kill ring."
+  (interactive)
+  (let ((inhibit-read-only t))
+    (cl-letf (((symbol-function 'insert-for-yank)
+               #'(lambda (str) (vterm-send-string str t))))
+      (call-interactively #'+default/yank-pop))))
 
 
 ;;;###autoload
