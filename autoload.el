@@ -58,7 +58,7 @@ that the daemon always runs when needed."
   (let ((inhibit-read-only t))
     (cl-letf (((symbol-function 'insert-for-yank)
                #'(lambda (str) (vterm-send-string str t))))
-      (call-interactively #'+default/yank-pop))))
+      (call-interactively #'counsel-yank-pop))))
 
 
 ;;;###autoload
