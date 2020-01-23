@@ -120,40 +120,68 @@
 ;;
 ;; Gerrit-CI
 (use-package! gci
-  :init
   :load-path "~/opensource/gerrit-ci"
   :config
-  (setq gci-change-ci-status-alist '(("Starting check jobs" . "Running")
-                                     ("recheck" . "Waiting")
-                                     ("regate" . "Waiting")
-                                     ("Build failed" . "Failed")
-                                     ("Merge failed" . "Failed")
-                                     ("Build succeeded" . "Success")
-                                     ("Uploaded patch set" . "Idle"))
-        gci-ci-job-comment-alist '(("Build failed" . "Failed")
-                                   ("Build succeeded" . "Success"))
-        gci-gerrit-project "src"
+  (setq gci-gerrit-project "src"
         gci-gerrit-url "gerrit.zenuity.com"
-        gci-email "niklas.carlsson@zenuity.com"
-        gci-ci-jobs-regexp  "^-\\s-*src--check-src-\\(.*\\)-src\\b\\s-*\\(\\bhttps.*/\\)\\s-*:\\s-*\\(\\b.*\\b\\)\\s-*in\\s-*\\(\\b.*\\b\\)")
+        gci-gerrit-email "niklas.carlsson@zenuity.com"
+        gci-job--parse-regexp  "^-\\s-*src--check-src-\\(.*\\)-src\\b\\s-*\\(\\bhttps.*/\\)\\s-*:\\s-*\\(\\b.*\\b\\)\\s-*in\\s-*\\(\\b.*\\b\\)"
+        gci-zuul-url "https://se1dev013.ad.zenuity.com/zuul/status.json"
+        gci-zuul-ca-cert "/home/nikcar/src/mono/stringent/tools/zuul/se1dev013.ad.zenuity.com")
 
   (defadvice! +gci/list-changes-a ()
     "Split windows."
     :before #'gci-list-changes
-    (when (get-buffer "*gci-changes*") (kill-buffer "*gci-changes*"))
-    (when (get-buffer "*gci-jobs*") (kill-buffer "*gci-jobs*"))
-    (switch-to-buffer-other-window "*gci-changes*"))
+   (gci-close-all-buffers)
+   (switch-to-buffer-other-window "*gci-changes*"))
 
   (set-popup-rule! "\\*gci-*" :ignore t)
 
   ;; Keymap
   (map!
-   (:map gci-tablist-mode-map
+   (:map gci-mode-map
      :n "^" #'navigel-open-parent
      :n "?" #'gci-dispatch
      :n "b" #'gci-browse
-     :n "m" #'gic-message-transient
-     :n "r" #'gci-changes-transient)))
+     :n "f" #'counsel-imenu
+     :n "l" #'gci-changes-transient
+     :n "m" #'gci-message-transient
+     :n "o" #'gci-imenu-open
+     :n "p" #'gci-list-patch-sets
+     :n "r" #'gci-changes-transient
+     :n "RET" #'gci-list-jobs)
+   (:map gci-change-mode-map
+     :n "^" #'navigel-open-parent
+     :n "f" #'counsel-imenu
+     :n "o" #'gci-imenu-open
+     :n "b" #'gci-browse)))
+
+
+;; GoCD
+(use-package! gocd
+  :init
+  (use-package! navigel
+    :load-path "~/opensource/navigel"
+    :ensure nil)
+  (require 'auth-source-pass)
+  :load-path "~/opensource/gocd"
+  :ensure nil
+  :config
+  (setq gocd-url "https://gocd.zenuity.com"
+        gocd-email "niklas.carlsson@zenuity.com"
+        gocd-secret (+pass-get-secret "work/zenuity/login")
+        gocd-gerrit-url "gerrit.zenuity.com"
+        gocd-pipeline-favorites '("z1_vehicle--master"))
+
+  ;; Popup windows
+  (set-popup-rule! "\\*gocd-*" :size 0.3 :side 'bottom :select t :autosave 'ignore)
+
+  ;; Keymap
+  (map!
+   (:map gocd-tablist-mode-map
+     :n "m" #'tablist-mark-forward
+     :n "u" #'tablist-unmark-forward
+     :n "d" #'gocd-pipeline-diff)))
 
 
 ;;
