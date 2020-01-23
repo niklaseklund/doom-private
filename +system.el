@@ -148,7 +148,7 @@
      :n "m" #'gci-message-transient
      :n "o" #'gci-imenu-open
      :n "p" #'gci-list-patch-sets
-     :n "r" #'gci-changes-transient
+     :n "r" #'gci-refresh-changes
      :n "RET" #'gci-list-jobs)
    (:map gci-change-mode-map
      :n "^" #'navigel-open-parent
