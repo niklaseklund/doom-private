@@ -167,11 +167,7 @@
 ;;
 ;; Conflicts
 (use-package! emacs-conflict
-  :config
-  (defun +emacs-conflict-show-conflicts-dired-at-point ()
-    "Show conflicts at point."
-    (interactive)
-    (emacs-conflict-show-conflicts-dired (dired-get-file-for-visit))))
+  :after dired)
 
 ;;
 ;; Notifications
