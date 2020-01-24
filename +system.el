@@ -129,12 +129,6 @@
         gci-zuul-url "https://se1dev013.ad.zenuity.com/zuul/status.json"
         gci-zuul-ca-cert "/home/nikcar/src/mono/stringent/tools/zuul/se1dev013.ad.zenuity.com")
 
-  (defadvice! +gci/list-changes-a ()
-    "Split windows."
-    :before #'gci-list-changes
-   (gci-close-all-buffers)
-   (switch-to-buffer-other-window "*gci-changes*"))
-
   (set-popup-rule! "\\*gci-*" :ignore t)
 
   ;; Keymap
