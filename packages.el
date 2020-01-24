@@ -27,7 +27,6 @@
 
 ;; system
 (package! disk-usage)
-(package! pulseaudio-control)
 (package! enwc)
 (package! magit-gerrit :recipe (:host github :repo "niklascarlsson/magit-gerrit"))
 (package! emacs-conflicts :recipe (:host github :repo "ibizaman/emacs-conflicts" :branch "master"))

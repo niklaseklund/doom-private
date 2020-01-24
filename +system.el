@@ -24,21 +24,6 @@
 
 
 ;;
-;; Netmacs
-(use-package! libnetmacs
-  :load-path "~/opensource/libnetmacs")
-(use-package! netmacs
-  :load-path "~/opensource/netmacs")
-
-
-;;
-;; Process manager
-(use-package! proced
-  :config
-  ;; (set-popup-rule! "*Proced*" :size 0.4 :side 'bottom :select t :autosave t)
-  )
-
-;;
 ;; Disk usage
 (use-package! disk-usage
   :config
@@ -47,12 +32,6 @@
    :desc "Reset cache" :nmi "r" #'disk-usage-reset-cache
    :desc "Dired here" :nmi "D" (λ! () (dired default-directory))))
 
-
-;;
-;; Pulse audio control
-(use-package! pulseaudio-control
-  ;; TODO: Implement transient to control the separate functions?
-  )
 
 ;;
 ;; Bluetooth
