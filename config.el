@@ -377,16 +377,8 @@
 
 
 ;;
-;; Help/Documentation
-(defun cmake-doc ()
-  (interactive)
-  (setq-local dash-docs-docsets '("CMake")))
-(add-hook 'cmake-mode-hook 'cmake-doc)
-
-(defun docker-doc ()
-  (interactive)
-  (setq-local dash-docs-docsets '("Docker")))
-(add-hook 'dockerfile-mode-hook 'docker-doc)
+;; Languagetool
+(setq langtool-language-tool-jar "~/opensource/languagetool/languagetool-commandline.jar")
 
 
 ;;
