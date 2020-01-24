@@ -51,11 +51,9 @@
    "mountdrives" "nc/mount-drives")
   (setenv "PAGERQ" "cat")
 
-  ;; Save history (always).
   (add-hook! 'eshell-first-time-mode-hook
     (lambda () (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)))
- 
-  ;; Don't use company for completion.
+
   (remove-hook 'eshell-mode-hook '+eshell-init-company-h))
 
 
@@ -75,7 +73,7 @@ This works pretty nice with childframes I think."
     (setq-local ivy-display-functions-alist
                 (remq (assoc 'ivy-completion-in-region ivy-display-functions-alist)
                       ivy-display-functions-alist)))
- 
+
   (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
   (add-hook 'eshell-mode-hook #'setup-eshell-ivy-completion-h))
 
