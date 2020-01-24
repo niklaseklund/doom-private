@@ -272,7 +272,7 @@
        :desc "Project root" :n "p" (λ! () (find-file (projectile-project-root))))
      ;; Bindings for conflicts
      (:prefix-map ("c" . "Conflicts")
-       :desc "Show conflicts" :n "s" #'+emacs-conflict-show-conflicts-dired-at-point
+       :desc "Show conflicts" :n "s" #'+emacs-conflict/show-conflicts-dired-at-point
        :desc "Resolve marked files or at point" :n "r" #'emacs-conflict-resolve-conflict-dired))
    ;; Define or redefine dired bindings
    (:map dired-mode-map

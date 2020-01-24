@@ -83,3 +83,12 @@ The function originates from, https://oremacs.com/2017/03/18/dired-ediff/"
                       (setq ediff-after-quit-hook-internal nil)
                       (set-window-configuration wnd))))
       (error "no more than 2 files should be marked"))))
+
+
+;;;###autoload
+(defun +emacs-conflict/show-conflicts-dired-at-point ()
+    "Dired show conflicts at point."
+    (interactive)
+    (emacs-conflict-show-conflicts-dired (dired-get-file-for-visit)))
+
+
