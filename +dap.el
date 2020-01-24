@@ -2,18 +2,8 @@
 
 ;;
 ;; Debug Adapter Protocol
-(after! lsp-mode
-  (setq dap-breakpoints-file (concat doom-local-dir "dap/breakpoints")
-        dap-utils-extension-path (concat doom-local-dir "dap/extension"))
-  ;; c++
-  (require 'dap-gdb-lldb)
-  (dap-gdb-lldb-setup)
-  ;; python
-  (require 'dap-python)
-  ;; configure dap
-  (set-company-backend! 'dap-ui-repl-mode 'company-dap-ui-repl)
-  (dap-mode t)
-  (dap-ui-mode t))
+(after! dap-mode
+  (set-company-backend! 'dap-ui-repl-mode 'company-dap-ui-repl))
 
 ;; Customize more after it's b
 (with-eval-after-load 'dap-mode
