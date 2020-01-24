@@ -92,3 +92,9 @@ The function originates from, https://oremacs.com/2017/03/18/dired-ediff/"
     (emacs-conflict-show-conflicts-dired (dired-get-file-for-visit)))
 
 
+;;;###autoload
+(defun nc/updatedb ()
+  "Update the database that locate uses."
+  (interactive)
+  (let ((default-directory  "/sudo:root@localhost:"))
+    (shell-command "sudo updatedb")))
