@@ -92,10 +92,15 @@ This works pretty nice with childframes I think."
 (use-package! detached
   :load-path "~/src/detached"
   :ensure nil
+  :after eshell
   :config
   (map! :map eshell-mode-map
         :ni [C-return] #'counsel-detached
-        :ni [S-return] #'detached-eshell-send-input))
+        :ni [S-return] #'detached-eshell-send-input)
+  ;; Disable and and enable ivy-rich to make detached ivy-rich configuration
+  ;; have effect.
+  (ivy-rich-mode 0)
+  (ivy-rich-mode +1))
 
 
 ;; Vterm
