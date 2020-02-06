@@ -18,15 +18,15 @@
 
   ;; Keybindings
   (map! :map eshell-mode-map
-        :i "C-p" 'eshell-previous-input
-        :i "C-n" 'eshell-next-input
-        :i "M-c" 'counsel-projectile-find-dir
-        :ni "C-k" #'evil-window-up
-        :ni "C-j" #'evil-window-down
-        :ni "C-h" #'evil-window-left
-        :ni "C-l" #'evil-window-right
-        :i "TAB" #'completion-at-point
-        :i [tab] #'completion-at-point)
+      :i "C-p" #'eshell-previous-input
+      :i "C-n" #'eshell-next-input
+      :i "M-c" #'counsel-projectile-find-dir
+      :ni "C-k" #'evil-window-up
+      :ni "C-j" #'evil-window-down
+      :ni "C-h" #'evil-window-left
+      :ni "C-l" #'evil-window-right
+      :i "TAB" #'completion-at-point
+      :i [tab] #'completion-at-point)
 
   ;; Aliases
   (set-eshell-alias!
@@ -86,6 +86,16 @@ This works pretty nice with childframes I think."
   :config
   (setq bash-completion-prog (executable-find "bash")))
 
+
+;;
+;; Detached
+(use-package! detached
+  :load-path "~/src/detached"
+  :ensure nil
+  :config
+  (map! :map eshell-mode-map
+        :ni [C-return] #'counsel-detached
+        :ni [S-return] #'detached-eshell-send-input))
 
 
 ;; Vterm
