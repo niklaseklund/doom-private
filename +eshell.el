@@ -94,10 +94,11 @@ This works pretty nice with childframes I think."
   :ensure nil
   :after eshell
   :config
+  (require 'counsel-detached)
   (map! :map eshell-mode-map
         :ni [C-return] #'counsel-detached
-        :ni [S-return] #'detached-eshell-send-input)
-  (set-popup-rule! "\\*detached-*" :ignore t)
+        :ni [S-return] #'detached-attach)
+  (set-popup-rule! "\\*detached-*" :size 0.5 :side 'right :quit t :modeline t)
   ;; Disable and and enable ivy-rich to make detached ivy-rich configuration
   ;; have effect.
   (ivy-rich-mode 0)
