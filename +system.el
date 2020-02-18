@@ -98,8 +98,13 @@
 
 ;;
 ;; Gerrit-CI
+(use-package! navigel
+  :load-path "~/opensource/navigel"
+  :ensure nil)
+
 (use-package! gci
   :load-path "~/opensource/gerrit-ci"
+  :ensure nil
   :config
   (setq gci-gerrit-project "src"
         gci-gerrit-url "gerrit.zenuity.com"
@@ -108,12 +113,12 @@
         gci-zuul-url "https://se1dev013.ad.zenuity.com/zuul/status.json"
         gci-zuul-ca-cert "/home/nikcar/src/mono/stringent/tools/zuul/se1dev013.ad.zenuity.com")
 
+  ;; Make DOOM not treat gci windows as popups
   (set-popup-rule! "\\*gci-*" :ignore t)
 
   ;; Keymap
   (map!
    (:map gci-mode-map
-     :n "^" #'navigel-open-parent
      :n "?" #'gci-dispatch
      :n "b" #'gci-browse
      :n "f" #'counsel-imenu
@@ -129,32 +134,29 @@
      :n "o" #'gci-imenu-open
      :n "b" #'gci-browse)))
 
-
-;; GoCD
-(use-package! gocd
+(use-package! flow
   :init
-  (use-package! navigel
-    :load-path "~/opensource/navigel"
-    :ensure nil)
-  (require 'auth-source-pass)
   :load-path "~/opensource/gocd"
   :ensure nil
   :config
-  (setq gocd-url "https://gocd.zenuity.com"
-        gocd-email "niklas.carlsson@zenuity.com"
-        gocd-secret (+pass-get-secret "work/zenuity/login")
-        gocd-gerrit-url "gerrit.zenuity.com"
-        gocd-pipeline-favorites '("z1_vehicle--master"))
+  (require 'auth-source-pass)
+  (setq flow-gocd-url "https://gocd.zenuity.com"
+        flow-gocd-email "niklas.carlsson@zenuity.com"
+        flow-gocd-secret (+pass-get-secret "work/zenuity/login")
+        flow-gerrit-user "nikcar"
+        flow-gerrit-url "gerrit.zenuity.com"
+        flow-gerrit-port "29418")
+
+  ;; Want to be able to control the windows
+  (defun +navigel-pop-to-buffer ()
+    (pop-to-buffer (buffer-name)))
+  (add-hook! 'navigel-init-done-hook #'+navigel-pop-to-buffer)
 
   ;; Popup windows
-  (set-popup-rule! "\\*gocd-*" :size 0.3 :side 'bottom :select t :autosave 'ignore)
-
-  ;; Keymap
-  (map!
-   (:map gocd-tablist-mode-map
-     :n "m" #'tablist-mark-forward
-     :n "u" #'tablist-unmark-forward
-     :n "d" #'gocd-pipeline-diff)))
+  (set-popup-rule! "\\*flow-console-output\\*" :ignore t)
+  (set-popup-rule! "\\*flow-pipelines\\*" :side 'bottom :size 0.25 :slot 5 :quit nil :modeline t)
+  (set-popup-rule! "\\*flow-instances\\*" :side 'bottom :size 0.25 :slot 10 :quit nil :modeline t)
+  (set-popup-rule! "\\*flow-notes\\*" :side 'bottom :size 0.25 :quit nil :modeline t))
 
 
 ;;
