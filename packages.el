@@ -25,6 +25,11 @@
 (package! org-super-agenda)
 (package! ejira :recipe (:host github :repo "nyyManni/ejira"))
 
+;; code
+(package! slime)
+(package! slime-repl-ansi-color)
+(package! slime-company)
+
 ;; system
 (package! disk-usage)
 (package! enwc)
