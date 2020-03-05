@@ -23,7 +23,6 @@
 
 ;; gtd
 (package! org-super-agenda)
-(package! ejira :recipe (:host github :repo "nyyManni/ejira"))
 
 ;; code
 (package! slime)
