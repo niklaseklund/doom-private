@@ -134,6 +134,14 @@
      :n "o" #'gci-imenu-open
      :n "b" #'gci-browse)))
 
+
+(use-package! guix
+  :config
+  (set-popup-rule! "\\*Guix Packages*" :ignore t)
+  (set-popup-rule! "\\*Guix Package Info*" :side 'bottom :size 0.8 :vslot 10)
+  (set-popup-rule! "\\*Guix REPL\\*" :side 'bottom :size 0.3 :vslot 5))
+
+
 (use-package! flow
   :init
   :load-path "~/opensource/gocd"

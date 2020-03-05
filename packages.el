@@ -41,6 +41,7 @@
 (package! dired-narrow)
 (package! command-log-mode)
 (package! alert)
+(package! guix)
 
 ;; chat
 (package! erc-hl-nicks)
