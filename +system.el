@@ -148,12 +148,90 @@
   :ensure nil
   :config
   (require 'auth-source-pass)
+  (auth-source-pass-enable)
   (setq flow-gocd-url "https://gocd.zenuity.com"
         flow-gocd-email "niklas.carlsson@zenuity.com"
         flow-gocd-secret (+pass-get-secret "work/zenuity/login")
         flow-gerrit-user "nikcar"
         flow-gerrit-url "gerrit.zenuity.com"
         flow-gerrit-port "29418")
+
+  ;; Keybindings
+  (map!
+   (:leader
+     (:prefix "o"
+       :desc "Open Flow" :n "F" #'=flow))
+   (:map flow-pipeline-mode-map
+     :n "`" #'flow-open-note
+     :n "j" #'flow-next-pipeline
+     :n "k" #'flow-prev-pipeline
+     :n "b" #'flow-browse-entity
+     :n "m" #'tablist-mark-forward
+     :n "u" #'tablist-unmark-forward
+     :n "U" #'tablist-unmark-all-marks
+     :n "r" #'flow-list-pipelines)
+   (:map flow-instance-mode-map
+     :n "`" #'flow-open-note
+     :n "b" #'flow-browse-entity
+     :n "m" #'tablist-mark-forward
+     :n "u" #'tablist-unmark-forward
+     :n "U" #'tablist-unmark-all-marks)
+   (:map flow-job-mode-map
+     :n "`" #'flow-open-note
+     :n "j" #'flow-next-job
+     :n "k" #'flow-prev-job
+     :n "b" #'flow-browse-entity
+     :n "c" #'flow-capture-note
+     :n "m" #'tablist-mark-forward
+     :n "y" #'flow-copy-entity
+     :n "u" #'tablist-unmark-forward
+     :n "U" #'tablist-unmark-all-marks)
+   (:map flow-patch-mode-map
+     :n "`" #'flow-open-note
+     :n "j" #'flow-next-commit-message
+     :n "k" #'flow-prev-commit-message
+     :n "b" #'flow-browse-entity
+     :n "c" #'flow-capture-note
+     :n "m" #'tablist-mark-forward
+     :n "y" #'flow-copy-entity
+     :n "u" #'tablist-unmark-forward
+     :n "U" #'tablist-unmark-all-marks)
+   (:map flow-compile-mode-map
+     :n "`" #'flow-open-note
+     :n "n" #'flow-next-error
+     :n "p" #'flow-prev-error
+     :n "c" #'flow-capture-note
+     :n "]" #'flow-next-job
+     :n "[" #'flow-prev-job)
+   (:map flow-diff-mode-map
+     :n "`" #'flow-open-note
+     :n "n" #'diff-hunk-next
+     :n "p" #'diff-hunk-prev
+     :nvm "c" #'flow-capture-note
+     :n "]" #'flow-next-patch
+     :n "[" #'flow-prev-patch)
+   (:map flow-commit-message-mode-map
+     :n "`" #'flow-open-note
+     :n "c" #'flow-capture-note
+     :n "]" #'flow-next-commit-message
+     :n "[" #'flow-prev-commit-message)
+   (:map flow-note-mode-map
+     :n "`" #'flow-open-note)
+   (:localleader
+     :map flow-compile-mode-map
+     :desc "Switch to commit message" :nmv "c" #'flow-switch-to-commit-message
+     :desc "Switch to patch diff" :n "d" #'flow-switch-to-diff
+     :desc "Switch to job output" :n "j" #'flow-switch-to-job)
+   (:localleader
+     :map flow-diff-mode-map
+     :desc "Switch to commit message" :n "c" #'flow-switch-to-commit-message
+     :desc "Switch to patch diff" :n "d" #'flow-switch-to-diff
+     :desc "Switch to job output" :n "j" #'flow-switch-to-job)
+   (:localleader
+     :map flow-commit-message-mode-map
+     :desc "Switch to commit message" :nmv "c" #'flow-switch-to-commit-message
+     :desc "Switch to patch diff" :n "d" #'flow-switch-to-diff
+     :desc "Switch to job output" :n "j" #'flow-switch-to-job))
 
   ;; Want to be able to control the windows
   (defun +navigel-pop-to-buffer ()
@@ -162,9 +240,9 @@
 
   ;; Popup windows
   (set-popup-rule! "\\*flow-console-output\\*" :ignore t)
-  (set-popup-rule! "\\*flow-pipelines\\*" :side 'bottom :size 0.25 :slot 5 :quit nil :modeline t)
-  (set-popup-rule! "\\*flow-instances\\*" :side 'bottom :size 0.25 :slot 10 :quit nil :modeline t)
-  (set-popup-rule! "\\*flow-notes\\*" :side 'bottom :size 0.25 :quit nil :modeline t))
+  (set-popup-rule! "\\*flow-pipelines\\*" :side 'bottom :size 0.25 :slot 5 :quit nil)
+  (set-popup-rule! "\\*flow-instances\\*" :side 'bottom :size 0.25 :slot 10 :quit nil)
+  (set-popup-rule! "\\*flow-notes\\*" :side 'bottom :size 0.3 :quit nil))
 
 
 ;;
