@@ -25,9 +25,6 @@
 (package! org-super-agenda)
 
 ;; code
-(package! slime)
-(package! slime-repl-ansi-color)
-(package! slime-company)
 
 ;; system
 (package! disk-usage)
