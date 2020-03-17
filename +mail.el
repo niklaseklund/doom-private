@@ -11,30 +11,27 @@
 
 
 (after! notmuch
-  ;; treat notmuch buffers as reall buffer (going from show->search will work)
-  ;; (add-hook 'doom-real-buffer-functions #'notmuch-interesting-buffer)
-  (add-hook! '(notmuch-search-mode-hook
-               notmuch-show-mode-hook
-               notmuch-message-mode-hook) #'hide-mode-line-mode)
-  (add-hook! '(notmuch-show-mode-hook
-               notmuch-message-mode-hook) #'+notmuch-setup-mail-mode)
-  (defun +notmuch-setup-mail-mode ()
-    (writeroom-mode 1)
-    (doom-disable-line-numbers-h)
-    (visual-line-mode))
+  ;; Configure ui
+  (add-hook 'doom-real-buffer-functions #'notmuch-interesting-buffer)
+  (advice-add #'notmuch-start-notmuch-sentinel :around #'+notmuch-dont-confirm-on-kill-process-a)
 
-  ;; TODO: How to deal with closing of windows?
-  (map!
-   (:map notmuch-search-mode-map
-     :nv "gr" #'notmuch-refresh-this-buffer))
+  ;; keybindings
+  (map! :map (notmuch-search-mode-map notmuch-tree-mode-map notmuch-show-mode-map)
+        :desc "Search notmuch"    "C-s" #'counsel-notmuch)
 
+  (set-face-attribute 'notmuch-search-date nil :weight 'bold :slant 'italic)
 
-  ;; Other mail related settings
-  (setq send-mail-function 'sendmail-send-it
-        notmuch-fcc-dirs
-        '(("niklas.carlsson@posteo.net" . "posteo/Sent -inbox +sent -unread +private")
-          ("niklas.carlsson@zenuity.com" . "zenuity/Sent -inbox +sent -unread +work"))
+  ;; Configure mail settings
+  (setq notmuch-fcc-dirs
+        '(("niklas.carlsson@posteo.net" . "posteo/Sent -inbox +sent -unread +private"))
+        send-mail-function 'sendmail-send-it
+        ;; notmuch-message-headers-visible nil
+        notmuch-search-oldest-first nil
+        message-kill-buffer-on-exit t
         message-send-mail-function 'message-send-mail-with-sendmail
         sendmail-program "msmtp"
-        message-kill-buffer-on-exit t
-        notmuch-message-headers-visible nil))
+        notmuch-saved-searches
+        '((:name "inbox" :query "tag:inbox not tag:trash" :key "i")
+          (:name "flagged" :query "tag:flagged" :key "f")
+          (:name "sent" :query "tag:sent" :key "s")
+          (:name "drafts" :query "tag:draft" :key "d"))))
