@@ -98,3 +98,10 @@ The function originates from, https://oremacs.com/2017/03/18/dired-ediff/"
   (interactive)
   (let ((default-directory  "/sudo:root@localhost:"))
     (shell-command "sudo updatedb")))
+
+
+;;;###autoload
+(defun +notmuch-dont-confirm-on-kill-process-a (orig-fn &rest args)
+  "Don't prompt for confirmation when killing notmuch sentinel."
+  (let (confirm-kill-processes)
+    (apply orig-fn args)))
