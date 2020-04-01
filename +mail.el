@@ -25,7 +25,6 @@
   (setq notmuch-fcc-dirs
         '(("niklas.carlsson@posteo.net" . "posteo/Sent -inbox +sent -unread +private"))
         send-mail-function 'sendmail-send-it
-        ;; notmuch-message-headers-visible nil
         notmuch-search-oldest-first nil
         message-kill-buffer-on-exit t
         message-send-mail-function 'message-send-mail-with-sendmail
