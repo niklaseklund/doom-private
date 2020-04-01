@@ -69,23 +69,6 @@
 
 
 ;;
-;; LaTeX
-(after! org
-  (require 'ox-latex)
-  ;; Make it possible to reference code blocks, figures etc.
-  (require 'org-ref)
-  ;; Fontify source code, use minted package opposed to listings.
-  (setq org-latex-listings 'minted)
-  ;; Specify options section, newfloat to minted to be able to setup the listing
-  ;; environment for the code blocks properly
-  (add-to-list 'org-latex-packages-alist '("section,newfloat" "minted" t))
-  ;; Shell commands to run upon compilation
-  (setq org-latex-pdf-process
-        '("xelatex -shell-escape -interaction nonstopmode %f"
-          "xelatex -shell-escape -interaction nonstopmode %f"
-          "xelatex -shell-escape -interaction nonstopmode %f")))
-
-;;
 ;; Hugo
 (after! ox-hugo
   (defun org-hugo-publish ()

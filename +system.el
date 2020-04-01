@@ -4,26 +4,6 @@
 
 
 ;;
-;; Network manager
-(use-package! enwc
-  :config
-  ;; Customize settings
-  (setq enwc-default-backend 'nm
-        enwc-display-mode-line nil
-        enwc-wireless-device "wlp3s0"
-        enwc-wired-device "lo"
-        enwc-ask-to-save-interfaces nil
-        enwc-warn-if-already-setup nil)
-  ;; Ensure enwc buffer is delegated to the popup system.
-  (defadvice! +popup--enwc-pop-to-buffer ()
-    "Use `pop-to-buffer' instead of `switch-to-buffer' to open buffer.'"
-    :before #'enwc
-    (pop-to-buffer "*ENWC*"))
-  ;; Customize popup buffer
-  (set-popup-rule! "*ENWC*" :size 0.3 :side 'bottom :select t :autosave t))
-
-
-;;
 ;; Disk usage
 (use-package! disk-usage
   :config
@@ -243,13 +223,6 @@
   (set-popup-rule! "\\*flow-pipelines\\*" :side 'bottom :size 0.25 :slot 5 :quit nil)
   (set-popup-rule! "\\*flow-instances\\*" :side 'bottom :size 0.25 :slot 10 :quit nil)
   (set-popup-rule! "\\*flow-notes\\*" :side 'bottom :size 0.3 :quit nil))
-
-
-;;
-;; Magit Gerrit
-(use-package! magit-gerrit
-  :config
-  (setq magit-gerrit-popup-prefix "R"))
 
 
 ;;

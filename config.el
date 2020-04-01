@@ -226,17 +226,6 @@
                 (start-process "switch-to-normal" nil "xkb-switch" "-s" normal-mode-keyboard-layout)))))
 
 
-
-
-
-;;
-;; Media player
-(use-package! emms
-  :config
-  (require 'emms-setup)
-  (setq emms-stream-info-backend 'vlc))
-
-
 ;;
 ;; Dired
 (use-package! dired-recent
@@ -302,7 +291,6 @@
 
 ;;
 ;; Auto-formatting
-;; (add-hook 'c++-mode-hook #'+format|enable-on-save)
 (setq show-trailing-whitespace nil)
 
 
@@ -310,9 +298,8 @@
 ;; Documentation
 ;; right docsets for major-modes
 (after! python
-  (set-docsets! 'python-mode "Python 3" "NumPy" "SciPy" "Pandas"))
-(after! dockerfile
-  (set-docsets! 'dockerfile-mode "Docker"))
+  (set-docsets! 'python-mode "Pandas"))
+
 ;; add archwiki to online providers
 (add-to-list '+lookup-provider-url-alist '("ArchWiki" "https://wiki.archlinux.org/index.php?search=%s"))
 ;; remove providers that I don't use
@@ -393,5 +380,4 @@
 (load! "+org")
 (load! "+mail")
 (load! "+system")
-(load! "+wip")
-(load! "+daemon")
+;; (load! "+daemon")

@@ -6,14 +6,6 @@
 ;; into Emacs.
 
 
-;;; Music
-(use-package! counsel-spotify
-  :defer t
-  :config
-  (setq counsel-spotify-client-id (+pass-get-user "web/spotify/spotify.el")
-        counsel-spotify-client-secret (+pass-get-secret "web/spotify/spotify.el")))
-
-
 ;;; Video
 (use-package! ivy-youtube
   :defer t
@@ -23,13 +15,6 @@
         browse-url-generic-program "firefox"
         ivy-youtube-play-at "/usr/bin/vlc"
         ivy-youtube-history-file (concat doom-local-dir "ivy-youtube-history")))
-
-
-;;; Bookmarks
-(use-package! ebuku
-  :defer t
-  :config
-  (setq ebuku-buku-path "/usr/bin/buku"))
 
 
 ;;; Torrents

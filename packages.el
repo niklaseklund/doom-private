@@ -1,43 +1,31 @@
 ;;; packages.el -*- lexical-binding: t; -*-
 
 ;; apps
-(package! ebuku :recipe (:host github :repo "flexibeast/ebuku"))
-(package! counsel-spotify)
 (package! ivy-youtube)
 (package! transmission)
 
-;; writing
+;; org
+(package! org-super-agenda)
 (package! org-noter)
-(package! org-ref)
+(package! org-mime)
 
 ;; shell
+(package! esh-autosuggest)
 (package! fish-completion)
 (package! bash-completion)
-(package! esh-autosuggest)
-(package! eshell-detach :recipe (:host gitlab :repo "niklascarlsson/eshell-detach"))
-(package! yequake)
-
-;; media
-(package! gif-screencast)
-(package! emms)
-
-;; gtd
-(package! org-super-agenda)
-
-;; code
 
 ;; system
-(package! disk-usage)
-(package! enwc)
-(package! magit-gerrit :recipe (:host github :repo "niklascarlsson/magit-gerrit"))
-(package! emacs-conflicts :recipe (:host github :repo "ibizaman/emacs-conflicts" :branch "master"))
-(package! bluetooth)
+(package! guix)
 (package! dired-recent)
 (package! dired-subtree)
 (package! dired-narrow)
+(package! disk-usage)
+(package! emacs-conflicts :recipe (:host github :repo "ibizaman/emacs-conflicts" :branch "master"))
+(package! bluetooth)
 (package! command-log-mode)
 (package! alert)
-(package! guix)
+(package! yequake)
+(package! gif-screencast)
 
 ;; chat
 (package! erc-hl-nicks)
@@ -48,14 +36,10 @@
 
 ;; mail
 (package! notmuch)
-(package! org-mime)
 (package! counsel-notmuch)
 
-;; development
+;; package development
 (package! navigel)
 (package! emacsql)
 (package! emacsql-sqlite)
-
-;; wip
-(package! which-key-posframe)
-(package! hydra-posframe :recipe (:host github :repo "Ladicle/hydra-posframe"))
+(package! lorem-ipsum)
