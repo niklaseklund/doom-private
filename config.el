@@ -9,7 +9,7 @@
 ;; looks
 (setq doom-modeline-height 40
       +doom-modeline-buffer-file-name-style 'relative-from-project
-      doom-theme 'doom-dracula
+      doom-theme 'doom-nord
       +workspaces-switch-project-function #'ignore)
 
 ;; prettify modes
