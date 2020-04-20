@@ -56,20 +56,26 @@
 
 
 ;;
+;; Detach
+(use-package! detach
+  :load-path "~/src/detach"
   :ensure nil
   :after eshell
   :config
-  (require 'counsel-detached)
+  (setq detach-db-dir doom-etc-dir)
+  (require 'counsel-detach)
+  ;; Keybindings
   (map! :map eshell-mode-map
-        :ni [C-return] #'counsel-detached
-        :ni [S-return] #'detached-create-session)
-  (set-popup-rule! "\\*detached-*" :size 0.5 :side 'right :quit t :modeline t)
-  ;; Disable and and enable ivy-rich to make detached ivy-rich configuration
-  ;; have effect.
+        :ni [C-return] #'counsel-detach
+        :ni [S-return] #'detach-create-session)
+  ;; Popup rules
+  (set-popup-rule! "\\*detach-*" :size 0.5 :side 'right :quit t :modeline nil)
+  ;; Enable ivy-rich
   (ivy-rich-mode 0)
   (ivy-rich-mode +1))
 
 
+;;
 ;; Vterm
 (after! vterm
   (defadvice! +default/yank-pop-a (orig-fn &rest args)
