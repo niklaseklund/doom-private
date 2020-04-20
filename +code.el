@@ -65,7 +65,6 @@
 
 ;;
 ;;; Common Lisp
-(add-hook 'lisp-mode-hook #'lispy-mode)
 (after! sly
   (add-to-list 'sly-contribs 'sly-retro nil #'eq))
 

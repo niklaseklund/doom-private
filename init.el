@@ -25,7 +25,7 @@
        ;;ido               ; the other *other* search engine...
        (ivy              ; a search engine for love and life
        +prescient      ; new alternative fuzzy backend
-       +childframe
+       ;; +childframe
        ;; +fuzzy
        )          ; enable fuzzy search backend for ivy
 
@@ -36,7 +36,7 @@
        ;;doom-quit         ; DOOM quit-message prompts when you quit Emacs
        ;;fill-column       ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
-       ;; hydra
+       hydra
        ;;indent-guides     ; highlighted indent columns
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink the current line after jumping
@@ -80,9 +80,9 @@
 
        :term
        eshell            ; a consistent, cross-platform shell (WIP)
-       ;;shell             ; a terminal REPL for Emacs
+       shell             ; a terminal REPL for Emacs
        ;;term              ; terminals in Emacs
-       vterm             ; another terminals in Emacs
+       ;; vterm             ; another terminals in Emacs
 
        :checkers
        syntax              ; tasing you for every semicolon you forget

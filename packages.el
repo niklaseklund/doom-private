@@ -10,9 +10,7 @@
 (package! org-mime)
 
 ;; shell
-(package! esh-autosuggest)
-(package! fish-completion)
-(package! bash-completion)
+;(package! esh-autosuggest)
 
 ;; system
 (package! guix)
