@@ -17,16 +17,16 @@
     (pushnew! eshell-visual-commands "bluetoothctl"))
 
   ;; Keybindings
-  (map! :map eshell-mode-map
-      :i "C-p" #'eshell-previous-input
-      :i "C-n" #'eshell-next-input
-      :i "M-c" #'counsel-projectile-find-dir
-      :ni "C-k" #'evil-window-up
-      :ni "C-j" #'evil-window-down
-      :ni "C-h" #'evil-window-left
-      :ni "C-l" #'evil-window-right
-      :i "TAB" #'completion-at-point
-      :i [tab] #'completion-at-point)
+  ;; (map! :map eshell-mode-map
+  ;;     :i "C-p" #'eshell-previous-input
+  ;;     :i "C-n" #'eshell-next-input
+  ;;     :i "M-c" #'counsel-projectile-find-dir
+  ;;     :ni "C-k" #'evil-window-up
+  ;;     :ni "C-j" #'evil-window-down
+  ;;     :ni "C-h" #'evil-window-left
+  ;;     :ni "C-l" #'evil-window-right
+  ;;     :i "TAB" #'completion-at-point
+  ;;     :i [tab] #'completion-at-point)
 
   ;; Aliases
   (set-eshell-alias!
@@ -52,45 +52,10 @@
   (setenv "PAGERQ" "cat")
 
   (add-hook! 'eshell-first-time-mode-hook
-    (lambda () (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)))
-
-  (remove-hook 'eshell-mode-hook '+eshell-init-company-h))
+    (lambda () (add-hook 'eshell-pre-command-hook 'eshell-save-some-history))))
 
 
 ;;
-;;; Completion
-
-(use-package! esh-autosuggest
-  :after eshell
-  :config
-  (setq ivy-do-completion-in-region t)
-
-  (defun setup-eshell-ivy-completion-h ()
-    "Use ivy mini-buffer for completion.
-This works pretty nice with childframes I think."
-    (map! :map eshell-mode-map
-          [remap eshell-pcomplete] 'completion-at-point)
-    (setq-local ivy-display-functions-alist
-                (remq (assoc 'ivy-completion-in-region ivy-display-functions-alist)
-                      ivy-display-functions-alist)))
-
-  (add-hook 'eshell-mode-hook #'esh-autosuggest-mode)
-  (add-hook 'eshell-mode-hook #'setup-eshell-ivy-completion-h))
-
-(use-package! fish-completion
-  :config
-  (setq fish-completion-fallback-on-bash-p t)
-  (global-fish-completion-mode))
-
-(use-package! bash-completion
-  :config
-  (setq bash-completion-prog (executable-find "bash")))
-
-
-;;
-;; Detached
-(use-package! detached
-  :load-path "~/src/detached"
   :ensure nil
   :after eshell
   :config
@@ -107,13 +72,11 @@ This works pretty nice with childframes I think."
 
 ;; Vterm
 (after! vterm
-
   (defadvice! +default/yank-pop-a (orig-fn &rest args)
     :around #'+default/yank-pop
     (if (eq major-mode 'vterm-mode )
         (+vterm/yank-pop)
       (apply orig-fn args)))
-
   (map!
    (:map vterm-mode-map
      :desc "Search history" :i "C-s" (lambda! () (vterm-send-key "r" nil nil t))
