@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: deprecate
+# key: dep
+# condition: t
+# --
+
+[DEPRECATE] $0

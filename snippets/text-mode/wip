@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: wip
+# key: wip
+# condition: t
+# --
+
+[WIP] $0
