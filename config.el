@@ -19,15 +19,10 @@
 ;; host os configuration
 (load! "+functions")
 (when (string= (system-name) "archbook")
-  (if (nc/multi-screen-setup-p)
-      (setq doom-font (font-spec :family "Fira Code" :size 12)
-            doom-big-font-increment 8
-            ;; doom-variable-pitch-font (font-spec :family "EtBembo" :size 20)
-            )
-    (setq doom-font (font-spec :family "Fira Code" :size 16)
-          doom-big-font-increment 8
-          ;; doom-variable-pitch-font (font-spec :family "EtBembo" :size 22)
-          ))
+  (setq doom-font (font-spec :family "Fira Code" :size 16)
+        doom-big-font-increment 8
+        ;; doom-variable-pitch-font (font-spec :family "EtBembo" :size 22)
+        )
   (font-put doom-font :weight 'semi-light)
   (setq x-super-keysym 'meta
         x-alt-keysym 'alt))

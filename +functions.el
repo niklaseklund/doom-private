@@ -19,9 +19,6 @@
                       (format "atlasian.xsrf.token=%s;JSESSIONID=%s" token id))))
 
 
-(defun nc/multi-screen-setup-p ()
-  ( > (string-to-number (shell-command-to-string "printf %s \"$(xrandr -q | grep -c ' connected')\"")) 1))
-
 (defun nc/buffer-copy (new-buffer-name)
   "Copy a buffer content into a buffer named NEW-BUFFER-NAME."
   (interactive)
