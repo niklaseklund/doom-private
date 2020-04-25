@@ -14,10 +14,8 @@
 
 ;; prettify modes
 (setq +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
-;; (set-frame-parameter nil 'fullscreen 'maximized)
 
 ;; host os configuration
-(load! "+functions")
 (when (string= (system-name) "archbook")
   (setq doom-font (font-spec :family "Fira Code" :size 16)
         doom-big-font-increment 8
@@ -50,54 +48,8 @@
                   (calendar-absolute-from-gregorian (list month day year)))))
         'font-lock-face 'font-lock-function-name-face))
 
-;; Don't bother
-(setq confirm-kill-emacs nil)
-;; Save customizations elsewhere
-(setq custom-file (expand-file-name "custom.el" doom-etc-dir))
-(load custom-file)
-
-
-;;
-;; Remote editing
-(with-eval-after-load 'tramp-sh
-  ;; Create persistent connections
-  (customize-set-variable
-   'tramp-ssh-controlmaster-options
-   (concat
-    "-o ControlPath=/tmp/ssh-ControlPath-%%r@%%h:%%p "
-    "-o ControlMaster=auto -o ControlPersist=yes"))
-  (customize-set-variable 'tramp-use-ssh-controlmaster-options nil)
-  ;; Add the remote host path
-  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
-
-  ;; solution for getting around a server with warning message about a not fully
-  ;; functional terminal. This is due to the fact that tramp is set to "dumb"
-  ;; Found a similar problem to mine here:
-  ;; http://emacs.1067599.n8.nabble.com/problem-getting-files-under-SunOS-from-cygwin-td277890.html
-  ;; there is also an example there about an interactive user input version if I ever need that :)
-  (defconst my-tramp-press-return-prompt-regexp
-    "\\(-  (press RETURN)\\)\\s-*"
-    "Regular expression matching my login prompt request.")
-
-  (defun my-tramp-press-return-action (proc vec)
-    "Enter \"?\^M\" to send a carriage return."
-    (save-window-excursion
-      (message "%s" vec)
-      (with-current-buffer (tramp-get-connection-buffer vec)
-        (tramp-message vec 6 "\n%s" (buffer-string))
-        ;; The control character for Enter is ^M
-        ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Ctl_002dChar-Syntax.html#Ctl_002dChar-Syntax
-        (tramp-send-string vec "?\^M"))))
-
-  (add-to-list 'tramp-actions-before-shell
-               '(my-tramp-press-return-prompt-regexp my-tramp-press-return-action)))
-
-
 ;;
 ;; Elisp
-
-;; Let the scratch buffer have elisp major mode by default
-;; if set to t it has the same mode as previous buffer
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
 
 ;;
@@ -214,10 +166,6 @@
      :desc "Home" :n "gh" (λ! () (find-file "~")))))
 
 ;;
-;; Command Log
-
-
-;;
 ;; Documentation
 ;; right docsets for major-modes
 (after! python
@@ -242,7 +190,6 @@
 (load! "+app")
 (load! "+bindings")
 (load! "+brain")
-(load! "+chat")
 (load! "+code")
 (load! "+dap")
 (load! "+eshell")
