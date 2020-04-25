@@ -5,7 +5,6 @@
 (package! transmission)
 
 ;; org
-(package! org-super-agenda)
 (package! org-mime)
 
 ;; system
