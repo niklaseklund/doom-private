@@ -26,4 +26,3 @@
 (package! navigel)
 (package! emacsql)
 (package! emacsql-sqlite)
-(package! lorem-ipsum)
