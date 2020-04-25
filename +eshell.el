@@ -74,21 +74,6 @@
   (ivy-rich-mode 0)
   (ivy-rich-mode +1))
 
-
-;;
-;; Vterm
-(after! vterm
-  (defadvice! +default/yank-pop-a (orig-fn &rest args)
-    :around #'+default/yank-pop
-    (if (eq major-mode 'vterm-mode )
-        (+vterm/yank-pop)
-      (apply orig-fn args)))
-  (map!
-   (:map vterm-mode-map
-     :desc "Search history" :i "C-s" (lambda! () (vterm-send-key "r" nil nil t))
-     :desc "Paste from evil register" :i "C-r" #'+vterm/paste-from-register)))
-
-
 ;;
 ;; Shell
 ;; Customize the shell to use per host

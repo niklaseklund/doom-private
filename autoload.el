@@ -42,26 +42,6 @@ that the daemon always runs when needed."
 
 
 ;;;###autoload
-(defun +vterm/paste-from-register ()
-  "Paste from evil register."
-    (interactive)
-    (let ((inhibit-read-only t))
-      (cl-letf (((symbol-function 'insert-for-yank)
-                 #'(lambda (str) (vterm-send-string str t))))
-        (call-interactively #'evil-paste-from-register))))
-
-
-;;;###autoload
-(defun +vterm/yank-pop ()
-  "Interactively select what text to insert from the kill ring."
-  (interactive)
-  (let ((inhibit-read-only t))
-    (cl-letf (((symbol-function 'insert-for-yank)
-               #'(lambda (str) (vterm-send-string str t))))
-      (call-interactively #'counsel-yank-pop))))
-
-
-;;;###autoload
 (defun +dired/ediff-files ()
   "Ediff two marked files in a dired buffer.
 The function originates from, https://oremacs.com/2017/03/18/dired-ediff/"
