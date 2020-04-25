@@ -16,7 +16,6 @@
                                                         (string-trim-right (buffer-substring-no-properties (point) (line-end-position)))))
                 (start-process "switch-to-normal" nil "xkb-switch" "-s" normal-mode-keyboard-layout)))))
 
-
 ;;
 ;; Screencast
 (use-package! gif-screencast

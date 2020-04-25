@@ -86,6 +86,7 @@ The function originates from, https://oremacs.com/2017/03/18/dired-ediff/"
   (let (confirm-kill-processes)
     (apply orig-fn args)))
 
+
 ;;;###autoload
 (defun nc/org-babel-previous-session ()
   "Find the previous src code block which contains the session argument and
@@ -104,3 +105,18 @@ return it together with the language"
             (setq session block-session)
             (setq language block-lang))))
       (format "%s :session %s" language session))))
+
+
+;;;###autoload
+(defun nc/blog-publish ()
+  "Publish changes to the blog.
+Builds the project with command `hugo' then creates a commit and pushes it
+upstreams."
+  (interactive)
+  (let ((default-directory (projectile-project-root)))
+    (shell-command "hugo")
+    (let ((default-directory (concat default-directory "public/"))
+          (commit-message (format "rebuilding site %s" (shell-command-to-string "echo -n $(date +%Y%m%d)"))))
+      (apply #'call-process `("git" nil nil nil "add" "."))
+      (apply #'call-process `("git" nil nil nil "commit" "-m" ,commit-message))
+      (apply #'call-process `("git" nil nil nil "push" "origin" "master")))))
