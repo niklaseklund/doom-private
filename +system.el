@@ -12,19 +12,16 @@
    :desc "Reset cache" :nmi "r" #'disk-usage-reset-cache
    :desc "Dired here" :nmi "D" (λ! () (dired default-directory))))
 
-
 ;;
 ;; Bluetooth
 (use-package! bluetooth
   :config
 
-  ;; Ensure bluetooth buffer is delegated to the popup system.
+  ;; Window
   (defadvice! +popup--bluetooth-pop-to-buffer ()
     "Use `pop-to-buffer' instead of `switch-to-buffer' to open buffer.'"
     :before #'bluetooth-list-devices
     (pop-to-buffer "*Bluetooth*"))
-
-  ;; Configure popup rule
   (set-popup-rule! "*Bluetooth*" :size 0.3 :side 'bottom :select t :autosave t)
 
   ;; Keybindings
@@ -44,11 +41,15 @@
      :desc "Begin" :n "b" #'bluetooth-start-discovery
      :desc "Stop" :n "s" #'bluetooth-stop-discovery)))
 
+
+;;
+;; Guix (package management)
 (use-package! guix
   :config
   (set-popup-rule! "\\*Guix Packages*" :ignore t)
   (set-popup-rule! "\\*Guix Package Info*" :side 'bottom :size 0.8 :vslot 10)
   (set-popup-rule! "\\*Guix REPL\\*" :side 'bottom :size 0.3 :vslot 5))
+
 
 ;;
 ;; Conflicts
