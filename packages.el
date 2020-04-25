@@ -6,7 +6,6 @@
 
 ;; org
 (package! org-super-agenda)
-(package! org-noter)
 (package! org-mime)
 
 ;; shell
