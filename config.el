@@ -20,12 +20,14 @@
 (load! "+functions")
 (when (string= (system-name) "archbook")
   (if (nc/multi-screen-setup-p)
-      (setq doom-font (font-spec :family "Fira Code" :size 14)
+      (setq doom-font (font-spec :family "Fira Code" :size 12)
             doom-big-font-increment 8
-            doom-variable-pitch-font (font-spec :family "EtBembo" :size 20))
-    (setq doom-font (font-spec :family "Fira Code" :size 18)
+            ;; doom-variable-pitch-font (font-spec :family "EtBembo" :size 20)
+            )
+    (setq doom-font (font-spec :family "Fira Code" :size 16)
           doom-big-font-increment 8
-          doom-variable-pitch-font (font-spec :family "EtBembo" :size 22)))
+          ;; doom-variable-pitch-font (font-spec :family "EtBembo" :size 22)
+          ))
   (font-put doom-font :weight 'semi-light)
   (setq x-super-keysym 'meta
         x-alt-keysym 'alt))
@@ -151,9 +153,7 @@
         :desc "Toggle password" :m "t" #'pass-view-toggle-password
         :desc "View qr-code" :m "Q" #'pass-view-qrcode
         :desc "Copy password" :m "y" #'pass-view-copy-password
-        :desc "Quit" :m "q" #'pass-quit)
-  ;; TODO: improve the pass-quit function to properly clean-up the window layout
-  )
+        :desc "Quit" :m "q" #'pass-quit))
 
 
 ;;
