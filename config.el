@@ -104,26 +104,6 @@
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
 
 ;;
-;; Projects
-(after! projectile
-  (setq projectile-enable-caching t
-        projectile-project-search-path '("~/src/" "~/opensource")
-        ;; Follow suggestion to reorder root functions to find the .projectile file
-        ;; https://old.reddit.com/r/emacs/comments/920psp/projectile_ignoring_projectile_files/
-        projectile-project-root-files-functions #'(projectile-root-top-down
-                                                   projectile-root-top-down-recurring
-                                                   projectile-root-bottom-up
-                                                   projectile-root-local))
-  (add-to-list 'projectile-project-root-files ".projectile"))
-
-
-;;
-;; Windows (not the operating system)
-(after! org
-  (set-popup-rule! "^CAPTURE.*\\.org$" :size 0.4 :side 'bottom :select t :autosave t))
-
-
-;;
 ;; Pass
 (after! pass
   ;; enter evil mode
@@ -181,7 +161,7 @@
 ;; spell check commit messages
 (add-hook 'git-commit-setup-hook 'git-commit-turn-on-flyspell)
 ;; mitigate dumb terminals
-(setenv "EDITOR" "emacsclient")
+;; (setenv "EDITOR" "emacsclient")
 ;; add submodules to magit-status
 (with-eval-after-load 'magit
 (magit-add-section-hook 'magit-status-sections-hook
@@ -238,26 +218,8 @@
      :desc "Recent files" :n "zz" #'dired-recent-open
      :desc "Home" :n "gh" (λ! () (find-file "~")))))
 
-
-;;
-;; Disable flycheck
-(add-hook! 'text-mode-hook (lambda ()
-                             (flycheck-mode -1)))
-
 ;;
 ;; Command Log
-(use-package! command-log-mode
-  :commands global-command-log-mode
-  :config
-  (setq command-log-mode-auto-show t
-        command-log-mode-open-log-turns-on-mode nil
-        command-log-mode-is-global t
-        command-log-mode-window-size 50))
-
-
-;;
-;; Auto-formatting
-(setq show-trailing-whitespace nil)
 
 
 ;;
@@ -280,62 +242,8 @@
                             (flycheck-mode -1)))
 (add-to-list 'auto-mode-alist '("\\.MD\\'" . markdown-mode))
 
-
-;;
-;; Pop-ups
-(set-popup-rule! "^\\*Customize Group:*" :side 'right :size 0.4)
-
-
-;;
-;; Feeder
-(use-package! elfeed
-  :config
-  (setq elfeed-db-directory "~/sync/elfeed/db")
-  ;; Gotta make doom treat elfeed-search-buffer as real. Otherwise exiting a
-  ;; show buffer doesn't bring me back to the feed, but instead the latest
-  ;; "real" buffer.
-  (defun +elfeed-buffer-p (buf)
-    "Return non-nil if BUF is a `elfeed-mode' buffer."
-    (with-current-buffer buf
-      (or
-       (derived-mode-p 'elfeed-search-mode))))
-  (add-hook 'doom-real-buffer-functions #'+elfeed-buffer-p)
-  (add-hook 'elfeed-search-update-hook #'hide-mode-line-mode)
-
-  ;; Customize show entry
-  (defun nc/elfeed-search-show-entry (orig-fn &rest args)
-    (apply orig-fn args)
-    (hide-mode-line-mode)
-    (writeroom-mode 1)
-    (visual-line-mode))
-  (advice-add 'elfeed-search-show-entry :around #'nc/elfeed-search-show-entry))
-
-
-;; Improve defining feeds
-(use-package! elfeed-org
-  :config
-  (elfeed-org)
-  (setq rmh-elfeed-org-files (list "~/sync/elfeed/elfeed.org")))
-
-
-;;
-;; PDF
-(after! pdf-tools
-  ;; customize midnight-mode colors
-  (setq pdf-view-midnight-colors '("#ffffff" . "#000000"))
-  (map!
-   :map pdf-view-mode-map
-   :desc "pdf-occur" :nmi "C-s" #'pdf-occur))
-
-
-;;
-;; Languagetool
-(setq langtool-language-tool-jar "~/opensource/languagetool/languagetool-commandline.jar")
-
-
 ;;
 ;; Load other config files
-(load! "+agenda")
 (load! "+app")
 (load! "+bindings")
 (load! "+brain")

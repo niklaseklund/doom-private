@@ -2,52 +2,22 @@
 
 ;;
 ;; Org-mode
+(setq org-directory "~/org")
 (after! org
   (setq outline-blank-line nil
         org-cycle-separator-lines 2
-        org-log-done 'time
-        org-directory "~/org"
-        org-agenda-files '("~/org/todo.org"
-                           "~/org/incubate.org"
-                           "~/org/projects.org"
-                           "~/sync/org/Inbox.org"
-                           "~/sync/org/Ideer.org"
-                           "~/sync/org/Intressen.org")
-        org-latex-caption-above nil
-        org-html-table-caption-above nil
-        org-ditaa-jar-path "~/.emacs.d/.local/straight/repos/org/contrib/scripts/ditaa.jar")
+        org-log-done 'time)
   ;; Org-links to emails
-  (require 'ol-notmuch))
+  (require 'ol-notmuch)
+  ;; Popups
+  (set-popup-rule! "^CAPTURE.*\\.org$" :size 0.4 :side 'bottom :select t :autosave t))
+
 ;; Hooks
 (add-hook 'org-mode-hook (lambda ()
                            (hl-line-mode -1)))
 (add-hook 'org-mode-hook (lambda ()
                            (flycheck-mode -1))
           (add-hook 'org-mode-hook #'doom-disable-line-numbers-h))
-
-;;
-;; Links
-(after! org-compat
-          (defvar yt-iframe-format
-            ;; You may want to change your width and height.
-            (concat "<iframe width=\"1600\""
-                    " height=\"1000\""
-                    " src=\"https://www.youtube.com/embed/%s\""
-                    " frameborder=\"0\""
-                    " allowfullscreen>%s</iframe>"))
-(org-add-link-type
- "yt"
- (lambda (handle)
-   (browse-url
-    (concat "https://www.youtube.com/embed/"
-            handle)))
- (lambda (path desc backend)
-   (cl-case backend
-     (html (format yt-iframe-format
-                   path (or desc "")))
-     (latex (format "\href{%s}{%s}"
-                    path (or desc "video")))))))
-
 
 ;;
 ;; Hugo

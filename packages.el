@@ -8,9 +8,6 @@
 (package! org-super-agenda)
 (package! org-mime)
 
-;; shell
-;(package! esh-autosuggest)
-
 ;; system
 (package! guix)
 (package! dired-recent)
@@ -19,16 +16,11 @@
 (package! disk-usage)
 (package! emacs-conflicts :recipe (:host github :repo "ibizaman/emacs-conflicts" :branch "master"))
 (package! bluetooth)
-(package! command-log-mode)
 (package! alert)
 (package! gif-screencast)
 
 ;; chat
 (package! erc-hl-nicks)
-
-;; rss
-(package! elfeed)
-(package! elfeed-org)
 
 ;; mail
 (package! notmuch)
