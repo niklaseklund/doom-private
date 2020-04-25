@@ -191,7 +191,6 @@
 (load! "+bindings")
 (load! "+brain")
 (load! "+code")
-(load! "+dap")
 (load! "+eshell")
 (load! "+org")
 (load! "+mail")
