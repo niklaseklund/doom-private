@@ -10,12 +10,6 @@
   ;; Enable TRAMP to use sudo.
   (require 'em-tramp)
 
-  ;; Handle visual commands
-  (after! term
-    (add-hook 'term-mode-hook #'hide-mode-line-mode))
-  (after! em-term
-    (pushnew! eshell-visual-commands "bluetoothctl"))
-
   ;; Aliases
   (set-eshell-alias!
    "d" "dired $1"
@@ -61,15 +55,3 @@
   ;; Enable ivy-rich
   (ivy-rich-mode 0)
   (ivy-rich-mode +1))
-
-;;
-;; Shell
-;; Customize the shell to use per host
-;; https://www.gnu.org/software/tramp/
-(connection-local-set-profile-variables
- 'remote-bash
- '((explicit-shell-file-name . "/bin/bash")
-   (explicit-bash-args . ("-i"))))
-(connection-local-set-profiles
-  '(:application tramp :protocol "ssh" :machine "pi")
-  'remote-bash)
