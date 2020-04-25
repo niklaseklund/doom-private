@@ -19,9 +19,6 @@
 (package! alert)
 (package! gif-screencast)
 
-;; chat
-(package! erc-hl-nicks)
-
 ;; mail
 (package! notmuch)
 (package! counsel-notmuch)
