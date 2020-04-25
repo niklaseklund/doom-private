@@ -21,7 +21,6 @@
 (package! bluetooth)
 (package! command-log-mode)
 (package! alert)
-(package! yequake)
 (package! gif-screencast)
 
 ;; chat
