@@ -105,18 +105,14 @@
 
 ;;
 ;; Version control
-;; spell check commit messages
-(add-hook 'git-commit-setup-hook 'git-commit-turn-on-flyspell)
-;; mitigate dumb terminals
-;; (setenv "EDITOR" "emacsclient")
-;; add submodules to magit-status
-(with-eval-after-load 'magit
-(magit-add-section-hook 'magit-status-sections-hook
-                            'magit-insert-modules
-                            'magit-insert-unpulled-from-upstream)
-  (setq magit-module-sections-nested nil))
-;; improve diff of org-mode files
+(add-hook 'git-commit-setup-hook #'git-commit-turn-on-flyspell)
 (add-hook 'ediff-prepare-buffer-hook #'outline-show-all)
+(with-eval-after-load 'magit
+  ;; add submodules to magit-status
+  (magit-add-section-hook 'magit-status-sections-hook
+                          'magit-insert-modules
+                          'magit-insert-unpulled-from-upstream)
+  (setq magit-module-sections-nested nil))
 
 
 ;;
@@ -180,9 +176,6 @@
 
 ;;
 ;; Mode file association
-(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
-(add-hook 'octave-mode-hook (lambda ()
-                            (flycheck-mode -1)))
 (add-to-list 'auto-mode-alist '("\\.MD\\'" . markdown-mode))
 
 ;;

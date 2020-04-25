@@ -2,6 +2,14 @@
 
 ;; A collection of system utilty functionality
 
+;;
+;; Guix (package management)
+(use-package! guix
+  :config
+  (set-popup-rule! "\\*Guix Packages*" :ignore t)
+  (set-popup-rule! "\\*Guix Package Info*" :side 'bottom :size 0.8 :vslot 10)
+  (set-popup-rule! "\\*Guix REPL\\*" :side 'bottom :size 0.3 :vslot 5))
+
 
 ;;
 ;; Disk usage
@@ -11,6 +19,7 @@
    :map disk-usage-mode-map
    :desc "Reset cache" :nmi "r" #'disk-usage-reset-cache
    :desc "Dired here" :nmi "D" (λ! () (dired default-directory))))
+
 
 ;;
 ;; Bluetooth
@@ -40,16 +49,6 @@
    (:prefix ("d" . "Discover")
      :desc "Begin" :n "b" #'bluetooth-start-discovery
      :desc "Stop" :n "s" #'bluetooth-stop-discovery)))
-
-
-;;
-;; Guix (package management)
-(use-package! guix
-  :config
-  (set-popup-rule! "\\*Guix Packages*" :ignore t)
-  (set-popup-rule! "\\*Guix Package Info*" :side 'bottom :size 0.8 :vslot 10)
-  (set-popup-rule! "\\*Guix REPL\\*" :side 'bottom :size 0.3 :vslot 5))
-
 
 ;;
 ;; Conflicts
