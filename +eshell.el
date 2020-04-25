@@ -16,18 +16,6 @@
   (after! em-term
     (pushnew! eshell-visual-commands "bluetoothctl"))
 
-  ;; Keybindings
-  ;; (map! :map eshell-mode-map
-  ;;     :i "C-p" #'eshell-previous-input
-  ;;     :i "C-n" #'eshell-next-input
-  ;;     :i "M-c" #'counsel-projectile-find-dir
-  ;;     :ni "C-k" #'evil-window-up
-  ;;     :ni "C-j" #'evil-window-down
-  ;;     :ni "C-h" #'evil-window-left
-  ;;     :ni "C-l" #'evil-window-right
-  ;;     :i "TAB" #'completion-at-point
-  ;;     :i [tab] #'completion-at-point)
-
   ;; Aliases
   (set-eshell-alias!
    "d" "dired $1"
