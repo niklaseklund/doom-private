@@ -13,57 +13,7 @@
             (lambda ()
               (setq-local company-minimum-prefix-length 1)))
 
-  ;; Override the built-in dap hydra to add additional keybindings
-  (defhydra +dap-hydra (:color purple :hint nil :foreign-keys run)
-    "
-^Stepping^             ^Switch^           ^Breakpoints^          ^Eval^                        ^Debug
-^^^^^^^^--------------------------------------------------------------------------------------------------------------------
-_n_: Next          _ss_: Session          _bt_: Toggle          _ee_: Eval                     _dd_: Debug
-_i_: Step in       _st_: Thread           _bd_: Delete          _er_: Eval region              _dr_: Debug recent
-_o_: Step out      _sf_: Stack frame      _ba_: Add             _es_: Eval thing at point      _dl_: Debug last
-_c_: Continue      _sl_: List locals      _bc_: Set condition   _eii_: Inspect                 _dt_: Debug edit template
-_r_: Restart frame _sb_: List breakpoints _bh_: Set hit count   _eir_: Inspect region          ^ ^
-_Q_: Disconnect    _sS_: List sessions    _bl_: Set log message _eis_: Inspect thing at point  ^ ^
-^ ^                 ^ ^                   _bD_: Delete all      ^ ^                            ^ ^
-"
-    ("n" dap-next)
-    ("i" dap-step-in)
-    ("o" dap-step-out)
-    ("c" dap-continue)
-    ("r" dap-restart-frame)
-    ("Q" dap-disconnect)
-
-    ("ss" dap-switch-session)
-    ("st" dap-switch-thread)
-    ("sf" dap-switch-stack-frame)
-    ("sl" dap-ui-locals)
-    ("sb" dap-ui-breakpoints)
-    ("sS" dap-ui-sessions)
-
-    ("bt" dap-breakpoint-toggle)
-    ("bd" dap-breakpoint-delete)
-    ("bD" dap-breakpoint-delete-all)
-    ("ba" dap-breakpoint-add)
-    ("bc" dap-breakpoint-condition)
-    ("bh" dap-breakpoint-hit-condition)
-    ("bl" dap-breakpoint-log-message)
-
-    ("ee" dap-eval)
-    ("er" dap-eval-region)
-    ("es" dap-eval-thing-at-point)
-    ("eii" dap-ui-inspect)
-    ("eir" dap-ui-inspect-region)
-    ("eis" dap-ui-inspect-thing-at-point)
-
-    ("dd" dap-debug)
-    ("dr" dap-debug-recent)
-    ("dl" dap-debug-last)
-    ("dt" dap-debug-edit-template)
-
-    ("q" nil "quit"))
-
   ;; Display some debug windows on session startup
-  ;; https://github.com/emacs-lsp/dap-mode/wiki/HowTo:-Display-debug-windows-on-session-startup
   (defun +dap/window-visible (b-name)
     "Return whether B-NAME is visible."
     (-> (-compose 'buffer-name 'window-buffer)

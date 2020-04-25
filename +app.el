@@ -1,11 +1,5 @@
 ;;; +app.el -*- lexical-binding: t; -*-
 
-;;; Description
-;; This file contains application packages that aims to extend the powers of
-;; Emacs to control or interact with external applications to bring workflows
-;; into Emacs.
-
-
 ;;; Video
 (use-package! ivy-youtube
   :defer t
