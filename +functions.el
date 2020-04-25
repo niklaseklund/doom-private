@@ -22,60 +22,6 @@
 (defun nc/multi-screen-setup-p ()
   ( > (string-to-number (shell-command-to-string "printf %s \"$(xrandr -q | grep -c ' connected')\"")) 1))
 
-
-
-;; TODO: Make a more general mount
-;; select from a list of the directories in /mnt
-(defun nc/mount-drive ()
-  (interactive)
-  (let ((default-directory "/sudo:root@localhost:/mnt/")
-        (mount-command "PASSWD=$(pass devices/archbook/root | sed -n 1p) mount /mnt/")
-        drive)
-    (with-temp-buffer
-      (call-process "ls" nil t "")
-      (setq drive (completing-read "Mount drive:"
-                                   (split-string (string-trim (buffer-string )) "\n")
-                                   nil t
-                                   )))
-    (shell-command (concat mount-command drive))))
-
-
-(defun nc/mount-drives ()
-  "Mount my drives."
-  (interactive)
-  (let ((drives '("regtt01"
-                  "zebra01"
-                  "driveme01"))
-        (mount-command "PASSWD=$(pass work/zenuity/login | sed -n 1p) mount /mnt/"))
-    (mapcar (lambda (mount-drive) (shut-up (shell-command (concat mount-command mount-drive)))) drives)))
-
-
-(defun nc/delete-frame-and-switch ()
-  "Delete the current frame and jump to the previous bspwm window."
-  (interactive)
-  (let ((command (split-string-and-unquote  "bspc node older -f")))
-    ;; delete the current frame
-    (call-interactively 'delete-frame)
-    ;; focus on the previous node
-    (apply 'start-process "switch-to-previous-node" nil command)
-    ))
-
-
-;; TODO: Simplify the code below, to get the number of the current desktop:
-;; bspc query -D -d --names
-(defun nc/delete-frame-and-stay ()
-  "Delete the current frame and stay focused on the current desktop."
-  (interactive)
-  (let* ((desktop-ids (split-string (string-trim (shell-command-to-string "bspc query -D"))))
-         (current-desktop (string-trim (shell-command-to-string "bspc query -D -d")))
-         (current-desktop-index (+ 1  (cl-position current-desktop desktop-ids :test #'equal)))
-         (command (split-string-and-unquote (format "bspc desktop -f ^%s" current-desktop-index))))
-    ;; delete the current frame
-    (call-interactively 'delete-frame)
-    ;; focus on the previous node
-    (apply 'start-process "keep-focus" nil command)))
-
-
 (defun nc/buffer-copy (new-buffer-name)
   "Copy a buffer content into a buffer named NEW-BUFFER-NAME."
   (interactive)
