@@ -39,11 +39,11 @@
            (zone-buffer (get-buffer-create "*zone*")))
       ;; Make a copy of the current buffer,
       ;; this way it works even for buffers like eshell
-      (nc/buffer-copy "*zone-copy*")
+      (+zone/buffer-copy "*zone-copy*")
       ;; Visit all windows and switch to the soon to be used zone-buffer
       (while all-windows
-        (select-window (car  all-windows))
-        (setq  all-windows (cdr  all-windows))
+        (select-window (car all-windows))
+        (setq all-windows (cdr all-windows))
         (switch-to-buffer "*zone*"))
       ;; Switch back to the starting window and change that to zone-copy buffer
       (select-window current-window)
@@ -62,7 +62,7 @@
           (windows)
           (zone-buffer (get-buffer-create "*zone*")))
       ;; copy the current window
-      (nc/buffer-copy "*zone-copy*")
+      (+zone/buffer-copy "*zone-copy*")
       ;; As long as we haven't returned to the starting frame
       (while (not (eq current-frame start-frame))
         ;; get all the windows on the current frame
@@ -95,6 +95,27 @@
           ;; Kill the *zone-copy* upon unlocking (don't need it anymore)
           (kill-buffer "*zone-copy*")))
       (+zone/all-frames)))
+
+  (defun +zone/buffer-copy (new-buffer-name)
+    "Copy a buffer content into a buffer named NEW-BUFFER-NAME."
+    (interactive)
+    (let ((text (buffer-substring (point-min) (point-max)))
+          (outbuf (get-buffer-create new-buffer-name))
+          (current-point (point)))
+      (switch-to-buffer outbuf)
+      (erase-buffer)
+      (insert text)
+      (+zone/set-region-writeable (point-min) (point-max))
+      (goto-char current-point)))
+
+  (defun +zone/set-region-writeable (begin end)
+    "Removes the read-only text property from the marked region."
+    ;; See http://stackoverflow.com/questions/7410125
+    (interactive "r")
+    (let ((modified (buffer-modified-p))
+          (inhibit-read-only t))
+      (remove-text-properties begin end '(read-only t))
+      (set-buffer-modified-p modified)))
 
   ;; bindings
   (map!
