@@ -147,3 +147,51 @@ upstreams."
       (apply #'call-process `("git" nil nil nil "add" "."))
       (apply #'call-process `("git" nil nil nil "commit" "-m" ,commit-message))
       (apply #'call-process `("git" nil nil nil "push" "origin" "master")))))
+
+
+;;;###autoload
+(defun +dap/python-poetry-a (orig-fn &rest args)
+"Use the Python binary from the current virtual environment."
+(if (getenv "VIRTUAL_ENV")
+      (executable-find (car args))
+    (apply orig-fn args)))
+
+
+;;;###autoload
+(defun +python/open-poetry-repl-a (orig-fn &rest args)
+  "Use the Python binary from the current virtual environment."
+  (if (getenv "VIRTUAL_ENV")
+      (let ((python-shell-interpreter (executable-find "python")))
+        (apply orig-fn args))
+    (apply orig-fn args)))
+
+
+;;;###autoload
+(defun +dap/hide-debug-windows-h (_session)
+    "Hide debug windows when all debug sessions are dead."
+    (unless (-filter 'dap--session-running (dap--get-sessions))
+      (and (get-buffer dap-ui--sessions-buffer)
+           (kill-buffer dap-ui--sessions-buffer))
+      (and (get-buffer dap-ui--locals-buffer)
+           (kill-buffer dap-ui--locals-buffer))
+      (and (get-buffer "*Breakpoints*")
+           (kill-buffer "*Breakpoints*"))))
+
+
+;;;###autoload
+(defun +dap/window-visible (b-name)
+    "Return whether B-NAME is visible."
+    (-> (-compose 'buffer-name 'window-buffer)
+        (-map (window-list))
+        (-contains? b-name)))
+
+
+;;;###autoload
+(defun +dap/show-debug-windows-h (session)
+    "Show debug windows."
+    (let ((lsp--cur-workspace (dap--debug-session-workspace session)))
+      (save-excursion
+        (unless (+dap/window-visible dap-ui--locals-buffer)
+          (dap-ui-locals))
+        (unless (+dap/window-visible dap-ui--sessions-buffer)
+          (dap-ui-sessions)))))
