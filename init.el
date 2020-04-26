@@ -142,7 +142,6 @@
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org              ; organize your plain life in plain text
-        +brain
         +hugo            ; use Emacs for hugo blogging
         +noter
         +present)        ; using org-mode for presentations
