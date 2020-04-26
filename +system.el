@@ -3,8 +3,9 @@
 ;; A collection of system utilty functionality
 
 ;;
-;; Guix (package management)
+;; Package manager
 (use-package! guix
+  :defer t
   :config
   (set-popup-rule! "\\*Guix Packages*" :ignore t)
   (set-popup-rule! "\\*Guix Package Info*" :side 'bottom :size 0.8 :vslot 10)
@@ -14,41 +15,51 @@
 ;;
 ;; Disk usage
 (use-package! disk-usage
-  :config
-  (map!
-   :map disk-usage-mode-map
-   :desc "Reset cache" :nmi "r" #'disk-usage-reset-cache
-   :desc "Dired here" :nmi "D" (λ! () (dired default-directory))))
+  :defer t)
 
 
 ;;
 ;; Bluetooth
 (use-package! bluetooth
+  :defer t
   :config
-
-  ;; Window
-  (defadvice! +popup--bluetooth-pop-to-buffer ()
-    "Use `pop-to-buffer' instead of `switch-to-buffer' to open buffer.'"
-    :before #'bluetooth-list-devices
-    (pop-to-buffer "*Bluetooth*"))
+  (advice-add 'bluetooth-list-devices :before '+bluetooth-pop-to-buffer-a)
   (set-popup-rule! "*Bluetooth*" :size 0.3 :side 'bottom :select t :autosave t)
-
-  ;; Keybindings
   (map!
    :map bluetooth-mode-map
    :desc "Connect" :n "c" #'bluetooth-connect
-   :desc "Disconnect" :n "x" #'bluetooth-disconnect
-   :desc "Information" :n "RET" #'bluetooth-show-device-info
-   :desc "Remove" :n "X" #'bluetooth-remove-device
-   (:prefix ("t" . "Toggle")
-     :desc "Power" :n  "p" #'bluetooth-toggle-power
-     :desc "Pairable" :n "P" #'bluetooth-toggle-pairable
-     :desc "Discoverable" :n "d" #'bluetooth-toggle-discoverable
-     :desc "Blocked" :n "b" #'bluetooth-toggle-blocked
-     :desc "Trusted" :n "t" #'bluetooth-toggle-trusted)
-   (:prefix ("d" . "Discover")
-     :desc "Begin" :n "b" #'bluetooth-start-discovery
-     :desc "Stop" :n "s" #'bluetooth-stop-discovery)))
+   :desc "Disconnect" :n "x" #'bluetooth-disconnect))
+
+
+;;
+;; Transmission
+(use-package! transmission
+  :defer t
+  :config
+  (setq transmission-refresh-modes '(transmission-mode
+                                      transmission-files-mode
+                                      transmission-info-mode
+                                      transmission-peers-mode))
+  (set-popup-rule! "*transmission*" :size 0.3 :side 'bottom :select t :autosave t)
+  (with-eval-after-load 'transmission
+    (advice-add 'transmission :before '+transmission-start-daemon-a)
+    (setq transmission-refresh-modes '(transmission-mode
+                                       transmission-files-mode
+                                       transmission-info-mode
+                                       transmission-peers-mode)
+          transmission-refresh-interval 1)))
+
+
+;;; Video
+(use-package! ivy-youtube
+  :defer t
+  :config
+  (setq ivy-youtube-key (+pass-get-secret "web/youtube/api-key")
+        browse-url-browser-function 'browse-url-generic
+        browse-url-generic-program "firefox"
+        ivy-youtube-play-at (executable-find "vlc")
+        ivy-youtube-history-file (concat doom-local-dir "ivy-youtube-history")))
+
 
 ;;
 ;; Conflicts
@@ -60,21 +71,5 @@
 (use-package! alert
   :config
   (setq alert-default-style 'libnotify)
-
-  (defun nc/compile-start-time (_process)
-    "Record the start time of the compilation."
-    (setq-local compile-start-time (time-to-seconds)))
-  (add-hook 'compilation-start-hook 'nc/compile-start-time)
-
-  (defun nc/compile-notify-finish (_buffer string)
-    "Conditionally show a notification when a compilation finishes.
-Always notify about compilations that are failing. Notify about successful ones
-if they have been running for enough time."
-    (let* ((duration-threshold 10)
-           (compilation-end-time (time-to-seconds))
-           (compile-duration (float-time (time-subtract compilation-end-time compile-start-time))))
-      (if (string-match "^finished" string)
-          (when (> compile-duration duration-threshold)
-            (alert "Compilation finished OK!" :title "Compilation Successful" :severity 'moderate :category 'compile :id 'compile-ok))
-        (alert "Compilation Failed" :title "Compilation Failed" :severity 'high :category 'compile :id 'compile-fail))))
-  (add-hook 'compilation-finish-functions 'nc/compile-notify-finish))
+  (add-hook 'compilation-start-hook '+compile-start-time-h)
+  (add-hook 'compilation-finish-functions '+compile-notify-finish-h))

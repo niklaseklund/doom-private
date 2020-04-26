@@ -14,6 +14,12 @@ that the daemon always runs when needed."
 
 
 ;;;###autoload
+(defun +bluetooth-pop-to-buffer-a ()
+  "Use `pop-to-buffer' instead of `switch-to-buffer' to open buffer.'"
+  (pop-to-buffer "*Bluetooth*"))
+
+
+;;;###autoload
 (defun +eshell/info-manual ()
   "Select and open an info manual."
   (info "dir")
