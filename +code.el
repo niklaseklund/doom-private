@@ -14,9 +14,6 @@
 ;;
 ;; DAP
 (with-eval-after-load 'dap-mode
-  (defun +dap/company-h ()
-    (setq-local company-minimum-prefix-length 1))
-
   (set-company-backend! 'dap-ui-repl-mode 'company-dap-ui-repl)
   (add-hook 'dap-ui-repl-mode-hook #'+dap/company-h)
   (add-hook 'dap-stopped-hook #'+dap/show-debug-windows-h)

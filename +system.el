@@ -94,17 +94,12 @@
   :defer t
   :config
   (setq transmission-refresh-modes '(transmission-mode
-                                      transmission-files-mode
-                                      transmission-info-mode
-                                      transmission-peers-mode))
-  (set-popup-rule! "*transmission*" :size 0.3 :side 'bottom :select t :autosave t)
-  (with-eval-after-load 'transmission
-    (advice-add 'transmission :before '+transmission-start-daemon-a)
-    (setq transmission-refresh-modes '(transmission-mode
-                                       transmission-files-mode
-                                       transmission-info-mode
-                                       transmission-peers-mode)
-          transmission-refresh-interval 1)))
+                                     transmission-files-mode
+                                     transmission-info-mode
+                                     transmission-peers-mode)
+        transmission-refresh-interval 1)
+  (advice-add 'transmission :before '+transmission-start-daemon-a)
+  (set-popup-rule! "*transmission*" :size 0.3 :side 'bottom :select t :autosave t))
 
 
 ;;; Video
@@ -142,21 +137,14 @@
 ;;
 ;; Password manager
 (after! pass
-  ;; enter evil mode
   (add-to-list 'evil-motion-state-modes 'pass-mode)
-  ;; disable snipe to have access to those keys
-  (push 'pass-mode evil-snipe-disabled-modes)
-  ;; don't show the bindings
   (setq pass-show-keybindings nil
         password-store-password-length 20)
-  ;; define the looks
   (set-popup-rule! "*Password-Store*" :size 0.3 :side 'left :select t :autosave t)
-  ;; Let's make the password shown directly
-  (add-hook 'pass-view-mode-hook 'pass-view-toggle-password)
+  (add-hook 'pass-view-mode-hook #'pass-view-toggle-password)
   ;; Keybindings
   (map!
    :map pass-mode-map
-
    :m "C-j" #'evil-window-down
    :m "C-h" #'evil-window-left
    :m "C-l" #'evil-window-right
