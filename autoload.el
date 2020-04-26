@@ -20,6 +20,27 @@ that the daemon always runs when needed."
 
 
 ;;;###autoload
+(defun +compile-notify-finish-h (_buffer string)
+    "Conditionally show a notification when a compilation finish.
+Always notify about compilations that are failing. Notify about successful ones
+if they have been running for enough time."
+    (message "hook compile called")
+    (let* ((duration-threshold 10)
+           (compilation-end-time (time-to-seconds))
+           (compile-duration (float-time (time-subtract compilation-end-time compile-start-time))))
+      (if (string-match "^finished" string)
+          (when (> compile-duration duration-threshold)
+            (alert "Compilation finished OK!" :title "Compilation Successful" :severity 'moderate :category 'compile :id 'compile-ok))
+        (alert "Compilation Failed" :title "Compilation Failed" :severity 'high :category 'compile :id 'compile-fail))))
+
+
+;;;###autoload
+(defun +compile-start-time-h (_process)
+    "Record the start time of the compilation."
+    (setq-local compile-start-time (time-to-seconds)))
+
+
+;;;###autoload
 (defun +eshell/info-manual ()
   "Select and open an info manual."
   (info "dir")

@@ -29,6 +29,7 @@
 ;;
 ;; Lock screen
 (use-package! zone
+  :defer t
   :config
   (defun +zone/all-windows ()
     "Make zone clone the current buffer on to all windows before running zone."

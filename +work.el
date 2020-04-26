@@ -8,6 +8,7 @@
 (use-package! gerrit
   :load-path "~/opensource/gerrit"
   :ensure nil
+  :defer t
   :config
   (setq gerrit-url "gerrit.zenuity.com"
         gerrit-email "niklas.carlsson@zenuity.com"

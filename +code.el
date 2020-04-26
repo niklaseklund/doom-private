@@ -72,6 +72,10 @@
         (apply orig-fn args))
     (apply orig-fn args)))
 
+(after! python
+  (set-docsets! 'python-mode "Pandas"))
+
+
 
 ;;
 ;; C++
@@ -81,6 +85,7 @@
 ;;
 ;;; Emacs Lisp
 (add-hook 'ielm-mode-hook 'lispy-mode)
+(setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
 
 
 ;;
