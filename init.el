@@ -144,7 +144,8 @@
        (org              ; organize your plain life in plain text
         +hugo            ; use Emacs for hugo blogging
         +noter
-        +present)        ; using org-mode for presentations
+        +present         ; using org-mode for presentations
+        +roam)
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
