@@ -102,7 +102,8 @@
   (set-popup-rule! "*transmission*" :size 0.3 :side 'bottom :select t :autosave t))
 
 
-;;; Video
+;;
+;; Video
 (use-package! ivy-youtube
   :defer t
   :config

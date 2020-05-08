@@ -40,18 +40,24 @@
 ;;
 ;; Detach
 (use-package! detach
-  :load-path "~/src/detach"
+  :load-path "~/opensource/detach"
   :ensure nil
   :after eshell
   :config
   (setq detach-db-dir doom-etc-dir)
   (require 'counsel-detach)
-  ;; Keybindings
-  (map! :map eshell-mode-map
-        :ni [C-return] #'counsel-detach
-        :ni [S-return] #'detach-create-session)
-  ;; Popup rules
   (set-popup-rule! "\\*detach-*" :size 0.5 :side 'right :quit t :modeline nil)
-  ;; Enable ivy-rich
+  ;; Enable compilation minor mode
+  (add-hook 'detach-log-mode-hook #'compilation-minor-mode)
+  ;; HACK reload ivy-rich to make detach config take effect.
   (ivy-rich-mode 0)
   (ivy-rich-mode +1))
+
+(use-package! detach-eshell
+  :load-path "~/opensource/detach"
+  :ensure nil
+  :after eshell
+  :config
+  (map! :map eshell-mode-map
+        :ni [C-return] #'counsel-detach
+        :ni [S-return] #'detach-create-session))
