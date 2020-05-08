@@ -8,32 +8,19 @@
 (use-package! gerrit
   :load-path "~/opensource/gerrit"
   :ensure nil
-  :defer t
   :config
-  (setq gerrit-url "gerrit.zenuity.com"
-        gerrit-email "niklas.carlsson@zenuity.com"
-        gerrit-job-regexp "^-\\s-*src--check-src-\\(.*\\)-src\\b\\s-*\\(\\bhttps.*/\\)\\s-*:\\s-*\\(\\b.*\\b\\)\\s-*in\\s-*\\(\\b.*\\b\\)")
 
   ;; Make DOOM not treat gerrit windows as popups
-  (set-popup-rule! "\\*gerrit-*" :ignore t)
+  (set-popup-rule! "\\*gerrit-*" :size 0.3 :side 'bottom :select t)
 
   ;; Keymap
-  (map!
-   (:map gerrit-mode-map
-     :n "?" #'gerrit-dispatch
-     :n "b" #'gerrit-browse
-     :n "f" #'counsel-imenu
-     :n "l" #'gerrit-changes-transient
-     :n "m" #'gerrit-message-transient
-     :n "o" #'gerrit-imenu-open
-     :n "p" #'gerrit-list-patch-sets
-     :n "r" #'gerrit-refresh-changes
-     :n "RET" #'gerrit-list-jobs)
-   (:map gerrit-change-mode-map
-     :n "^" #'navigel-open-parent
-     :n "f" #'counsel-imenu
-     :n "o" #'gerrit-imenu-open
-     :n "b" #'gerrit-browse)))
+  (map! :leader
+        :prefix "o"
+        :desc "Open gerrit" :n "g" #'gerrit)
+
+  ;; HACK reload ivy-rich to make gerrit config take effect.
+  (ivy-rich-mode 0)
+  (ivy-rich-mode +1))
 
 
 ;;
