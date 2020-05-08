@@ -46,7 +46,7 @@
        vc-gutter         ; vcs diff in the fringe
        ;;vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        window-select     ; visually switch windows
-       workspaces        ; tab emulation, persistence & separate workspaces
+       ;;workspaces        ; tab emulation, persistence & separate workspaces
        zen               ; distraction-free coding or writing
 
        :editor
@@ -83,7 +83,7 @@
 
        :tools
        ;;ansible
-       debugger          ; FIXME stepping through code, to help you add bugs
+       (debugger +lsp)     ; FIXME stepping through code, to help you add bugs
        direnv
        docker
        ;; editorconfig      ; let someone else argue about tabs vs spaces

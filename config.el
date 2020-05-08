@@ -59,6 +59,8 @@
 ;; Load other config files
 (load! "+code")
 (load! "+eshell")
+(unless (waylandp)
+  (load! "+exwm"))
 (load! "+org")
 (load! "+mail")
 (load! "+system")

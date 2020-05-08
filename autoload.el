@@ -295,3 +295,8 @@ upstreams."
           (inhibit-read-only t))
       (remove-text-properties begin end '(read-only t))
       (set-buffer-modified-p modified)))
+
+;;;###autoload
+(defun waylandp ()
+  "Return t if environmental variable WAYLAND is 1."
+  (string= (getenv "WAYLAND") "1"))
