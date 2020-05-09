@@ -1,15 +1,9 @@
 ;;; ~/.config/doom/+x.el -*- lexical-binding: t; -*-
 
 ;;
-;; Paste
-;; (use-package! gpastel)
-
-;;
 ;; Window Manager
 (use-package! exwm
   :config
-
-  ;; (add-hook 'exwm-init-hook (gpastel-mode))
 
   ;; exwm buffers should be considered real buffers.
   (add-hook! exwm-mode #'doom-mark-buffer-as-real-h)
@@ -31,6 +25,8 @@
                          (string= "Firefox" exwm-class-name))
                      (exwm-workspace-rename-buffer exwm-title)))))
 
+
+
   ;;  keybindings.
   (map!
    "s-SPC" #'counsel-linux-app
@@ -50,6 +46,9 @@
    "s-o" #'evil-switch-to-windows-last-buffer
    "s-a" (λ! () (org-agenda nil "a"))
    "s-e" (lambda! (notmuch-search "tag:inbox"))
+   "s-&" (lambda (command)
+           (interactive (list (read-shell-command "$ ")))
+           (start-process-shell-command command nil command))
    (:map exwm-mode-map
     "s-SPC" #'counsel-linux-app
     "s-," #'+ivy/switch-buffer
@@ -69,6 +68,9 @@
     "s-e" (lambda! (notmuch-search "tag:inbox"))
     "s-a" (λ! () (org-agenda nil "a"))
     "s-o" #'evil-switch-to-windows-last-buffer
+    "s-&" (lambda (command)
+            (interactive (list (read-shell-command "$ ")))
+            (start-process-shell-command command nil command))
     "s-\\" #'ivy-pass))
   (exwm-enable))
 
@@ -78,8 +80,9 @@
 (use-package! exwm-edit
   :after exwm
   :config
-  (setq exwm-edit-split "below")
+  (advice-add 'exwm-edit--compose :before '+exwm/edit-compose-a)
   (set-popup-rule! "\\*exwm-edit*" :size 0.3 :side 'bottom :select t :autosave t))
+
 
 ;;
 ;; Keyboard layout

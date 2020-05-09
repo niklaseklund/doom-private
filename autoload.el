@@ -296,7 +296,36 @@ upstreams."
       (remove-text-properties begin end '(read-only t))
       (set-buffer-modified-p modified)))
 
+
 ;;;###autoload
 (defun waylandp ()
   "Return t if environmental variable WAYLAND is 1."
   (string= (getenv "WAYLAND") "1"))
+
+
+;;;###autoload
+(defun +exwm/edit-compose-a (&optional no-copy)
+  "Override partly original implementation.
+Use `switch-to-buffer-other-window' to be able to customize the popup window."
+  (let* ((title (exwm-edit--buffer-title (buffer-name)))
+         (existing (get-buffer title))
+         (inhibit-read-only t)
+         (save-interprogram-paste-before-kill t)
+         (selection-coding-system 'utf-8)) ; required for multilang-support
+    (when (derived-mode-p 'exwm-mode)
+      (setq exwm-edit--last-exwm-buffer (buffer-name))
+      (unless (bound-and-true-p global-exwm-edit-mode)
+        (global-exwm-edit-mode 1))
+      (unless existing
+        (exwm-input--fake-key ?\C-a)
+        (exwm-input--fake-key ?\C-c)
+        (let ((buffer (get-buffer-create title)))
+          (with-current-buffer buffer
+            (run-hooks 'exwm-edit-compose-hook)
+            (exwm-edit-mode 1)
+            (switch-to-buffer-other-window (get-buffer-create title))
+            (setq-local header-line-format
+                        (substitute-command-keys
+                         "Edit, then exit with `\\[exwm-edit--finish]' or cancel with \ `\\[exwm-edit--cancel]'"))
+            (unless no-copy
+              (exwm-edit--yank))))))))
