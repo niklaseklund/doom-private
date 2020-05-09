@@ -26,6 +26,8 @@
 (advice-add #'+python/open-repl :around #'+python/open-poetry-repl-a)
 (after! python
   (set-docsets! 'python-mode "Pandas"))
+(map! :map inferior-python-mode-map
+      :desc "Search history"    "C-s" #'comint-history-isearch-backward-regexp)
 
 
 ;;
