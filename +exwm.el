@@ -71,8 +71,34 @@
     "s-&" (lambda (command)
             (interactive (list (read-shell-command "$ ")))
             (start-process-shell-command command nil command))
-    "s-\\" #'ivy-pass))
-  (exwm-enable))
+    "s-\\" #'ivy-pass)))
+
+
+;;
+;; Screen setup
+(use-package! exwm-randr
+  :config
+
+  (defun +exwm/change-screen-h ()
+    (let ((xrandr-output-reaexp "\n\\([^ ]+\\) connected ")
+          default-output)
+      (with-temp-buffer
+        (call-process "xrandr" nil t nil)
+        (goto-char (point-min))
+        (re-search-forward xrandr-output-reaexp nil 'noerror)
+        (setq default-output (match-string 1))
+        (forward-line)
+        (if (not (re-search-forward xrandr-output-reaexp nil 'noerror))
+            (call-process "xrandr" nil nil nil "--output" default-output "--auto")
+          (call-process
+           "xrandr" nil nil nil
+           "--output" (match-string 1)
+           "--right-of" default-output "--auto"
+           "--output" default-output "--off")
+          (setq exwm-randr-workspace-monitor-plist (list 1 (match-string 1)))))))
+
+  (add-hook 'exwm-randr-screen-change-hook '+exwm/change-screen-h)
+  (exwm-randr-enable))
 
 
 ;;
