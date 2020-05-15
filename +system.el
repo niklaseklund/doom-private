@@ -68,6 +68,13 @@
                           'magit-insert-unpulled-from-upstream)
   (setq magit-module-sections-nested nil))
 
+;;
+;; Process manager
+(use-package! proced
+  :defer t
+  :custom
+  (proced-auto-update-flag t)
+  (proced-auto-update-interval 1))
 
 ;;
 ;; Disk usage
