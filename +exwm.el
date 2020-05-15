@@ -9,8 +9,7 @@
   (add-hook! exwm-mode #'doom-mark-buffer-as-real-h)
 
   ;; configure
-  (setq exwm-workspace-number 3
-        exwm-workspace-show-all-buffers t
+  (setq exwm-workspace-show-all-buffers t
         exwm-layout-show-all-buffers t)
 
   ;; Leader key access in exwm with super+space
