@@ -13,8 +13,10 @@
         exwm-workspace-show-all-buffers t
         exwm-layout-show-all-buffers t)
 
-  ;; Set prefix keys
-  ;; (push ?\s-  exwm-input-prefix-keys)
+  ;; Leader key access in exwm with super+space
+  (setq doom-leader-alt-key "s-SPC")
+  (push ?\s-\  exwm-input-prefix-keys)
+  (evil-set-initial-state 'exwm-mode 'emacs)
 
   ;; Keep track of time
   (display-time-mode 1)
@@ -34,7 +36,7 @@
 
   ;;  keybindings.
   (map!
-   "s-SPC" #'counsel-linux-app
+   "s-;" #'counsel-linux-app
    "s-," #'+ivy/switch-buffer
    "s-c" #'org-capture
    "s-x" #'doom/open-scratch-buffer
@@ -55,7 +57,7 @@
            (interactive (list (read-shell-command "$ ")))
            (start-process-shell-command command nil command))
    (:map exwm-mode-map
-    "s-SPC" #'counsel-linux-app
+    "s-;" #'counsel-linux-app
     "s-," #'+ivy/switch-buffer
     "s-c" #'org-capture
     "s-x" #'doom/open-scratch-buffer
