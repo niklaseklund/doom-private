@@ -329,3 +329,48 @@ Use `switch-to-buffer-other-window' to be able to customize the popup window."
                          "Edit, then exit with `\\[exwm-edit--finish]' or cancel with \ `\\[exwm-edit--cancel]'"))
             (unless no-copy
               (exwm-edit--yank))))))))
+
+;;;###autoload
+(defun +exwm/edit-compose-h ()
+  "Customize exwm-edit."
+  (markdown-mode))
+
+;;;###autoload
+(defun +exwm/rename-buffer-to-title-h ()
+  "Make sure that the exwm buffers name convays its content."
+  (exwm-workspace-rename-buffer
+   (format "%s - %s" exwm-class-name exwm-title)))
+
+;;;###autoload
+(defun +exwm/update-class-h ()
+  (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
+              (string= "gimp" exwm-instance-name)
+              (string= "Firefox" exwm-class-name))
+    (exwm-workspace-rename-buffer exwm-class-name)))
+
+;;;###autoload
+(defun +exwm/update-title-h ()
+  (cond ((or (not exwm-instance-name)
+             (string-prefix-p "sun-awt-X11-" exwm-instance-name)
+             (string= "gimp" exwm-instance-name)
+             (string= "Firefox" exwm-class-name))
+         (exwm-workspace-rename-buffer exwm-title))))
+
+;;;###autoload
+(defun +exwm/change-screen-h ()
+  (let ((xrandr-output-reaexp "\n\\([^ ]+\\) connected ")
+        default-output)
+    (with-temp-buffer
+      (call-process "xrandr" nil t nil)
+      (goto-char (point-min))
+      (re-search-forward xrandr-output-reaexp nil 'noerror)
+      (setq default-output (match-string 1))
+      (forward-line)
+      (if (not (re-search-forward xrandr-output-reaexp nil 'noerror))
+          (call-process "xrandr" nil nil nil "--output" default-output "--auto")
+        (call-process
+         "xrandr" nil nil nil
+         "--output" (match-string 1)
+         "--right-of" default-output "--auto"
+         "--output" default-output "--off")
+        (setq exwm-randr-workspace-monitor-plist (list 1 (match-string 1)))))))

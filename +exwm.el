@@ -8,24 +8,29 @@
   ;; exwm buffers should be considered real buffers.
   (add-hook! exwm-mode #'doom-mark-buffer-as-real-h)
 
-  ;; make window titles a bit more understandable.
-  (defun jethro/exwm-rename-buffer-to-title () (exwm-workspace-rename-buffer (format "%s - %s" exwm-class-name exwm-title)))
-  (add-hook 'exwm-update-title-hook 'jethro/exwm-rename-buffer-to-title)
-  (add-hook 'exwm-update-class-hook
-            (defun my-exwm-update-class-hook ()
-              (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
-                          (string= "gimp" exwm-instance-name)
-                          (string= "Firefox" exwm-class-name))
-                (exwm-workspace-rename-buffer exwm-class-name))))
-  (add-hook 'exwm-update-title-hook
-            (defun my-exwm-update-title-hook ()
-              (cond ((or (not exwm-instance-name)
-                         (string-prefix-p "sun-awt-X11-" exwm-instance-name)
-                         (string= "gimp" exwm-instance-name)
-                         (string= "Firefox" exwm-class-name))
-                     (exwm-workspace-rename-buffer exwm-title)))))
+  ;; configure
+  (setq exwm-workspace-number 3
+        exwm-workspace-show-all-buffers t
+        exwm-layout-show-all-buffers t)
 
+  ;; Set prefix keys
+  ;; (push ?\s-  exwm-input-prefix-keys)
 
+  ;; Keep track of time
+  (display-time-mode 1)
+
+  ;; Workspace keybindings
+  (mapcar (lambda (i)
+            (exwm-input-set-key (kbd (format "s-%d" i))
+                                `(lambda ()
+                                   (interactive)
+                                   (exwm-workspace-switch-create ,i))))
+          (number-sequence 0 9))
+
+  ;; Hooks
+  (add-hook 'exwm-update-title-hook #'+exwm/rename-buffer-to-title-h)
+  (add-hook 'exwm-update-class-hook #'+exwm/update-class-h)
+  (add-hook 'exwm-update-title-hook #'+exwm/update-title-h)
 
   ;;  keybindings.
   (map!
@@ -77,26 +82,8 @@
 ;;
 ;; Screen setup
 (use-package! exwm-randr
+  :after exwm
   :config
-
-  (defun +exwm/change-screen-h ()
-    (let ((xrandr-output-reaexp "\n\\([^ ]+\\) connected ")
-          default-output)
-      (with-temp-buffer
-        (call-process "xrandr" nil t nil)
-        (goto-char (point-min))
-        (re-search-forward xrandr-output-reaexp nil 'noerror)
-        (setq default-output (match-string 1))
-        (forward-line)
-        (if (not (re-search-forward xrandr-output-reaexp nil 'noerror))
-            (call-process "xrandr" nil nil nil "--output" default-output "--auto")
-          (call-process
-           "xrandr" nil nil nil
-           "--output" (match-string 1)
-           "--right-of" default-output "--auto"
-           "--output" default-output "--off")
-          (setq exwm-randr-workspace-monitor-plist (list 1 (match-string 1)))))))
-
   (add-hook 'exwm-randr-screen-change-hook '+exwm/change-screen-h)
   (exwm-randr-enable))
 
@@ -104,8 +91,10 @@
 ;;
 ;; Edit text with Emacs
 (use-package! exwm-edit
-  :after exwm
   :config
+  (setq exwm-edit-yank-delay 0.3
+        exwm-edit-paste-delay 0.3)
+  (add-hook 'exwm-edit-compose-hook #'+exwm/edit-compose-h)
   (advice-add 'exwm-edit--compose :before '+exwm/edit-compose-a)
   (set-popup-rule! "\\*exwm-edit*" :size 0.3 :side 'bottom :select t :autosave t))
 

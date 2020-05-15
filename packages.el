@@ -10,7 +10,6 @@
 ;; window manager
 (package! exwm :recipe (:type git :host github :repo "ch11ng/exwm"))
 (package! exwm-edit :recipe (:type git :host github :repo "agzam/exwm-edit"))
-(package! gpastel :recipe (:type git :host github :repo "DamienCassou/gpastel"))
 
 ;; system
 (package! guix)
