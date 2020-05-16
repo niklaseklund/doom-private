@@ -55,6 +55,7 @@
    "s-&" (lambda (command)
            (interactive (list (read-shell-command "$ ")))
            (start-process-shell-command command nil command))
+   :n "s-SPC" (λ! () (general-simulate-SPC))
    (:map exwm-mode-map
     "s-;" #'counsel-linux-app
     "s-," #'+ivy/switch-buffer
