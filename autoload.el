@@ -426,3 +426,12 @@ from the copied entry will be send separately."
           (mapc #'exwm-input--fake-key (string-to-list (call-interactively #'counsel-yank-pop)))
         (call-interactively #'counsel-yank-pop)
         (exwm-input--fake-key ?\C-v)))))
+
+;;;###autoload
+  (let ((screenkey-active nil))
+    (defun nc/toggle-screenkey ()
+      (interactive)
+      (if screenkey-active
+          (start-process-shell-command "screenkey off" nil "pkill screenkey")
+        (start-process-shell-command "screenkey on" nil "screenkey"))
+      (setq screenkey-active (null screenkey-active))))
