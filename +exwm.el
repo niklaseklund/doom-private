@@ -17,6 +17,10 @@
   (push ?\s-\  exwm-input-prefix-keys)
   (evil-set-initial-state 'exwm-mode 'emacs)
 
+  ;; Add super+space in normal mode as well
+  (let ((map general-override-mode-map))
+    (evil-define-key* '(normal visual motion) map (kbd "s-SPC") 'doom/leader))
+
   ;; Keep track of time
   (display-time-mode 1)
 
@@ -55,7 +59,6 @@
    "s-&" (lambda (command)
            (interactive (list (read-shell-command "$ ")))
            (start-process-shell-command command nil command))
-   :n "s-SPC" (λ! () (general-simulate-SPC))
    (:map exwm-mode-map
     "s-;" #'counsel-linux-app
     "s-," #'+ivy/switch-buffer
