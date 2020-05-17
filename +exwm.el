@@ -5,24 +5,20 @@
 (use-package! exwm
   :config
 
-  ;; exwm buffers should be considered real buffers.
-  (add-hook! exwm-mode #'doom-mark-buffer-as-real-h)
-
-  ;; configure
+  ;; Customize
   (setq exwm-workspace-show-all-buffers t
         exwm-layout-show-all-buffers t)
 
-  ;; Leader key access in exwm with super+space
-  (setq doom-leader-alt-key "s-SPC")
-  (push ?\s-\  exwm-input-prefix-keys)
-  (evil-set-initial-state 'exwm-mode 'emacs)
-
-  ;; Add super+space in normal mode as well
-  (let ((map general-override-mode-map))
-    (evil-define-key* '(normal visual motion) map (kbd "s-SPC") 'doom/leader))
-
-  ;; Keep track of time
+  ;; Modeline
   (display-time-mode 1)
+
+  ;; Hooks
+  (add-hook 'exwm-floating-exit-hook #'exwm-layout-show-mode-line)
+  (add-hook 'exwm-floating-setup-hook #'exwm-layout-hide-mode-line)
+  (add-hook 'exwm-update-title-hook #'+exwm/rename-buffer-to-title-h)
+  (add-hook 'exwm-update-class-hook #'+exwm/update-class-h)
+  (add-hook 'exwm-update-title-hook #'+exwm/update-title-h)
+  (add-hook 'exwm-mode #'doom-mark-buffer-as-real-h)
 
   ;; Workspace keybindings
   (mapcar (lambda (i)
@@ -32,56 +28,39 @@
                                    (exwm-workspace-switch-create ,i))))
           (number-sequence 0 9))
 
-  ;; Hooks
-  (add-hook 'exwm-update-title-hook #'+exwm/rename-buffer-to-title-h)
-  (add-hook 'exwm-update-class-hook #'+exwm/update-class-h)
-  (add-hook 'exwm-update-title-hook #'+exwm/update-title-h)
+  ;; Global leader key (Super+Space)
+  (push ?\s-\  exwm-input-prefix-keys)
+  (evil-set-initial-state 'exwm-mode 'emacs)
+  (setq doom-leader-alt-key "s-SPC")
+  (let ((map general-override-mode-map))
+    (evil-define-key* '(normal visual motion)
+      map (kbd doom-leader-alt-key) 'doom/leader))
 
-  ;;  keybindings.
-  (map!
-   "s-;" #'counsel-linux-app
-   "s-," #'+ivy/switch-buffer
-   "s-c" #'org-capture
-   "s-x" #'doom/open-scratch-buffer
-   "s-l" #'evil-window-right
-   "s-h" #'evil-window-left
-   "s-k" #'evil-window-up
-   "s-j" #'evil-window-down
-   "s-u" #'winner-undo
-   "s-m" #'doom/window-maximize-buffer
-   "s-r" #'winner-redo
-   "s-`" #'+eshell/toggle
-   "s-q" #'evil-window-delete
-   "s-\\" #'ivy-pass
-   "s-o" #'evil-switch-to-windows-last-buffer
-   "s-a" (λ! () (org-agenda nil "a"))
-   "s-e" (lambda! (notmuch-search "tag:inbox"))
-   "s-&" (lambda (command)
-           (interactive (list (read-shell-command "$ ")))
-           (start-process-shell-command command nil command))
-   (:map exwm-mode-map
-    "s-;" #'counsel-linux-app
-    "s-," #'+ivy/switch-buffer
-    "s-c" #'org-capture
-    "s-x" #'doom/open-scratch-buffer
-    "s-l" #'evil-window-right
-    "s-h" #'evil-window-left
-    "s-k" #'evil-window-up
-    "s-j" #'evil-window-down
-    "s-s" #'evil-window-split
-    "s-v" #'evil-window-vsplit
-    "s-q" #'evil-window-delete
-    "s-m" #'doom/window-maximize-buffer
-    "s-u" #'winner-undo
-    "s-r" #'winner-redo
-    "s-`" #'+eshell/toggle
-    "s-e" (lambda! (notmuch-search "tag:inbox"))
-    "s-a" (λ! () (org-agenda nil "a"))
-    "s-o" #'evil-switch-to-windows-last-buffer
-    "s-&" (lambda (command)
-            (interactive (list (read-shell-command "$ ")))
-            (start-process-shell-command command nil command))
-    "s-\\" #'ivy-pass)))
+  ;; Keybindings
+  (map! :map (global-map exwm-mode-map)
+        "s-;" #'counsel-linux-app
+        "s-," #'+ivy/switch-buffer
+        "s-c" #'org-capture
+        "s-x" #'doom/open-scratch-buffer
+        "s-l" #'evil-window-right
+        "s-h" #'evil-window-left
+        "s-k" #'evil-window-up
+        "s-j" #'evil-window-down
+        "s-s" #'evil-window-split
+        "s-v" #'evil-window-vsplit
+        "s-q" #'evil-window-delete
+        "s-m" #'doom/window-maximize-buffer
+        "s-u" #'winner-undo
+        "s-r" #'winner-redo
+        "s-`" #'+eshell/toggle
+        "s-e" (lambda! (notmuch-search "tag:inbox"))
+        "s-a" (λ! () (org-agenda nil "a"))
+        "s-o" #'evil-switch-to-windows-last-buffer
+        "s-y" #'+exwm/counsel-yank-pop
+        "s-&" (lambda (command)
+                (interactive (list (read-shell-command "$ ")))
+                (start-process-shell-command command nil command))
+        "s-\\" #'ivy-pass))
 
 
 ;;

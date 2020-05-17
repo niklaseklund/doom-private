@@ -285,7 +285,6 @@ upstreams."
     (+zone/set-region-writeable (point-min) (point-max))
     (goto-char current-point)))
 
-
 ;;;###autoload
 (defun +zone/set-region-writeable (begin end)
     "Removes the read-only text property from the marked region."
@@ -296,12 +295,10 @@ upstreams."
       (remove-text-properties begin end '(read-only t))
       (set-buffer-modified-p modified)))
 
-
 ;;;###autoload
 (defun waylandp ()
   "Return t if environmental variable WAYLAND is 1."
   (string= (getenv "WAYLAND") "1"))
-
 
 ;;;###autoload
 (defun +exwm/edit-compose-a (&optional no-copy)
@@ -374,3 +371,58 @@ Use `switch-to-buffer-other-window' to be able to customize the popup window."
          "--right-of" default-output "--auto"
          "--output" default-output "--off")
         (setq exwm-randr-workspace-monitor-plist (list 1 (match-string 1)))))))
+
+;;;###autoload
+(defun +exwm/emacs-teardown ()
+  "Save all buffers and runs `kill-emacs-hook', without killing exwm/Emacs."
+  (save-some-buffers t)
+  ;; `run-hooks' doesn't work with let binding.
+  (setq +exwm/kill-hook (thread-last kill-emacs-hook
+                          (remove 'exwm--server-stop)
+                          (remove 'server-force-stop)))
+  (run-hooks '+exwm/kill-hook))
+
+;;;###autoload
+(defun +exwm/logout ()
+  "Logout from the x session."
+  (interactive)
+  (recentf-save-list)
+  (save-some-buffers)
+  (start-process-shell-command "logout" nil "kill -9 -1"))
+
+;;;###autoload
+(defun +exwm/poweroff ()
+  "Clock out, save all Emacs buffers and shut computer down."
+  (interactive)
+  (when (y-or-n-p "Really want to shut down?")
+    (when (org-clock-is-active)
+      (org-clock-out))
+    (+exwm/emacs-teardown)
+    (start-process-shell-command "poweroff" nil "poweroff")))
+
+;;;###autoload
+(defun +exwm/reboot ()
+  "Save all Emacs buffers and reboot."
+  (interactive)
+  (when (y-or-n-p "Really want to reboot?")
+    (+exwm/emacs-teardown)
+    (start-process-shell-command "reboot" nil "reboot")))
+
+;;;###autoload
+(defun +exwm/counsel-yank-pop ()
+  "Same as `counsel-yank-pop' but also works for exwm buffers.
+It copies the selected entry to the clipboard and then sends `C-v' to the
+X11 Application. Sometimes this doesn't work.
+Then you can call this method with a prefix argument and each character
+from the copied entry will be send separately."
+  (interactive)
+  (if (not (derived-mode-p 'exwm-mode))
+      (call-interactively #'counsel-yank-pop)
+    (let ((inhibit-read-only t)
+          ;; Make sure we send selected yank-pop candidate to the clipboard
+          (yank-pop-change-selection t))
+      (exwm-input--set-focus (exwm--buffer->id (window-buffer (selected-window))))
+      (if current-prefix-arg
+          (mapc #'exwm-input--fake-key (string-to-list (call-interactively #'counsel-yank-pop)))
+        (call-interactively #'counsel-yank-pop)
+        (exwm-input--fake-key ?\C-v)))))
