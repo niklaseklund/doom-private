@@ -57,11 +57,11 @@
         "s-a" (λ! () (org-agenda nil "a"))
         "s-o" #'evil-switch-to-windows-last-buffer
         "s-y" #'+exwm/counsel-yank-pop
+        "s-Y" (λ!! #'+exwm/counsel-yank-pop '(4))
         "s-&" (lambda (command)
                 (interactive (list (read-shell-command "$ ")))
                 (start-process-shell-command command nil command))
         "s-\\" #'ivy-pass))
-
 
 ;;
 ;; Screen setup
