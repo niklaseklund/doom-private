@@ -61,6 +61,8 @@
         "s-&" (lambda (command)
                 (interactive (list (read-shell-command "$ ")))
                 (start-process-shell-command command nil command))
+        "<s-return>" #'+eshell/here
+        "<s-S-return>" (λ! () (start-process-shell-command "alacritty" nil "alacritty"))
         "s-\\" #'ivy-pass))
 
 ;;
