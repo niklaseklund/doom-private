@@ -50,9 +50,9 @@
         "s-v" #'evil-window-vsplit
         "s-q" #'evil-window-delete
         "s-m" #'doom/window-maximize-buffer
+        "s-M" (lambda! (notmuch-search "tag:inbox"))
         "s-u" #'winner-undo
         "s-r" #'winner-redo
-        "s-e" (lambda! (notmuch-search "tag:inbox"))
         "s-a" (λ! () (org-agenda nil "a"))
         "s-o" #'evil-switch-to-windows-last-buffer
         "s-y" #'+exwm/counsel-yank-pop
@@ -62,6 +62,7 @@
                 (start-process-shell-command command nil command))
         "s-`" #'+popup/toggle
         "s-'" #'ivy-resume
+        "s-e" #'+eshell/toggle
         "<s-return>" #'+eshell/here
         "<s-S-return>" (λ! () (start-process-shell-command "alacritty" nil "alacritty"))
         "s-\\" #'ivy-pass))
