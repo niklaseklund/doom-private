@@ -435,3 +435,10 @@ from the copied entry will be send separately."
           (start-process-shell-command "screenkey off" nil "pkill screenkey")
         (start-process-shell-command "screenkey on" nil "screenkey"))
       (setq screenkey-active (null screenkey-active))))
+
+;;;###autoload
+(defun +gerrit/open-src-a (orig-fn &rest args)
+  (let ((default-directory (expand-file-name "~/src/mono/")))
+    (with-temp-buffer
+      (hack-dir-local-variables-non-file-buffer)
+      (apply orig-fn args))))

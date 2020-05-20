@@ -10,6 +10,9 @@
   :ensure nil
   :config
 
+  ;; Advice gerrit to open in a specific project
+  (advice-add 'gerrit :around '+gerrit/open-src-a)
+
   ;; Make DOOM not treat gerrit windows as popups
   (set-popup-rule! "\\*gerrit-*" :size 0.3 :side 'bottom :select t)
 
