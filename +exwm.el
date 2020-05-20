@@ -62,7 +62,6 @@
                 (start-process-shell-command command nil command))
         "s-`" #'+popup/toggle
         "s-'" #'ivy-resume
-        "s-e" #'+eshell/toggle
         "<s-return>" #'+eshell/here
         "<s-S-return>" (λ! () (start-process-shell-command "alacritty" nil "alacritty"))
         "s-\\" #'ivy-pass))
