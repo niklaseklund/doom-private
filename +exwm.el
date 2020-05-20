@@ -52,7 +52,6 @@
         "s-m" #'doom/window-maximize-buffer
         "s-u" #'winner-undo
         "s-r" #'winner-redo
-        "s-`" #'+eshell/toggle
         "s-e" (lambda! (notmuch-search "tag:inbox"))
         "s-a" (λ! () (org-agenda nil "a"))
         "s-o" #'evil-switch-to-windows-last-buffer
@@ -61,6 +60,8 @@
         "s-&" (lambda (command)
                 (interactive (list (read-shell-command "$ ")))
                 (start-process-shell-command command nil command))
+        "s-`" #'+popup/toggle
+        "s-'" #'ivy-resume
         "<s-return>" #'+eshell/here
         "<s-S-return>" (λ! () (start-process-shell-command "alacritty" nil "alacritty"))
         "s-\\" #'ivy-pass))
