@@ -38,7 +38,8 @@
 
   ;; Keybindings
   (map! :map (global-map exwm-mode-map)
-        "s-;" #'counsel-linux-app
+        "s-:" #'counsel-linux-app
+        "s-;" #'counsel-M-x
         "s-," #'+ivy/switch-buffer
         "s-c" #'org-capture
         "s-x" #'doom/open-scratch-buffer
