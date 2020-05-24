@@ -1,6 +1,5 @@
 ;;;  -*- lexical-binding: t; -*-
 
-
 ;;
 ;; UI
 (setq user-full-name    "Niklas Carlsson"
@@ -61,8 +60,7 @@
 ;; Load other config files
 (load! "+code")
 (load! "+eshell")
-(unless (waylandp)
-  (load! "+exwm"))
+(load! "+exwm")
 (load! "+org")
 (load! "+mail")
 (load! "+system")
