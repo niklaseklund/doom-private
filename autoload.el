@@ -150,23 +150,6 @@ upstreams."
 
 
 ;;;###autoload
-(defun +dap/python-poetry-a (orig-fn &rest args)
-"Use the Python binary from the current virtual environment."
-(if (getenv "VIRTUAL_ENV")
-      (executable-find (car args))
-    (apply orig-fn args)))
-
-
-;;;###autoload
-(defun +python/open-poetry-repl-a (orig-fn &rest args)
-  "Use the Python binary from the current virtual environment."
-  (if (getenv "VIRTUAL_ENV")
-      (let ((python-shell-interpreter (executable-find "python")))
-        (apply orig-fn args))
-    (apply orig-fn args)))
-
-
-;;;###autoload
 (defun +dap/hide-debug-windows-h (_session)
     "Hide debug windows when all debug sessions are dead."
     (unless (-filter 'dap--session-running (dap--get-sessions))
