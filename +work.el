@@ -16,11 +16,6 @@
   ;; Make DOOM not treat gerrit windows as popups
   (set-popup-rule! "\\*gerrit-*" :size 0.3 :side 'bottom :select t)
 
-  ;; Keymap
-  (map! :leader
-        :prefix "o"
-        :desc "Open gerrit" :n "g" #'gerrit)
-
   ;; HACK reload ivy-rich to make gerrit config take effect.
   (ivy-rich-mode 0)
   (ivy-rich-mode +1))

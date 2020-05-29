@@ -46,13 +46,14 @@
  (:leader
   :desc "Resume Avy" :n "\"" #'avy-resume
   (:prefix "o"
-   :desc "Open mail" :n "m" (lambda! (notmuch-search "tag:inbox"))
+   :desc "Open mail" :n "m" (cmd! (notmuch-search "tag:inbox"))
    :desc "Open (pass-)store" :n "S" #'pass
-   :desc "Open (ivy-pass-)store" :n "s" #'ivy-pass)
+   :desc "Open (ivy-pass-)store" :n "s" #'ivy-pass
+   :desc "Open Guix" :n "g" #'guix-popup)
   (:prefix "s"
    :desc "Search Youtube" :n "y" #'ivy-youtube)
   (:prefix "p"
-   :desc "Open Magit in project:" :n "p" (lambda! (counsel-projectile-switch-project "v")))
+   :desc "Open Magit in project:" :n "p" (cmd! (counsel-projectile-switch-project "v")))
   (:prefix "w"
    :desc "Select window" :n "w" #'ace-window)))
 

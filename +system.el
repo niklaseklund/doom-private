@@ -54,10 +54,7 @@
   :config
   (set-popup-rule! "\\*Guix Packages*" :ignore t)
   (set-popup-rule! "\\*Guix Package Info*" :side 'bottom :size 0.7 :vslot 10)
-  (set-popup-rule! "\\*Guix REPL\\*" :side 'bottom :size 0.3 :vslot 5)
-  (map! :leader
-        :prefix "o"
-        :desc "Open Guix" :n "g" #'guix-popup))
+  (set-popup-rule! "\\*Guix REPL\\*" :side 'bottom :size 0.3 :vslot 5))
 
 
 ;;

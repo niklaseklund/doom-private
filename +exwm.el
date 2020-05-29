@@ -28,6 +28,10 @@
                                    (exwm-workspace-switch-create ,i))))
           (number-sequence 0 9))
 
+  (defun +exwm/print ()
+    (interactive)
+    (start-process-shell-command "screenshot" nil "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/'"))
+
   ;; Global leader key (Super+Space)
   (push ?\s-\  exwm-input-prefix-keys)
   (evil-set-initial-state 'exwm-mode 'emacs)
@@ -52,7 +56,7 @@
         "s-v" #'evil-window-vsplit
         "s-q" #'evil-window-delete
         "s-m" #'doom/window-maximize-buffer
-        "s-M" (lambda! (notmuch-search "tag:inbox"))
+        "s-M" (cmd! (notmuch-search "tag:inbox"))
         "s-u" #'winner-undo
         "s-r" #'winner-redo
         "s-a" (λ! () (org-agenda nil "a"))
@@ -62,6 +66,7 @@
         "s-&" (lambda (command)
                 (interactive (list (read-shell-command "$ ")))
                 (start-process-shell-command command nil command))
+        "<print>" #'+exwm/print
         "s-`" #'+popup/toggle
         "s-'" #'ivy-resume
         "<s-return>" #'+eshell/here
