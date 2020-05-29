@@ -48,6 +48,7 @@
         "s-k" #'evil-window-up
         "s-j" #'evil-window-down
         "s-s" #'evil-window-split
+        "s-g" #'gerrit
         "s-v" #'evil-window-vsplit
         "s-q" #'evil-window-delete
         "s-m" #'doom/window-maximize-buffer
