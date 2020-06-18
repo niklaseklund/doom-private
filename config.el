@@ -57,6 +57,18 @@
   (:prefix "w"
    :desc "Select window" :n "w" #'ace-window)))
 
+
+;;
+;; Chat
+(after! circe
+  (set-irc-server! "chat.freenode.net"
+                   `(:tls t
+                     :port 6697
+                     :nick "niklascarlsson"
+                     :sasl-username ,(+pass-get-user "web/irc.freenode.net")
+                     :sasl-password (lambda (&rest _) (+pass-get-secret "web/irc.freenode.net"))
+                     :channels ("#emacs" "#guix"))))
+
 ;;
 ;; Load other config files
 (load! "+code")
