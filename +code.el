@@ -38,16 +38,11 @@
 (add-hook 'ielm-mode-hook 'lispy-mode)
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
 
+
 ;;
 ;; Guile
 (after! geiser
   (setq-default geiser-scheme-implementation 'guile))
-
-
-
-;;
-;;; Guile
-(setq geiser-active-implementations '(guile))
 
 
 ;;
