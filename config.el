@@ -29,6 +29,13 @@
 
 
 ;;
+;; Warnings
+(use-package warnings
+  :config
+  (add-to-list 'warning-suppress-types '(yasnippet backquote-change)))
+
+
+;;
 ;; Lookup
 (add-to-list '+lookup-provider-url-alist '("ArchWiki" "https://wiki.archlinux.org/index.php?search=%s"))
 (setq +lookup-provider-url-alist (assoc-delete-all "Google images" +lookup-provider-url-alist))
