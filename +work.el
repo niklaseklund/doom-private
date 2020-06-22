@@ -6,7 +6,7 @@
 ;;
 ;; Gerrit
 (use-package! gerrit
-  :load-path "~/opensource/gerrit"
+  :load-path "~/opensource/gerrit.el"
   :ensure nil
   :config
 
