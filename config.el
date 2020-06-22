@@ -76,6 +76,9 @@
                      :sasl-password (lambda (&rest _) (+pass-get-secret "web/irc.freenode.net"))
                      :channels ("#emacs" "#guix"))))
 
+(after! elfeed
+  (setq elfeed-db-directory "~/sync/elfeed"))
+
 ;;
 ;; Load other config files
 (load! "+code")
